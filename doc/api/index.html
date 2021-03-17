@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="generator" content="made with love by dartdoc 0.40.0">
+  <meta name="description" content="unico_check API docs, for the Dart programming language.">
+  <title>unico_check - Dart API docs</title>
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="static-assets/github.css">
+  <link rel="stylesheet" href="static-assets/styles.css">
+  <link rel="icon" href="static-assets/favicon.png">
+
+</head>
+
+<body data-base-href=""
+      data-using-base-href="false">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <button id="sidenav-left-toggle" type="button">&nbsp;</button>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://github.com/acesso-io/unico_check_flutter">unico_check package</a></li>
+  </ol>
+  <div class="self-name">unico_check</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<main>
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <header id="header-search-sidebar" class="hidden-l">
+      <form class="search-sidebar" role="search">
+        <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+      </form>
+    </header>
+    
+    <ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+      <li><a href="https://github.com/acesso-io/unico_check_flutter">unico_check package</a></li>
+    </ol>
+    
+    <h5 class="hidden-xs"><span class="package-name">unico_check</span> <span class="package-kind">package</span></h5>
+    <ol>
+          <li class="section-title">Libraries</li>
+          <li><a href="result_error_ErrorBio/result_error_ErrorBio-library.html">ErrorBio</a></li>
+          <li><a href="result_error_ErrorLiveness/result_error_ErrorLiveness-library.html">ErrorLiveness</a></li>
+          <li><a href="abstracts_IAcessoBio/abstracts_IAcessoBio-library.html">IAcessoBio</a></li>
+          <li><a href="abstracts_IAcessoBioAuthenticate/abstracts_IAcessoBioAuthenticate-library.html">IAcessoBioAuthenticate</a></li>
+          <li><a href="abstracts_IAcessoBioCamera/abstracts_IAcessoBioCamera-library.html">IAcessoBioCamera</a></li>
+          <li><a href="abstracts_IAcessoBioDocument/abstracts_IAcessoBioDocument-library.html">IAcessoBioDocument</a></li>
+          <li><a href="abstracts_IAcessoBioLiveness/abstracts_IAcessoBioLiveness-library.html">IAcessoBioLiveness</a></li>
+          <li><a href="result_success_OCRResponse/result_success_OCRResponse-library.html">OCRResponse</a></li>
+          <li><a href="result_success_ResultAuthenticate/result_success_ResultAuthenticate-library.html">ResultAuthenticate</a></li>
+          <li><a href="result_success_ResultCamera/result_success_ResultCamera-library.html">ResultCamera</a></li>
+          <li><a href="result_success_ResultCameraDocument/result_success_ResultCameraDocument-library.html">ResultCameraDocument</a></li>
+          <li><a href="result_success_ResultFacematch/result_success_ResultFacematch-library.html">ResultFacematch</a></li>
+          <li><a href="result_success_ResultLivenessX/result_success_ResultLivenessX-library.html">ResultLivenessX</a></li>
+          <li><a href="unico_check/unico_check-library.html">unico_check</a></li>
+    </ol>
+  </div>
+
+  <div id="dartdoc-main-content" class="main-content">
+      <section class="desc markdown">
+        <h1 id="unico-check">Unico Check</h1>
+<p>Esta biblioteca visa implementar a tecnologia Unico para prova de vida sob a plataforma Flutter.</p>
+<h2 id="getting-started">Getting Started</h2>
+<h2 id="android">Android</h2>
+<p>Pré-requisito minSdkVersion : 21</p>
+<h2 id="ios">IOS</h2>
+<p>Pré-requisito versão 9 ou superior.</p>
+<p>1 - Caso ainda não possua as permissões para o uso de câmera em seu projeto</p>
+<p><code>&lt;key&gt;NSCameraUsageDescription&lt;/key&gt;</code>
+<code>&lt;string&gt;Camera usage description&lt;/string&gt;</code></p>
+<p>2 - Adicione:  <code>pod ‘AcessoBio’, :git =&gt; ‘https://github.com/acesso-io/acessobio-ios’</code> no podfile do projeto IOS em seguida execute comando <code>pod install</code></p>
+<p>3 - Adicione <code>#import &lt;AcessoBioManager.h&gt;</code> no arquivo Runner-Bridging-Header.h</p>
+<p>4 - No arquivo acessobio_plugin-umbrella.h adicione <code>@import AcessoBio;</code> localizado no diretorio: <code>YOUR_PROJECT/example/ios/Pods/Target Support Files/acessobio_plugin/acessobio_plugin-umbrella.h</code></p>
+<p>5 - no Target Menbership defina o arquivo <code>centerModelCrop</code> como publico.</p>
+      </section>
+      
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+          <dt id="ErrorBio">
+            <span class="name"><a href="result_error_ErrorBio/result_error_ErrorBio-library.html">ErrorBio</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="ErrorLiveness">
+            <span class="name"><a href="result_error_ErrorLiveness/result_error_ErrorLiveness-library.html">ErrorLiveness</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="IAcessoBio">
+            <span class="name"><a href="abstracts_IAcessoBio/abstracts_IAcessoBio-library.html">IAcessoBio</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="IAcessoBioAuthenticate">
+            <span class="name"><a href="abstracts_IAcessoBioAuthenticate/abstracts_IAcessoBioAuthenticate-library.html">IAcessoBioAuthenticate</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="IAcessoBioCamera">
+            <span class="name"><a href="abstracts_IAcessoBioCamera/abstracts_IAcessoBioCamera-library.html">IAcessoBioCamera</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="IAcessoBioDocument">
+            <span class="name"><a href="abstracts_IAcessoBioDocument/abstracts_IAcessoBioDocument-library.html">IAcessoBioDocument</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="IAcessoBioLiveness">
+            <span class="name"><a href="abstracts_IAcessoBioLiveness/abstracts_IAcessoBioLiveness-library.html">IAcessoBioLiveness</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="OCRResponse">
+            <span class="name"><a href="result_success_OCRResponse/result_success_OCRResponse-library.html">OCRResponse</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="ResultAuthenticate">
+            <span class="name"><a href="result_success_ResultAuthenticate/result_success_ResultAuthenticate-library.html">ResultAuthenticate</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="ResultCamera">
+            <span class="name"><a href="result_success_ResultCamera/result_success_ResultCamera-library.html">ResultCamera</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="ResultCameraDocument">
+            <span class="name"><a href="result_success_ResultCameraDocument/result_success_ResultCameraDocument-library.html">ResultCameraDocument</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="ResultFacematch">
+            <span class="name"><a href="result_success_ResultFacematch/result_success_ResultFacematch-library.html">ResultFacematch</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="ResultLivenessX">
+            <span class="name"><a href="result_success_ResultLivenessX/result_success_ResultLivenessX-library.html">ResultLivenessX</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+          <dt id="unico_check">
+            <span class="name"><a href="unico_check/unico_check-library.html">unico_check</a></span>           
+          </dt>
+          <dd>
+             
+          </dd>
+        </dl>
+      </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    unico_check
+      0.0.1
+  </span>
+
+</footer>
+
+<script src="static-assets/highlight.pack.js"></script>
+<script src="static-assets/script.js"></script>
+
+
+</body>
+
+</html>

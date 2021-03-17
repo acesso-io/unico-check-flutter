@@ -26,7 +26,7 @@ class MyApp extends StatefulWidget  {
 
 class _MyAppState extends State<MyApp> implements IAcessoBio, IAcessoBioCamera, IAcessoBioDocument, IAcessoBioLiveness, IAcessoBioAuthenticate {
 
-  String _result = "Esta biblioteca visa implementar a tecnologia Unico";
+  String _result = "Esta biblioteca visa implementar a tecnologia unico";
   UnicoCheck acessobio;
 
   @override

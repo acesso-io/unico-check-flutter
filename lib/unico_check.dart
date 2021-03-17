@@ -56,6 +56,7 @@ class UnicoCheck {
   String iosImageIconPopupError = null;
 
 
+  ///Para iniciar nossa tecnologia forneça o contexto da aplicação e as chaves de acesso disponibilizadas pela unico
   UnicoCheck(IAcessoBio context, String urlIntance, String apikey, String authToken){
 
     if(context is IAcessoBio){
@@ -138,6 +139,7 @@ class UnicoCheck {
   }
 
   //region LIVENESS
+  ///Inicia processo de liveness
   get openLiveness async {
 
     final Map<dynamic, dynamic> result = await _channel.invokeMethod('openLiveness',buildMap());
@@ -154,7 +156,7 @@ class UnicoCheck {
 
 
   }
-
+  ///Inicia liviness e cria um processo
   void openLivenessWithCreateProcess(String name, String document) async {
 
     var map = buildMap();
@@ -180,7 +182,7 @@ class UnicoCheck {
   //endregion
 
   //region DOCUMENT
-
+  ///Inicia abertura de camera OCR
   void openCameraDocumentOCR(int DOCUMENT_TYPE) async {
 
     var map = buildMap();
@@ -200,7 +202,7 @@ class UnicoCheck {
     }
 
   }
-
+  ///Inicia faceMatch
   void openFaceMatch(int DOCUMENT_TYPE) async {
 
     var map = buildMap();
@@ -220,7 +222,7 @@ class UnicoCheck {
     }
 
   }
-
+  ///Inicia abertura de camera OCR
   void openCameraDocument(int DOCUMENT_TYPE) async {
 
     var map = buildMap();
@@ -244,7 +246,7 @@ class UnicoCheck {
   //endregion
 
   //region AUTH
-
+  ///Inicia liveness para authenticação
   void openLivenessAuthenticate(String code) async {
 
     var map = buildMap();
@@ -268,7 +270,7 @@ class UnicoCheck {
   //endregion
 
   //region CAMERA
-
+  ///Inicia camera inteligente
   get openCamera async {
 
     final Map<dynamic, dynamic> result = await _channel.invokeMethod('openCamera',buildMap());
@@ -285,7 +287,7 @@ class UnicoCheck {
 
 
   }
-
+  ///Inicia camera inteligenre e cria um processo
   void openCameraWithCreateProcess(String nome, String code, String gender, String birthdate, String email, String phone ) async {
 
     var map = buildMap();
@@ -309,7 +311,7 @@ class UnicoCheck {
     }
 
   }
-
+  ///Inicia camera inteligente, cria um processo e incere um documento (disponivel apenas para android no momento)
   void openCameraWithCreateProcessAndInsertDocument(String code, String nome, int DOCUMENT_TYPE) async {
 
     var map = buildMap();
@@ -336,29 +338,50 @@ class UnicoCheck {
   //region COSTOMIZATION
 
   //region Android
+  ///Permite fazer cosumização da silhueta em que o usuario encaixa o rosto  no ANDROID
   void setAndroidColorSilhoutte(String success_stroke_color,  String error_stroke_color){androidColorSilhoutte = success_stroke_color+";"+success_stroke_color;}
+  ///Permite mudar a cor do fundo da tela de captura no ANDROID
   void setAndroidColorBackground( String colorBlueMask){androidColorBackground = colorBlueMask;}
+  ///Permite a costumização cor do caixa de mensagem no ANDROID
   void setAndroidColorBoxMessage( String colorWhite){ androidColorBoxMessage = colorWhite;}
+  ///Permite adicionar cor no texto da mensagem no ANDROID
   void setAndroidColorTextMessage( String colorBlack){androidColorTextMessage = colorBlack;}
+  ///Permite costumizar o fundo o popup de erro no ANDROID
   void setAndroidColorBackgroundPopupError( String colorAccent){ androidColorBackgroundPopupError = colorAccent;}
+  ///Permite personalizar o texto da caixa de erro no ANDROID
   void setAndroidColorTextPopupError( String colorGreen){androidColorTextPopupError = colorGreen;}
+  ///Permite costumizar o botao do popup de erro no ANDROID
   void setAndroidColorBackgroundButtonPopupError( String red_btn_bg_color){androidColorBackgroundButtonPopupError = red_btn_bg_color;}
+  ///Permite costumizar a cor do texto do botao do popup error no ANDROID
   void setAndroidColorTextButtonPopupError( String colorPrimary){androidColorTextButtonPopupError = colorPrimary;}
+  ///Permite costumizar fundo do botao que captura a foto no ANDROID
   void setAndroidColorBackgroundTakePictureButton( String colorGreyDark){androidColorBackgroundTakePictureButton = colorGreyDark;}
+  ///Permite costumizaar a cor do icone que captura a foto no ANDROID
   void setAndroidColorIconTakePictureButton( String colorOrange){androidColorIconTakePictureButton = colorOrange;}
+  ///Permite costumizar a cor do botao captura foto do documento no ANDROID
   void setAndroidColorBackgroundBottomDocument( String red_btn_bg_color){androidColorBackgroundBottomDocument = red_btn_bg_color;}
+  ///Permite alterar a cor do botao captura foto do documento no ANDROID
   void setAndroidColorTextBottomDocument( String colorGreen){androidColorTextBottomDocument = colorGreen;}
   //endregion
 
   //region IOS
+  ///Permite alterar a cor da silhueta em que o usuario encaixa o tosto  no IOS
   void setIosColorSilhoutteNeutra(String color ){iosColorSilhoutteNeutra = color;}
+  ///Permite alterar a cor da silhueta em que o usuario encaixa o rosto quando esta em estado de sucesso no IOS
   void setIosColorSilhoutteSuccess(String color ){iosColorSilhoutteSuccess = color;}
+  ///Permite alterar ao a cor da silhueta em que o usuario encaixa o rosto quando esta em estado descentralizado no IOS
   void setIosColorSilhoutteError(String color ){iosColorSilhoutteError = color;}
+  /// permite alterar a cor de fundo da captura de imagem no IOS
   void setIosColorBackground(String color ){iosColorBackground = color;}
+  ///Permite alterar a cor da caixa de status no IOS
   void setIosColorBackgroundBoxStatus(String color ){iosColorBackgroundBoxStatus = color;}
+  ///Permite alterar o texti da caixa de status no IOS
   void setIosColorTextBoxStatus(String color ){iosColorTextBoxStatus = color;}
+  ///Permite alterar a cor do fundo da caixa de popup de erro no IOS
   void setIosColorBackgroundPopupError(String color ){iosColorBackgroundPopupError = color;}
+  ///Permite altera a cor do texto da caixa de popup de erro no IOS
   void setIosColorTextPopupError(String color ){iosColorTextPopupError = color;}
+  ///Permite alterar a cor do icone de popup error no IOS
   void setIosImageIconPopupError(String color ){iosImageIconPopupError = color;}
 //endregion
 
