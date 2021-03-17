@@ -31,29 +31,29 @@ class UnicoCheck {
   IAcessoBioAuthenticate iAcessoBioAuthenticate;
 
   //Android custom layout
-  String androidColorSilhoutte = null;
-  String androidColorBackground = null;
-  String androidColorBoxMessage = null;
-  String androidColorTextMessage = null;
-  String androidColorBackgroundPopupError = null;
-  String androidColorTextPopupError = null;
-  String androidColorBackgroundButtonPopupError = null;
-  String androidColorTextButtonPopupError = null;
-  String androidColorBackgroundTakePictureButton = null;
-  String androidColorIconTakePictureButton = null;
-  String androidColorBackgroundBottomDocument = null;
-  String androidColorTextBottomDocument = null;
+  String androidColorSilhoutte;
+  String androidColorBackground;
+  String androidColorBoxMessage;
+  String androidColorTextMessage;
+  String androidColorBackgroundPopupError;
+  String androidColorTextPopupError;
+  String androidColorBackgroundButtonPopupError;
+  String androidColorTextButtonPopupError;
+  String androidColorBackgroundTakePictureButton;
+  String androidColorIconTakePictureButton;
+  String androidColorBackgroundBottomDocument;
+  String androidColorTextBottomDocument;
 
   //IOS cuscum layout
-  String iosColorSilhoutteNeutra = null;
-  String iosColorSilhoutteSuccess = null;
-  String iosColorSilhoutteError = null;
-  String iosColorBackground = null;
-  String iosColorBackgroundBoxStatus = null;
-  String iosColorTextBoxStatus = null;
-  String iosColorBackgroundPopupError = null;
-  String iosColorTextPopupError = null;
-  String iosImageIconPopupError = null;
+  String iosColorSilhoutteNeutra;
+  String iosColorSilhoutteSuccess;
+  String iosColorSilhoutteError;
+  String iosColorBackground;
+  String iosColorBackgroundBoxStatus;
+  String iosColorTextBoxStatus;
+  String iosColorBackgroundPopupError;
+  String iosColorTextPopupError;
+  String iosImageIconPopupError;
 
 
   ///Para iniciar nossa tecnologia forneça o contexto da aplicação e as chaves de acesso disponibilizadas pela unico

@@ -2,10 +2,11 @@
 
 class ErrorBio {
 
-  int code = null;
-  String method = null;
-  String description = null;
+  int code;
+  String method;
+  String description;
 
+  ///Default error
   ErrorBio(Map<dynamic, dynamic> map){
 
     for(String nome in map.keys){

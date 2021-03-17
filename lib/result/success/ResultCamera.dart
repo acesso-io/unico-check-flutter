@@ -2,8 +2,8 @@
 
 class ResultCamera {
 
-  String base64 = null;
-  String processID = null;
+  String base64;
+  String processID;
 
   ResultCamera(Map<dynamic, dynamic> map){
 

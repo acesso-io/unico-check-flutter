@@ -70,7 +70,6 @@ class _MyAppState extends State<MyApp> implements IAcessoBio, IAcessoBioCamera, 
   Future<void> customLayout() async {
 
     // --- CUSTOM LAYOUT Android
-    // acessobio.setAndroidColorSilhoutte("#87CEFA","#87CEFA");
     // acessobio.setAndroidColorBackground("#901850");
     // acessobio.setAndroidColorBoxMessage("#901850");
     // acessobio.setAndroidColorTextMessage("#901850");
@@ -82,6 +81,8 @@ class _MyAppState extends State<MyApp> implements IAcessoBio, IAcessoBioCamera, 
     // acessobio.setAndroidColorIconTakePictureButton("#901850");
     // acessobio.setAndroidColorBackgroundBottomDocument("#901850");
     // acessobio.setAndroidColorTextBottomDocument("#901850");
+    // acessobio.setAndroidColorSilhoutte("#87CEFA","#87CEFA");
+
 
     // --- CUSTOM LAYOUT IOS
     // acessobio.setIosColorSilhoutteNeutra("#901850");

@@ -1,8 +1,8 @@
 
 class ResultFacematch {
 
-  String Base64Selfie = null;
-  String Base64Document = null;
+  String Base64Selfie;
+  String Base64Document;
   bool Status = false;
 
   ResultFacematch(Map<dynamic, dynamic> map){

@@ -1,7 +1,7 @@
 
 class ResultCameraDocument {
 
-  String base64 = null;
+  String base64;
 
   ResultCameraDocument(Map<dynamic, dynamic> map){
 
