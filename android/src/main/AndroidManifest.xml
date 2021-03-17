@@ -1,0 +1,24 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  package="com.unico_check">
+
+    <application>
+
+        <activity
+            android:name=".AcessoBioLiveness"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".AcessoBioDocument"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".AcessoBioAuthenticate"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".AcessoBioCamera"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+    </application>
+
+</manifest>
