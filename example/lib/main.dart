@@ -5,7 +5,7 @@ import 'package:unico_check/abstracts/IAcessoBioAuthenticate.dart';
 import 'package:unico_check/abstracts/IAcessoBioCamera.dart';
 import 'package:unico_check/abstracts/IAcessoBioDocument.dart';
 import 'package:unico_check/abstracts/IAcessoBioLiveness.dart';
-import 'package:unico_check/result/success/OCRResponse.dart';
+import 'package:unico_check/result/success/ResultOCR.dart';
 import 'package:unico_check/result/success/ResultAuthenticate.dart';
 import 'package:unico_check/result/success/ResultCamera.dart';
 import 'package:unico_check/result/success/ResultLivenessX.dart';
@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> implements IAcessoBio, IAcessoBioCamera, 
   }
 
   Future<void> initDocument() async{
-    acessobio.openCameraDocumentOCR(UnicoCheck.CNH);
+    acessobio.openCameraDocumentOCR(UnicoCheck.cnh);
     // acessobio.openFaceMatch(AcessoBio.CNH);
     // acessobio.openCameraDocument(AcessoBio.CNH);
   }
@@ -202,7 +202,7 @@ class _MyAppState extends State<MyApp> implements IAcessoBio, IAcessoBioCamera, 
   }
 
   @override
-  void onSuccessOCR(OCRResponse ocr) {
+  void onSuccessOCR(ResultOCR ocr) {
     // TODO: implement onSuccessOCR
   }
 

@@ -6,7 +6,7 @@ import 'abstracts/IAcessoBioDocument.dart';
 import 'abstracts/IAcessoBioLiveness.dart';
 import 'result/success/ResultCamera.dart';
 import 'result/success/ResultAuthenticate.dart';
-import 'result/success/OCRResponse.dart';
+import 'result/success/ResultOCR.dart';
 import 'result/success/ResultCameraDocument.dart';
 import 'result/success/ResultFacematch.dart';
 import 'result/success/ResultLivenessX.dart';
@@ -16,13 +16,13 @@ class UnicoCheck {
 
   static const MethodChannel _channel = const MethodChannel('acessobio');
 
-  String _urlIntance = null;
-  String _apikey = null;
-  String _authToken = null;
+  String _urlIntance;
+  String _apikey;
+  String _authToken;
 
-  static final int RG_FRENTE = 501;
-  static final int RG_VERSO = 502;
-  static final int CNH = 4;
+  static final int frenteRG = 501;
+  static final int versoRG = 502;
+  static final int cnh = 4;
 
   IAcessoBio iAcessoBio;
   IAcessoBioCamera iAcessoBioCamera;
@@ -194,7 +194,7 @@ class UnicoCheck {
     if(validResult(result)){
 
       if(result["flutterstatus"] == 1){
-        iAcessoBioDocument.onSuccessOCR(OCRResponse(result));
+        iAcessoBioDocument.onSuccessOCR(ResultOCR(result));
       }else{
         iAcessoBioDocument.onErrorOCR(result["result"]);
       }

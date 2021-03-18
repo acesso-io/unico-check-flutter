@@ -92,6 +92,7 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
     
     func userClosedCameraManually(){
         flutterResult(convertObjToDicionary(result: 0, status: -1))
+        self.dismiss(animated: false)
     }
     
     func onErrorAcessoBioManager(_ error: String!) {
