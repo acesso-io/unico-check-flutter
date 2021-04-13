@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:unico_check_example/acessoPass.dart';
-import 'package:unico_check/abstracts/IAcessoBio.dart';
-import 'package:unico_check/abstracts/IAcessoBioAuthenticate.dart';
-import 'package:unico_check/abstracts/IAcessoBioCamera.dart';
-import 'package:unico_check/abstracts/IAcessoBioDocument.dart';
-import 'package:unico_check/abstracts/IAcessoBioLiveness.dart';
-import 'package:unico_check/result/success/OCRResponse.dart';
-import 'package:unico_check/result/success/ResultAuthenticate.dart';
-import 'package:unico_check/result/success/ResultCamera.dart';
-import 'package:unico_check/result/success/ResultLivenessX.dart';
-import 'package:unico_check/result/success/ResultCameraDocument.dart';
-import 'package:unico_check/result/success/ResultFacematch.dart';
-import 'package:unico_check/result/error/ErrorBio.dart';
+import 'package:unico_check/abstracts/acesso_bio.interface.dart';
+import 'package:unico_check/abstracts/acesso_bio_authenticate.interface.dart';
+import 'package:unico_check/abstracts/acesso_bio_camera.interface.dart';
+import 'package:unico_check/abstracts/acesso_bio_document.interface.dart';
+import 'package:unico_check/abstracts/acesso_bio_liveness.interface.dart';
+import 'package:unico_check/result/error/error_bio.response.dart';
+import 'package:unico_check/result/success/authenticate.response.dart';
+import 'package:unico_check/result/success/camera.response.dart';
+import 'package:unico_check/result/success/camera_document.response.dart';
+import 'package:unico_check/result/success/facematch.response.dart';
+import 'package:unico_check/result/success/liveness_x.response.dart';
+import 'package:unico_check/result/success/ocr.response.dart';
 import 'package:unico_check/unico_check.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget  {
+class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
 }
 
-
-class _MyAppState extends State<MyApp> implements IAcessoBio, IAcessoBioCamera, IAcessoBioDocument, IAcessoBioLiveness, IAcessoBioAuthenticate {
-
+class _MyAppState extends State<MyApp>
+    implements
+        IAcessoBio,
+        IAcessoBioCamera,
+        IAcessoBioDocument,
+        IAcessoBioLiveness,
+        IAcessoBioAuthenticate {
   String _result = "Esta biblioteca visa implementar a tecnologia Unico";
   UnicoCheck acessobio;
 
@@ -37,38 +40,36 @@ class _MyAppState extends State<MyApp> implements IAcessoBio, IAcessoBioCamera, 
 
   Future<void> initAcessoBio() async {
     acessobio = new UnicoCheck(
-        this,
-        acessoPass.url,
-        acessoPass.apikey,
-        acessoPass.token
+      this,
+      'acessoPass.url',
+      'acessoPass.apikey',
+      'acessoPass.token',
     );
     customLayout();
   }
 
-  Future<void> initLiveness() async{
+  Future<void> initLiveness() async {
     acessobio.openLiveness;
     // acessobio.openLivenessWithCreateProcess("lucas diniz","123123123123");
   }
 
-  Future<void> initDocument() async{
-    acessobio.openCameraDocumentOCR(UnicoCheck.CNH);
+  Future<void> initDocument() async {
+    acessobio.openCameraDocumentOCR(UnicoCheck.cnh);
     // acessobio.openFaceMatch(AcessoBio.CNH);
     // acessobio.openCameraDocument(AcessoBio.CNH);
   }
 
-  Future<void> initAuth() async{
+  Future<void> initAuth() async {
     acessobio.openLivenessAuthenticate("12345678909");
   }
 
-  Future<void> initCamera() async{
+  Future<void> initCamera() async {
     acessobio.openCamera;
     // acessobio.openCameraWithCreateProcess("lucas", "12345678909",null,null,null,null);
     // acessobio.openCameraWithCreateProcessAndInsertDocument("12345678909", "Lucas Diniz", AcessoBio.CNH);// no IOS ainda nao foi inplementado // retornando na interface errada
-
   }
 
   Future<void> customLayout() async {
-
     // --- CUSTOM LAYOUT Android
     // acessobio.setAndroidColorSilhoutte("#87CEFA","#87CEFA");
     // acessobio.setAndroidColorBackground("#901850");
@@ -93,7 +94,6 @@ class _MyAppState extends State<MyApp> implements IAcessoBio, IAcessoBioCamera, 
     // acessobio.setIosColorBackgroundPopupError("#901850");
     // acessobio.setIosColorTextPopupError("#901850");
     // acessobio.setIosImageIconPopupError("#901850");
-
   }
 
   @override
@@ -106,35 +106,27 @@ class _MyAppState extends State<MyApp> implements IAcessoBio, IAcessoBioCamera, 
         body: Container(
           margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 80.0),
           alignment: Alignment.center,
-
           child: Column(
             children: <Widget>[
-
               ElevatedButton.icon(
                 onPressed: initLiveness,
                 icon: Icon(Icons.camera, size: 18),
                 label: Text("Open Liveness"),
               ),
-
               ElevatedButton.icon(
                 onPressed: initDocument,
                 icon: Icon(Icons.pages, size: 18),
                 label: Text("Open Document"),
               ),
-
               ElevatedButton.icon(
                 onPressed: initCamera,
                 icon: Icon(Icons.camera, size: 18),
                 label: Text("Open Camera"),
               ),
-
               Padding(
                 padding: const EdgeInsets.all(95),
-                child: Text(
-                    '$_result\n'
-                ),
+                child: Text('$_result\n'),
               ),
-
             ],
           ),
         ),
@@ -142,101 +134,54 @@ class _MyAppState extends State<MyApp> implements IAcessoBio, IAcessoBioCamera, 
     );
   }
 
-
-  //region -- IAcessoBio
   @override
-  void onErrorAcessoBio(ErrorBio errorBio) {
-    // TODO: implement onErrorAcessoBio
-  }
+  void onErrorAcessoBio(ErrorBioResponse errorBioResponse) {}
 
   @override
-  void userClosedCameraManually() {
-    // TODO: implement userClosedCameraManually
-  }
-
-  //endregion
-
-  //region -- IAcessoBioCamera
-  @override
-  void onErrorCamera(ErrorBio errorBio) {
-    // TODO: implement onErrorCamera
-  }
+  void userClosedCameraManually() {}
 
   @override
-  void onErrorDocumentInsert(String error) {
-    // TODO: implement onErrorDocumentInsert
-  }
+  void onErrorCamera(ErrorBioResponse errorBioResponse) {}
 
   @override
-  void onSuccessCamera(ResultCamera result) {
-    // TODO: implement onSuccessCamera
-  }
+  void onErrorDocumentInsert(String error) {}
 
   @override
-  void onSucessDocumentInsert(String processId, String typed) {
-    // TODO: implement onSucessDocumentInsert
-  }
+  void onSuccessCamera(CameraResponse result) {}
+
+  @override
+  void onSucessDocumentInsert(String processId, String typed) {}
 
   //endregion
 
   //region -- IAcessoBioDocument
   @override
-  void onErrorDocument(String error) {
-    // TODO: implement onErrorDocument
-  }
+  void onErrorDocument(String error) {}
 
   @override
-  void onErrorFaceMatch(String error) {
-    // TODO: implement onErrorFaceMatch
-  }
+  void onErrorFaceMatch(String error) {}
 
   @override
-  void onErrorOCR(String error) {
-    // TODO: implement onErrorOCR
-  }
+  void onErrorOCR(String error) {}
 
   @override
-  void onSuccessFaceMatch(ResultFacematch result) {
-    // TODO: implement onSuccessFaceMatch
-  }
+  void onSuccessFaceMatch(FacematchResponse result) {}
 
   @override
-  void onSuccessOCR(OCRResponse ocr) {
-    // TODO: implement onSuccessOCR
-  }
+  void onSuccessOCR(OCRResponse ocr) {}
 
   @override
-  void onSuccesstDocument(ResultCameraDocument result) {
-    // TODO: implement onSuccesstDocument
-  }
-
-  //endregion
-
-  //region -- IAcessoBioLiveness
-  @override
-  void onErrorLiveness(ErrorBio errorBio) {
-    // TODO: implement onErrorLiveness
-  }
+  void onSuccesstDocument(CameraDocumentResponse result) {}
 
   @override
-  void onSuccessLiveness(ResultLivenessX result) {
-    // TODO: implement onSuccessLiveness
-  }
-
-  //endregion
-
-  //region -- IAcessoBioAuthenticate
-  @override
-  void onErrorAuthenticate(ErrorBio errorBio) {
-    // TODO: implement onErrorAuthenticate
-  }
+  void onErrorLiveness(ErrorBioResponse errorBioResponse) {}
 
   @override
-  void onSuccessAuthenticate(ResultAuthenticate result) {
-    // TODO: implement onSuccessAuthenticate
-  }
+  void onSuccessLiveness(LivenessXResponse result) {}
 
-//endregion
+  @override
+  void onErrorAuthenticate(ErrorBioResponse errorBioResponse) {}
 
-
+  @override
+  void onSuccessAuthenticate(AuthenticateResponse result) {}
 }
