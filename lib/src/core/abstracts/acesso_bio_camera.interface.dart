@@ -1,7 +1,8 @@
-import '../result/error/error_bio.response.dart';
-import '../result/success/camera.response.dart';
+import '../response/error/error_bio.response.dart';
+import '../response/success/camera.response.dart';
+import 'acesso_bio.interface.dart';
 
-abstract class IAcessoBioCamera {
+abstract class IAcessoBioCamera extends IAcessoBio {
   void onSuccessCamera(CameraResponse response);
   void onErrorCamera(ErrorBioResponse error);
   void onSucessDocumentInsert(String processId, String typed);

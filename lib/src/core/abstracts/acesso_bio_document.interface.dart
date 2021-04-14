@@ -1,8 +1,9 @@
-import '../result/success/camera_document.response.dart';
-import '../result/success/facematch.response.dart';
-import '../result/success/ocr.response.dart';
+import '../response/success/camera_document.response.dart';
+import '../response/success/facematch.response.dart';
+import '../response/success/ocr.response.dart';
+import 'acesso_bio.interface.dart';
 
-abstract class IAcessoBioDocument {
+abstract class IAcessoBioDocument extends IAcessoBio {
   void onSuccesstDocument(CameraDocumentResponse response);
 
   void onSuccessFaceMatch(FacematchResponse response);
