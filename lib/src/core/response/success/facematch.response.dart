@@ -22,12 +22,4 @@ class FacematchResponse {
   Map<String, dynamic> toJson() => _$FacematchResponseToJson(this);
 }
 
-bool statusFromJson(dynamic status) {
-  if (status == 1) {
-    return true;
-  } else if (status == true) {
-    return status;
-  }
-
-  return false;
-}
+bool statusFromJson(dynamic status) => status == 1 || status;
