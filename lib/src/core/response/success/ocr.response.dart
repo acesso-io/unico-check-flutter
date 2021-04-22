@@ -1,8 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'ocr.response.g.dart';
-
-@JsonSerializable()
 class OCRResponse {
   final String birthDate;
   final String placeOfBirth;
@@ -44,8 +39,26 @@ class OCRResponse {
     required this.observation,
   });
 
-  factory OCRResponse.fromJson(Map<String, dynamic> json) =>
-      _$OCRResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$OCRResponseToJson(this);
+  factory OCRResponse.fromJson(Map<String, dynamic> json) {
+    return OCRResponse(
+      birthDate: json['birthDate'],
+      placeOfBirth: json['placeOfBirth'],
+      category: json['category'],
+      expeditionCity: json['expeditionCity'],
+      expeditionState: json['expeditionState'],
+      expeditionDate: json['expeditionDate'],
+      expirationDate: json['expirationDate'],
+      fatherName: json['fatherName'],
+      motherName: json['motherName'],
+      firstLicenseDate: json['firstLicenseDate'],
+      name: json['name'],
+      rg: json['rg'],
+      code: json['code'],
+      registrationNumber: json['registrationNumber'],
+      renach: json['renach'],
+      securityCode: json['securityCode'],
+      mirrorNumber: json['mirrorNumber'],
+      observation: json['observation'],
+    );
+  }
 }

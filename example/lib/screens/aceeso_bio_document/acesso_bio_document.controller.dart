@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:unico_check/unico_check.dart';
+import 'package:unico_check_example/utils/snackbar.util.dart';
 
 class AcessoBioDocumentController extends GetxController
     implements IAcessoBioDocument {
@@ -16,19 +17,27 @@ class AcessoBioDocumentController extends GetxController
   }
 
   @override
-  void onErrorAcessoBio(ErrorBioResponse error) {}
+  void onErrorAcessoBio(ErrorBioResponse error) {
+    SnackbarUtil.showError(message: error.description);
+  }
 
   @override
   void userClosedCameraManually() {}
 
   @override
-  void onErrorDocument(String error) {}
+  void onErrorDocument(String error) {
+    SnackbarUtil.showError(message: error);
+  }
 
   @override
-  void onErrorFaceMatch(String error) {}
+  void onErrorFaceMatch(String error) {
+    SnackbarUtil.showError(message: error);
+  }
 
   @override
-  void onErrorOCR(String error) {}
+  void onErrorOCR(String error) {
+    SnackbarUtil.showError(message: error);
+  }
 
   @override
   void onSuccessFaceMatch(FacematchResponse response) {}

@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:unico_check_example/navigation/bindings/acesso_bio_camera.binding.dart';
+import 'package:unico_check_example/navigation/bindings/home.binding.dart';
 import 'package:unico_check_example/screens/aceeso_bio_document/acesso_bio_document.screen.dart';
 import 'package:unico_check_example/screens/aceeso_bio_liveness/acesso_bio_liveness.screen.dart';
 import 'package:unico_check_example/screens/acesso_bio_camera/acesso_bio_camera.screen.dart';
@@ -14,6 +15,7 @@ class Nav {
     GetPage(
       name: Routes.HOME,
       page: () => HomeScreen(),
+      binding: HomeBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(

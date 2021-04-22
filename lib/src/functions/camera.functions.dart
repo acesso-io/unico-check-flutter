@@ -22,10 +22,12 @@ class CameraFunctions {
         _callbacks = callbacks;
 
   void openCamera() async {
-    final result = await _channel.invokeMethod(
-      MethodsChannelsConstants.openCamera,
-      _config.getCommonMap,
-    ) as Map<String, dynamic>;
+    final result = Map<String, dynamic>.from(
+      await _channel.invokeMethod(
+        MethodsChannelsConstants.openCamera,
+        _config.getCommonMap,
+      ),
+    );
 
     if (validateResponse(callbacks: _callbacks, response: result)) {
       if (result[MapConstants.flutterStatus] == 1) {
@@ -54,10 +56,12 @@ class CameraFunctions {
     map[MapConstants.email] = email;
     map[MapConstants.phone] = phone;
 
-    final result = await _channel.invokeMethod(
-      MethodsChannelsConstants.openCameraWithCreateProcess,
-      map,
-    ) as Map<String, dynamic>;
+    final result = Map<String, dynamic>.from(
+      await _channel.invokeMethod(
+        MethodsChannelsConstants.openCameraWithCreateProcess,
+        map,
+      ),
+    );
 
     if (validateResponse(callbacks: _callbacks, response: result)) {
       if (result[MapConstants.flutterStatus] == 1) {
@@ -80,10 +84,12 @@ class CameraFunctions {
     map[MapConstants.nome] = nome;
     map[MapConstants.documentType] = documentType;
 
-    final result = await _channel.invokeMethod(
-      MethodsChannelsConstants.openCameraInsertDocument,
-      map,
-    ) as Map<String, dynamic>;
+    final result = Map<String, dynamic>.from(
+      await _channel.invokeMethod(
+        MethodsChannelsConstants.openCameraInsertDocument,
+        map,
+      ),
+    );
 
     if (validateResponse(callbacks: _callbacks, response: result)) {
       if (result[MapConstants.flutterStatus] == 1) {

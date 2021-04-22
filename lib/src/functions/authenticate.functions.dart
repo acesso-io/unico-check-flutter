@@ -26,10 +26,12 @@ class AuthenticateFunctions {
 
     map[MapConstants.code] = code;
 
-    final result = await _channel.invokeMethod(
-      MethodsChannelsConstants.openLivenessAuthenticate,
-      map,
-    ) as Map<String, dynamic>;
+    final result = Map<String, dynamic>.from(
+      await _channel.invokeMethod(
+        MethodsChannelsConstants.openLivenessAuthenticate,
+        map,
+      ),
+    );
 
     if (validateResponse(callbacks: _callbacks, response: result)) {
       if (result[MapConstants.flutterStatus] == 1) {

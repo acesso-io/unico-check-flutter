@@ -1,8 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'authenticate.response.g.dart';
-
-@JsonSerializable()
 class AuthenticateResponse {
   final String base64;
   final bool status;
@@ -14,8 +9,11 @@ class AuthenticateResponse {
     required this.isLiveness,
   });
 
-  factory AuthenticateResponse.fromJson(Map<String, dynamic> json) =>
-      _$AuthenticateResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AuthenticateResponseToJson(this);
+  factory AuthenticateResponse.fromJson(Map<String, dynamic> json) {
+    return AuthenticateResponse(
+      base64: json['base64'],
+      status: json['status'],
+      isLiveness: json['isLiveness'],
+    );
+  }
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'initializer.dart';
 import 'navigation/navigation.dart';
 import 'navigation/routes.dart';
 
 void main() {
+  Initializer.init();
+
   final initialRoute = Routes.initialRoute;
   runApp(Main(initialRoute));
 }
