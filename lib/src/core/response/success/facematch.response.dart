@@ -1,13 +1,6 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'facematch.response.g.dart';
-
-@JsonSerializable()
 class FacematchResponse {
   final String base64Selfie;
   final String base64Document;
-
-  @JsonKey(fromJson: statusFromJson)
   final bool status;
 
   const FacematchResponse({
@@ -16,10 +9,13 @@ class FacematchResponse {
     required this.status,
   });
 
-  factory FacematchResponse.fromJson(Map<String, dynamic> json) =>
-      _$FacematchResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$FacematchResponseToJson(this);
+  factory FacematchResponse.fromJson(Map<String, dynamic> json) {
+    return FacematchResponse(
+      base64Selfie: json['base64Selfie'],
+      base64Document: json['base64Document'],
+      status: statusFromJson(json['status']),
+    );
+  }
 }
 
 bool statusFromJson(dynamic status) {

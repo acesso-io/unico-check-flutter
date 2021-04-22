@@ -1,8 +1,3 @@
-import 'package:json_annotation/json_annotation.dart';
-
-part 'liveness_x.response.g.dart';
-
-@JsonSerializable()
 class LivenessXResponse {
   final String base64;
   final String processID;
@@ -16,8 +11,12 @@ class LivenessXResponse {
     required this.isLiveness,
   });
 
-  factory LivenessXResponse.fromJson(Map<String, dynamic> json) =>
-      _$LivenessXResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$LivenessXResponseToJson(this);
+  factory LivenessXResponse.fromJson(Map<String, dynamic> json) {
+    return LivenessXResponse(
+      base64: json['base64'],
+      processID: json['processID'],
+      log: json['log'],
+      isLiveness: json['isLiveness'],
+    );
+  }
 }
