@@ -22,10 +22,12 @@ class LivenessFunctions {
         _callbacks = callbacks;
 
   void openLiveness() async {
-    final result = await _channel.invokeMethod(
-      MethodsChannelsConstants.openLiveness,
-      _config.getCommonMap,
-    ) as Map<String, dynamic>;
+    final result = Map<String, dynamic>.from(
+      await _channel.invokeMethod(
+        MethodsChannelsConstants.openLiveness,
+        _config.getCommonMap,
+      ),
+    );
 
     if (validateResponse(callbacks: _callbacks, response: result)) {
       if (result[MapConstants.flutterStatus] == 1) {
@@ -47,10 +49,12 @@ class LivenessFunctions {
     map[MapConstants.name] = name;
     map[MapConstants.document] = document;
 
-    final result = await _channel.invokeMethod(
-      MethodsChannelsConstants.openLivenessWithCreateProcess,
-      map,
-    ) as Map<String, dynamic>;
+    final result = Map<String, dynamic>.from(
+      await _channel.invokeMethod(
+        MethodsChannelsConstants.openLivenessWithCreateProcess,
+        map,
+      ),
+    );
 
     if (validateResponse(callbacks: _callbacks, response: result)) {
       if (result[MapConstants.flutterStatus] == 1) {

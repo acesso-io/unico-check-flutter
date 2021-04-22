@@ -26,10 +26,12 @@ class DocumentFunctions {
     final map = _config.getCommonMap;
     map[MapConstants.documentType] = documentType;
 
-    final result = await _channel.invokeMethod(
-      MethodsChannelsConstants.openCameraDocumentOCR,
-      map,
-    ) as Map<String, dynamic>;
+    final result = Map<String, dynamic>.from(
+      await _channel.invokeMethod(
+        MethodsChannelsConstants.openCameraDocumentOCR,
+        map,
+      ),
+    );
 
     if (validateResponse(callbacks: _callbacks, response: result)) {
       if (result[MapConstants.flutterStatus] == 1) {
@@ -46,10 +48,12 @@ class DocumentFunctions {
 
     map[MapConstants.documentType] = documentType;
 
-    final result = await _channel.invokeMethod(
-      MethodsChannelsConstants.openFaceMatch,
-      map,
-    ) as Map<String, dynamic>;
+    final result = Map<String, dynamic>.from(
+      await _channel.invokeMethod(
+        MethodsChannelsConstants.openFaceMatch,
+        map,
+      ),
+    );
 
     if (validateResponse(callbacks: _callbacks, response: result)) {
       if (result[MapConstants.flutterStatus] == 1) {
@@ -66,10 +70,12 @@ class DocumentFunctions {
 
     map[MapConstants.documentType] = documentType;
 
-    final result = await _channel.invokeMethod(
-      MethodsChannelsConstants.openCameraDocument,
-      map,
-    ) as Map<String, dynamic>;
+    final result = Map<String, dynamic>.from(
+      await _channel.invokeMethod(
+        MethodsChannelsConstants.openCameraDocument,
+        map,
+      ),
+    );
 
     if (validateResponse(callbacks: _callbacks, response: result)) {
       if (result[MapConstants.flutterStatus] == 1) {

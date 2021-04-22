@@ -1,20 +1,11 @@
 class ErrorBioResponse {
-  int? code;
-  String? method;
-  String? description;
+  late int code;
+  late String method;
+  late String description;
 
   ErrorBioResponse(Map<dynamic, dynamic> map) {
-    // TODO: Como tratar essa description? Ela vem de duas fontes diferentes
-    for (String nome in map.keys) {
-      if (nome == 'code') {
-        code = map[nome];
-      } else if (nome == 'method') {
-        method = map[nome];
-      } else if (nome == 'description') {
-        description = map[nome];
-      } else if (nome == 'result') {
-        description = map[nome];
-      }
-    }
+    code = map['code'];
+    method = map['method'];
+    description = map['description'] ?? map['result'];
   }
 }

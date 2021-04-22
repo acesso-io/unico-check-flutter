@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:unico_check/unico_check.dart';
+import 'package:unico_check_example/utils/snackbar.util.dart';
 
 class AcessoBioLivenessController extends GetxController
     implements IAcessoBioLiveness {
@@ -14,13 +15,17 @@ class AcessoBioLivenessController extends GetxController
   }
 
   @override
-  void onErrorAcessoBio(ErrorBioResponse error) {}
+  void onErrorAcessoBio(ErrorBioResponse error) {
+    SnackbarUtil.showError(message: error.description);
+  }
 
   @override
   void userClosedCameraManually() {}
 
   @override
-  void onErrorLiveness(ErrorBioResponse error) {}
+  void onErrorLiveness(ErrorBioResponse error) {
+    SnackbarUtil.showError(message: error.description);
+  }
 
   @override
   void onSuccessLiveness(LivenessXResponse response) {}
