@@ -13,11 +13,6 @@ class HomeScreen extends GetView<HomeController> {
         child: Column(
           children: <Widget>[
             ElevatedButton.icon(
-              onPressed: controller.openLiveness,
-              icon: Icon(Icons.camera, size: 18),
-              label: Text('Navegar para o Liveness'),
-            ),
-            ElevatedButton.icon(
               onPressed: controller.openDocument,
               icon: Icon(Icons.pages, size: 18),
               label: Text('Navegar para Documents'),
@@ -26,6 +21,11 @@ class HomeScreen extends GetView<HomeController> {
               onPressed: controller.openCamera,
               icon: Icon(Icons.camera, size: 18),
               label: Text('Navegar para a Camera'),
+            ),
+            ElevatedButton.icon(
+              onPressed: controller.openAuth,
+              icon: Icon(Icons.camera, size: 18),
+              label: Text('Navegar para a Autenticação'),
             ),
           ],
         ),

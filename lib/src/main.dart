@@ -17,8 +17,8 @@ class UnicoCheck {
   /// Instancie a classe ```UnicoConfig``` e passe ela como parametro
   final UnicoConfig _config;
 
-  /// Classe onde ficam as funções para as funções do liveness
-  late LivenessFunctions? liveness;
+  // Classe onde ficam as funções para as funções do liveness
+  // late LivenessFunctions? liveness;
 
   /// Classe onde ficam as funções para as funções do documento
   late DocumentFunctions? document;
@@ -33,13 +33,14 @@ class UnicoCheck {
   /// de utilizar
   UnicoCheck({required Object context, required UnicoConfig config})
       : _config = config {
-    if (context is IAcessoBioLiveness) {
-      liveness = LivenessFunctions(
-        channel: _channel,
-        config: _config,
-        callbacks: context,
-      );
-    }
+
+    // if (context is IAcessoBioLiveness) {
+    //   liveness = LivenessFunctions(
+    //     channel: _channel,
+    //     config: _config,
+    //     callbacks: context,
+    //   );
+    // }
 
     if (context is IAcessoBioDocument) {
       document = DocumentFunctions(

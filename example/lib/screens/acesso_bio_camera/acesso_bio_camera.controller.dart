@@ -37,4 +37,5 @@ class AcessoBioCameraController extends GetxController
 
   @override
   void userClosedCameraManually() {}
+
 }
