@@ -11,7 +11,7 @@ class AcessoBioDocumentController extends GetxController
   }
 
   void openCameraDocument() {
-    _unico.document!.openCameraDocument(
+    _unico.document!.openFaceMatch(
       documentType: DocumentsTypeConstants.cnh,
     );
   }
@@ -47,4 +47,5 @@ class AcessoBioDocumentController extends GetxController
 
   @override
   void onSuccesstDocument(CameraDocumentResponse response) {}
+
 }
