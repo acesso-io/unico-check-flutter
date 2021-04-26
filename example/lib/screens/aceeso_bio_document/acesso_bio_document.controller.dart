@@ -17,12 +17,21 @@ class AcessoBioDocumentController extends GetxController
   }
 
   @override
-  void onErrorAcessoBio(ErrorBioResponse error) {
-    SnackbarUtil.showError(message: error.description);
-  }
+  void onSuccessOCR(OCRResponse ocr) {}
+
+  @override
+  void onSuccessFaceMatch(FacematchResponse response) {}
+
+  @override
+  void onSuccesstDocument(CameraDocumentResponse response) {}
 
   @override
   void userClosedCameraManually() {}
+
+  @override
+  void onErrorAcessoBio(ErrorBioResponse error) {
+    SnackbarUtil.showError(message: error.description);
+  }
 
   @override
   void onErrorDocument(String error) {
@@ -38,13 +47,4 @@ class AcessoBioDocumentController extends GetxController
   void onErrorOCR(String error) {
     SnackbarUtil.showError(message: error);
   }
-
-  @override
-  void onSuccessFaceMatch(FacematchResponse response) {}
-
-  @override
-  void onSuccessOCR(OCRResponse ocr) {}
-
-  @override
-  void onSuccesstDocument(CameraDocumentResponse response) {}
 }

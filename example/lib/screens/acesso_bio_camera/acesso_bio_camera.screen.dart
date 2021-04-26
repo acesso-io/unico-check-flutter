@@ -13,6 +13,12 @@ class AcessoBioCameraScreen extends GetView<AcessoBioCameraController> {
           icon: Icon(Icons.camera, size: 18),
           label: Text('Abrir a camera da UNICO'),
         ),
+        const SizedBox(height: 30),
+        ElevatedButton.icon(
+          onPressed: controller.openCameraOnline,
+          icon: Icon(Icons.online_prediction, size: 18),
+          label: Text('Abrir a camera da UNICO criando Processo'),
+        ),
       ],
     );
   }

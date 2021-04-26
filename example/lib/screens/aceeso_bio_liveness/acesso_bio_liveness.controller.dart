@@ -15,8 +15,8 @@ class AcessoBioLivenessController extends GetxController
   }
 
   @override
-  void onErrorAcessoBio(ErrorBioResponse error) {
-    SnackbarUtil.showError(message: error.description);
+  void onSuccessLiveness(LivenessXResponse response) {
+    print(response.processID);
   }
 
   @override
@@ -28,5 +28,7 @@ class AcessoBioLivenessController extends GetxController
   }
 
   @override
-  void onSuccessLiveness(LivenessXResponse response) {}
+  void onErrorAcessoBio(ErrorBioResponse error) {
+    SnackbarUtil.showError(message: error.description);
+  }
 }

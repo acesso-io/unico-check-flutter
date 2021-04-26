@@ -43,10 +43,10 @@ class CameraFunctions {
   void openCameraWithCreateProcess({
     required String nome,
     required String code,
-    required String gender,
-    required String birthdate,
-    required String email,
-    required String phone,
+    String? gender,
+    String? birthdate,
+    String? email,
+    String? phone,
   }) async {
     var map = _config.getCommonMap;
     map[MapConstants.nome] = nome;

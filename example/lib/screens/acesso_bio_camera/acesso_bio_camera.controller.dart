@@ -14,21 +14,25 @@ class AcessoBioCameraController extends GetxController
     _unico.camera!.openCamera();
   }
 
+  void openCameraOnline() {
+    // _unico.camera!.openCameraWithCreateProcess();
+  }
+
+  @override
+  void onSuccessCamera(CameraResponse response) {
+    print(response.processID);
+  }
+
+  @override
+  void onSucessDocumentInsert(String processId, String typed) {}
+
+  @override
+  void userClosedCameraManually() {}
+
   @override
   void onErrorCamera(ErrorBioResponse error) {
     SnackbarUtil.showError(message: error.description);
   }
-
-  @override
-  void onErrorDocumentInsert(String error) {
-    SnackbarUtil.showError(message: error);
-  }
-
-  @override
-  void onSuccessCamera(CameraResponse response) {}
-
-  @override
-  void onSucessDocumentInsert(String processId, String typed) {}
 
   @override
   void onErrorAcessoBio(ErrorBioResponse error) {
@@ -36,5 +40,7 @@ class AcessoBioCameraController extends GetxController
   }
 
   @override
-  void userClosedCameraManually() {}
+  void onErrorDocumentInsert(String error) {
+    SnackbarUtil.showError(message: error);
+  }
 }
