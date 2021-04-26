@@ -6,9 +6,7 @@ import 'package:unico_check/src/unico_config.dart';
 import 'core/abstracts/acesso_bio_authenticate.interface.dart';
 import 'core/abstracts/acesso_bio_camera.interface.dart';
 import 'core/abstracts/acesso_bio_document.interface.dart';
-import 'core/abstracts/acesso_bio_liveness.interface.dart';
 import 'functions/camera.functions.dart';
-import 'functions/liveness.functions.dart';
 
 class UnicoCheck {
   static const _channel = MethodChannel('acessobio');
@@ -33,7 +31,6 @@ class UnicoCheck {
   /// de utilizar
   UnicoCheck({required Object context, required UnicoConfig config})
       : _config = config {
-
     // if (context is IAcessoBioLiveness) {
     //   liveness = LivenessFunctions(
     //     channel: _channel,

@@ -4,8 +4,7 @@
 .packages
 .pub/
 
-lib/acessoPass.dart
-
 build/
 
 .fvm/flutter_sdk
+example/lib/acesso_pass.dart
