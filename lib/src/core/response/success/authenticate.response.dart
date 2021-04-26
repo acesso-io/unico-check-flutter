@@ -10,10 +10,21 @@ class AuthenticateResponse {
   });
 
   factory AuthenticateResponse.fromJson(Map<String, dynamic> json) {
-    return AuthenticateResponse(
-      base64: json['base64'],
-      status: json['status'],
-      isLiveness: json['isLiveness'],
-    );
+
+    if(json['result'] != null){
+      return AuthenticateResponse(
+        base64: '',
+        status: json['result'],
+        isLiveness: json['result'],
+      );
+    }else{
+      return AuthenticateResponse(
+        base64: json['base64'],
+        status: json['status'],
+        isLiveness: json['isLiveness'],
+      );
+    }
+
+
   }
 }

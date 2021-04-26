@@ -1,3 +1,5 @@
+import 'package:unico_check/src/core/constants/map.constants.dart';
+
 class FacematchResponse {
   final String base64Selfie;
   final String base64Document;
@@ -10,20 +12,27 @@ class FacematchResponse {
   });
 
   factory FacematchResponse.fromJson(Map<String, dynamic> json) {
-    return FacematchResponse(
-      base64Selfie: json['base64Selfie'],
-      base64Document: json['base64Document'],
-      status: statusFromJson(json['status']),
-    );
+
+    if(json[MapConstants.result] != null){
+      return FacematchResponse(
+        base64Selfie: "",
+        base64Document: "",
+        status: json[MapConstants.result],
+      );
+    }else{
+      var statusIOS = false;
+      if(json['Status'] == 1){
+        statusIOS = true;
+      }
+      return FacematchResponse(
+        base64Selfie: json['Base64Selfie'],
+        base64Document: json['Base64Document'],
+        status: statusIOS,
+      );
+    }
   }
 }
 
-bool statusFromJson(dynamic status) {
-  if (status == 1) {
-    return true;
-  } else if (status == true) {
-    return status;
-  }
+bool statusFromJson(dynamic status) => status == 1 || status;
 
-  return false;
-}
+
