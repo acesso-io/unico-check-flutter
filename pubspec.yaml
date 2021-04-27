@@ -1,6 +1,6 @@
 name: unico_check
-description: Esta biblioteca visa implementar a tecnologia Unico.
-version: 0.1.0
+description: Esta biblioteca visa implementar a tecnologia unico check na plataforma flutter.
+version: 0.1.1
 homepage: https://github.com/acesso-io/unico_check_flutter
 
 environment:

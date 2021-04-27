@@ -124,47 +124,70 @@
 </section>
 
 
+<section class="desc markdown">
+  <p>token</p>
+</section>
 
 
 <section class="summary source-code" id="source">
   <h2><span>Implementation</span></h2>
-  <pre class="language-dart"><code class="language-dart">Map&lt;dynamic, dynamic&gt; get getCommonMap {
-  var map = &lt;String, dynamic&gt;{
-    &#39;urlIntance&#39;: _urlInstance,
-    &#39;apikey&#39;: _apikey,
-    &#39;authToken&#39;: _authToken,
+  <pre class="language-dart"><code class="language-dart">_authToken = authToken; &#47;&#47;&#47;token
 
-    &#47;&#47;Android custom layout
-    &#39;setAndroidColorSilhoutte&#39;: androidColorSilhoutte,
-    &#39;setAndroidColorBackground&#39;: androidColorBackground,
-    &#39;setAndroidColorBoxMessage&#39;: androidColorBoxMessage,
-    &#39;setAndroidColorTextMessage&#39;: androidColorTextMessage,
-    &#39;setAndroidColorBackgroundPopupError&#39;: androidColorBackgroundPopupError,
-    &#39;setAndroidColorTextPopupError&#39;: androidColorTextPopupError,
-    &#39;setAndroidColorBackgroundButtonPopupError&#39;:
-        androidColorBackgroundButtonPopupError,
-    &#39;setAndroidColorTextButtonPopupError&#39;: androidColorTextButtonPopupError,
-    &#39;setAndroidColorBackgroundTakePictureButton&#39;:
-        androidColorBackgroundTakePictureButton,
-    &#39;setAndroidColorIconTakePictureButton&#39;: androidColorIconTakePictureButton,
-    &#39;setAndroidColorBackgroundBottomDocument&#39;:
-        androidColorBackgroundBottomDocument,
-    &#39;setAndroidColorTextBottomDocument&#39;: androidColorTextBottomDocument,
+  Map&lt;dynamic, dynamic&gt; get getCommonMap {
+    var map = &lt;String, dynamic&gt;{
+      &#39;urlIntance&#39;: _urlInstance,
+      &#39;apikey&#39;: _apikey,
+      &#39;authToken&#39;: _authToken,
 
-    &#47;&#47;IOS custom layout
-    &#39;setIosColorSilhoutteNeutra&#39;: iosColorSilhoutteNeutra,
-    &#39;setIosColorSilhoutteSuccess&#39;: iosColorSilhoutteSuccess,
-    &#39;setIosColorSilhoutteError&#39;: iosColorSilhoutteError,
-    &#39;setIosColorBackground&#39;: iosColorBackground,
-    &#39;setIosColorBackgroundBoxStatus&#39;: iosColorBackgroundBoxStatus,
-    &#39;setIosColorTextBoxStatus&#39;: iosColorTextBoxStatus,
-    &#39;setIosColorBackgroundPopupError&#39;: iosColorBackgroundPopupError,
-    &#39;setIosColorTextPopupError&#39;: iosColorTextPopupError,
-    &#39;setIosImageIconPopupError&#39;: iosImageIconPopupError
-  };
+      &#47;&#47;&#47;Android custom layout
+      &#47;&#47;&#47;adiciona cor a silhueta de captura
+      &#39;setAndroidColorSilhoutte&#39;: androidColorSilhoutte,
+      &#47;&#47;&#47;adiciona cor no funudo da captura
+      &#39;setAndroidColorBackground&#39;: androidColorBackground,
+      &#47;&#47;&#47;adiciona cor no box de mensagem
+      &#39;setAndroidColorBoxMessage&#39;: androidColorBoxMessage,
+      &#47;&#47;&#47;adiciona cor no texto da mensagem
+      &#39;setAndroidColorTextMessage&#39;: androidColorTextMessage,
+      &#47;&#47;&#47;adiciona cor no fundo do popup de erro
+      &#39;setAndroidColorBackgroundPopupError&#39;: androidColorBackgroundPopupError,
+      &#47;&#47;&#47;adiciona cor no texto de erro do popup
+      &#39;setAndroidColorTextPopupError&#39;: androidColorTextPopupError,
+      &#47;&#47;&#47;adiciona cor no botão popup
+      &#39;setAndroidColorBackgroundButtonPopupError&#39;: androidColorBackgroundButtonPopupError,
+      &#47;&#47;&#47;adiciona cor no texto do botão do popup
+      &#39;setAndroidColorTextButtonPopupError&#39;: androidColorTextButtonPopupError,
+      &#47;&#47;&#47;adiciona cor no fundo de captura
+      &#39;setAndroidColorBackgroundTakePictureButton&#39;: androidColorBackgroundTakePictureButton,
+      &#47;&#47;&#47;adiciona cor no icone do botão de captura
+      &#39;setAndroidColorIconTakePictureButton&#39;: androidColorIconTakePictureButton,
+      &#47;&#47;&#47;adiciona cor no fundo do botão de captura
+      &#39;setAndroidColorBackgroundBottomDocument&#39;: androidColorBackgroundBottomDocument,
+      &#47;&#47;&#47;adiciona cor no texto do botão de captura documento
+      &#39;setAndroidColorTextBottomDocument&#39;: androidColorTextBottomDocument,
 
-  return map;
-}</code></pre>
+      &#47;&#47;&#47;IOS custom layout
+      &#47;&#47;&#47;adiciona cor na silhueta de captura
+      &#39;setIosColorSilhoutteNeutra&#39;: iosColorSilhoutteNeutra,
+      &#47;&#47;&#47;adiciona cor na silhueta de sucesso
+      &#39;setIosColorSilhoutteSuccess&#39;: iosColorSilhoutteSuccess,
+      &#47;&#47;&#47;adiciona cor na silhueta de erro
+      &#39;setIosColorSilhoutteError&#39;: iosColorSilhoutteError,
+      &#47;&#47;&#47;adiciona cor no fundo de captura
+      &#39;setIosColorBackground&#39;: iosColorBackground,
+      &#47;&#47;&#47;adiciona cor no fundo da caixa de status
+      &#39;setIosColorBackgroundBoxStatus&#39;: iosColorBackgroundBoxStatus,
+      &#47;&#47;&#47;adiciona cor no texto da caixa de status
+      &#39;setIosColorTextBoxStatus&#39;: iosColorTextBoxStatus,
+      &#47;&#47;&#47;adiciona cor no fundo do icone popup de erro
+      &#39;setIosColorBackgroundPopupError&#39;: iosColorBackgroundPopupError,
+      &#47;&#47;&#47;adiciona cor no texto popup de erro
+      &#39;setIosColorTextPopupError&#39;: iosColorTextPopupError,
+      &#47;&#47;&#47;adiciona cor no icone popup erro
+      &#39;setIosImageIconPopupError&#39;: iosImageIconPopupError
+    };
+
+    return map;
+  }</code></pre>
 </section>
 
 </section>
@@ -180,7 +203,7 @@
 <footer>
   <span class="no-break">
     unico_check
-      0.1.0
+      0.1.1
   </span>
 
   

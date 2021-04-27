@@ -2,13 +2,10 @@ import 'package:flutter/services.dart';
 import 'package:unico_check/src/functions/authenticate.functions.dart';
 import 'package:unico_check/src/functions/document.functions.dart';
 import 'package:unico_check/src/unico_config.dart';
-
 import 'core/abstracts/acesso_bio_authenticate.interface.dart';
 import 'core/abstracts/acesso_bio_camera.interface.dart';
 import 'core/abstracts/acesso_bio_document.interface.dart';
-import 'core/abstracts/acesso_bio_liveness.interface.dart';
 import 'functions/camera.functions.dart';
-import 'functions/liveness.functions.dart';
 
 class UnicoCheck {
   static const _channel = MethodChannel('acessobio');
@@ -42,6 +39,7 @@ class UnicoCheck {
     //   );
     // }
 
+    ///IAcessoBioDocument implementa as funcionalidades de documento
     if (context is IAcessoBioDocument) {
       document = DocumentFunctions(
         channel: _channel,
@@ -50,6 +48,7 @@ class UnicoCheck {
       );
     }
 
+    ///IAcessoBioAuthenticate implementa as funcionalidades de autenticação
     if (context is IAcessoBioAuthenticate) {
       authenticate = AuthenticateFunctions(
         channel: _channel,
@@ -58,6 +57,7 @@ class UnicoCheck {
       );
     }
 
+    ///IAcessoBioAuthenticate implementa as funcionalidade camera inteligente
     if (context is IAcessoBioCamera) {
       camera = CameraFunctions(
         channel: _channel,

@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:unico_check/unico_check.dart';
-import 'package:unico_check_example/utils/snackbar.util.dart';
 
 class AcessoBioAuthController extends GetxController
     implements IAcessoBioAuthenticate {

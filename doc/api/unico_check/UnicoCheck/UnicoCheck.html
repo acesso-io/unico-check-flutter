@@ -120,6 +120,7 @@ de utilizar</p>
   &#47;&#47;   );
   &#47;&#47; }
 
+  &#47;&#47;&#47;IAcessoBioDocument implementa as funcionalidades de documento
   if (context is IAcessoBioDocument) {
     document = DocumentFunctions(
       channel: _channel,
@@ -128,6 +129,7 @@ de utilizar</p>
     );
   }
 
+  &#47;&#47;&#47;IAcessoBioAuthenticate implementa as funcionalidades de autenticação
   if (context is IAcessoBioAuthenticate) {
     authenticate = AuthenticateFunctions(
       channel: _channel,
@@ -136,6 +138,7 @@ de utilizar</p>
     );
   }
 
+  &#47;&#47;&#47;IAcessoBioAuthenticate implementa as funcionalidade camera inteligente
   if (context is IAcessoBioCamera) {
     camera = CameraFunctions(
       channel: _channel,
@@ -157,7 +160,7 @@ de utilizar</p>
 <footer>
   <span class="no-break">
     unico_check
-      0.1.0
+      0.1.1
   </span>
 
   
