@@ -12,4 +12,6 @@ class MapConstants {
   static const phone = 'phone';
   static const processId = 'processId';
   static const typed = 'typed';
+  static const disableAutoCapture = 'disableAutoCapture';
+  static const disableSmartFrame = 'disableSmartFrame';
 }

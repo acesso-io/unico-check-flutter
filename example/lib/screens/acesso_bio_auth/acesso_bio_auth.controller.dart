@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:unico_check/unico_check.dart';
+import 'package:unico_check_example/utils/snackbar.util.dart';
 
 class AcessoBioAuthController extends GetxController
     implements IAcessoBioAuthenticate {
@@ -10,19 +11,25 @@ class AcessoBioAuthController extends GetxController
   }
 
   void openAuthentication() {
-    _unico.authenticate!.openLivenessAuthenticate(code: '');
+    _unico.authenticate!.openAuthenticate(code: '');
   }
 
   @override
-  void onErrorAcessoBio(ErrorBioResponse error) {}
+  void onErrorAcessoBio(ErrorBioResponse error) {
+    SnackbarUtil.showError(message: error.description);
+  }
 
   @override
-  void onErrorAuthenticate(ErrorBioResponse error) {}
+  void onErrorAuthenticate(ErrorBioResponse error) {
+    SnackbarUtil.showError(message: error.description);
+  }
 
   @override
-  void onSuccessAuthenticate(AuthenticateResponse response) {}
+  void onSuccessAuthenticate(AuthenticateResponse response) {
+    SnackbarUtil.showSuccess(message: "Success");
+  }
 
   @override
-  void userClosedCameraManually() {}
+  void userClosedCameraManually() { SnackbarUtil.showError(message: "Camera fecheda manualmente");}
 
 }

@@ -8,6 +8,7 @@
 class AcessoBioCamera: AcessoBioView {
     
     override func callMethodBio(){
+        cameraSetings()
         switch method {
             
             case "openCamera": acessoBioManager.openCameraFace()
@@ -15,6 +16,18 @@ class AcessoBioCamera: AcessoBioView {
             
                 
             default: flutterResult(FlutterMethodNotImplemented)
+        }
+    }
+    
+    func cameraSetings(){
+        let disableAutoCapture = valueExtra["disableAutoCapture"] as? Bool
+        let disableSmartFrame = valueExtra["disableSmartFrame"] as? Bool
+        
+        if( disableAutoCapture != nil && disableAutoCapture == true){
+            acessoBioManager.disableAutoCapture()
+        }
+        if(disableAutoCapture != nil && disableSmartFrame == true){
+            acessoBioManager.disableSmartCamera()
         }
     }
     
@@ -26,6 +39,7 @@ class AcessoBioCamera: AcessoBioView {
         let birthdate = valueExtra["birthdate"] as? String
         let email = valueExtra["email"] as? String
         let phone = valueExtra["phone"] as? String
+        
 
         if(
                 nome != nil && nome != ""
@@ -35,9 +49,14 @@ class AcessoBioCamera: AcessoBioView {
                 && email != nil && email != ""
                 && phone != nil && phone != ""
         ){
+            
+            
             acessoBioManager.openCameraFace(withCreateProcess: nome, name: nome,gender: gender,birthdate: birthdate,email: email,phone: phone)
+            
         }else if(nome != nil && nome != "" && code != nil && code != ""){
+            
             acessoBioManager.openCameraFace(withCreateProcess: nome,name: code)
+            
         }else{
             onError(msg: "ao menos nome e code sao obrigatorios")
         }

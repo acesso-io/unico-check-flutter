@@ -11,7 +11,7 @@ class AcessoBioAuthenticate: AcessoBioView {
     override func callMethodBio(){
         switch method {
             
-            case "openLivenessAuthenticate": openLivenessAuthenticate()
+            case "openAuthenticate": openAuthenticate()
             
                 
             default: flutterResult(FlutterMethodNotImplemented)
@@ -19,14 +19,14 @@ class AcessoBioAuthenticate: AcessoBioView {
         
     }
     
-    private func openLivenessAuthenticate(){
+    private func openAuthenticate(){
         
         let code = valueExtra["code"] as? String
         
         if(code != nil){
             acessoBioManager.facesCompare(code)
         }else{
-            onError(msg: "informe o code")
+            onError(msg: "informe o CPF")
         }
         
     }

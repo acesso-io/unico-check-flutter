@@ -11,7 +11,7 @@ class AcessoBioAuthenticate : AcessoBio(), iAcessoBioAuthenticate {
 
         when(methodCall){
 
-            "openLivenessAuthenticate" -> openLivenessAuthenticate()
+            "openAuthenticate" -> openAuthenticate()
 
 
             else -> onError("metedo nao encontrado")
@@ -19,14 +19,14 @@ class AcessoBioAuthenticate : AcessoBio(), iAcessoBioAuthenticate {
 
     }
 
-    private fun openLivenessAuthenticate() {
+    private fun openAuthenticate() {
 
         val code = intent.getStringExtra("code")
 
         if(code != null){
-            acessoBio.openLivenessAuthenticate(code)
+            acessoBio.openCameraAuthenticate(code)
         }else{
-            onError("informe o code")
+            onError("informe o CPF")
         }
 
     }

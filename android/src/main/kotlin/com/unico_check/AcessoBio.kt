@@ -144,11 +144,12 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
                 apikey,
                 authToken
         )
-        acessoBio.setLanguageOrigin(AcessoBio.LanguageOrigin.FLUTTER,"0.1.2")
+        acessoBio.setLanguageOrigin(AcessoBio.LanguageOrigin.FLUTTER,"1.0.1")
     }
 
     //SUCCESS
     protected fun onSuccess(result: Any?){
+        finish()
         if(pluginContext != null){
             if(result != null){
                 pluginContext!!.onSuccessPlugin(result)
@@ -158,16 +159,15 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
         }else{
             onError("Erro ao retornar resultado, o contexto foi perdido")
         }
-        finish()
     }
 
     protected fun onSuccess(result: Boolean){
+        finish()
         if(pluginContext != null){
             pluginContext!!.onSuccessPlugin(result)
         }else{
             onError("Erro ao retornar resultado, o contexto foi perdido")
         }
-        finish()
     }
 
     protected fun onSuccess(result: String?){

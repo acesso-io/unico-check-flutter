@@ -2,19 +2,18 @@ import 'package:get/get.dart';
 import 'package:unico_check/unico_check.dart';
 import 'package:unico_check_example/utils/snackbar.util.dart';
 
-class AcessoBioDocumentController extends GetxController
+class AcessoBioFaceMatchController extends GetxController
     implements IAcessoBioDocument {
   late UnicoCheck _unico;
 
-  AcessoBioDocumentController() {
+  AcessoBioFaceMatchController() {
     _unico = UnicoCheck(context: this, config: Get.find());
   }
 
-  void openCameraDocument() {
-    _unico.document!.openCameraDocument(
-      documentType: DocumentsTypeConstants.cnh,
-    );
+  void openFaceMatch() {
+    _unico.document!.openFaceMatch(documentType: DocumentsTypeConstants.cnh);
   }
+
 
   @override
   void onErrorAcessoBio(ErrorBioResponse error) {
@@ -43,12 +42,12 @@ class AcessoBioDocumentController extends GetxController
 
   @override
   void onSuccessFaceMatch(FacematchResponse response) {
-    SnackbarUtil.showSuccess(message: "Status = "+response.status.toString());
+    SnackbarUtil.showSuccess(message: "Success :"+response.status.toString());
   }
 
   @override
   void onSuccessOCR(OCRResponse ocr) {
-    SnackbarUtil.showSuccess(message: ocr.name+" "+ocr.code);
+    SnackbarUtil.showSuccess(message: "Success Name:"+ocr.name);
   }
 
   @override

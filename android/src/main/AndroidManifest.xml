@@ -4,10 +4,6 @@
     <application>
 
         <activity
-            android:name=".AcessoBioLiveness"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
             android:name=".AcessoBioDocument"
             android:theme="@style/AppTheme.NoActionBar" />
 

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.unico_check_example">
    <application
-        android:label="@string/app_name"
+        android:label="unico_check"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

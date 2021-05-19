@@ -18,10 +18,10 @@ Pré-requisito versão 9 ou superior.
 `<key>NSCameraUsageDescription</key>`
 `<string>Camera usage description</string>`
 
-2 - Adicione:  `pod ‘AcessoBio’, :git => ‘https://github.com/acesso-io/acessobio-ios’` no podfile do projeto IOS em seguida execute comando `pod install`
+2 - Adicione:  `pod ‘AcessoBio’, :git => ‘https://github.com/acesso-io/acessobio-ios,’ , :tag => ‘1.2.4’` no podfile do projeto IOS em seguida execute comando `pod install`
 
 3 - Adicione `#import <AcessoBioManager.h>` no arquivo Runner-Bridging-Header.h
 
-4 - No arquivo acessobio_plugin-umbrella.h adicione `@import AcessoBio;` localizado no diretorio: `YOUR_PROJECT/example/ios/Pods/Target Support Files/acessobio_plugin/acessobio_plugin-umbrella.h`
+4 - No arquivo acessobio_plugin-umbrella.h adicione `@import AcessoBio;` localizado no diretorio: `YOUR_PROJECT/example/ios/Pods/Target Support Files/unico_check/unico_check-umbrella.h`
 
 5 - no Target Menbership defina o arquivo `centerModelCrop` como publico.

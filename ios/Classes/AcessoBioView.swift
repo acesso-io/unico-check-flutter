@@ -56,7 +56,7 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
             apikey: apikey,
             token:authToken
         );
-        acessoBioManager.setLanguageOrigin(LanguageOrigin.Flutter, release: "0.1.2")
+        acessoBioManager.setLanguageOrigin(LanguageOrigin.Flutter, release: "1.0.0")
     }
     
     private func setColors(){
@@ -165,9 +165,6 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
         return dict
 
     }
-    
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         if(isOpenCamera){

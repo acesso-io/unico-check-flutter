@@ -21,14 +21,14 @@ class AuthenticateFunctions {
         _config = config,
         _callbacks = callbacks;
 
-  void openLivenessAuthenticate({required String code}) async {
+  void openAuthenticate({required String code}) async {
     var map = _config.getCommonMap;
 
     map[MapConstants.code] = code;
 
     final result = Map<String, dynamic>.from(
       await _channel.invokeMethod(
-        MethodsChannelsConstants.openLivenessAuthenticate,
+        MethodsChannelsConstants.openAuthenticate,
         map,
       ),
     );

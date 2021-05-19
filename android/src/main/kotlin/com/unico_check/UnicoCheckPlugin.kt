@@ -50,10 +50,6 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
     when(call.method){
 
-      //Liveness
-      "openLiveness" -> acessoBioLiveness(call.method)
-      "openLivenessWithCreateProcess" -> acessoBioLiveness(call.method,call.argument("name"),call.argument("document"))
-
       //Document
       "openCameraDocumentOCR" -> openCameraDocumentOCR(call.method,call.argument("DOCUMENT_TYPE"))
       "openFaceMatch" -> openCameraDocumentOCR(call.method,call.argument("DOCUMENT_TYPE"))
@@ -65,44 +61,30 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
       )
 
       //Auth
-      "openLivenessAuthenticate" -> openLivenessAuthenticate(call.method,call.argument("code"))
+      "openAuthenticate" -> openAuthenticate(call.method,call.argument("code"))
 
       //Camera
-      "openCamera" -> openCamera(call.method)
-      "openCameraWithCreateProcess" -> openCamera(call.method,
+      "openCamera" -> openCamera(
+              call.method,
+              call.argument("disableAutoCapture"),
+              call.argument("disableSmartFrame")
+      )
+      "openCameraWithCreateProcess" -> openCamera(
+              call.method,
               call.argument("nome"),
               call.argument("code"),
               call.argument("gender"),
               call.argument("birthdate"),
               call.argument("email"),
-              call.argument("phone")
+              call.argument("phone"),
+              call.argument("disableAutoCapture"),
+              call.argument("disableSmartFrame")
       )
 
       else -> result.notImplemented()
     }
 
   }
-
-  //region Liviness
-
-  private fun acessoBioLiveness(methodCall: String) {
-
-    activity.startActivityForResult(getIntent(AcessoBioLiveness(),methodCall), REQUEST_BIO)
-
-  }
-
-  private fun acessoBioLiveness(methodCall: String, name: String?, document: String?) {
-
-    val intent = getIntent(AcessoBioLiveness(),methodCall)
-
-    intent.putExtra("name", name)
-    intent.putExtra("document", document)
-
-    activity.startActivityForResult(intent, REQUEST_BIO)
-
-  }
-
-  //endregion
 
   //region Document
 
@@ -132,7 +114,7 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
   //region Auth
 
-  private fun openLivenessAuthenticate(methodCall: String, code: String?) {
+  private fun openAuthenticate(methodCall: String, code: String?) {
 
     val intent = getIntent(AcessoBioAuthenticate(),methodCall)
 
@@ -146,15 +128,39 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
   //region Camera
 
-  private fun openCamera(methodCall: String) {
+  private fun getCameraIntent(methodCall: String, disableAutoCapture: Boolean?, disableSmartFrame: Boolean?): Intent {
 
-    activity.startActivityForResult(getIntent(AcessoBioCamera(),methodCall), REQUEST_BIO)
+    val intent = getIntent(AcessoBioCamera(),methodCall)
+
+    if(disableAutoCapture != null && disableAutoCapture == true){
+      intent.putExtra("disableAutoCapture", disableAutoCapture)
+    }else{
+      intent.putExtra("disableAutoCapture", false)
+    }
+
+    if(disableSmartFrame != null && disableSmartFrame == true){
+      intent.putExtra("disableSmartFrame", disableSmartFrame)
+    }else{
+      intent.putExtra("disableSmartFrame", false)
+    }
+
+
+    return intent
+  }
+
+  private fun openCamera(methodCall: String, disableAutoCapture: Boolean?, disableSmartFrame: Boolean?) {
+
+    val intent = getCameraIntent(methodCall,disableAutoCapture,disableSmartFrame)
+
+    activity.startActivityForResult(intent, REQUEST_BIO)
+
+
 
   }
 
-  private fun openCamera(method: String, nome: String?,code: String?, gender: String?, birthdate: String?, email: String?, phone: String?) {
+  private fun openCamera(methodCall: String, nome: String?,code: String?, gender: String?, birthdate: String?, email: String?, phone: String?, disableAutoCapture: Boolean?, disableSmartFrame: Boolean? ) {
 
-    val intent = getIntent(AcessoBioCamera(),method)
+    val intent = getCameraIntent(methodCall,disableAutoCapture,disableSmartFrame)
 
     intent.putExtra("nome", nome)
     intent.putExtra("code", code)

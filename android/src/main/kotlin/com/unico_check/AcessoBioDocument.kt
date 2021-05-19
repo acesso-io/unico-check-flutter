@@ -59,7 +59,7 @@ class AcessoBioDocument : AcessoBio(), iAcessoBioDocument {
         onSuccess(ocr)
     }
 
-    override fun onErrorOCR(error: String?) {
+    override fun onErrorOCR(error: String) {
         onError(error)
     }
 

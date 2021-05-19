@@ -7,6 +7,7 @@ import com.acesso.acessobio_android.services.dto.ResultCamera
 class AcessoBioCamera: AcessoBio(), iAcessoBioCamera {
 
     override fun callMethodBio() {
+        cameraSetings()
         when(methodCall){
 
             "openCamera" -> acessoBio.openCamera()
@@ -15,6 +16,20 @@ class AcessoBioCamera: AcessoBio(), iAcessoBioCamera {
 
             else -> onError("metedo nao encontrado")
         }
+    }
+
+    private fun cameraSetings(){
+
+        val disableAutoCapture = intent.getBooleanExtra("disableAutoCapture", false)
+        val disableSmartFrame = intent.getBooleanExtra("disableSmartFrame", false)
+
+        if(disableAutoCapture){
+            acessoBio.disableAutoCapture()
+        }
+        if(disableSmartFrame){
+            acessoBio.disableSmartFrame()
+        }
+
     }
 
     private fun openCameraWithCreateProcess() {

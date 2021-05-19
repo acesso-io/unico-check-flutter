@@ -1,22 +1,18 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:unico_check_example/screens/acesso_bio_camera/acesso_bio_camera.controller.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'acesso_bio_camera_normal_controller.dart';
 
-class AcessoBioCameraScreen extends GetView<AcessoBioCameraController> {
+class AcessoBioCameraNormalScreen extends GetView<AcessoBioCameraNormalController> {
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Image.memory(
-        //   base64Decode(controller.getBase64()),
-        // ),
         ElevatedButton.icon(
           onPressed: controller.openCamera,
           icon: Icon(Icons.camera, size: 18),
-          label: Text('Abrir a camera Inteligente'),
+          label: Text('Abrir a camera normal'),
         ),
       ],
     );
