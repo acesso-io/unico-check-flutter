@@ -4,8 +4,12 @@ class ErrorBioResponse {
   late String description;
 
   ErrorBioResponse(Map<dynamic, dynamic> map) {
-    code = map['code'];
-    method = map['method'];
-    description = map['description'] ?? map['result'];
+    if(map['description'] == null || map['description'] == ""){
+      description = map['result'];
+    }else{
+      code = map['code'];
+      method = map['method'];
+      description = map['description'];
+    }
   }
 }

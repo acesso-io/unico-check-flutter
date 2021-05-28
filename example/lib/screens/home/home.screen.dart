@@ -13,19 +13,28 @@ class HomeScreen extends GetView<HomeController> {
         child: Column(
           children: <Widget>[
             ElevatedButton.icon(
-              onPressed: controller.openDocument,
-              icon: Icon(Icons.pages, size: 18),
-              label: Text('Navegar para Documents'),
+              onPressed: controller.openCameraNormal,
+              icon: Icon(Icons.camera, size: 18),
+              label: Text('Navegar para a Câmera Normal'),
             ),
             ElevatedButton.icon(
               onPressed: controller.openCamera,
               icon: Icon(Icons.camera, size: 18),
-              label: Text('Navegar para a Camera'),
+              label: Text('Navegar para a Câmera Inteligente'),
             ),
             ElevatedButton.icon(
-              onPressed: controller.openAuth,
-              icon: Icon(Icons.camera, size: 18),
-              label: Text('Navegar para a Autenticação'),
+              onPressed: controller.openDocument,
+              icon: Icon(Icons.pages, size: 18),
+              label: Text('Navegar para Documentos'),
+            ),
+            ElevatedButton.icon(
+              onPressed: controller.openOcr,
+              icon: Icon(Icons.pages, size: 18),
+              label: Text('Navegar para OCR'),
+            ),ElevatedButton.icon(
+              onPressed: controller.openFaceMatch,
+              icon: Icon(Icons.pages, size: 18),
+              label: Text('Navegar para Face Match'),
             ),
           ],
         ),

@@ -6,6 +6,4 @@ import 'acesso_bio.interface.dart';
 abstract class IAcessoBioCamera extends IAcessoBio {
   void onSuccessCamera(CameraResponse response);
   void onErrorCamera(ErrorBioResponse error);
-  void onSucessDocumentInsert(String processId, String typed);
-  void onErrorDocumentInsert(String error);
 }

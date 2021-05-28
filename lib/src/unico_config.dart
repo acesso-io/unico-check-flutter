@@ -1,4 +1,5 @@
 class UnicoConfig {
+
   /// Url para sua identificação da sua empresa
   final String _urlInstance;
 

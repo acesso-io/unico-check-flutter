@@ -8,7 +8,14 @@ class Initializer {
   }
 
   static void _initUnico() {
-    final unicoInit = UnicoConfig(urlInstance: acessoPass.url, apikey: acessoPass.apikey, authToken: acessoPass.token);
+    final unicoInit = UnicoConfig(
+        urlInstance: acessoPass.url,
+        apikey: acessoPass.apikey,
+        authToken: acessoPass.token,
+
+        // androidColorSilhoutte: "#901850"
+        // androidColorBackground: "#901850"
+    );
     Get.put(unicoInit);
   }
 }

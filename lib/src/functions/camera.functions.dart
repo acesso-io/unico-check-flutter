@@ -13,7 +13,11 @@ class CameraFunctions {
   final UnicoConfig _config;
   final IAcessoBioCamera _callbacks;
 
-  const CameraFunctions({
+  bool _disableAutoCapture = false;
+  bool _disableSmartFrame = false;
+
+
+  CameraFunctions({
     required MethodChannel channel,
     required UnicoConfig config,
     required IAcessoBioCamera callbacks,
@@ -21,11 +25,27 @@ class CameraFunctions {
         _config = config,
         _callbacks = callbacks;
 
+
+
+
+  void disableAutoCapture(){
+    _disableAutoCapture = true;
+  }
+
+  void disableSmartFrame(){
+    _disableSmartFrame = true;
+  }
+
   void openCamera() async {
+
+    var map = _config.getCommonMap;
+    map[MapConstants.disableAutoCapture] = _disableAutoCapture;
+    map[MapConstants.disableSmartFrame] = _disableSmartFrame;
+
     final result = Map<String, dynamic>.from(
       await _channel.invokeMethod(
         MethodsChannelsConstants.openCamera,
-        _config.getCommonMap,
+        map,
       ),
     );
 
@@ -43,10 +63,10 @@ class CameraFunctions {
   void openCameraWithCreateProcess({
     required String nome,
     required String code,
-    required String gender,
-    required String birthdate,
-    required String email,
-    required String phone,
+    String gender = "",
+    String birthdate = "",
+    String email = "",
+    String phone = "",
   }) async {
     var map = _config.getCommonMap;
     map[MapConstants.nome] = nome;
@@ -74,32 +94,35 @@ class CameraFunctions {
     }
   }
 
-  void openCameraWithCreateProcessAndInsertDocument({
-    required String code,
-    required String nome,
-    required int documentType,
-  }) async {
-    var map = _config.getCommonMap;
-    map[MapConstants.code] = code;
-    map[MapConstants.nome] = nome;
-    map[MapConstants.documentType] = documentType;
+  // void openCameraWithCreateProcessAndInsertDocument({
+  //   required String code,
+  //   required String nome,
+  //   required int documentType,
+  // }) async {
+  //   var map = _config.getCommonMap;
+  //   map[MapConstants.code] = code;
+  //   map[MapConstants.nome] = nome;
+  //   map[MapConstants.documentType] = documentType;
+  //
+  //   final result = Map<String, dynamic>.from(
+  //     await _channel.invokeMethod(
+  //       MethodsChannelsConstants.openCameraInsertDocument,
+  //       map,
+  //     ),
+  //   );
+  //
+  //   if (validateResponse(callbacks: _callbacks, response: result)) {
+  //     if (result[MapConstants.flutterStatus] == 1) {
+  //       _callbacks.onSucessDocumentInsert(
+  //         result[MapConstants.processId],
+  //         result[MapConstants.typed],
+  //       );
+  //     } else {
+  //       _callbacks.onErrorDocumentInsert(result['result']);
+  //     }
+  //   }
+  // }
 
-    final result = Map<String, dynamic>.from(
-      await _channel.invokeMethod(
-        MethodsChannelsConstants.openCameraInsertDocument,
-        map,
-      ),
-    );
 
-    if (validateResponse(callbacks: _callbacks, response: result)) {
-      if (result[MapConstants.flutterStatus] == 1) {
-        _callbacks.onSucessDocumentInsert(
-          result[MapConstants.processId],
-          result[MapConstants.typed],
-        );
-      } else {
-        _callbacks..onErrorDocumentInsert(result['result']);
-      }
-    }
-  }
+
 }

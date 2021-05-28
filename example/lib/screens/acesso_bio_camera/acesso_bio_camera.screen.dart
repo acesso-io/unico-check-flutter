@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:unico_check_example/screens/acesso_bio_camera/acesso_bio_camera.controller.dart';
@@ -11,7 +13,7 @@ class AcessoBioCameraScreen extends GetView<AcessoBioCameraController> {
         ElevatedButton.icon(
           onPressed: controller.openCamera,
           icon: Icon(Icons.camera, size: 18),
-          label: Text('Abrir a camera da UNICO'),
+          label: Text('Abrir a camera Inteligente'),
         ),
       ],
     );

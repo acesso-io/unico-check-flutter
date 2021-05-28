@@ -1,8 +1,6 @@
 import 'package:flutter/services.dart';
-import 'package:unico_check/src/functions/authenticate.functions.dart';
 import 'package:unico_check/src/functions/document.functions.dart';
 import 'package:unico_check/src/unico_config.dart';
-import 'core/abstracts/acesso_bio_authenticate.interface.dart';
 import 'core/abstracts/acesso_bio_camera.interface.dart';
 import 'core/abstracts/acesso_bio_document.interface.dart';
 import 'functions/camera.functions.dart';
@@ -20,9 +18,6 @@ class UnicoCheck {
   /// Classe onde ficam as funções para as funções do documento
   late DocumentFunctions? document;
 
-  /// Classe onde ficam as funções para as funções do authenticate
-  late AuthenticateFunctions? authenticate;
-
   /// Classe onde ficam as funções para as funções da camera
   late CameraFunctions? camera;
 
@@ -31,26 +26,9 @@ class UnicoCheck {
   UnicoCheck({required Object context, required UnicoConfig config})
       : _config = config {
 
-    // if (context is IAcessoBioLiveness) {
-    //   liveness = LivenessFunctions(
-    //     channel: _channel,
-    //     config: _config,
-    //     callbacks: context,
-    //   );
-    // }
-
     ///IAcessoBioDocument implementa as funcionalidades de documento
     if (context is IAcessoBioDocument) {
       document = DocumentFunctions(
-        channel: _channel,
-        config: _config,
-        callbacks: context,
-      );
-    }
-
-    ///IAcessoBioAuthenticate implementa as funcionalidades de autenticação
-    if (context is IAcessoBioAuthenticate) {
-      authenticate = AuthenticateFunctions(
         channel: _channel,
         config: _config,
         callbacks: context,

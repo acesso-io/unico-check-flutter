@@ -3,10 +3,14 @@ import 'package:unico_check_example/navigation/routes.dart';
 
 class HomeController extends GetxController {
 
-  void openAuth() => Get.toNamed(Routes.ACESSO_BIO_AUTH);
+  void openCameraNormal() => Get.toNamed(Routes.ACESSO_BIO_CAMERA_NORMAL);
+
+  void openCamera() => Get.toNamed(Routes.ACESSO_BIO_CAMERA);
 
   void openDocument() => Get.toNamed(Routes.ACESSO_BIO_DOCUMENT);
 
-  void openCamera() => Get.toNamed(Routes.ACESSO_BIO_CAMERA);
+  void openOcr() => Get.toNamed(Routes.ACESSO_BIO_OCR);
+
+  void openFaceMatch() => Get.toNamed(Routes.ACESSO_BIO_FACEMATCH);
 
 }

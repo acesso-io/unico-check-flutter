@@ -41,13 +41,7 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
         getColors(call:call)
            
         switch call.method {
-            //Liveness
-            case "openLiveness": acessoBioLiveness(method: call.method)
-            case "openLivenessWithCreateProcess": acessoBioLiveness(
-                method: call.method,
-                name: argument!["name"]! as? String,
-                document: argument!["document"]! as? String
-            )
+    
                     
             //Document
             case "openCameraDocumentOCR": openCameraDocumentOCR(method: call.method,DOCUMENT_TYPE: argument!["DOCUMENT_TYPE"] as? Int)
@@ -56,10 +50,14 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
             case "openCameraInsertDocument": result(FlutterMethodNotImplemented)
 
             //Auth
-            case "openLivenessAuthenticate": openLivenessAuthenticate(method: call.method, code: argument!["code"] as? String )
+            case "openAuthenticate": openAuthenticate(method: call.method, code: argument!["code"] as? String )
 
             //Camera
-            case "openCamera": openCamera(method: call.method )
+            case "openCamera": openCamera(
+                method: call.method,
+                disableAutoCapture: argument!["disableAutoCapture"]! as? Bool,
+                disableSmartFrame: argument!["disableSmartFrame"]! as? Bool
+            )
             case "openCameraWithCreateProcess": openCamera(
                 method: call.method,
                 nome: argument!["nome"]! as? String,
@@ -67,7 +65,9 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
                 gender: argument!["gender"]! as? String,
                 birthdate: argument!["birthdate"]! as? String,
                 email: argument!["email"]! as? String,
-                phone: argument!["phone"]! as? String
+                phone: argument!["phone"]! as? String,
+                disableAutoCapture: argument?["disableAutoCapture"] as? Bool,
+                disableSmartFrame: argument?["disableSmartFrame"] as? Bool
             )
                     
             default: result(FlutterMethodNotImplemented)
@@ -135,28 +135,6 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
         
     }
     
-    // Liveness
-    private func acessoBioLiveness(method: String){
-        
-        let acessoBioView = AcessoBioLiveness()
-        let view = createView(method: method, acessoBioView: acessoBioView)
-        
-        initView(acessoBioView: view)
-        
-    }
-    private func acessoBioLiveness(method: String, name: String?, document : String? ){
-        
-        let acessoBioView = AcessoBioLiveness()
-        
-        acessoBioView.valueExtra["name"] = name
-        acessoBioView.valueExtra["document"] = document
-        
-        let view = createView(method: method, acessoBioView: acessoBioView)
-        
-        initView(acessoBioView: view)
-        
-    }
-    
     //Document
     private func openCameraDocumentOCR(method: String, DOCUMENT_TYPE : Int?){
         
@@ -170,7 +148,7 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
     }
     
     //Auth
-    private func openLivenessAuthenticate(method: String, code: String?){
+    private func openAuthenticate(method: String, code: String?){
         let acessoBioView = AcessoBioAuthenticate()
         
         acessoBioView.valueExtra["code"] = code
@@ -181,14 +159,40 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
     }
     
     //Camera
-    private func openCamera(method: String){
+    private func getAcessoBioCamera(disableAutoCapture: Bool? ,disableSmartFrame: Bool?  ) -> AcessoBioCamera{
+        
         let acessoBioView = AcessoBioCamera()
+        
+        if(disableAutoCapture != nil){
+            acessoBioView.valueExtra["disableAutoCapture"] = disableAutoCapture
+        }
+        if(disableAutoCapture != nil){
+            acessoBioView.valueExtra["disableSmartFrame"] = disableSmartFrame
+        }
+
+        return acessoBioView
+    }
+    
+    private func openCamera(method: String, disableAutoCapture: Bool?, disableSmartFrame: Bool?){
+        let acessoBioView = getAcessoBioCamera(disableAutoCapture: disableAutoCapture,disableSmartFrame: disableSmartFrame)
         let view = createView(method: method, acessoBioView: acessoBioView)
         
         initView(acessoBioView: view)
     }
-    private func openCamera(method: String, nome: String?, code: String?, gender: String?, birthdate: String?, email: String?, phone: String?){
-        let acessoBioView = AcessoBioCamera()
+    
+    private func openCamera(
+        method: String,
+        nome: String?,
+        code: String?,
+        gender: String?,
+        birthdate: String?,
+        email: String?,
+        phone: String?,
+        disableAutoCapture: Bool?,
+        disableSmartFrame: Bool?
+    ){
+        
+        let acessoBioView = getAcessoBioCamera(disableAutoCapture: disableAutoCapture,disableSmartFrame: disableSmartFrame)
         
         acessoBioView.valueExtra["nome"] = nome
         acessoBioView.valueExtra["code"] = code

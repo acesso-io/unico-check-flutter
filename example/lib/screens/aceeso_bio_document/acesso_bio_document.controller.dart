@@ -11,7 +11,7 @@ class AcessoBioDocumentController extends GetxController
   }
 
   void openCameraDocument() {
-    _unico.document!.openFaceMatch(
+    _unico.document!.openCameraDocument(
       documentType: DocumentsTypeConstants.cnh,
     );
   }
@@ -22,7 +22,9 @@ class AcessoBioDocumentController extends GetxController
   }
 
   @override
-  void userClosedCameraManually() {}
+  void userClosedCameraManually() {
+    SnackbarUtil.showError(message: "Camera fecheda manualmente");
+  }
 
   @override
   void onErrorDocument(String error) {
@@ -40,12 +42,18 @@ class AcessoBioDocumentController extends GetxController
   }
 
   @override
-  void onSuccessFaceMatch(FacematchResponse response) {}
+  void onSuccessFaceMatch(FacematchResponse response) {
+    SnackbarUtil.showSuccess(message: "Status = "+response.status.toString());
+  }
 
   @override
-  void onSuccessOCR(OCRResponse ocr) {}
+  void onSuccessOCR(OCRResponse ocr) {
+    SnackbarUtil.showSuccess(message: ocr.name+" "+ocr.code);
+  }
 
   @override
-  void onSuccesstDocument(CameraDocumentResponse response) {}
+  void onSuccesstDocument(CameraDocumentResponse response) {
+    SnackbarUtil.showSuccess(message: "Success");
+  }
 
 }
