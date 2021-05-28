@@ -1,33 +1,22 @@
 PODS:
-  - AcessoBio (1.2.4)
   - Flutter (1.0.0)
-  - unico_check (0.0.1):
-    - AcessoBio
+  - unico_check (1.0.1):
     - Flutter
 
 DEPENDENCIES:
-  - AcessoBio (from `https://github.com/acesso-io/acessobio-ios`)
   - Flutter (from `Flutter`)
   - unico_check (from `.symlinks/plugins/unico_check/ios`)
 
 EXTERNAL SOURCES:
-  AcessoBio:
-    :git: https://github.com/acesso-io/acessobio-ios
   Flutter:
     :path: Flutter
   unico_check:
     :path: ".symlinks/plugins/unico_check/ios"
 
-CHECKOUT OPTIONS:
-  AcessoBio:
-    :commit: 5ee8b78121d710dd3921355104ac305c2584c400
-    :git: https://github.com/acesso-io/acessobio-ios
-
 SPEC CHECKSUMS:
-  AcessoBio: dff4bca0190f0d44370a1c6b22fcecb62a430edb
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  unico_check: 8b6be036c6f637f9c252610790dba941bf8be4a5
+  unico_check: 8ae02d05350056f24a8f222646b9d0f58bdd1012
 
-PODFILE CHECKSUM: fe8bd3bf8fa1fe5d3e8173f3411c33d380996413
+PODFILE CHECKSUM: 765b9780ca1e29cb03c4f1888b8fb3f20ad8271f
 
 COCOAPODS: 1.10.0

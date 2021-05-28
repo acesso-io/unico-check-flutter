@@ -17,8 +17,8 @@ class AcessoBioCameraController extends StatefulWidget
 
   void openCamera() {
     _unico.camera!.openCameraWithCreateProcess(
-        nome: 'lucas diniz',
-        code: '10642352984'
+        nome: '',
+        code: ''
     );
   }
 

@@ -41,14 +41,7 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
         getColors(call:call)
            
         switch call.method {
-        
-            //Liveness
-//            case "openLiveness": acessoBioLiveness(method: call.method)/T01JP5W5MMZ-U01KA9NKWG2-525f36c61f0a-48
-//            case "openLivenessWithCreateProcess": acessoBioLiveness(
-//                method: call.method,
-//                name: argument!["name"]! as? String,
-//                document: argument!["document"]! as? String
-//            )
+    
                     
             //Document
             case "openCameraDocumentOCR": openCameraDocumentOCR(method: call.method,DOCUMENT_TYPE: argument!["DOCUMENT_TYPE"] as? Int)
@@ -139,28 +132,6 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
         setIosColorBackgroundPopupError = argument!["setIosColorBackgroundPopupError"] as? String
         setIosColorTextPopupError = argument!["setIosColorTextPopupError"] as? String
         setIosImageIconPopupError = argument!["setIosImageIconPopupError"] as? String
-        
-    }
-    
-    // Liveness
-    private func acessoBioLiveness(method: String){
-        
-        let acessoBioView = AcessoBioLiveness()
-        let view = createView(method: method, acessoBioView: acessoBioView)
-        
-        initView(acessoBioView: view)
-        
-    }
-    private func acessoBioLiveness(method: String, name: String?, document : String? ){
-        
-        let acessoBioView = AcessoBioLiveness()
-        
-        acessoBioView.valueExtra["name"] = name
-        acessoBioView.valueExtra["document"] = document
-        
-        let view = createView(method: method, acessoBioView: acessoBioView)
-        
-        initView(acessoBioView: view)
         
     }
     

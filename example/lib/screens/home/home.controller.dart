@@ -7,8 +7,6 @@ class HomeController extends GetxController {
 
   void openCamera() => Get.toNamed(Routes.ACESSO_BIO_CAMERA);
 
-  void openAuth() => Get.toNamed(Routes.ACESSO_BIO_AUTH);
-
   void openDocument() => Get.toNamed(Routes.ACESSO_BIO_DOCUMENT);
 
   void openOcr() => Get.toNamed(Routes.ACESSO_BIO_OCR);

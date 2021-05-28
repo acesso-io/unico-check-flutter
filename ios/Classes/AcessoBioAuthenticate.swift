@@ -23,7 +23,7 @@ class AcessoBioAuthenticate: AcessoBioView {
         
         let code = valueExtra["code"] as? String
         
-        if(code != nil){
+        if(code != nil && code != ""){
             acessoBioManager.facesCompare(code)
         }else{
             onError(msg: "informe o CPF")

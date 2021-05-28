@@ -10,9 +10,6 @@ class AcessoBioCameraScreen extends GetView<AcessoBioCameraController> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // Image.memory(
-        //   base64Decode(controller.getBase64()),
-        // ),
         ElevatedButton.icon(
           onPressed: controller.openCamera,
           icon: Icon(Icons.camera, size: 18),

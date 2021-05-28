@@ -10,6 +10,5 @@ class Routes {
   static const ACESSO_BIO_OCR = '/acesso-bio-ocr';
   static const ACESSO_BIO_FACEMATCH = '/acesso-bio-facematch';
   static const ACESSO_BIO_LIVENESS = '/acesso-bio-liveness';
-  static const ACESSO_BIO_AUTH = '/acesso-bio-auth';
 
 }

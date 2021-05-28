@@ -10,6 +10,7 @@ import Flutter
 
 class AcessoBioView: UIViewController, AcessoBioDelegate {
     
+    
     var acessoBioManager: AcessoBioManager!
     var isOpenCamera: Bool =  false
     var flutterResult: FlutterResult!
@@ -56,7 +57,7 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
             apikey: apikey,
             token:authToken
         );
-        acessoBioManager.setLanguageOrigin(LanguageOrigin.Flutter, release: "1.0.0")
+        acessoBioManager.setLanguageOrigin(LanguageOrigin.Flutter, release: "1.0.1")
     }
     
     private func setColors(){
@@ -101,6 +102,7 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
     
     func onError(msg: String){
         flutterResult(convertObjToDicionary(result: msg,status: 0))
+        dismiss(animated: true)
     }
     
     //CONVERT RESULT TO HASHMAP
@@ -173,6 +175,18 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
         isOpenCamera = true
     }
     
+    
+    func systemClosedCameraTimeoutSession() {
+        
+    }
+    
+    func systemClosedCameraTimeoutFaceInference() {
+        
+    }
+    
+    func onErrorAcessoBioManager(_ error: ErrorBio!) {
+        
+    }
     
     
 }

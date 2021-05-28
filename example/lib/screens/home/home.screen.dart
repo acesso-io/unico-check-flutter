@@ -36,11 +36,6 @@ class HomeScreen extends GetView<HomeController> {
               icon: Icon(Icons.pages, size: 18),
               label: Text('Navegar para Face Match'),
             ),
-            ElevatedButton.icon(
-              onPressed: controller.openAuth,
-              icon: Icon(Icons.camera, size: 18),
-              label: Text('Navegar para a Verificação 1:1'),
-            ),
           ],
         ),
       ),
