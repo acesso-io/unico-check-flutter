@@ -27,15 +27,6 @@ class HomeScreen extends GetView<HomeController> {
               icon: Icon(Icons.pages, size: 18),
               label: Text('Navegar para Documentos'),
             ),
-            ElevatedButton.icon(
-              onPressed: controller.openOcr,
-              icon: Icon(Icons.pages, size: 18),
-              label: Text('Navegar para OCR'),
-            ),ElevatedButton.icon(
-              onPressed: controller.openFaceMatch,
-              icon: Icon(Icons.pages, size: 18),
-              label: Text('Navegar para Face Match'),
-            ),
           ],
         ),
       ),

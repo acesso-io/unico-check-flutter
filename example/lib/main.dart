@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'initializer.dart';
 import 'navigation/navigation.dart';
 import 'navigation/routes.dart';
