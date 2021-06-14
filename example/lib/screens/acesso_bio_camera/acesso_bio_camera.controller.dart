@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:unico_check/unico_check.dart';
 import 'package:unico_check_example/utils/snackbar.util.dart';
 
-class AcessoBioCameraController extends StatefulWidget
+class AcessoBioCameraController extends GetxController
     implements IAcessoBioCamera  {
 
   late UnicoCheck _unico;
@@ -16,10 +16,7 @@ class AcessoBioCameraController extends StatefulWidget
   }
 
   void openCamera() {
-    _unico.camera!.openCameraWithCreateProcess(
-        nome: '',
-        code: ''
-    );
+    _unico.camera!.openCamera();
   }
 
   @override
@@ -40,7 +37,7 @@ class AcessoBioCameraController extends StatefulWidget
   @override
   void onSuccessCamera(CameraResponse response) {
     _base64 = response.base64;
-    SnackbarUtil.showSuccess(message: "success ID: "+response.processID);
+    SnackbarUtil.showSuccess(message: "success");
   }
 
   @override
@@ -52,14 +49,5 @@ class AcessoBioCameraController extends StatefulWidget
   void userClosedCameraManually() {
     SnackbarUtil.showError(message: "Camera fecheda manualmente");
   }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
-
-
-
 
 }

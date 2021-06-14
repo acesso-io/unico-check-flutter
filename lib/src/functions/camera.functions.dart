@@ -27,7 +27,6 @@ class CameraFunctions {
 
 
 
-
   void disableAutoCapture(){
     _disableAutoCapture = true;
   }
@@ -60,39 +59,39 @@ class CameraFunctions {
     }
   }
 
-  void openCameraWithCreateProcess({
-    required String nome,
-    required String code,
-    String gender = "",
-    String birthdate = "",
-    String email = "",
-    String phone = "",
-  }) async {
-    var map = _config.getCommonMap;
-    map[MapConstants.nome] = nome;
-    map[MapConstants.code] = code;
-    map[MapConstants.gender] = gender;
-    map[MapConstants.birthdate] = birthdate;
-    map[MapConstants.email] = email;
-    map[MapConstants.phone] = phone;
-
-    final result = Map<String, dynamic>.from(
-      await _channel.invokeMethod(
-        MethodsChannelsConstants.openCameraWithCreateProcess,
-        map,
-      ),
-    );
-
-    if (validateResponse(callbacks: _callbacks, response: result)) {
-      if (result[MapConstants.flutterStatus] == 1) {
-        final response = CameraResponse.fromJson(result);
-        _callbacks.onSuccessCamera(response);
-      } else {
-        final error = ErrorBioResponse(result);
-        _callbacks.onErrorCamera(error);
-      }
-    }
-  }
+  // void openCameraWithCreateProcess({
+  //   required String nome,
+  //   required String code,
+  //   String gender = "",
+  //   String birthdate = "",
+  //   String email = "",
+  //   String phone = "",
+  // }) async {
+  //   var map = _config.getCommonMap;
+  //   map[MapConstants.nome] = nome;
+  //   map[MapConstants.code] = code;
+  //   map[MapConstants.gender] = gender;
+  //   map[MapConstants.birthdate] = birthdate;
+  //   map[MapConstants.email] = email;
+  //   map[MapConstants.phone] = phone;
+  //
+  //   final result = Map<String, dynamic>.from(
+  //     await _channel.invokeMethod(
+  //       MethodsChannelsConstants.openCameraWithCreateProcess,
+  //       map,
+  //     ),
+  //   );
+  //
+  //   if (validateResponse(callbacks: _callbacks, response: result)) {
+  //     if (result[MapConstants.flutterStatus] == 1) {
+  //       final response = CameraResponse.fromJson(result);
+  //       _callbacks.onSuccessCamera(response);
+  //     } else {
+  //       final error = ErrorBioResponse(result);
+  //       _callbacks.onErrorCamera(error);
+  //     }
+  //   }
+  // }
 
   // void openCameraWithCreateProcessAndInsertDocument({
   //   required String code,

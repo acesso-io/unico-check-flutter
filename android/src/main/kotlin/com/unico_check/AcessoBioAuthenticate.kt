@@ -32,7 +32,7 @@ class AcessoBioAuthenticate : AcessoBio(), iAcessoBioAuthenticate {
     }
 
     override fun onSuccessAuthenticate(result: ResultAuthenticate?) {
-        onSuccess(result)
+        onSuccess(result!!.status)
     }
 
     override fun onErrorAuthenticate(errorBio: ErrorBio?) {

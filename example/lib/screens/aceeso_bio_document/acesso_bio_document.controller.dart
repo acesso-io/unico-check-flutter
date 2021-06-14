@@ -47,11 +47,6 @@ class AcessoBioDocumentController extends GetxController
   }
 
   @override
-  void onSuccessOCR(OCRResponse ocr) {
-    SnackbarUtil.showSuccess(message: ocr.name+" "+ocr.code);
-  }
-
-  @override
   void onSuccesstDocument(CameraDocumentResponse response) {
     SnackbarUtil.showSuccess(message: "Success");
   }

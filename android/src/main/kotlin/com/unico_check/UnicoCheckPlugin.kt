@@ -1,17 +1,18 @@
 package com.unico_check
 
+import android.app.Activity
+import android.content.Intent
+import android.util.Log
 import androidx.annotation.NonNull
+import com.acesso.acessobio_android.services.dto.ErrorBio
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import android.app.Activity
-import android.content.Intent
-import io.flutter.embedding.engine.plugins.activity.ActivityAware
-import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
-
-import java.lang.reflect.Field
+import kotlin.collections.HashMap
 
 /** UnicoCheckPlugin */
 class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
@@ -20,9 +21,6 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   private lateinit var channel : MethodChannel
   private lateinit var activity: Activity
   private lateinit var result: Result
-  private lateinit var urlIntance : String
-  private lateinit var apikey : String
-  private lateinit var authToken : String
 
   private var setColorSilhoutte: String? = null
   private var setColorBackground: String? = null
@@ -45,7 +43,6 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
     this.result = result
 
-    validKeys(call.argument("urlIntance"), call.argument("apikey"), call.argument("authToken"))
     getColors(call)
 
     when(call.method){
@@ -206,37 +203,31 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
     return intent
   }
+
   private fun getIntent(acessoBio: AcessoBio, methodCall: String): Intent {
 
     acessoBio.setPluginContext(this)
 
     val intent = Intent(activity, acessoBio::class.java)
 
-    intent.putExtra("urlIntance",urlIntance)
-    intent.putExtra("apikey",apikey)
-    intent.putExtra("authToken",authToken)
     intent.putExtra("methodCall",methodCall)
 
 
     return setColors(intent)
 
   }
-  private fun validKeys(urlIntance: String?, apikey: String?, authToken: String?) {
-    if(urlIntance == null || apikey == null || authToken == null ) {
-      this.result.success("Informe urlIntance, apikey, authToken para proceguir")
-    }else{
-      this.urlIntance = urlIntance
-      this.apikey = apikey
-      this.authToken = authToken
-    }
-  }
 
   //region RETURN THE RESULTS
 
   //SUCCESS
-  fun onSuccessPlugin(resultBio: Any) {
-    result.success(convertObjToMapReflection(resultBio,1))//Status false pq vem do onSuccess
-  }
+//  fun onSuccessPlugin(resultBio: Any) {
+//
+//    var hashMap:HashMap<String,Any> = convertObjToMapReflection(resultBio,1)
+//
+//    Log.d("CAMERA RESULT","AcessoBioCamera -> onSuccess -> onSuccessPlugin base64: "+hashMap["base64"])
+//
+//    result.success(hashMap)//Status false pq vem do onSuccess
+//  }
 
   fun onSuccessPlugin(resultBio: Boolean) {
     result.success(convertObjToMapReflection(resultBio,1))//Status false pq vem do onSuccess
@@ -251,8 +242,8 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   }
 
   //ERRORS
-  fun onErrorPlugin(error: Any) {
-    result.success(convertObjToMapReflection(error, 0))//Status false pq vem do onError
+  fun onErrorPlugin(error: ErrorBio) {
+    result.success(errorBioToHashMap(error,0)) //Status false pq vem do onError
   }
 
   fun onErrorPlugin(error: String) {
@@ -264,8 +255,8 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   }
 
   //ERROR ACESSOBIO
-  fun onErrorPluginAcessoBio(error: Any) {
-    result.success(convertObjToMapReflection(error, 2))//Status false pq vem do onError
+  fun onErrorPluginAcessoBio(error: ErrorBio) {
+    result.success(errorBioToHashMap(error,2))
   }
 
   fun userClosedCameraManually() {
@@ -274,32 +265,49 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
   //endregion
 
-  //region Convert to HashMap
-
-  private fun convertObjToMapReflection(objects: Any, status: Int): java.util.HashMap<String, Any> {
-
+  fun errorBioToHashMap(error: ErrorBio, status: Int): HashMap<String, Any> {
     val hashMap:HashMap<String,Any> = HashMap()
 
-    val allFields: Array<Field> = objects.javaClass.declaredFields
-
-    for (field in allFields) {
-      field.isAccessible = true
-
-      val value = field[objects]
-
-      if(value != null){
-        hashMap[field.name] = value
-      }else{
-        hashMap[field.name] = ""
-      }
-
-    }
-
-    hashMap["flutterstatus"] = status
+    hashMap["code"] = error.code
+    hashMap["method"] = error.method
+    hashMap["description"] = error.description
+    hashMap["flutterstatus"] = status//Status false pq vem do onError
 
     return hashMap
 
   }
+
+  //region Convert to HashMap
+
+//  private fun convertObjToMapReflection(objects: Any, status: Int): java.util.HashMap<String, Any> {
+//
+////    Log.d("CAMERA RESULT", "convertObjToMapReflection object result: ${resultCamera.base64}")
+//
+//    val hashMap:HashMap<String,Any> = HashMap()
+//
+//    val allFields: Array<Field> = objects::class.java.declaredFields
+//
+//    for (field in allFields) {
+//      field.isAccessible = true
+//
+//      val value = field[objects]
+//
+//      Log.d("CAMERA RESULT", "convertObjToMapReflection Field name: ${field.name} Field value $value")
+//
+//      if(value != null){
+//        hashMap[field.name] = value
+//      }else{
+//        hashMap[field.name] = ""
+//      }
+//
+//    }
+//
+//    hashMap["flutterstatus"] = status
+//
+//    return hashMap
+//
+//  }
+
   private fun convertObjToMapReflection(result: Boolean, status: Int): java.util.HashMap<String, Any> {
 
     val hashMap:HashMap<String,Any> = HashMap()

@@ -1,16 +1,5 @@
 class UnicoConfig {
 
-  /// Url para sua identificação da sua empresa
-  final String _urlInstance;
-
-  /// Key unica da sua empresa
-  final String _apikey;
-
-  /// Token para garantir sua autenticidade
-  /// Veja a documentação para gerar esse token:
-  /// https://acesso-io.github.io/docs/platform/identity/protocols/oauth2/get-token.html
-  final String _authToken;
-
   ///Android custom layout
   String? androidColorSilhoutte;
   String? androidColorBackground;
@@ -38,9 +27,6 @@ class UnicoConfig {
 
   ///Objeto de configuracao unico
   UnicoConfig({
-    required String urlInstance,
-    required String apikey,
-    required String authToken,
     this.androidColorSilhoutte,
     this.androidColorBackground,
     this.androidColorBoxMessage,
@@ -62,16 +48,10 @@ class UnicoConfig {
     this.iosColorBackgroundPopupError,
     this.iosColorTextPopupError,
     this.iosImageIconPopupError,
-  })  : _urlInstance = urlInstance, ///url
-        _apikey = apikey, ///apikey
-        _authToken = authToken; ///token
+  });
 
   Map<dynamic, dynamic> get getCommonMap {
     var map = <String, dynamic>{
-      'urlIntance': _urlInstance,
-      'apikey': _apikey,
-      'authToken': _authToken,
-
       ///Android custom layout
       ///adiciona cor a silhueta de captura
       'setAndroidColorSilhoutte': androidColorSilhoutte,

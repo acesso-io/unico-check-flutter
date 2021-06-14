@@ -13,7 +13,6 @@ class AcessoBioDocument : AcessoBio(), iAcessoBioDocument {
             "openFaceMatch" -> openFaceMatch()
             "openCameraDocument" -> openCameraDocument()
 
-
             else -> onError("metedo nao encontrado")
         }
     }
@@ -56,7 +55,7 @@ class AcessoBioDocument : AcessoBio(), iAcessoBioDocument {
 
     //override
     override fun onSuccessOCR(ocr: OCRResponse?) {
-        onSuccess(ocr)
+
     }
 
     override fun onErrorOCR(error: String) {
@@ -82,25 +81,7 @@ class AcessoBioDocument : AcessoBio(), iAcessoBioDocument {
     }
 
     override fun onSucessDocumentInsert(processId: String?, typed: String?) {
-
-        if(processId == null || typed == null ){
-            onError("Erro desconhecido")
-        }else{
-
-            data class temp(
-                    var processId: String,
-                    var typed: String
-            )
-
-            val obj = temp(
-                    processId,
-                    typed
-            )
-
-            onSuccess(obj)
-        }
-
-
+        onSuccess(processId)
     }
 
     override fun onErrorDocumentInsert(error: String?) {

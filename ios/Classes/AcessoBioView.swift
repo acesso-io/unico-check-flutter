@@ -18,9 +18,6 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
     var acecessoBioStatus = true
     
     var method: String = ""
-    var urlIntance: String = ""
-    var apikey: String = ""
-    var authToken: String = ""
     
     var setColorSilhoutteNeutra: String? = nil
     var setColorSilhoutteSuccess: String? = nil
@@ -53,9 +50,9 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
     private func initAcessoBio(){
         acessoBioManager = AcessoBioManager(
             viewController: self,
-            url: urlIntance,
-            apikey: apikey,
-            token:authToken
+            url: "",
+            apikey: "",
+            token:""
         );
         acessoBioManager.setLanguageOrigin(LanguageOrigin.Flutter, release: "1.0.1")
     }

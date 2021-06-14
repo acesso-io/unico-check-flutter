@@ -5,6 +5,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -46,11 +47,7 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
 
         methodCall = intent.getStringExtra("methodCall")
 
-        initAcessoBio(
-                intent.getStringExtra("urlIntance"),
-                intent.getStringExtra("apikey"),
-                intent.getStringExtra("authToken")
-        )
+        initAcessoBio()
 
         getColors()
         setColors()
@@ -125,41 +122,29 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
     }
 
     //ACESSOBIO
-    private fun initAcessoBio(urlIntance: String?, apikey: String?, authToken: String?) {
-
-        if (urlIntance != null && apikey != null && authToken != null) {
-            createAcessoBio(
-                    urlIntance,
-                    apikey,
-                    authToken
-            )
-        } else onError("informe urlIntance, apikey, authToken para proceguir.")
-
-    }
-
-    private fun createAcessoBio(urlIntance: String, apikey: String, authToken: String) {
+    private fun initAcessoBio() {
         acessoBio = AcessoBio(
                 this,
-                urlIntance,
-                apikey,
-                authToken
+                "",
+                "",
+                ""
         )
         acessoBio.setLanguageOrigin(AcessoBio.LanguageOrigin.FLUTTER,"1.0.1")
     }
 
     //SUCCESS
-    protected fun onSuccess(result: Any?){
-        finish()
-        if(pluginContext != null){
-            if(result != null){
-                pluginContext!!.onSuccessPlugin(result)
-            }else{
-                onError("erro desconhecido")
-            }
-        }else{
-            onError("Erro ao retornar resultado, o contexto foi perdido")
-        }
-    }
+//    protected fun onSuccess(result: Any?){
+//        if(pluginContext != null){
+//            if(result != null){
+//                pluginContext!!.onSuccessPlugin(result)
+//            }else{
+//                onError("erro desconhecido")
+//            }
+//        }else{
+//            onError("Erro ao retornar resultado, o contexto foi perdido")
+//        }
+//        finish()
+//    }
 
     protected fun onSuccess(result: Boolean){
         finish()
@@ -197,16 +182,16 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
     }
 
     //ERROR
-    protected fun onError(result: String) {
-
-        if (pluginContext != null) {
+    protected fun onError(result: String?) {
+        if (pluginContext != null && result != null) {
             pluginContext!!.onErrorPlugin(result)
+        }else{
+            pluginContext!!.onErrorPlugin("Erro nao identificado")
         }
-
         finish()
     }
 
-    protected fun onError(result: Any?){
+    protected fun onError(result: ErrorBio?){
         if(pluginContext != null){
             if(result != null){
                 pluginContext!!.onErrorPlugin(result)

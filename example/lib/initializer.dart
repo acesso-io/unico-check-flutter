@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:unico_check/unico_check.dart';
-import 'package:unico_check_example/acessoPass.dart';
 
 class Initializer {
   static void init() {
@@ -9,10 +8,6 @@ class Initializer {
 
   static void _initUnico() {
     final unicoInit = UnicoConfig(
-        urlInstance: acessoPass.url,
-        apikey: acessoPass.apikey,
-        authToken: acessoPass.token,
-
         // androidColorSilhoutte: "#901850"
         // androidColorBackground: "#901850"
     );

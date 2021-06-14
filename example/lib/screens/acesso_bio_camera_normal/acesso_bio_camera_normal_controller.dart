@@ -27,7 +27,7 @@ class AcessoBioCameraNormalController extends GetxController implements IAcessoB
 
   @override
   void onSuccessCamera(CameraResponse response) {
-    SnackbarUtil.showSuccess(message: "Success ID:"+response.processID);
+    SnackbarUtil.showSuccess(message: "Success");
   }
 
   @override
