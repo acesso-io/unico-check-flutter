@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:unico_check/src/core/abstracts/acesso_bio.interface.dart';
 import 'package:unico_check/src/functions/document.functions.dart';
 import 'package:unico_check/src/unico_config.dart';
 import 'core/abstracts/acesso_bio_camera.interface.dart';
@@ -26,22 +27,30 @@ class UnicoCheck {
   UnicoCheck({required Object context, required UnicoConfig config})
       : _config = config {
 
-    ///IAcessoBioDocument implementa as funcionalidades de documento
-    if (context is IAcessoBioDocument) {
-      document = DocumentFunctions(
-        channel: _channel,
-        config: _config,
-        callbacks: context,
-      );
+    if(context is IAcessoBioDocument || context is IAcessoBioCamera ){
+      ///IAcessoBioDocument implementa as funcionalidades de documento
+      if (context is IAcessoBioDocument) {
+        document = DocumentFunctions(
+          channel: _channel,
+          config: _config,
+          callbacks: context,
+        );
+      }
+
+      ///IAcessoBioAuthenticate implementa as funcionalidade camera inteligente
+      if (context is IAcessoBioCamera) {
+        camera = CameraFunctions(
+          channel: _channel,
+          config: _config,
+          callbacks: context,
+        );
+      }
+    }else{
+      throw new Exception('Implementa a interface para receber o resultado: ( IAcessoBioDocument e/ou IAcessoBioCamera ) ');
     }
 
-    ///IAcessoBioAuthenticate implementa as funcionalidade camera inteligente
-    if (context is IAcessoBioCamera) {
-      camera = CameraFunctions(
-        channel: _channel,
-        config: _config,
-        callbacks: context,
-      );
-    }
+
+
+
   }
 }

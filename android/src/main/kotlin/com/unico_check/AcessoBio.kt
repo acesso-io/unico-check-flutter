@@ -2,6 +2,7 @@ package com.unico_check
 
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -124,36 +125,14 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
     //ACESSOBIO
     private fun initAcessoBio() {
         acessoBio = AcessoBio(
-                this,
-                "",
-                "",
-                ""
+                this
         )
-        acessoBio.setLanguageOrigin(AcessoBio.LanguageOrigin.FLUTTER,"1.0.1")
+        acessoBio.setLanguageOrigin(AcessoBio.LanguageOrigin.FLUTTER,"1.0.2")
     }
-
+    
+    //region results
     //SUCCESS
-//    protected fun onSuccess(result: Any?){
-//        if(pluginContext != null){
-//            if(result != null){
-//                pluginContext!!.onSuccessPlugin(result)
-//            }else{
-//                onError("erro desconhecido")
-//            }
-//        }else{
-//            onError("Erro ao retornar resultado, o contexto foi perdido")
-//        }
-//        finish()
-//    }
 
-    protected fun onSuccess(result: Boolean){
-        finish()
-        if(pluginContext != null){
-            pluginContext!!.onSuccessPlugin(result)
-        }else{
-            onError("Erro ao retornar resultado, o contexto foi perdido")
-        }
-    }
 
     protected fun onSuccess(result: String?){
         if(pluginContext != null){
@@ -168,18 +147,6 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
         finish()
     }
 
-    protected fun onSuccess(result: Int?){
-        if(pluginContext != null){
-            if(result == null || result == 0){
-                pluginContext!!.onSuccessPlugin(result!!)
-            }else{
-                onError("Erro ao retornar resultado")
-            }
-        }else{
-            onError("Erro ao retornar resultado, o contexto foi perdido")
-        }
-        finish()
-    }
 
     //ERROR
     protected fun onError(result: String?) {
@@ -191,18 +158,7 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
         finish()
     }
 
-    protected fun onError(result: ErrorBio?){
-        if(pluginContext != null){
-            if(result != null){
-                pluginContext!!.onErrorPlugin(result)
-            }else{
-                onError("erro desconhecido")
-            }
-        }else{
-            onError("Erro ao retornar resultado, o contexto foi perdido")
-        }
-        finish()
-    }
+
 
     //ERROR AcessoBio
     override fun onErrorAcessoBio(errorBio: ErrorBio?) {
@@ -224,8 +180,20 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
         finish()
     }
 
+    override fun systemClosedCameraTimeoutSession() {
+        TODO("Not yet implemented")
+    }
+
+    override fun systemChangedTypeCameraTimeoutFaceInference() {
+        TODO("Not yet implemented")
+    }
+
+    //endregion
+    
     //region Camera Permission
+    @SuppressLint("MissingSuperCall")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode != REQUEST_CODE_PERMISSIONS) {
             Toast.makeText(this, "Permissão acesso camera negada", Toast.LENGTH_SHORT).show()
             finish()

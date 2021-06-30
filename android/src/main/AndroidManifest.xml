@@ -8,10 +8,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".AcessoBioAuthenticate"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity
             android:name=".AcessoBioCamera"
             android:theme="@style/AppTheme.NoActionBar" />
 

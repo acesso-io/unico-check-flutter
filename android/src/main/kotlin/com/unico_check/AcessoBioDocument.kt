@@ -9,37 +9,12 @@ class AcessoBioDocument : AcessoBio(), iAcessoBioDocument {
     override fun callMethodBio() {
         when(methodCall){
 
-            "openCameraDocumentOCR" -> openCameraDocumentOCR()
-            "openFaceMatch" -> openFaceMatch()
             "openCameraDocument" -> openCameraDocument()
 
             else -> onError("metedo nao encontrado")
         }
     }
 
-    private fun openCameraDocumentOCR() {
-
-        val documentType = intent.getIntExtra("DOCUMENT_TYPE",0)
-
-        if(documentType == 0){
-            onError("informe tipo de documento")
-        }else{
-            acessoBio.openCameraDocumentOCR(documentType)
-        }
-
-    }
-
-    private fun openFaceMatch() {
-
-        val documentType = intent.getIntExtra("DOCUMENT_TYPE",0)
-
-        if(documentType == 0){
-            onError("informe tipo de documento")
-        }else{
-            acessoBio.openFaceMatch(documentType)
-        }
-
-    }
 
     private fun openCameraDocument() {
 
@@ -53,38 +28,11 @@ class AcessoBioDocument : AcessoBio(), iAcessoBioDocument {
 
     }
 
-    //override
-    override fun onSuccessOCR(ocr: OCRResponse?) {
-
-    }
-
-    override fun onErrorOCR(error: String) {
-        onError(error)
-    }
-
-    override fun onSucessFaceMatch(status: Boolean) {
-        onSuccess(status)
-    }
-
-    override fun onErrorFaceMatch(error: String?) {
-        onError(error)
-    }
-
     override fun onSuccesstDocument(base64: String?) {
         onSuccess(base64)
     }
 
-
-
     override fun onErrorDocument(error: String?) {
-        onError(error)
-    }
-
-    override fun onSucessDocumentInsert(processId: String?, typed: String?) {
-        onSuccess(processId)
-    }
-
-    override fun onErrorDocumentInsert(error: String?) {
         onError(error)
     }
 

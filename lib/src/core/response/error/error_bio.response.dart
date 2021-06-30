@@ -12,4 +12,5 @@ class ErrorBioResponse {
       description = map['description'];
     }
   }
+
 }

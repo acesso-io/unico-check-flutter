@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'unico_check'
-  s.version          = '1.0.1'
+  s.version          = '1.0.2'
   s.summary          = 'Esta biblioteca visa implementar a tecnologia Unico.'
   s.description      = <<-DESC
 Esta biblioteca visa implementar a tecnologia Unico.

@@ -42,11 +42,6 @@ class AcessoBioDocumentController extends GetxController
   }
 
   @override
-  void onSuccessFaceMatch(FacematchResponse response) {
-    SnackbarUtil.showSuccess(message: "Status = "+response.status.toString());
-  }
-
-  @override
   void onSuccesstDocument(CameraDocumentResponse response) {
     SnackbarUtil.showSuccess(message: "Success");
   }

@@ -11,9 +11,10 @@ class AcessoBioCamera: AcessoBio(), iAcessoBioCamera {
         cameraSetings()
         when(methodCall){
 
-            "openCamera" -> acessoBio.openCamera()
-            "openCameraWithCreateProcess" -> openCameraWithCreateProcess()
-            "openCameraInsertDocument" -> openCameraInsertDocument()
+            "openCamera" -> {
+                Log.d("CAMERA RESULT","openCamera")
+                acessoBio.openCamera()
+            }
 
             else -> onError("metedo nao encontrado")
         }
@@ -33,46 +34,8 @@ class AcessoBioCamera: AcessoBio(), iAcessoBioCamera {
 
     }
 
-    private fun openCameraWithCreateProcess() {
-
-        val nome = intent.getStringExtra("nome")
-        val code = intent.getStringExtra("code")
-        val gender = intent.getStringExtra("gender")
-        val birthdate = intent.getStringExtra("birthdate")
-        val email = intent.getStringExtra("email")
-        val phone = intent.getStringExtra("phone")
-
-        if(        nome != null && nome != ""
-                && code != null && code != ""
-                && gender != null && gender != ""
-                && birthdate != null && birthdate != ""
-                && email != null && email != ""
-                && phone != null && phone != ""
-        ){
-            acessoBio.openCameraWithCreateProcess(nome,code,gender,birthdate,email,phone)
-        }else if(nome != null && nome != "" && code != null && code != ""){
-            acessoBio.openCameraWithCreateProcess(nome,code)
-        }else{
-            onError("ao menos nome e code sao obrigatorios")
-        }
-
-    }
-
-    private fun openCameraInsertDocument(){
-
-        val code = intent.getStringExtra("code")
-        val nome = intent.getStringExtra("nome")
-        val documentType = intent.getIntExtra("DOCUMENT_TYPE",0)
-
-        if(documentType == 0 || code == null || nome == null){
-            onError("informe tipo de documento")
-        }else{
-            acessoBio.openCameraWithCreateProcess(nome, code, documentType)
-        }
-
-    }
-
     override fun onSuccessCamera(result: ResultCamera?) {
+        Log.d("CAMERA RESULT","onSuccessCamera")
 
         if(result?.base64 != null)
             Log.d("CAMERA RESULT","onSuccessCamera base64: TRUE")
@@ -81,7 +44,8 @@ class AcessoBioCamera: AcessoBio(), iAcessoBioCamera {
     }
 
     override fun onErrorCamera(errorBio: ErrorBio?) {
-        onError(errorBio)
+        Log.d("CAMERA RESULT","onErrorCamera")
+        //onError(errorBio)
     }
 
 
