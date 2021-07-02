@@ -25,6 +25,10 @@ class UnicoConfig {
   String? iosColorTextPopupError;
   String? iosImageIconPopupError;
 
+  ///Timers
+  double? setTimeoutSession;
+  double? setTimeoutToFaceInference;
+
   ///Objeto de configuracao unico
   UnicoConfig({
     this.androidColorSilhoutte,
@@ -48,6 +52,8 @@ class UnicoConfig {
     this.iosColorBackgroundPopupError,
     this.iosColorTextPopupError,
     this.iosImageIconPopupError,
+    this.setTimeoutSession,
+    this.setTimeoutToFaceInference,
   });
 
   Map<dynamic, dynamic> get getCommonMap {
@@ -96,7 +102,13 @@ class UnicoConfig {
       ///adiciona cor no texto popup de erro
       'setIosColorTextPopupError': iosColorTextPopupError,
       ///adiciona cor no icone popup erro
-      'setIosImageIconPopupError': iosImageIconPopupError
+      'setIosImageIconPopupError': iosImageIconPopupError,
+
+      ///adiciona timer de sessão
+      'setTimeoutSession': setTimeoutSession,
+      ///adiciona timer de inferencia do rosto
+      'setTimeoutToFaceInference': setTimeoutToFaceInference
+
     };
 
     return map;

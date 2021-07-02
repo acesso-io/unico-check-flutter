@@ -71,8 +71,5 @@ class AcessoBioCamera: AcessoBioView {
         flutterResult(convertObjToDicionary(result: error, status: 0))
     }
     
- 
-    
-    
 
 }

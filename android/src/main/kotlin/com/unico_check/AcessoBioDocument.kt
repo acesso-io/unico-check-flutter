@@ -1,8 +1,6 @@
 package com.unico_check
 
-
 import com.acesso.acessobio_android.iAcessoBioDocument
-import com.acesso.acessobio_android.services.dto.OCRResponse
 
 class AcessoBioDocument : AcessoBio(), iAcessoBioDocument {
 
@@ -11,29 +9,30 @@ class AcessoBioDocument : AcessoBio(), iAcessoBioDocument {
 
             "openCameraDocument" -> openCameraDocument()
 
-            else -> onError("metedo nao encontrado")
+            else ->  channelResult.notImplemented()
         }
     }
-
-
+    
     private fun openCameraDocument() {
 
         val documentType = intent.getIntExtra("DOCUMENT_TYPE",0)
 
         if(documentType == 0){
-            onError("informe tipo de documento")
+            channelResult.success(convertObjToMapReflection("informe tipo de documento",0))
         }else{
             acessoBio.openCameraDocument(documentType)
         }
 
     }
 
-    override fun onSuccesstDocument(base64: String?) {
-        onSuccess(base64)
+    override fun onSuccesstDocument(base64: String) {
+        channelResult.success(convertObjToMapReflection(base64,1))
+        finish()
     }
 
-    override fun onErrorDocument(error: String?) {
-        onError(error)
+    override fun onErrorDocument(error: String) {
+        channelResult.success(convertObjToMapReflection(error,0))
+        finish()
     }
 
 

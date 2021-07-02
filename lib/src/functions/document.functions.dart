@@ -19,7 +19,7 @@ class DocumentFunctions {
         _config = config,
         _callbacks = callbacks;
 
-
+  ///método responsavel pela abertura da camera e retorno dos dados
   void openCameraDocument({required int documentType}) async {
     final map = _config.getCommonMap;
 

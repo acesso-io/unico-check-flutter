@@ -26,15 +26,17 @@ class CameraFunctions {
         _callbacks = callbacks;
 
 
-
+  ///metodo para desabilitar a auto captura
   void disableAutoCapture(){
     _disableAutoCapture = true;
   }
 
+  ///método para desabilitar o smart frame da camera
   void disableSmartFrame(){
     _disableSmartFrame = true;
   }
 
+  ///método responsavel pela abertura da camera e retorno dos dados
   void openCamera() async {
 
     var map = _config.getCommonMap;
@@ -58,70 +60,6 @@ class CameraFunctions {
       }
     }
   }
-
-  // void openCameraWithCreateProcess({
-  //   required String nome,
-  //   required String code,
-  //   String gender = "",
-  //   String birthdate = "",
-  //   String email = "",
-  //   String phone = "",
-  // }) async {
-  //   var map = _config.getCommonMap;
-  //   map[MapConstants.nome] = nome;
-  //   map[MapConstants.code] = code;
-  //   map[MapConstants.gender] = gender;
-  //   map[MapConstants.birthdate] = birthdate;
-  //   map[MapConstants.email] = email;
-  //   map[MapConstants.phone] = phone;
-  //
-  //   final result = Map<String, dynamic>.from(
-  //     await _channel.invokeMethod(
-  //       MethodsChannelsConstants.openCameraWithCreateProcess,
-  //       map,
-  //     ),
-  //   );
-  //
-  //   if (validateResponse(callbacks: _callbacks, response: result)) {
-  //     if (result[MapConstants.flutterStatus] == 1) {
-  //       final response = CameraResponse.fromJson(result);
-  //       _callbacks.onSuccessCamera(response);
-  //     } else {
-  //       final error = ErrorBioResponse(result);
-  //       _callbacks.onErrorCamera(error);
-  //     }
-  //   }
-  // }
-
-  // void openCameraWithCreateProcessAndInsertDocument({
-  //   required String code,
-  //   required String nome,
-  //   required int documentType,
-  // }) async {
-  //   var map = _config.getCommonMap;
-  //   map[MapConstants.code] = code;
-  //   map[MapConstants.nome] = nome;
-  //   map[MapConstants.documentType] = documentType;
-  //
-  //   final result = Map<String, dynamic>.from(
-  //     await _channel.invokeMethod(
-  //       MethodsChannelsConstants.openCameraInsertDocument,
-  //       map,
-  //     ),
-  //   );
-  //
-  //   if (validateResponse(callbacks: _callbacks, response: result)) {
-  //     if (result[MapConstants.flutterStatus] == 1) {
-  //       _callbacks.onSucessDocumentInsert(
-  //         result[MapConstants.processId],
-  //         result[MapConstants.typed],
-  //       );
-  //     } else {
-  //       _callbacks.onErrorDocumentInsert(result['result']);
-  //     }
-  //   }
-  // }
-
 
 
 }

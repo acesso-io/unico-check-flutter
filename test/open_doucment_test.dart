@@ -48,8 +48,8 @@ void main() {
 
       if(methodCall.method == MethodsChannelsConstants.openCameraDocument){
         return <String, dynamic>{
-          'result': 0,
           'flutterstatus': -1,
+          'result': 0,
         };
       }
 
@@ -188,6 +188,16 @@ class Results implements IAcessoBioDocument {
       expect(await true,false);
     }
     returned_in_interface = true;
+  }
+
+  @override
+  void systemChangedTypeCameraTimeoutFaceInference() {
+    // TODO: implement systemChangedTypeCameraTimeoutFaceInference
+  }
+
+  @override
+  void systemClosedCameraTimeoutSession() {
+    // TODO: implement systemClosedCameraTimeoutSession
   }
 
 }

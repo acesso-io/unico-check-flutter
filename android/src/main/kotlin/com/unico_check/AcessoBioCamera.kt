@@ -16,7 +16,7 @@ class AcessoBioCamera: AcessoBio(), iAcessoBioCamera {
                 acessoBio.openCamera()
             }
 
-            else -> onError("metedo nao encontrado")
+            else -> channelResult.notImplemented()
         }
     }
 
@@ -34,18 +34,16 @@ class AcessoBioCamera: AcessoBio(), iAcessoBioCamera {
 
     }
 
-    override fun onSuccessCamera(result: ResultCamera?) {
-        Log.d("CAMERA RESULT","onSuccessCamera")
-
-        if(result?.base64 != null)
-            Log.d("CAMERA RESULT","onSuccessCamera base64: TRUE")
-
-        onSuccess(result!!.base64)
+    override fun onSuccessCamera(result: ResultCamera) {
+        Log.d("Teste","onSuccessCamera")
+        channelResult.success(convertObjToMapReflection(result.base64,1))
+        finish()
     }
 
-    override fun onErrorCamera(errorBio: ErrorBio?) {
-        Log.d("CAMERA RESULT","onErrorCamera")
-        //onError(errorBio)
+    override fun onErrorCamera(errorBio: ErrorBio) {
+        Log.d("Teste","onErrorCamera")
+        channelResult.success(errorBioToHashMap(errorBio,0))
+        finish()
     }
 
 

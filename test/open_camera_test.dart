@@ -2,7 +2,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:unico_check/src/core/constants/methods_channels.constants.dart';
 import 'package:unico_check/src/functions/camera.functions.dart';
-import 'package:unico_check/src/functions/document.functions.dart';
 import 'package:unico_check/unico_check.dart';
 
 bool returned_in_interface = false;
@@ -12,21 +11,6 @@ void main() {
   late UnicoCheck _unico;
 
   TestWidgetsFlutterBinding.ensureInitialized();
-
-  // setUp(() {
-  //   channel.setMockMethodCallHandler((MethodCall methodCall) async {
-  //
-  //     if(methodCall.method == MethodsChannelsConstants.openCamera){
-  //       return <String, dynamic>{
-  //         'flutterstatus': 1,
-  //         'result': "base64"
-  //       };
-  //     }
-  //
-  //   });
-  // });
-
-
 
   void setOnSuccessResponse(){
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
@@ -60,6 +44,30 @@ void main() {
         return <String, dynamic>{
           'result': 0,
           'flutterstatus': -1,
+        };
+      }
+
+    });
+  }
+  void setsystemClosedCameraTimeoutSession(){
+    channel.setMockMethodCallHandler((MethodCall methodCall) async {
+
+      if(methodCall.method == MethodsChannelsConstants.openCamera){
+        return <String, dynamic>{
+          'result': 0,
+          'flutterstatus': 3,
+        };
+      }
+
+    });
+  }
+  void systemChangedTypeCameraTimeoutFaceInference(){
+    channel.setMockMethodCallHandler((MethodCall methodCall) async {
+
+      if(methodCall.method == MethodsChannelsConstants.openCamera){
+        return <String, dynamic>{
+          'result': 0,
+          'flutterstatus': 4,
         };
       }
 
@@ -157,8 +165,23 @@ void main() {
       _unico.camera!.openCamera();
     });
 
-  });
+    test('openCamera_on_camera_time_session', () async {
+      setsystemClosedCameraTimeoutSession();
+      _unico = UnicoCheck(context: Results(3), config: UnicoConfig());
+      _unico.camera!.openCamera();
+    });
 
+    test('openCamera_on_camera_face_inference', () async {
+      systemChangedTypeCameraTimeoutFaceInference();
+      _unico = UnicoCheck(context: Results(4), config: UnicoConfig());
+      _unico.camera!.openCamera();
+    });
+
+    //onErrorAcessoBio
+    //systemClosedCameraTimeoutSession
+    //systemChangedTypeCameraTimeoutFaceInference
+
+  });
 
 
 }
@@ -209,6 +232,26 @@ class Results implements IAcessoBioCamera {
   @override
   void userClosedCameraManually() async{
     if(onTest == -1){
+      expect(await true,true);
+    }else{
+      expect(await true,false);
+    }
+    returned_in_interface = true;
+  }
+
+  @override
+  void systemClosedCameraTimeoutSession() async{
+    if(onTest == 3){
+      expect(await true,true);
+    }else{
+      expect(await true,false);
+    }
+    returned_in_interface = true;
+  }
+
+  @override
+  void systemChangedTypeCameraTimeoutFaceInference() async{
+    if(onTest == 4){
       expect(await true,true);
     }else{
       expect(await true,false);
