@@ -92,21 +92,6 @@ class AcessoBioDocument: AcessoBioView{
         flutterResult(convertObjToDicionary(result: error, status: 0))
     }
 
-    func onSuccessOCR(_ result: OCRResult!){
-        flutterResult(convertObjToDicionary(result: result, status: 1))
-    }
-
-    func onErrorOCR(_ error: String){
-        flutterResult(convertObjToDicionary(result: error, status: 0))
-    }
-    
-    func onSuccessFacematch(_ result: FacematchResult?){
-        flutterResult(convertObjToDicionary(result: result!, status: 1))
-    }
-    
-    func onErrorFacematch(_ result: String!){
-        flutterResult(convertObjToDicionary(result: result, status: 0))
-    }
         
 
 }

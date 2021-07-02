@@ -34,6 +34,9 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   private var setColorIconTakePictureButton: String? = null
   private var setColorBackgroundBottomDocument: String? = null
   private var setColorTextBottomDocument: String? = null
+  
+  private var setTimeoutSession: Double? = null
+  private var setTimeoutToFaceInference: Double? = null
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, "acessobio")
@@ -44,44 +47,40 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     this.result = result
 
     getColors(call)
+    getTimers(call)
 
     when(call.method){
-
-      //Document
-      "openCameraDocumentOCR" -> openCameraDocumentOCR(call.method,call.argument("DOCUMENT_TYPE"))
-      "openFaceMatch" -> openCameraDocumentOCR(call.method,call.argument("DOCUMENT_TYPE"))
-      "openCameraDocument" -> openCameraDocumentOCR(call.method,call.argument("DOCUMENT_TYPE"))
-      "openCameraInsertDocument" -> openCameraInsertDocument(call.method,
-              call.argument("code"),
-              call.argument("nome"),
+      "openCameraDocument" -> openCameraDocumentOCR(
+              call.method,
               call.argument("DOCUMENT_TYPE")
-      )
-
-      //Auth
-      "openAuthenticate" -> openAuthenticate(call.method,call.argument("code"))
-
-      //Camera
+        )
       "openCamera" -> openCamera(
               call.method,
               call.argument("disableAutoCapture"),
               call.argument("disableSmartFrame")
       )
-      "openCameraWithCreateProcess" -> openCamera(
-              call.method,
-              call.argument("nome"),
-              call.argument("code"),
-              call.argument("gender"),
-              call.argument("birthdate"),
-              call.argument("email"),
-              call.argument("phone"),
-              call.argument("disableAutoCapture"),
-              call.argument("disableSmartFrame")
-      )
-
       else -> result.notImplemented()
     }
 
   }
+
+
+  
+  private fun getIntent(acessoBio: AcessoBio, methodCall: String): Intent {
+
+    acessoBio.setPluginContext(result)
+
+    val intent = Intent(activity, acessoBio::class.java)
+
+    intent.putExtra("methodCall",methodCall)
+
+    
+
+    return setTimers(setColors(intent))
+
+  }
+
+  
 
   //region Document
 
@@ -102,20 +101,6 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
     intent.putExtra("code", code)
     intent.putExtra("nome", nome)
     intent.putExtra("DOCUMENT_TYPE", DOCUMENT_TYPE)
-
-    activity.startActivityForResult(intent, REQUEST_BIO)
-
-  }
-
-  //endregion
-
-  //region Auth
-
-  private fun openAuthenticate(methodCall: String, code: String?) {
-
-    val intent = getIntent(AcessoBioAuthenticate(),methodCall)
-
-    intent.putExtra("code", code)
 
     activity.startActivityForResult(intent, REQUEST_BIO)
 
@@ -173,6 +158,7 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
   //endregion
 
+  //region Colors
   private fun getColors(call: MethodCall) {
     setColorSilhoutte = call.argument("setAndroidColorSilhoutte")
     setColorBackground = call.argument("setAndroidColorBackground")
@@ -203,142 +189,18 @@ class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
 
     return intent
   }
-
-  private fun getIntent(acessoBio: AcessoBio, methodCall: String): Intent {
-
-    acessoBio.setPluginContext(this)
-
-    val intent = Intent(activity, acessoBio::class.java)
-
-    intent.putExtra("methodCall",methodCall)
-
-
-    return setColors(intent)
-
-  }
-
-  //region RETURN THE RESULTS
-
-  //SUCCESS
-//  fun onSuccessPlugin(resultBio: Any) {
-//
-//    var hashMap:HashMap<String,Any> = convertObjToMapReflection(resultBio,1)
-//
-//    Log.d("CAMERA RESULT","AcessoBioCamera -> onSuccess -> onSuccessPlugin base64: "+hashMap["base64"])
-//
-//    result.success(hashMap)//Status false pq vem do onSuccess
-//  }
-
-  fun onSuccessPlugin(resultBio: Boolean) {
-    result.success(convertObjToMapReflection(resultBio,1))//Status false pq vem do onSuccess
-  }
-
-  fun onSuccessPlugin(resultBio: String) {
-    result.success(convertObjToMapReflection(resultBio,1))//Status false pq vem do onSuccess
-  }
-
-  fun onSuccessPlugin(resultBio: Int) {
-    result.success(convertObjToMapReflection(resultBio,1))//Status false pq vem do onSuccess
-  }
-
-  //ERRORS
-  fun onErrorPlugin(error: ErrorBio) {
-    result.success(errorBioToHashMap(error,0)) //Status false pq vem do onError
-  }
-
-  fun onErrorPlugin(error: String) {
-    result.success(convertObjToMapReflection(error, 0))//Status false pq vem do onError
-  }
-
-  fun onErrorPlugin(error: Int) {
-    result.success(convertObjToMapReflection(error, 0))//Status false pq vem do onError
-  }
-
-  //ERROR ACESSOBIO
-  fun onErrorPluginAcessoBio(error: ErrorBio) {
-    result.success(errorBioToHashMap(error,2))
-  }
-
-  fun userClosedCameraManually() {
-    result.success(convertObjToMapReflection(0,-1))//Status false pq vem do onError
-  }
-
   //endregion
-
-  fun errorBioToHashMap(error: ErrorBio, status: Int): HashMap<String, Any> {
-    val hashMap:HashMap<String,Any> = HashMap()
-
-    hashMap["code"] = error.code
-    hashMap["method"] = error.method
-    hashMap["description"] = error.description
-    hashMap["flutterstatus"] = status//Status false pq vem do onError
-
-    return hashMap
-
+  
+  //region Timers
+  private fun getTimers(call: MethodCall) {
+    setTimeoutSession = call.argument("setTimeoutSession")
+    setTimeoutToFaceInference = call.argument("setTimeoutToFaceInference")
   }
-
-  //region Convert to HashMap
-
-//  private fun convertObjToMapReflection(objects: Any, status: Int): java.util.HashMap<String, Any> {
-//
-////    Log.d("CAMERA RESULT", "convertObjToMapReflection object result: ${resultCamera.base64}")
-//
-//    val hashMap:HashMap<String,Any> = HashMap()
-//
-//    val allFields: Array<Field> = objects::class.java.declaredFields
-//
-//    for (field in allFields) {
-//      field.isAccessible = true
-//
-//      val value = field[objects]
-//
-//      Log.d("CAMERA RESULT", "convertObjToMapReflection Field name: ${field.name} Field value $value")
-//
-//      if(value != null){
-//        hashMap[field.name] = value
-//      }else{
-//        hashMap[field.name] = ""
-//      }
-//
-//    }
-//
-//    hashMap["flutterstatus"] = status
-//
-//    return hashMap
-//
-//  }
-
-  private fun convertObjToMapReflection(result: Boolean, status: Int): java.util.HashMap<String, Any> {
-
-    val hashMap:HashMap<String,Any> = HashMap()
-
-    hashMap["result"] = result
-    hashMap["flutterstatus"] = status
-
-    return hashMap
-
+  private fun setTimers(intent: Intent): Intent {
+    intent.putExtra("setTimeoutSession",setTimeoutSession)
+    intent.putExtra("setTimeoutToFaceInference",setTimeoutToFaceInference)
+    return intent
   }
-  private fun convertObjToMapReflection(result: String, status: Int): java.util.HashMap<String, Any> {
-
-    val hashMap:HashMap<String,Any> = HashMap()
-
-    hashMap["result"] = result
-    hashMap["flutterstatus"] = status
-
-    return hashMap
-
-  }
-  private fun convertObjToMapReflection(result: Int, status: Int): java.util.HashMap<String, Any> {
-
-    val hashMap:HashMap<String,Any> = HashMap()
-
-    hashMap["result"] = result
-    hashMap["flutterstatus"] = status
-
-    return hashMap
-
-  }
-
   //endregion
 
   //region ActivityAware

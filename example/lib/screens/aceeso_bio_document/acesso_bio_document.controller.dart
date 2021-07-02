@@ -10,10 +10,32 @@ class AcessoBioDocumentController extends GetxController
     _unico = UnicoCheck(context: this, config: Get.find());
   }
 
-  void openCameraDocument() {
+  void openCameraDocumentCNH() {
     _unico.document!.openCameraDocument(
       documentType: DocumentsTypeConstants.cnh,
     );
+  }
+
+  void openCameraDocumentRGFrente() {
+    _unico.document!.openCameraDocument(
+      documentType: DocumentsTypeConstants.rg_frente,
+    );
+  }
+
+  void openCameraDocumentRGVerso() {
+    _unico.document!.openCameraDocument(
+      documentType: DocumentsTypeConstants.rg_verso,
+    );
+  }
+
+  @override
+  void onErrorDocument(String error) {
+    SnackbarUtil.showError(message: error);
+  }
+
+  @override
+  void onSuccesstDocument(CameraDocumentResponse response) {
+    SnackbarUtil.showSuccess(message: "Success");
   }
 
   @override
@@ -27,28 +49,13 @@ class AcessoBioDocumentController extends GetxController
   }
 
   @override
-  void onErrorDocument(String error) {
-    SnackbarUtil.showError(message: error);
+  void systemChangedTypeCameraTimeoutFaceInference() {
+    SnackbarUtil.showError(message: "Timeout: changed to camera normal ");
   }
 
   @override
-  void onErrorFaceMatch(String error) {
-    SnackbarUtil.showError(message: error);
-  }
-
-  @override
-  void onErrorOCR(String error) {
-    SnackbarUtil.showError(message: error);
-  }
-
-  @override
-  void onSuccessFaceMatch(FacematchResponse response) {
-    SnackbarUtil.showSuccess(message: "Status = "+response.status.toString());
-  }
-
-  @override
-  void onSuccesstDocument(CameraDocumentResponse response) {
-    SnackbarUtil.showSuccess(message: "Success");
+  void systemClosedCameraTimeoutSession() {
+    SnackbarUtil.showError(message: "Timeout: close camera ");
   }
 
 }

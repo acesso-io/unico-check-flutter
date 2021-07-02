@@ -18,6 +18,8 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
     var setIosColorBackgroundPopupError: String? = nil
     var setIosColorTextPopupError: String? = nil
     var setIosImageIconPopupError: String? = nil
+    var setTimeoutSession: Int = 0;
+    var setTimeoutToFaceInference: Int = 0;
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "acessobio", binaryMessenger: registrar.messenger())
@@ -37,34 +39,17 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
            
         switch call.method {
     
-                    
-            //Document
-            case "openCameraDocumentOCR": openCameraDocumentOCR(method: call.method,DOCUMENT_TYPE: argument!["DOCUMENT_TYPE"] as? Int)
-            case "openFaceMatch": openCameraDocumentOCR(method: call.method,DOCUMENT_TYPE: argument!["DOCUMENT_TYPE"] as? Int)
-            case "openCameraDocument": openCameraDocumentOCR(method: call.method,DOCUMENT_TYPE: argument!["DOCUMENT_TYPE"] as? Int)
-            case "openCameraInsertDocument": result(FlutterMethodNotImplemented)
-
-            //Auth
-            case "openAuthenticate": openAuthenticate(method: call.method, code: argument!["code"] as? String )
-
-            //Camera
+            case "openCameraDocument": openCameraDocument(
+                method: call.method,
+                DOCUMENT_TYPE: argument!["DOCUMENT_TYPE"] as? Int
+            )
+            
             case "openCamera": openCamera(
                 method: call.method,
                 disableAutoCapture: argument!["disableAutoCapture"]! as? Bool,
                 disableSmartFrame: argument!["disableSmartFrame"]! as? Bool
             )
-            case "openCameraWithCreateProcess": openCamera(
-                method: call.method,
-                nome: argument!["nome"]! as? String,
-                code: argument!["code"]! as? String,
-                gender: argument!["gender"]! as? String,
-                birthdate: argument!["birthdate"]! as? String,
-                email: argument!["email"]! as? String,
-                phone: argument!["phone"]! as? String,
-                disableAutoCapture: argument?["disableAutoCapture"] as? Bool,
-                disableSmartFrame: argument?["disableSmartFrame"] as? Bool
-            )
-                    
+        
             default: result(FlutterMethodNotImplemented)
         }
         
@@ -95,7 +80,6 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
         let viewController: UIViewController = (UIApplication.shared.delegate?.window??.rootViewController)!;
         viewController.present(nav, animated: true, completion: nil)
     }
-
     
     private func getColors(call: FlutterMethodCall){
         
@@ -114,22 +98,11 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
     }
     
     //Document
-    private func openCameraDocumentOCR(method: String, DOCUMENT_TYPE : Int?){
+    private func openCameraDocument(method: String, DOCUMENT_TYPE : Int?){
         
         let acessoBioView = AcessoBioDocument()
         
         acessoBioView.valueExtra["DOCUMENT_TYPE"] = DOCUMENT_TYPE
-        
-        let view = createView(method: method, acessoBioView: acessoBioView)
-        
-        initView(acessoBioView: view)
-    }
-    
-    //Auth
-    private func openAuthenticate(method: String, code: String?){
-        let acessoBioView = AcessoBioAuthenticate()
-        
-        acessoBioView.valueExtra["code"] = code
         
         let view = createView(method: method, acessoBioView: acessoBioView)
         
@@ -158,31 +131,6 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
         initView(acessoBioView: view)
     }
     
-    private func openCamera(
-        method: String,
-        nome: String?,
-        code: String?,
-        gender: String?,
-        birthdate: String?,
-        email: String?,
-        phone: String?,
-        disableAutoCapture: Bool?,
-        disableSmartFrame: Bool?
-    ){
-        
-        let acessoBioView = getAcessoBioCamera(disableAutoCapture: disableAutoCapture,disableSmartFrame: disableSmartFrame)
-        
-        acessoBioView.valueExtra["nome"] = nome
-        acessoBioView.valueExtra["code"] = code
-        acessoBioView.valueExtra["gender"] = gender
-        acessoBioView.valueExtra["birthdate"] = birthdate
-        acessoBioView.valueExtra["email"] = email
-        acessoBioView.valueExtra["phone"] = phone
-        
-        let view = createView(method: method, acessoBioView: acessoBioView)
-        
-        initView(acessoBioView: view)
-    }
     
 }
 

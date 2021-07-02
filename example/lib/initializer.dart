@@ -8,8 +8,8 @@ class Initializer {
 
   static void _initUnico() {
     final unicoInit = UnicoConfig(
-        // androidColorSilhoutte: "#901850"
-        // androidColorBackground: "#901850"
+        setTimeoutSession: 50.0,
+        setTimeoutToFaceInference: 50.0
     );
     Get.put(unicoInit);
   }

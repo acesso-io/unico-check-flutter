@@ -1,6 +1,9 @@
 class ErrorBioResponse {
+  /// codigo do erro
   late int code;
+  /// método do erro
   late String method;
+  /// descrição do erro
   late String description;
 
   ErrorBioResponse(Map<dynamic, dynamic> map) {
@@ -12,4 +15,5 @@ class ErrorBioResponse {
       description = map['description'];
     }
   }
+
 }

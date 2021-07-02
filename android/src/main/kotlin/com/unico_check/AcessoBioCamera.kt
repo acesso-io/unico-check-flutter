@@ -11,11 +11,12 @@ class AcessoBioCamera: AcessoBio(), iAcessoBioCamera {
         cameraSetings()
         when(methodCall){
 
-            "openCamera" -> acessoBio.openCamera()
-            "openCameraWithCreateProcess" -> openCameraWithCreateProcess()
-            "openCameraInsertDocument" -> openCameraInsertDocument()
+            "openCamera" -> {
+                Log.d("CAMERA RESULT","openCamera")
+                acessoBio.openCamera()
+            }
 
-            else -> onError("metedo nao encontrado")
+            else -> channelResult.notImplemented()
         }
     }
 
@@ -33,55 +34,16 @@ class AcessoBioCamera: AcessoBio(), iAcessoBioCamera {
 
     }
 
-    private fun openCameraWithCreateProcess() {
-
-        val nome = intent.getStringExtra("nome")
-        val code = intent.getStringExtra("code")
-        val gender = intent.getStringExtra("gender")
-        val birthdate = intent.getStringExtra("birthdate")
-        val email = intent.getStringExtra("email")
-        val phone = intent.getStringExtra("phone")
-
-        if(        nome != null && nome != ""
-                && code != null && code != ""
-                && gender != null && gender != ""
-                && birthdate != null && birthdate != ""
-                && email != null && email != ""
-                && phone != null && phone != ""
-        ){
-            acessoBio.openCameraWithCreateProcess(nome,code,gender,birthdate,email,phone)
-        }else if(nome != null && nome != "" && code != null && code != ""){
-            acessoBio.openCameraWithCreateProcess(nome,code)
-        }else{
-            onError("ao menos nome e code sao obrigatorios")
-        }
-
+    override fun onSuccessCamera(result: ResultCamera) {
+        Log.d("Teste","onSuccessCamera")
+        channelResult.success(convertObjToMapReflection(result.base64,1))
+        finish()
     }
 
-    private fun openCameraInsertDocument(){
-
-        val code = intent.getStringExtra("code")
-        val nome = intent.getStringExtra("nome")
-        val documentType = intent.getIntExtra("DOCUMENT_TYPE",0)
-
-        if(documentType == 0 || code == null || nome == null){
-            onError("informe tipo de documento")
-        }else{
-            acessoBio.openCameraWithCreateProcess(nome, code, documentType)
-        }
-
-    }
-
-    override fun onSuccessCamera(result: ResultCamera?) {
-
-        if(result?.base64 != null)
-            Log.d("CAMERA RESULT","onSuccessCamera base64: TRUE")
-
-        onSuccess(result!!.base64)
-    }
-
-    override fun onErrorCamera(errorBio: ErrorBio?) {
-        onError(errorBio)
+    override fun onErrorCamera(errorBio: ErrorBio) {
+        Log.d("Teste","onErrorCamera")
+        channelResult.success(errorBioToHashMap(errorBio,0))
+        finish()
     }
 
 

@@ -50,4 +50,14 @@ class AcessoBioCameraController extends GetxController
     SnackbarUtil.showError(message: "Camera fecheda manualmente");
   }
 
+  @override
+  void systemChangedTypeCameraTimeoutFaceInference() {
+    SnackbarUtil.showError(message: "Timeout: changed to camera normal ");
+  }
+
+  @override
+  void systemClosedCameraTimeoutSession() {
+    SnackbarUtil.showError(message: "Timeout: close camera ");
+  }
+
 }

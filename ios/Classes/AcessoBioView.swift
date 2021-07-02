@@ -54,7 +54,7 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
             apikey: "",
             token:""
         );
-        acessoBioManager.setLanguageOrigin(LanguageOrigin.Flutter, release: "1.0.1")
+        acessoBioManager.setLanguageOrigin(LanguageOrigin.Flutter, release: "2.0.0-beta.2")
     }
     
     private func setColors(){
@@ -88,9 +88,7 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
         
     }
     
-    func userClosedCameraManually(){
-        flutterResult(convertObjToDicionary(result: 0, status: -1))
-    }
+    
     
     func onErrorAcessoBioManager(_ error: String!) {
         acecessoBioStatus = false
@@ -172,17 +170,20 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
         isOpenCamera = true
     }
     
+    func onErrorAcessoBioManager(_ error: ErrorBio!) {
+        flutterResult(convertObjToDicionary(result: error, status: 2))
+    }
+    
+    func userClosedCameraManually(){
+        flutterResult(convertObjToDicionary(result: 0, status: -1))
+    }
     
     func systemClosedCameraTimeoutSession() {
-        
+        flutterResult(convertObjToDicionary(result: 0, status: 3))
     }
     
     func systemClosedCameraTimeoutFaceInference() {
-        
-    }
-    
-    func onErrorAcessoBioManager(_ error: ErrorBio!) {
-        
+        flutterResult(convertObjToDicionary(result: 0, status: 4))
     }
     
     

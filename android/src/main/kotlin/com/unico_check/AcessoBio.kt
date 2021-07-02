@@ -2,10 +2,10 @@ package com.unico_check
 
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -13,20 +13,21 @@ import androidx.core.content.ContextCompat
 import com.acesso.acessobio_android.AcessoBio
 import com.acesso.acessobio_android.iAcessoBio
 import com.acesso.acessobio_android.services.dto.ErrorBio
+import io.flutter.plugin.common.MethodChannel
 
 
 abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
 
     companion object {
         var methodCall : String? = null
-        var pluginContext: UnicoCheckPlugin? = null
+        lateinit var channelResult: MethodChannel.Result
         val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
         const val REQUEST_CODE_PERMISSIONS = 10
     }
 
     lateinit var acessoBio: AcessoBio
     private var acessoBioStatus: Boolean = true
-
+    //colors
     private var setColorSilhoutte: String? = null
     private var setColorBackground: String? = null
     private var setColorBoxMessage: String? = null
@@ -40,6 +41,9 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
     private var setColorBackgroundBottomDocument: String? = null
     private var setColorTextBottomDocument: String? = null
 
+    private var setTimeoutSession: Double? = null
+    private var setTimeoutToFaceInference: Double? = null
+
     abstract fun callMethodBio()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,6 +56,9 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
         getColors()
         setColors()
 
+        getTimmer()
+        setTimmer()
+
         if (!getPermission()) {
             getPermission()
         } else {
@@ -60,6 +67,19 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
             }
         }
 
+    }
+
+    private fun setTimmer(){
+        if(setTimeoutSession != 0.0 && setTimeoutSession != null){
+            acessoBio.setTimeoutSession(setTimeoutSession!!)
+        }
+        if(setTimeoutToFaceInference != 0.0 && setTimeoutToFaceInference != null){
+            acessoBio.setTimeoutToFaceInference(setTimeoutToFaceInference!!)
+        }
+    }
+    private fun getTimmer(){
+        setTimeoutSession = intent.getDoubleExtra("setTimeoutSession",0.0)
+        setTimeoutToFaceInference = intent.getDoubleExtra("setTimeoutToFaceInference",0.0)
     }
 
     private fun setColors() {
@@ -101,7 +121,6 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
             acessoBio.setColorTextBottomDocument(setColorTextBottomDocument)
         }
     }
-
     private fun getColors() {
         setColorSilhoutte = intent.getStringExtra("setColorSilhoutte")
         setColorBackground = intent.getStringExtra("setColorBackground")
@@ -117,115 +136,81 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
         setColorTextBottomDocument = intent.getStringExtra("setColorTextBottomDocument")
     }
 
-    fun setPluginContext(context: UnicoCheckPlugin) {
-        pluginContext = context
+    fun setPluginContext(res: MethodChannel.Result) {
+        channelResult = res
     }
 
     //ACESSOBIO
     private fun initAcessoBio() {
         acessoBio = AcessoBio(
-                this,
-                "",
-                "",
-                ""
+                this
         )
-        acessoBio.setLanguageOrigin(AcessoBio.LanguageOrigin.FLUTTER,"1.0.1")
+        acessoBio.setLanguageOrigin(AcessoBio.LanguageOrigin.FLUTTER,"2.0.0-beta.2")
     }
-
-    //SUCCESS
-//    protected fun onSuccess(result: Any?){
-//        if(pluginContext != null){
-//            if(result != null){
-//                pluginContext!!.onSuccessPlugin(result)
-//            }else{
-//                onError("erro desconhecido")
-//            }
-//        }else{
-//            onError("Erro ao retornar resultado, o contexto foi perdido")
-//        }
-//        finish()
-//    }
-
-    protected fun onSuccess(result: Boolean){
-        finish()
-        if(pluginContext != null){
-            pluginContext!!.onSuccessPlugin(result)
-        }else{
-            onError("Erro ao retornar resultado, o contexto foi perdido")
-        }
-    }
-
-    protected fun onSuccess(result: String?){
-        if(pluginContext != null){
-            if(result != null || result != ""){
-                pluginContext!!.onSuccessPlugin(result!!)
-            }else{
-                onError("Erro ao retornar resultado")
-            }
-        }else{
-            onError("Erro ao retornar resultado, o contexto foi perdido")
-        }
-        finish()
-    }
-
-    protected fun onSuccess(result: Int?){
-        if(pluginContext != null){
-            if(result == null || result == 0){
-                pluginContext!!.onSuccessPlugin(result!!)
-            }else{
-                onError("Erro ao retornar resultado")
-            }
-        }else{
-            onError("Erro ao retornar resultado, o contexto foi perdido")
-        }
-        finish()
-    }
-
-    //ERROR
-    protected fun onError(result: String?) {
-        if (pluginContext != null && result != null) {
-            pluginContext!!.onErrorPlugin(result)
-        }else{
-            pluginContext!!.onErrorPlugin("Erro nao identificado")
-        }
-        finish()
-    }
-
-    protected fun onError(result: ErrorBio?){
-        if(pluginContext != null){
-            if(result != null){
-                pluginContext!!.onErrorPlugin(result)
-            }else{
-                onError("erro desconhecido")
-            }
-        }else{
-            onError("Erro ao retornar resultado, o contexto foi perdido")
-        }
-        finish()
-    }
-
+    
     //ERROR AcessoBio
-    override fun onErrorAcessoBio(errorBio: ErrorBio?) {
+    override fun onErrorAcessoBio(errorBio: ErrorBio) {
         acessoBioStatus = false
-        if(pluginContext != null){
-            if(errorBio != null){
-                pluginContext!!.onErrorPluginAcessoBio(errorBio)
-            }else{
-                onError("erro desconhecido")
-            }
-        }else{
-            onError("Erro ao retornar resultado, o contexto foi perdido")
-        }
+        channelResult.success(errorBioToHashMap(errorBio,2))
         finish()
     }
 
     override fun userClosedCameraManually() {
-        pluginContext!!.userClosedCameraManually()
+        channelResult.success(convertObjToMapReflection(0,-1))
         finish()
     }
 
+    override fun systemClosedCameraTimeoutSession() {
+        channelResult.success(convertObjToMapReflection(0,3))
+        finish()
+    }
+
+    override fun systemChangedTypeCameraTimeoutFaceInference() {
+        channelResult.success(convertObjToMapReflection(0,4))
+        finish()
+    }
+
+    
+    //region Convert to HashMap
+
+    protected fun errorBioToHashMap(error: ErrorBio, status: Int): HashMap<String, Any> {
+        val hashMap:HashMap<String,Any> = HashMap()
+
+        hashMap["code"] = error.code
+        hashMap["method"] = error.method
+        hashMap["description"] = error.description
+        hashMap["flutterstatus"] = status
+
+        return hashMap
+
+    }
+    protected fun convertObjToMapReflection(result: String, status: Int): java.util.HashMap<String, Any> {
+
+        val hashMap:HashMap<String,Any> = HashMap()
+
+        hashMap["result"] = result
+        hashMap["flutterstatus"] = status
+
+        return hashMap
+
+    }
+    protected fun convertObjToMapReflection(result: Int, status: Int): java.util.HashMap<String, Any> {
+
+        val hashMap:HashMap<String,Any> = HashMap()
+
+        hashMap["result"] = result
+        hashMap["flutterstatus"] = status
+
+        return hashMap
+
+    }
+
+    //endregion
+    
     //region Camera Permission
+    @SuppressLint("MissingSuperCall")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode != REQUEST_CODE_PERMISSIONS) {
             Toast.makeText(this, "Permissão acesso camera negada", Toast.LENGTH_SHORT).show()
             finish()
