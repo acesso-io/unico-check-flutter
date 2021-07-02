@@ -3,6 +3,7 @@ import 'package:unico_check/src/core/constants/map.constants.dart';
 
 import 'error/error_bio.response.dart';
 
+///validaçao de resposta iAccessoBio
 bool validateResponse({
   required IAcessoBio callbacks,
   required Map<String, dynamic> response,

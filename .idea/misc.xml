@@ -3,6 +3,9 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <type id="android" />
   </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/lib/src/core/response/success/facematch.response.dart" />
+  </component>
   <component name="ProjectType">
     <option name="id" value="io.flutter" />
   </component>

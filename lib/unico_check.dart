@@ -2,7 +2,6 @@ export './src/core/abstracts/acesso_bio.interface.dart';
 export './src/core/abstracts/acesso_bio_camera.interface.dart';
 export './src/core/abstracts/acesso_bio_document.interface.dart';
 export './src/core/response/error/error_bio.response.dart';
-export './src/core/response/success/authenticate.response.dart';
 export './src/core/response/success/camera.response.dart';
 export './src/core/response/success/camera_document.response.dart';
 export './src/main.dart';
