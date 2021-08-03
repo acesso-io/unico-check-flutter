@@ -144,7 +144,7 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
         acessoBio = AcessoBio(
                 this
         )
-        acessoBio.setLanguageOrigin(AcessoBio.LanguageOrigin.FLUTTER,"2.0.0-beta.2")
+        acessoBio.setLanguageOrigin(AcessoBio.LanguageOrigin.FLUTTER,"2.0.0-beta.3")
     }
     
     //ERROR AcessoBio
