@@ -1,5 +1,4 @@
 class UnicoConfig {
-
   ///Android custom layout
   String? androidColorSilhoutte;
   String? androidColorBackground;
@@ -61,54 +60,76 @@ class UnicoConfig {
       ///Android custom layout
       ///adiciona cor a silhueta de captura
       'setAndroidColorSilhoutte': androidColorSilhoutte,
+
       ///adiciona cor no funudo da captura
       'setAndroidColorBackground': androidColorBackground,
+
       ///adiciona cor no box de mensagem
       'setAndroidColorBoxMessage': androidColorBoxMessage,
+
       ///adiciona cor no texto da mensagem
       'setAndroidColorTextMessage': androidColorTextMessage,
+
       ///adiciona cor no fundo do popup de erro
       'setAndroidColorBackgroundPopupError': androidColorBackgroundPopupError,
+
       ///adiciona cor no texto de erro do popup
       'setAndroidColorTextPopupError': androidColorTextPopupError,
+
       ///adiciona cor no botão popup
-      'setAndroidColorBackgroundButtonPopupError': androidColorBackgroundButtonPopupError,
+      'setAndroidColorBackgroundButtonPopupError':
+          androidColorBackgroundButtonPopupError,
+
       ///adiciona cor no texto do botão do popup
       'setAndroidColorTextButtonPopupError': androidColorTextButtonPopupError,
+
       ///adiciona cor no fundo de captura
-      'setAndroidColorBackgroundTakePictureButton': androidColorBackgroundTakePictureButton,
+      'setAndroidColorBackgroundTakePictureButton':
+          androidColorBackgroundTakePictureButton,
+
       ///adiciona cor no icone do botão de captura
       'setAndroidColorIconTakePictureButton': androidColorIconTakePictureButton,
+
       ///adiciona cor no fundo do botão de captura
-      'setAndroidColorBackgroundBottomDocument': androidColorBackgroundBottomDocument,
+      'setAndroidColorBackgroundBottomDocument':
+          androidColorBackgroundBottomDocument,
+
       ///adiciona cor no texto do botão de captura documento
       'setAndroidColorTextBottomDocument': androidColorTextBottomDocument,
 
       ///IOS custom layout
       ///adiciona cor na silhueta de captura
       'setIosColorSilhoutteNeutra': iosColorSilhoutteNeutra,
+
       ///adiciona cor na silhueta de sucesso
       'setIosColorSilhoutteSuccess': iosColorSilhoutteSuccess,
+
       ///adiciona cor na silhueta de erro
       'setIosColorSilhoutteError': iosColorSilhoutteError,
+
       ///adiciona cor no fundo de captura
       'setIosColorBackground': iosColorBackground,
+
       ///adiciona cor no fundo da caixa de status
       'setIosColorBackgroundBoxStatus': iosColorBackgroundBoxStatus,
+
       ///adiciona cor no texto da caixa de status
       'setIosColorTextBoxStatus': iosColorTextBoxStatus,
+
       ///adiciona cor no fundo do icone popup de erro
       'setIosColorBackgroundPopupError': iosColorBackgroundPopupError,
+
       ///adiciona cor no texto popup de erro
       'setIosColorTextPopupError': iosColorTextPopupError,
+
       ///adiciona cor no icone popup erro
       'setIosImageIconPopupError': iosImageIconPopupError,
 
       ///adiciona timer de sessão
       'setTimeoutSession': setTimeoutSession,
+
       ///adiciona timer de inferencia do rosto
       'setTimeoutToFaceInference': setTimeoutToFaceInference
-
     };
 
     return map;

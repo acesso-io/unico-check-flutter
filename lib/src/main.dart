@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:unico_check/src/functions/document.functions.dart';
 import 'package:unico_check/src/unico_config.dart';
+
 import 'core/abstracts/acesso_bio_camera.interface.dart';
 import 'core/abstracts/acesso_bio_document.interface.dart';
 import 'functions/camera.functions.dart';
@@ -24,9 +25,7 @@ class UnicoCheck {
   /// de utilizar
   UnicoCheck({required Object context, required UnicoConfig config})
       : _config = config {
-
-    if(context is IAcessoBioDocument || context is IAcessoBioCamera ){
-
+    if (context is IAcessoBioDocument || context is IAcessoBioCamera) {
       ///IAcessoBioDocument implementa as funcionalidades de documento
       ///Para receber os resultados da captura do documento
       ///implemente a interface IAcessoBioDocument
@@ -48,12 +47,9 @@ class UnicoCheck {
           callbacks: context,
         );
       }
-    }else{
-      throw new Exception('Implementa a interface para receber o resultado: ( IAcessoBioDocument e/ou IAcessoBioCamera ) ');
+    } else {
+      throw new Exception(
+          'Implementa a interface para receber o resultado: ( IAcessoBioDocument e/ou IAcessoBioCamera ) ');
     }
-
-
-
-
   }
 }

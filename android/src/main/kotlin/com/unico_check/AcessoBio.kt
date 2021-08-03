@@ -84,8 +84,7 @@ abstract class AcessoBio : AppCompatActivity(), iAcessoBio {
 
     private fun setColors() {
         if(setColorSilhoutte != "" && setColorSilhoutte != null){
-            val strs = setColorSilhoutte!!.split(";").toTypedArray()
-            acessoBio.setColorSilhoutte(strs[0],strs[1])
+            acessoBio.setColorSilhoutte(setColorSilhoutte,setColorSilhoutte)
         }
         if(setColorBackground != "" && setColorBackground != null){
             acessoBio.setColorBackground(setColorBackground)

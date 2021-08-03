@@ -8,7 +8,6 @@ bool validateResponse({
   required IAcessoBio callbacks,
   required Map<String, dynamic> response,
 }) {
-
   var flutterResult = response[MapConstants.flutterStatus];
 
   if (flutterResult == 2) {
@@ -18,13 +17,13 @@ bool validateResponse({
   } else if (flutterResult == -1) {
     callbacks.userClosedCameraManually();
     return false;
-  }  else if (flutterResult == 3) {
+  } else if (flutterResult == 3) {
     callbacks.systemClosedCameraTimeoutSession();
     return false;
-  }else if (flutterResult == 4) {
+  } else if (flutterResult == 4) {
     callbacks.systemChangedTypeCameraTimeoutFaceInference();
     return false;
-  }else {
+  } else {
     return true;
   }
 }

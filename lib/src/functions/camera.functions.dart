@@ -16,7 +16,6 @@ class CameraFunctions {
   bool _disableAutoCapture = false;
   bool _disableSmartFrame = false;
 
-
   CameraFunctions({
     required MethodChannel channel,
     required UnicoConfig config,
@@ -25,20 +24,18 @@ class CameraFunctions {
         _config = config,
         _callbacks = callbacks;
 
-
   ///metodo para desabilitar a auto captura
-  void disableAutoCapture(){
+  void disableAutoCapture() {
     _disableAutoCapture = true;
   }
 
   ///método para desabilitar o smart frame da camera
-  void disableSmartFrame(){
+  void disableSmartFrame() {
     _disableSmartFrame = true;
   }
 
   ///método responsavel pela abertura da camera e retorno dos dados
   void openCamera() async {
-
     var map = _config.getCommonMap;
     map[MapConstants.disableAutoCapture] = _disableAutoCapture;
     map[MapConstants.disableSmartFrame] = _disableSmartFrame;
@@ -60,6 +57,4 @@ class CameraFunctions {
       }
     }
   }
-
-
 }

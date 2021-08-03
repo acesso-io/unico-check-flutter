@@ -59,33 +59,32 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
     
     private func setColors(){
         if(setColorSilhoutteNeutra != "" && setColorSilhoutteNeutra != nil){
-            acessoBioManager.setColorSilhoutteNeutral(self.setColorSilhoutteNeutra)
+            acessoBioManager.setColorSilhoutteNeutral(self.setColorSilhoutteNeutra?.uppercased())
         }
         if(setColorSilhoutteSuccess != "" && setColorSilhoutteSuccess != nil){
-            acessoBioManager.setColorSilhoutteSuccess(self.setColorSilhoutteSuccess)
+            acessoBioManager.setColorSilhoutteSuccess(self.setColorSilhoutteSuccess?.uppercased())
         }
         if(setColorSilhoutteError != "" && setColorSilhoutteError != nil){
-            acessoBioManager.setColorSilhoutteError(self.setColorSilhoutteError)
+            acessoBioManager.setColorSilhoutteError(self.setColorSilhoutteError?.uppercased())
         }
         if(setColorBackground != "" && setColorBackground != nil){
-            acessoBioManager.setColorBackground(self.setColorBackground)
+            acessoBioManager.setColorBackground(self.setColorBackground?.uppercased())
         }
         if(setColorBackgroundBoxStatus != "" && setColorBackgroundBoxStatus != nil){
-            acessoBioManager.setColorBackgroundBoxStatus(self.setColorBackgroundBoxStatus)
+            acessoBioManager.setColorBackgroundBoxStatus(self.setColorBackgroundBoxStatus?.uppercased())
         }
         if(setColorTextBoxStatus != "" && setColorTextBoxStatus != nil){
-            acessoBioManager.setColorTextBoxStatus(self.setColorTextBoxStatus)
+            acessoBioManager.setColorTextBoxStatus(self.setColorTextBoxStatus?.uppercased())
         }
         if(setColorBackgroundPopupError != "" && setColorBackgroundPopupError != nil){
-            acessoBioManager.setColorBackgroundPopupError(self.setColorBackgroundPopupError)
+            acessoBioManager.setColorBackgroundPopupError(self.setColorBackgroundPopupError?.uppercased())
         }
         if(setColorTextPopupError != "" && setColorTextPopupError != nil){
-            acessoBioManager.setColorTextPopupError(self.setColorTextPopupError)
+            acessoBioManager.setColorTextPopupError(self.setColorTextPopupError?.uppercased())
         }
         if(setImageIconPopupError != "" && setImageIconPopupError != nil){
-            acessoBioManager.setImageIconPopupError(self.setImageIconPopupError)
+            acessoBioManager.setImageIconPopupError(self.setImageIconPopupError?.uppercased())
         }
-        
     }
     
     

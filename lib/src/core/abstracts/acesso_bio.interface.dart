@@ -9,7 +9,10 @@ import '../response/error/error_bio.response.dart';
 /// ou quando atingir tempo determinado ou tempo padrão
 abstract class IAcessoBio {
   void onErrorAcessoBio(ErrorBioResponse error);
+
   void userClosedCameraManually();
+
   void systemClosedCameraTimeoutSession();
+
   void systemChangedTypeCameraTimeoutFaceInference();
 }
