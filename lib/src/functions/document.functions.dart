@@ -4,6 +4,7 @@ import 'package:unico_check/src/core/constants/map.constants.dart';
 import 'package:unico_check/src/core/constants/methods_channels.constants.dart';
 import 'package:unico_check/src/core/response/success/camera_document.response.dart';
 import 'package:unico_check/src/core/response/validate_response.dart';
+
 import '../unico_config.dart';
 
 class DocumentFunctions {
@@ -41,5 +42,4 @@ class DocumentFunctions {
       }
     }
   }
-
 }

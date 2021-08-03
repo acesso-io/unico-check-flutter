@@ -4,13 +4,10 @@ class CameraDocumentResponse {
   const CameraDocumentResponse({required this.base64});
 
   factory CameraDocumentResponse.fromJson(Map<String, dynamic> json) {
-
-    if(json['result'] == null){
+    if (json['result'] == null) {
       return CameraDocumentResponse(base64: json['base64']);
-    }else{
+    } else {
       return CameraDocumentResponse(base64: json['result']);
     }
-
-
   }
 }

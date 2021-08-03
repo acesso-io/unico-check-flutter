@@ -13,7 +13,6 @@ class AcessoBioDocument: AcessoBioView{
             case "openCameraDocumentOCR":openCameraDocumentOCR()
             case "openFaceMatch":openFaceMatch()
             case "openCameraDocument":openCameraDocuments()
-            case "openCameraWithCreateProcess":openCameraWithCreateProcess()
                 
             default: flutterResult(FlutterMethodNotImplemented)
         }
@@ -78,10 +77,7 @@ class AcessoBioDocument: AcessoBioView{
             onError(msg: "Informe tipo de documento")
         }
     }
-    
-    func openCameraWithCreateProcess(){
-       //no implemented
-    }
+
     
     //results
     func onSuccesCameraDocument(_ result: CameraDocumentResult!){

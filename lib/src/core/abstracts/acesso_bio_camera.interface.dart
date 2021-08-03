@@ -7,5 +7,6 @@ import 'acesso_bio.interface.dart';
 ///onErrorCamera chamado quando ocorreu erro no processo
 abstract class IAcessoBioCamera extends IAcessoBio {
   void onSuccessCamera(CameraResponse response);
+
   void onErrorCamera(ErrorBioResponse error);
 }
