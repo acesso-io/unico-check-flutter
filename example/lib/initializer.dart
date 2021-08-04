@@ -14,17 +14,17 @@ class Initializer {
 
       //Android
       androidColorSilhoutte: "#0080ff",
-      androidColorBackground: "#0080ff",
-      androidColorBoxMessage: "#0080ff",
-      androidColorTextMessage: "#0080ff",
-      androidColorBackgroundPopupError: "#0080ff",
-      androidColorTextPopupError: "#0080ff",
-      androidColorBackgroundButtonPopupError: "#0080ff",
-      androidColorTextButtonPopupError: "#0080ff",
-      androidColorBackgroundTakePictureButton: "#0080ff",
-      androidColorIconTakePictureButton: "#0080ff",
-      androidColorBackgroundBottomDocument: "#0080ff",
-      androidColorTextBottomDocument: "#0080ff",
+      // androidColorBackground: "#0080ff",
+      // androidColorBoxMessage: "#0080ff",
+      // androidColorTextMessage: "#0080ff",
+      // androidColorBackgroundPopupError: "#0080ff",
+      // androidColorTextPopupError: "#0080ff",
+      // androidColorBackgroundButtonPopupError: "#0080ff",
+      // androidColorTextButtonPopupError: "#0080ff",
+      // androidColorBackgroundTakePictureButton: "#0080ff",
+      // androidColorIconTakePictureButton: "#0080ff",
+      // androidColorBackgroundBottomDocument: "#0080ff",
+      // androidColorTextBottomDocument: "#0080ff",
 
       //iOS
       // iosColorSilhoutteNeutra: "#0080ff",
