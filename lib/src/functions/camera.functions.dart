@@ -2,10 +2,11 @@ import 'package:flutter/services.dart';
 import 'package:unico_check/src/core/abstracts/acesso_bio_camera.interface.dart';
 import 'package:unico_check/src/core/constants/map.constants.dart';
 import 'package:unico_check/src/core/constants/methods_channels.constants.dart';
-import 'package:unico_check/src/core/response/error/error_bio.response.dart';
+import 'package:unico_check/src/core/constants/response_contants.dart';
 import 'package:unico_check/src/core/response/success/camera.response.dart';
 import 'package:unico_check/src/core/response/validate_response.dart';
 
+import '../../unico_check.dart';
 import '../unico_config.dart';
 
 class CameraFunctions {
@@ -25,13 +26,13 @@ class CameraFunctions {
         _callbacks = callbacks;
 
   ///metodo para desabilitar a auto captura
-  void disableAutoCapture() {
-    _disableAutoCapture = true;
+  void setAutoCapture(bool type) {
+    _disableAutoCapture = type;
   }
 
   ///método para desabilitar o smart frame da camera
-  void disableSmartFrame() {
-    _disableSmartFrame = true;
+  void setSmartFrame(bool type) {
+    _disableSmartFrame = type;
   }
 
   ///método responsavel pela abertura da camera e retorno dos dados
@@ -40,20 +41,22 @@ class CameraFunctions {
     map[MapConstants.disableAutoCapture] = _disableAutoCapture;
     map[MapConstants.disableSmartFrame] = _disableSmartFrame;
 
-    final result = Map<String, dynamic>.from(
-      await _channel.invokeMethod(
-        MethodsChannelsConstants.openCamera,
-        map,
-      ),
-    );
+    try {
+      final result = Map<String, dynamic>.from(
+        await _channel.invokeMethod(
+          MethodsChannelsConstants.openCamera,
+          map,
+        ),
+      );
 
-    if (validateResponse(callbacks: _callbacks, response: result)) {
-      if (result[MapConstants.flutterStatus] == 1) {
-        final response = CameraResponse.fromJson(result);
-        _callbacks.onSuccessCamera(response);
-      } else {
-        final error = ErrorBioResponse(result);
+      final response = CameraResponse.fromJson(result);
+      _callbacks.onSuccessCamera(response);
+    } on PlatformException catch (exeption) {
+      if (exeption.code == ResponseConstants.onError) {
+        final error = ErrorBioResponse(exeption.details);
         _callbacks.onErrorCamera((error));
+      } else {
+        validateResponse(callbacks: _callbacks, response: exeption);
       }
     }
   }

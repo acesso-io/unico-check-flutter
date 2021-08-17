@@ -4,11 +4,11 @@
     <application>
 
         <activity
-            android:name=".AcessoBioDocument"
+            android:name=".UnicoCheckDocument"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".AcessoBioCamera"
+            android:name=".UnicoCheckCamera"
             android:theme="@style/AppTheme.NoActionBar" />
 
     </application>

@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:unico_check/src/core/abstracts/acesso_bio_document.interface.dart';
 import 'package:unico_check/src/core/constants/map.constants.dart';
 import 'package:unico_check/src/core/constants/methods_channels.constants.dart';
+import 'package:unico_check/src/core/constants/response_contants.dart';
 import 'package:unico_check/src/core/response/success/camera_document.response.dart';
 import 'package:unico_check/src/core/response/validate_response.dart';
 
@@ -26,20 +27,21 @@ class DocumentFunctions {
 
     map[MapConstants.documentType] = documentType;
 
-    final result = Map<String, dynamic>.from(
-      await _channel.invokeMethod(
-        MethodsChannelsConstants.openCameraDocument,
-        map,
-      ),
-    );
+    try {
+      final result = Map<String, dynamic>.from(
+        await _channel.invokeMethod(
+          MethodsChannelsConstants.openCameraDocument,
+          map,
+        ),
+      );
 
-    if (validateResponse(callbacks: _callbacks, response: result)) {
-      if (result[MapConstants.flutterStatus] == 1) {
-        final response = CameraDocumentResponse.fromJson(result);
-        _callbacks.onSuccesstDocument(response);
-      } else {
-        _callbacks.onErrorDocument(result[MapConstants.result]);
+      final response = CameraDocumentResponse.fromJson(result);
+      _callbacks.onSuccesstDocument(response);
+    } on PlatformException catch (exeption) {
+      if (exeption.code == ResponseConstants.onError) {
+        _callbacks.onErrorDocument(exeption.details);
       }
+      validateResponse(callbacks: _callbacks, response: exeption);
     }
   }
 }

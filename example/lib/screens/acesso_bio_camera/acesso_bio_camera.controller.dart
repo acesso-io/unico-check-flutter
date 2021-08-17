@@ -4,11 +4,10 @@ import 'package:unico_check/unico_check.dart';
 import 'package:unico_check_example/utils/snackbar.util.dart';
 
 class AcessoBioCameraController extends GetxController
-    implements IAcessoBioCamera  {
-
+    implements IAcessoBioCamera {
   late UnicoCheck _unico;
   String _base64 = "";
-  late ValueNotifier<String> base64 ;
+  late ValueNotifier<String> base64;
 
   AcessoBioCameraController() {
     _unico = UnicoCheck(context: this, config: Get.find());
@@ -16,6 +15,8 @@ class AcessoBioCameraController extends GetxController
   }
 
   void openCamera() {
+    _unico.camera!.setAutoCapture(true);
+    _unico.camera!.setSmartFrame(true);
     _unico.camera!.openCamera();
   }
 
@@ -42,7 +43,7 @@ class AcessoBioCameraController extends GetxController
 
   @override
   void onSucessDocumentInsert(String processId, String typed) {
-    SnackbarUtil.showSuccess(message: "success ID: "+processId);
+    SnackbarUtil.showSuccess(message: "success ID: " + processId);
   }
 
   @override
@@ -59,5 +60,4 @@ class AcessoBioCameraController extends GetxController
   void systemClosedCameraTimeoutSession() {
     SnackbarUtil.showError(message: "Timeout: close camera ");
   }
-
 }

@@ -1,29 +1,23 @@
+import 'package:flutter/services.dart';
 import 'package:unico_check/src/core/abstracts/acesso_bio.interface.dart';
-import 'package:unico_check/src/core/constants/map.constants.dart';
+import 'package:unico_check/src/core/constants/response_contants.dart';
 
 import 'error/error_bio.response.dart';
 
 ///validaçao de resposta iAccessoBio
-bool validateResponse({
+void validateResponse({
   required IAcessoBio callbacks,
-  required Map<String, dynamic> response,
+  required PlatformException response,
 }) {
-  var flutterResult = response[MapConstants.flutterStatus];
-
-  if (flutterResult == 2) {
-    final error = ErrorBioResponse(response);
-    callbacks.onErrorAcessoBio(error);
-    return false;
-  } else if (flutterResult == -1) {
+  if (response.code == ResponseConstants.onErrorAcessoBio) {
+    callbacks.onErrorAcessoBio(ErrorBioResponse(response.details));
+  } else if (response.code == ResponseConstants.onUserClosedCameraManually) {
     callbacks.userClosedCameraManually();
-    return false;
-  } else if (flutterResult == 3) {
+  } else if (response.code ==
+      ResponseConstants.onSystemClosedCameraTimeoutSession) {
     callbacks.systemClosedCameraTimeoutSession();
-    return false;
-  } else if (flutterResult == 4) {
+  } else if (response.code ==
+      ResponseConstants.onSystemChangedTypeCameraTimeoutFaceInference) {
     callbacks.systemChangedTypeCameraTimeoutFaceInference();
-    return false;
-  } else {
-    return true;
   }
 }

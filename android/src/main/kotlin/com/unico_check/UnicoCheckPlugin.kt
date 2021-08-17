@@ -2,9 +2,15 @@ package com.unico_check
 
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import androidx.annotation.NonNull
-import com.acesso.acessobio_android.services.dto.ErrorBio
+import com.unico_check.config.UnicoTheme
+import com.unico_check.config.UnicoTimer
+import com.unico_check.constants.MethodConstants
+import com.unico_check.constants.MethodConstants.Companion.disableAutoCapture
+import com.unico_check.constants.MethodConstants.Companion.disableSmartFrame
+import com.unico_check.constants.MethodConstants.Companion.document_type
+import com.unico_check.constants.MethodConstants.Companion.setTimeoutSession
+import com.unico_check.constants.MethodConstants.Companion.setTimeoutToFaceInference
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -12,218 +18,130 @@ import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import kotlin.collections.HashMap
 
 /** UnicoCheckPlugin */
-class UnicoCheckPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
+class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
-  private val REQUEST_BIO = 7
-  private lateinit var channel : MethodChannel
-  private lateinit var activity: Activity
-  private lateinit var result: Result
+    private val REQUEST_BIO = 7
+    private lateinit var channel: MethodChannel
+    private lateinit var activity: Activity
+    private lateinit var result: Result
+    private lateinit var unicoTheme: UnicoTheme
+    private lateinit var unicoTimer: UnicoTimer
 
-  private var setColorSilhoutte: String? = null
-  private var setColorBackground: String? = null
-  private var setColorBoxMessage: String? = null
-  private var setColorTextMessage: String? = null
-  private var setColorBackgroundPopupError: String? = null
-  private var setColorTextPopupError: String? = null
-  private var setColorBackgroundButtonPopupError: String? = null
-  private var setColorTextButtonPopupError: String? = null
-  private var setColorBackgroundTakePictureButton: String? = null
-  private var setColorIconTakePictureButton: String? = null
-  private var setColorBackgroundBottomDocument: String? = null
-  private var setColorTextBottomDocument: String? = null
-  
-  private var setTimeoutSession: Double? = null
-  private var setTimeoutToFaceInference: Double? = null
+    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "acessobio")
+        channel.setMethodCallHandler(this)
+    }
 
-  override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "acessobio")
-    channel.setMethodCallHandler(this)
-  }
+    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+        this.result = result
 
-  override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-    this.result = result
+        setTheme(call)
+        getTimers(call)
+        selectTypeOffCamera(call)
 
-    getColors(call)
-    getTimers(call)
+    }
 
-    when(call.method){
-      "openCameraDocument" -> openCameraDocumentOCR(
-              call.method,
-              call.argument("DOCUMENT_TYPE")
+    private fun selectTypeOffCamera(call: MethodCall) {
+        when (call.method) {
+
+            MethodConstants.openCamera -> openCamera(
+                call.method,
+                call.argument(disableAutoCapture),
+                call.argument(disableSmartFrame)
+            )
+
+            MethodConstants.openCameraDocument -> openCameraDocument(
+                call.method,
+                call.argument(document_type)
+            )
+
+            else -> result.notImplemented()
+        }
+    }
+
+    private fun setTheme(call: MethodCall) {
+        unicoTheme = UnicoTheme(call)
+    }
+
+    private fun getIntent(unicoCheck: UnicoCheck, methodCall: String): Intent {
+
+        unicoCheck.setPluginContext(result)
+        unicoCheck.setUnicoTheme(unicoTheme)
+        unicoCheck.setTimer(unicoTimer)
+
+        val intent = Intent(activity, unicoCheck::class.java)
+        intent.putExtra(MethodConstants.methodCall, methodCall)
+
+        return intent
+    }
+
+    private fun getTimers(call: MethodCall) {
+        unicoTimer = UnicoTimer(
+            call.argument(setTimeoutSession),
+            call.argument(setTimeoutToFaceInference)
         )
-      "openCamera" -> openCamera(
-              call.method,
-              call.argument("disableAutoCapture"),
-              call.argument("disableSmartFrame")
-      )
-      else -> result.notImplemented()
     }
 
-  }
+    private fun openCameraDocument(method: String, DOCUMENT_TYPE: Int?) {
 
+        val intent = getIntent(UnicoCheckDocument(), method)
+        intent.putExtra(document_type, DOCUMENT_TYPE)
+        activity.startActivityForResult(intent, REQUEST_BIO)
 
-  
-  private fun getIntent(acessoBio: AcessoBio, methodCall: String): Intent {
-
-    acessoBio.setPluginContext(result)
-
-    val intent = Intent(activity, acessoBio::class.java)
-
-    intent.putExtra("methodCall",methodCall)
-
-    
-
-    return setTimers(setColors(intent))
-
-  }
-
-  
-
-  //region Document
-
-  private fun openCameraDocumentOCR(method: String, DOCUMENT_TYPE: Int?) {
-
-    val intent = getIntent(AcessoBioDocument(),method)
-
-    intent.putExtra("DOCUMENT_TYPE", DOCUMENT_TYPE)
-
-    activity.startActivityForResult(intent, REQUEST_BIO)
-
-  }
-
-  private fun openCameraInsertDocument(method: String, code: String?, nome: String?, DOCUMENT_TYPE: Int?) {
-
-    val intent = getIntent(AcessoBioCamera(),method)
-
-    intent.putExtra("code", code)
-    intent.putExtra("nome", nome)
-    intent.putExtra("DOCUMENT_TYPE", DOCUMENT_TYPE)
-
-    activity.startActivityForResult(intent, REQUEST_BIO)
-
-  }
-
-  //endregion
-
-  //region Camera
-
-  private fun getCameraIntent(methodCall: String, disableAutoCapture: Boolean?, disableSmartFrame: Boolean?): Intent {
-
-    val intent = getIntent(AcessoBioCamera(),methodCall)
-
-    if(disableAutoCapture != null && disableAutoCapture == true){
-      intent.putExtra("disableAutoCapture", disableAutoCapture)
-    }else{
-      intent.putExtra("disableAutoCapture", false)
     }
 
-    if(disableSmartFrame != null && disableSmartFrame == true){
-      intent.putExtra("disableSmartFrame", disableSmartFrame)
-    }else{
-      intent.putExtra("disableSmartFrame", false)
+    private fun getCameraIntent(
+        methodCall: String,
+        disableAutoCapture: Boolean?,
+        disableSmartFrame: Boolean?
+    ): Intent {
+
+        val intent = getIntent(UnicoCheckCamera(), methodCall)
+
+        if (disableAutoCapture != null && disableAutoCapture == true) {
+            intent.putExtra(MethodConstants.disableAutoCapture, disableAutoCapture)
+        } else {
+            intent.putExtra(MethodConstants.disableAutoCapture, false)
+        }
+
+        if (disableSmartFrame != null && disableSmartFrame == true) {
+            intent.putExtra(MethodConstants.disableSmartFrame, disableSmartFrame)
+        } else {
+            intent.putExtra(MethodConstants.disableSmartFrame, false)
+        }
+
+
+        return intent
     }
 
+    private fun openCamera(
+        methodCall: String,
+        disableAutoCapture: Boolean?,
+        disableSmartFrame: Boolean?
+    ) {
 
-    return intent
-  }
+        val intent = getCameraIntent(methodCall, disableAutoCapture, disableSmartFrame)
 
-  private fun openCamera(methodCall: String, disableAutoCapture: Boolean?, disableSmartFrame: Boolean?) {
+        activity.startActivityForResult(intent, REQUEST_BIO)
 
-    val intent = getCameraIntent(methodCall,disableAutoCapture,disableSmartFrame)
+    }
 
-    activity.startActivityForResult(intent, REQUEST_BIO)
+    //region ActivityAware
+    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+        channel.setMethodCallHandler(null)
+    }
 
+    override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+        activity = binding.activity
+    }
 
+    override fun onDetachedFromActivity() { }
 
-  }
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) { }
 
-  private fun openCamera(methodCall: String, nome: String?,code: String?, gender: String?, birthdate: String?, email: String?, phone: String?, disableAutoCapture: Boolean?, disableSmartFrame: Boolean? ) {
-
-    val intent = getCameraIntent(methodCall,disableAutoCapture,disableSmartFrame)
-
-    intent.putExtra("nome", nome)
-    intent.putExtra("code", code)
-    intent.putExtra("gender", gender)
-    intent.putExtra("birthdate", birthdate)
-    intent.putExtra("email", email)
-    intent.putExtra("phone", phone)
-
-
-    activity.startActivityForResult(intent, REQUEST_BIO)
-
-  }
-
-  //endregion
-
-  //region Colors
-  private fun getColors(call: MethodCall) {
-    setColorSilhoutte = call.argument("setAndroidColorSilhoutte")
-    setColorBackground = call.argument("setAndroidColorBackground")
-    setColorBoxMessage = call.argument("setAndroidColorBoxMessage")
-    setColorTextMessage = call.argument("setAndroidColorTextMessage")
-    setColorBackgroundPopupError = call.argument("setAndroidColorBackgroundPopupError")
-    setColorTextPopupError = call.argument("setAndroidColorTextPopupError")
-    setColorBackgroundButtonPopupError = call.argument("setAndroidColorBackgroundButtonPopupError")
-    setColorTextButtonPopupError = call.argument("setAndroidColorTextButtonPopupError")
-    setColorBackgroundTakePictureButton = call.argument("setAndroidColorBackgroundTakePictureButton")
-    setColorIconTakePictureButton = call.argument("setAndroidColorIconTakePictureButton")
-    setColorBackgroundBottomDocument = call.argument("setAndroidColorBackgroundBottomDocument")
-    setColorTextBottomDocument = call.argument("setAndroidColorTextBottomDocument")
-  }
-  private fun setColors(intent: Intent): Intent {
-    intent.putExtra("setColorSilhoutte",setColorSilhoutte)
-    intent.putExtra("setColorBackground",setColorBackground)
-    intent.putExtra("setColorBoxMessage",setColorBoxMessage)
-    intent.putExtra("setColorTextMessage",setColorTextMessage)
-    intent.putExtra("setColorBackgroundPopupError",setColorBackgroundPopupError)
-    intent.putExtra("setColorTextPopupError",setColorTextPopupError)
-    intent.putExtra("setColorBackgroundButtonPopupError",setColorBackgroundButtonPopupError)
-    intent.putExtra("setColorTextButtonPopupError",setColorTextButtonPopupError)
-    intent.putExtra("setColorBackgroundTakePictureButton",setColorBackgroundTakePictureButton)
-    intent.putExtra("setColorIconTakePictureButton",setColorIconTakePictureButton)
-    intent.putExtra("setColorBackgroundBottomDocument",setColorBackgroundBottomDocument)
-    intent.putExtra("setColorTextBottomDocument",setColorTextBottomDocument)
-
-    return intent
-  }
-  //endregion
-  
-  //region Timers
-  private fun getTimers(call: MethodCall) {
-    setTimeoutSession = call.argument("setTimeoutSession")
-    setTimeoutToFaceInference = call.argument("setTimeoutToFaceInference")
-  }
-  private fun setTimers(intent: Intent): Intent {
-    intent.putExtra("setTimeoutSession",setTimeoutSession)
-    intent.putExtra("setTimeoutToFaceInference",setTimeoutToFaceInference)
-    return intent
-  }
-  //endregion
-
-  //region ActivityAware
-  override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
-    channel.setMethodCallHandler(null)
-  }
-
-  override fun onDetachedFromActivity() {
-
-  }
-
-  override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-
-  }
-
-  override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-    activity = binding.activity
-  }
-
-  override fun onDetachedFromActivityForConfigChanges() {
-
-  }
-  //endregion
-
+    override fun onDetachedFromActivityForConfigChanges() { }
+    //endregion
 
 }

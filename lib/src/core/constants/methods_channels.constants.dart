@@ -1,8 +1,7 @@
 class MethodsChannelsConstants {
-  static const openCameraDocument = 'openCameraDocument';
-
   ///abertura de camera documento
-  static const openCamera = 'openCamera';
+  static const openCameraDocument = 'OpenCameraDocument';
 
   ///abertura de camera inteligente e camera normal
+  static const openCamera = 'OpenCamera';
 }

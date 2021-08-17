@@ -19,4 +19,5 @@ class Main extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(initialRoute: initialRoute, getPages: Nav.routes);
   }
+
 }
