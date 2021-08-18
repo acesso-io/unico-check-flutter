@@ -25,7 +25,7 @@ jobs:
       - run: |
           flutter pub get
       - run: |
-          flutter run
+          example/flutter run
 
   Test:
     name: Test
