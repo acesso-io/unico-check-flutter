@@ -9,7 +9,6 @@ jobs:
 
   Test:
     name: Test
-    needs: [ Build ]
     runs-on: ubuntu-latest
     steps:
 
