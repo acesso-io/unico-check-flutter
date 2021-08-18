@@ -22,10 +22,11 @@ jobs:
           java-version: '12.x'
 
       - uses: subosito/flutter-action@v1
+        working-directory: example
       - run: |
           flutter pub get
       - run: |
-          example/flutter run
+          flutter run
 
   Test:
     name: Test
