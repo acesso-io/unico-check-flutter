@@ -14,14 +14,14 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-java@v1
         with:
           java-version: '12.x'
 
       - uses: subosito/flutter-action@v1
-        with:
-          channel: 'main'
       - run: |
           flutter pub get
       - run: |
@@ -29,6 +29,7 @@ jobs:
 
   Test:
     name: Test
+    needs: [ Build ]
     runs-on: ubuntu-latest
     steps:
 
@@ -40,8 +41,6 @@ jobs:
           java-version: '12.x'
 
       - uses: subosito/flutter-action@v1
-        with:
-          channel: 'main'
       - run: |
           flutter pub get
       - run: |
