@@ -58,7 +58,6 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
             .setTimeoutToFaceInference(unicoTimer.timeoutToFaceInference())
             .setTheme(unicoTheme)
             .setSafeMode(false)
-//            .setOrigin(UnicoCheck.FLUTTER,"2.0.0-beta.3")
     }
 
     fun setPluginContext(res: MethodChannel.Result) {
