@@ -59,7 +59,7 @@ class UnicoCheckCamera: UnicoCheck(), iAcessoBioSelfie {
     override fun onErrorSelfie(errorBio: ErrorBio) {
         runCatching {
 
-            channelResult.error(ReturnConstants.onErrorSelfie, "", ConvertAcessoBioHashMap.errorBioToHashMap(errorBio))
+            channelResult.error(ReturnConstants.onError, "", ConvertAcessoBioHashMap.errorBioToHashMap(errorBio))
             finish()
 
         }.onFailure {
