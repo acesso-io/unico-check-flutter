@@ -18,16 +18,15 @@ import io.flutter.plugin.common.MethodChannel
 
 abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
 
-    companion object {
-        var TAG = "UnicoCheck"
-        var methodCall : String? = null
-        lateinit var channelResult: MethodChannel.Result
-        lateinit var unicoTheme: UnicoTheme
-        lateinit var unicoTimer: UnicoTimer
-    }
+    companion object { var TAG = "UnicoCheck" }
 
+    var methodCall : String? = null
+    lateinit var channelResult: MethodChannel.Result
+    lateinit var unicoCustom: UnicoTheme
+    lateinit var unicoTimer: UnicoTimer
     lateinit var acessoBio: IAcessoBioBuilder
     private var acessoBioStatus: Boolean = true
+
     abstract fun callMethodBio()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,19 +55,19 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
         acessoBio = AcessoBio(this, this)
             .setTimeoutSession(unicoTimer.getTimeoutSession())
             .setTimeoutToFaceInference(unicoTimer.timeoutToFaceInference())
-            .setTheme(unicoTheme)
+            .setTheme(unicoCustom)
             .setSafeMode(false)
     }
 
-    protected fun setPluginContext(res: MethodChannel.Result) {
+    fun setPluginContext(res: MethodChannel.Result) {
         channelResult = res
     }
 
-    protected fun setUnicoTheme(theme: UnicoTheme){
-        unicoTheme = theme
+    fun setUnicoTheme(theme: UnicoTheme){
+        unicoCustom = theme
     }
 
-    protected fun setTimer(timer: UnicoTimer){
+    fun setTimer(timer: UnicoTimer){
         unicoTimer = timer
     }
 
