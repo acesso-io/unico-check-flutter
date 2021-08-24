@@ -2,14 +2,17 @@
 //  CameraMain.h
 //  CaptureAcesso
 //
-//  Created by Daniel Zanelatto on 20/05/19.
-//  Copyright © 2019 Matheus  domingos. All rights reserved.
+//  Created by Matheus Domingos on 20/05/19.
+//  Created by unico idtech. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
-#import <AVFoundation/AVFoundation.h>
-#import <CoreImage/CoreImage.h>
+@import AVFoundation;
+@import CoreImage;
+#import "UnicoCheck.h"
+
+#import "DeviceUtils.h"
 
 #define NAME_APPLICATION [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
 
@@ -29,18 +32,14 @@
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
 #define IS_IPHONE_X (IS_IPHONE && SCREEN_MAX_LENGTH == 812.0)
+#define IS_IPHONE_X_OR_MORE (IS_IPHONE && SCREEN_MAX_LENGTH >= 1218.0)
 
 #define PLATAFORM = [[[UIDevice currentDevice] systemVersion] intValue];
 
 NS_ASSUME_NONNULL_BEGIN
 
 
-
-@interface CameraMain : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate> {
-    
-    NSString *unauthorized_error_bio;
-    
-}
+@interface CameraMain : UIViewController <AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureMetadataOutputObjectsDelegate>
 
 @property (strong, nonatomic)   AVCaptureVideoPreviewLayer *previewLayer;
 
@@ -51,10 +50,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) AVCaptureDeviceInput *videoDeviceInput;
 @property (nonatomic) AVCaptureStillImageOutput *stillImageOutput;
 @property (nonatomic) AVCaptureVideoDataOutput *dataOutput;
-@property (nonatomic, assign) id delegate;
+@property (nonatomic) AVCaptureMetadataOutput *metadataOutput;
 @property (nonatomic) dispatch_queue_t sessionQueue;
 @property (nonatomic) NSLock *renderLock;
 @property (nonatomic) CIImage *latestFrame;
+
+@property (nonatomic, strong) UIColor *colorButtonIcon;
+@property (nonatomic, strong) UIColor *colorButtonBackground;
 
 - (AVCaptureDevice *) deviceWithMediaType:(NSString *)mediaType preferringPosition:(AVCaptureDevicePosition)position;
 
@@ -66,9 +68,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIImage *)converCIImageToUIImage : (CIImage *)cIImage;
 
-- (float)normalizeXPoint : (float)point faceWidth:(float)faceWidth;
-- (float)normalizeYPoint : (float)point faceHeight:(float)faceHeight;
-
 - (void) setupCamera:(BOOL) isSelfie;
 
 - (void) startCamera;
@@ -76,9 +75,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (UIColor *)getColorPrimary;
 
-// Models and Screen Sizes
-- (NSString*) deviceName;
-- (BOOL)isSmallScreen;
+@property (readwrite) LanguageOrigin language;
+@property (strong, nonatomic) NSString *versionRelease;
+- (NSString *)getOrigin;
 
 @end
 

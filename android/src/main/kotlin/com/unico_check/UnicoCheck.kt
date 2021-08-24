@@ -7,6 +7,7 @@ import com.acesso.acessobio_android.AcessoBioListener
 import com.acesso.acessobio_android.onboarding.AcessoBio
 import com.acesso.acessobio_android.onboarding.IAcessoBioBuilder
 import com.acesso.acessobio_android.services.dto.ErrorBio
+import com.unico_check.config.UnicoCameraType
 import com.unico_check.config.UnicoTheme
 import com.unico_check.config.UnicoTimer
 import com.unico_check.constants.MethodConstants
@@ -24,11 +25,11 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
         lateinit var channelResult: MethodChannel.Result
         lateinit var unicoTheme: UnicoTheme
         lateinit var unicoTimer: UnicoTimer
+        lateinit var unicoCameraType: UnicoCameraType
     }
 
     lateinit var acessoBio: IAcessoBioBuilder
     private var acessoBioStatus: Boolean = true
-    abstract fun callMethodBio()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +38,8 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
         initAcessoBio()
         verifyCanCallMethod()
     }
+
+    abstract fun callMethodBio()
 
     private fun getMethodCall(){
         methodCall = intent.getStringExtra(MethodConstants.methodCall)
@@ -54,6 +57,8 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
 
     private fun initAcessoBio() {
         acessoBio = AcessoBio(this, this)
+            .setAutoCapture(unicoCameraType.autoCapture)
+            .setSmartFrame(unicoCameraType.smartFrame)
             .setTimeoutSession(unicoTimer.getTimeoutSession())
             .setTimeoutToFaceInference(unicoTimer.timeoutToFaceInference())
             .setTheme(unicoTheme)
@@ -70,6 +75,10 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
 
     fun setTimer(timer: UnicoTimer){
         unicoTimer = timer
+    }
+
+    fun setCameraType(cameraType: UnicoCameraType){
+        unicoCameraType = cameraType
     }
 
     override fun onErrorAcessoBio(errorBio: ErrorBio) {

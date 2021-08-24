@@ -8,159 +8,30 @@
 import UIKit
 import Flutter
 
-class AcessoBioView: UIViewController, AcessoBioDelegate {
+class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
     
-    
-    var acessoBioManager: AcessoBioManager!
-    var isOpenCamera: Bool =  false
+    var method: String!
+    var unicoCheck: AcessoBioManager!
     var flutterResult: FlutterResult!
-    
+    var unicoTheme: UnicoTheme!
+    var unicoTimer: UnicoTimer!
+    var unicoCameraType: UnicoCameraType!
+
+    var isOpenCamera: Bool =  false
     var acecessoBioStatus = true
     
-    var method: String = ""
-    
-    var setColorSilhoutteNeutra: String? = nil
-    var setColorSilhoutteSuccess: String? = nil
-    var setColorSilhoutteError: String? = nil
-    var setColorBackground: String? = nil
-    var setColorBackgroundBoxStatus: String? = nil
-    var setColorTextBoxStatus: String? = nil
-    var setColorBackgroundPopupError: String? = nil
-    var setColorTextPopupError: String? = nil
-    var setImageIconPopupError: String? = nil
-    
     var valueExtra = [String:Any]()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setUi()
         initAcessoBio()
-        setColors()
-        if(acecessoBioStatus){
-            callMethodBio()
-        }
-            
-        self.view.backgroundColor = UIColor.white;
-        self.navigationController!.setToolbarHidden(false, animated: false)
+        
+        if(acecessoBioStatus){ callMethodBio() }
     }
     
     func callMethodBio(){}
-    
-    private func initAcessoBio(){
-        acessoBioManager = AcessoBioManager(
-            viewController: self,
-            url: "",
-            apikey: "",
-            token:""
-        );
-        acessoBioManager.setLanguageOrigin(LanguageOrigin.Flutter, release: "2.0.0-beta.3")
-    }
-    
-    private func setColors(){
-        if(setColorSilhoutteNeutra != "" && setColorSilhoutteNeutra != nil){
-            acessoBioManager.setColorSilhoutteNeutral(self.setColorSilhoutteNeutra?.uppercased())
-        }
-        if(setColorSilhoutteSuccess != "" && setColorSilhoutteSuccess != nil){
-            acessoBioManager.setColorSilhoutteSuccess(self.setColorSilhoutteSuccess?.uppercased())
-        }
-        if(setColorSilhoutteError != "" && setColorSilhoutteError != nil){
-            acessoBioManager.setColorSilhoutteError(self.setColorSilhoutteError?.uppercased())
-        }
-        if(setColorBackground != "" && setColorBackground != nil){
-            acessoBioManager.setColorBackground(self.setColorBackground?.uppercased())
-        }
-        if(setColorBackgroundBoxStatus != "" && setColorBackgroundBoxStatus != nil){
-            acessoBioManager.setColorBackgroundBoxStatus(self.setColorBackgroundBoxStatus?.uppercased())
-        }
-        if(setColorTextBoxStatus != "" && setColorTextBoxStatus != nil){
-            acessoBioManager.setColorTextBoxStatus(self.setColorTextBoxStatus?.uppercased())
-        }
-        if(setColorBackgroundPopupError != "" && setColorBackgroundPopupError != nil){
-            acessoBioManager.setColorBackgroundPopupError(self.setColorBackgroundPopupError?.uppercased())
-        }
-        if(setColorTextPopupError != "" && setColorTextPopupError != nil){
-            acessoBioManager.setColorTextPopupError(self.setColorTextPopupError?.uppercased())
-        }
-        if(setImageIconPopupError != "" && setImageIconPopupError != nil){
-            acessoBioManager.setImageIconPopupError(self.setImageIconPopupError?.uppercased())
-        }
-    }
-    
-    
-    
-    func onErrorAcessoBioManager(_ error: String!) {
-        acecessoBioStatus = false
-        flutterResult(convertObjToDicionary(result: error,status: 2))
-    }
-    
-    func onError(msg: String){
-        flutterResult(convertObjToDicionary(result: msg,status: 0))
-        dismiss(animated: true)
-    }
-    
-    //CONVERT RESULT TO HASHMAP
-    func convertObjToDicionary(result : NSObject, status: Int) -> [String:Any] {
-        
-        let obj: AnyClass = result.classForCoder
-        var outCount : UInt32 = 0
-        let properties = class_copyPropertyList(obj, &outCount)
-        var dict = [String:Any]()
-        
-        for i in 0 ..< Int(outCount) {
-            
-            let property = properties?[i],
-
-            strKey = NSString(utf8String: property_getName(property!)) as String?
-
-            let attrs = result.value(forKey: strKey!)
-            
-            if(attrs != nil){
-                dict[strKey!] = attrs
-            }else{
-                dict[strKey!] = ""
-            }
-              
-        }
-        
-        dict["flutterstatus"] = status
-        
-        return dict
-
-    }
-    
-    func convertObjToDicionary(result : Bool, status: Int) -> [String:Any] {
-        
-        var dict = [String:Any]()
-        
-        dict["result"] = result
-        dict["flutterstatus"] = status
-        
-        return dict
-
-    }
-    
-    func convertObjToDicionary(result : String, status: Int) -> [String:Any] {
-        
-        var dict = [String:Any]()
-        
-        dict["result"] = result
-        dict["flutterstatus"] = status
-        
-        return dict
-
-    }
-    
-    func convertObjToDicionary(result : Int, status: Int) -> [String:Any] {
-        
-        var dict = [String:Any]()
-        
-        dict["result"] = result
-        dict["flutterstatus"] = status
-        
-        return dict
-
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         if(isOpenCamera){
@@ -169,21 +40,48 @@ class AcessoBioView: UIViewController, AcessoBioDelegate {
         isOpenCamera = true
     }
     
+    private func setUi(){
+        self.view.backgroundColor = UIColor(white: 1, alpha: 0.0)
+        self.navigationController!.setToolbarHidden(true, animated: false)
+    }
+    
+    private func initAcessoBio(){
+        unicoCheck = AcessoBioManager(viewController: self)
+        unicoCheck.setSmartFrame(unicoCameraType.smartFrame)
+        unicoCheck.setAutoCapture(unicoCameraType.autoCapture)
+        unicoCheck.setTimeoutSession(unicoTimer.timeoutSession)
+        unicoCheck.setTimeoutToFaceInference(unicoTimer.timeoutToFaceInference)
+        unicoCheck.setTheme(unicoTheme)
+//        unicoCheck.setLanguageOrigin(LanguageOrigin.Flutter, release: "2.0.0-beta.3")
+    }
+    
     func onErrorAcessoBioManager(_ error: ErrorBio!) {
-        flutterResult(convertObjToDicionary(result: error, status: 2))
+        acecessoBioStatus = false
+        flutterResult(
+            FlutterError(code: ReturnCostants.onErrorAcessoBio, message: "", details: ConvertToHashMap.convertObjToDicionary(result: error))
+        )
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func userClosedCameraManually(){
-        flutterResult(convertObjToDicionary(result: 0, status: -1))
+    func onUserClosedCameraManually() {
+        flutterResult(
+            FlutterError(code: ReturnCostants.onUserClosedCameraManually, message: "", details: "")
+        )
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func systemClosedCameraTimeoutSession() {
-        flutterResult(convertObjToDicionary(result: 0, status: 3))
+    func onSystemClosedCameraTimeoutSession() {
+        flutterResult(
+            FlutterError(code: ReturnCostants.onSystemClosedCameraTimeoutSession, message: "", details: "")
+        )
+        self.dismiss(animated: true, completion: nil)
     }
     
-    func systemClosedCameraTimeoutFaceInference() {
-        flutterResult(convertObjToDicionary(result: 0, status: 4))
+    func onSystemChangedTypeCameraTimeoutFaceInference() {
+        flutterResult(
+            FlutterError(code: ReturnCostants.onSystemChangedTypeCameraTimeoutFaceInference, message: "", details: "")
+        )
+        self.dismiss(animated: true, completion: nil)
     }
-    
     
 }

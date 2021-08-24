@@ -6,36 +6,36 @@
 //  Copyright © 2020 Matheus  domingos. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
-#import <AVFoundation/AVFoundation.h>
-#import <CoreImage/CoreImage.h>
+@import AVFoundation;
+@import CoreImage;
 #import "UIImageUtils.h"
 
 #import "CameraMain.h"
 
 #import "UIViewWithHole.h"
 
-#import <CoreML/CoreML.h>
-#import <Vision/Vision.h>
+@import CoreML;
+@import Vision;
 //#import "CenterModelCrop.h"
 
 // gyroscope
-#import <CoreMotion/CoreMotion.h>
-
-#import "PopUpValidationLiveness.h"
-
-#define RADIANS_TO_DEGREES(radians) ((radians) * (180.0 / M_PI))
+@import CoreMotion;
 
 #import "AcessoBioManager.h"
+#import "SensorsDevice.h"
+
+#import "FaceAnalyze.h"
 
 @class CameraBio;
+
 
 NS_ASSUME_NONNULL_BEGIN
 
 
 
-@interface CameraFaceView : CameraMain <AVCaptureVideoDataOutputSampleBufferDelegate> {
+@interface CameraFaceView : CameraMain <AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureMetadataOutputObjectsDelegate> {
     
     
     BOOL isSelfie;
@@ -46,8 +46,6 @@ NS_ASSUME_NONNULL_BEGIN
     UILabel *labelMessage;
 
     int countWithNoFaceAtScreen;
-    int countTimeAlert;
-    int countNoNose;
 
     BOOL isShowAlert;
         
@@ -86,6 +84,9 @@ NS_ASSUME_NONNULL_BEGIN
     CGRect frameFaceCenter;
     CGRect frameFaceAway;
     CGRect frameFaceCloser;
+    
+    BOOL leftEyeClosed;
+    BOOL rightEyeClosed;
     
     BOOL isSuccessAnimated;
     BOOL isErrorAnimated;
@@ -137,7 +138,6 @@ NS_ASSUME_NONNULL_BEGIN
     
     UIImageView *ivBackgroundGreen;
     
-    NSString *AuthToken;
     
     
     double scoreFacedetect;
@@ -171,6 +171,8 @@ NS_ASSUME_NONNULL_BEGIN
     
     BOOL isTakingPhoto;
     
+    double yawFace;
+    
     // sensors
     double pPitch;
     double pRoll;
@@ -182,7 +184,6 @@ NS_ASSUME_NONNULL_BEGIN
     double rollAway;
     
     // Variables about popup reset
-    PopUpValidationLiveness *popup;
     BOOL isPopUpShow;
     
     // Luminosity
@@ -195,16 +196,19 @@ NS_ASSUME_NONNULL_BEGIN
     NSTimer *timerToTimoutFaceInference;
     NSTimer *timerToTimoutSession;
     
-    NSMutableString *strError;
     CIFaceFeature *faceObj;
+    UIImage *lastImageObj;
+    
+    SensorsDevice *sensorDevice;
+    FaceAnalyze *faceAnalyze;
 
 }
 
+
+@property (strong, nonatomic) UnicoCheck *delegate;
+
+
 #pragma mark - Methods
-
-
-- (void)popupHidden;
-
 
 - (void)setIsDebug : (BOOL)debug;
 //- (void)successProcces : (NSString *)processId;
@@ -253,9 +257,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (strong,nonatomic) CMMotionManager *motionManager;
 
-@property (strong, nonatomic) NSString *URL;
-@property (strong, nonatomic) NSString *APIKEY;
-@property (strong, nonatomic) NSString *TOKEN;
 
 @property (assign, nonatomic) BOOL isEnableAutoCapture;
 @property (assign, nonatomic) BOOL isEnableSmartCapture;
@@ -272,8 +273,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) UIColor *colorBackgroundBoxStatus;
 @property (strong, nonatomic) UIColor *colorTextBoxStatus;
 
-@property (readwrite) LanguageOrigin language;
-@property (strong, nonatomic) NSString *versionRelease;
 
 @property (readwrite) double secondsTimeoutToInferenceFace;
 @property (readwrite) double secondsTimeoutSession;

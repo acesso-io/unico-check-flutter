@@ -6,11 +6,11 @@
 //  Copyright © 2020 Matheus Domingos Acesso. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CameraDocumentResult : NSObject
+@interface DocumentResult : NSObject
 
 @property(strong, nonatomic) NSString *base64;
 

@@ -13,7 +13,6 @@ import com.unico_check.hashMap.ConvertAcessoBioHashMap
 class UnicoCheckCamera: UnicoCheck(), iAcessoBioSelfie {
 
     override fun callMethodBio() {
-        cameraSetings()
         selectCameraMethod()
     }
 
@@ -38,11 +37,6 @@ class UnicoCheckCamera: UnicoCheck(), iAcessoBioSelfie {
                 TODO()
             }
         })
-    }
-
-    private fun cameraSetings(){
-        acessoBio.setAutoCapture(intent.getBooleanExtra(MethodConstants.disableAutoCapture, false))
-        acessoBio.setSmartFrame(intent.getBooleanExtra(MethodConstants.disableAutoCapture, false))
     }
 
     override fun onSuccessSelfie(result: ResultCamera) {
