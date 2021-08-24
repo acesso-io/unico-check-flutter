@@ -11,6 +11,10 @@ import androidx.core.content.ContextCompat
 
 open class CameraPermission : AppCompatActivity(){
 
+    companion object{
+        var REQUESTCODE = 10
+    }
+
     fun getPermission() = arrayOf(Manifest.permission.CAMERA).all {
         ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
     }
@@ -18,7 +22,7 @@ open class CameraPermission : AppCompatActivity(){
     @SuppressLint("MissingSuperCall")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode != 10) {
+        if (requestCode != REQUESTCODE) {
             Toast.makeText(this, "Permissão acesso camera negada", Toast.LENGTH_SHORT).show()
             finish()
         }
@@ -30,7 +34,7 @@ open class CameraPermission : AppCompatActivity(){
         if (!getPermission()) {
             requestPermissions(
                 arrayOf(Manifest.permission.CAMERA),
-                10
+                REQUESTCODE
             )
             finish()
         }
