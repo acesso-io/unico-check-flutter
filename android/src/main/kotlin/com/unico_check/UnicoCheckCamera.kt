@@ -21,7 +21,7 @@ class UnicoCheckCamera: UnicoCheck(), iAcessoBioSelfie {
     private fun selectCameraMethod(){
         when(methodCall){
 
-MethodConstants.openCamera -> openCamera()
+            MethodConstants.openCamera -> openCamera()
 
             else -> channelResult.notImplemented()
         }
@@ -34,7 +34,7 @@ MethodConstants.openCamera -> openCamera()
             }
 
             override fun onCameraFailed(message: String) {
-                TODO()
+                Log.d(TAG, ReturnConstants.onError)
             }
         })
     }

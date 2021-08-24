@@ -40,7 +40,7 @@ class UnicoCheckDocument : UnicoCheck(), iAcessoBioDocument {
             }
 
             override fun onCameraFailed(message: String) {
-                TODO()
+                Log.d(TAG, ReturnConstants.onError)
             }
         })
     }
