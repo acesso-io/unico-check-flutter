@@ -7,7 +7,7 @@ import com.acesso.acessobio_android.onboarding.camera.document.DocumentCameraLis
 import com.acesso.acessobio_android.onboarding.types.DocumentType
 import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.ReturnConstants
-import com.unico_check.hashMap.ConvertAcessoBioHashMap
+import com.unico_check.hashMap.convertObjToMapReflection
 
 class UnicoCheckDocument : UnicoCheck(), iAcessoBioDocument {
 
@@ -48,7 +48,7 @@ class UnicoCheckDocument : UnicoCheck(), iAcessoBioDocument {
     override fun onSuccessDocument(base64: String) {
         runCatching {
 
-            channelResult.success(ConvertAcessoBioHashMap.convertObjToMapReflection(base64))
+            channelResult.success(convertObjToMapReflection(base64))
             finish()
 
         }.onFailure {
@@ -59,7 +59,7 @@ class UnicoCheckDocument : UnicoCheck(), iAcessoBioDocument {
     override fun onErrorDocument(error: String) {
         runCatching {
 
-            channelResult.error(ReturnConstants.onError,"", ConvertAcessoBioHashMap.convertObjToMapReflection(error))
+            channelResult.error(ReturnConstants.onError,"", convertObjToMapReflection(error))
             finish()
 
         }.onFailure {

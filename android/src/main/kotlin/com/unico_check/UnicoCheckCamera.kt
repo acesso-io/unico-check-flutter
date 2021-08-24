@@ -8,7 +8,8 @@ import com.acesso.acessobio_android.services.dto.ErrorBio
 import com.acesso.acessobio_android.services.dto.ResultCamera
 import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.ReturnConstants
-import com.unico_check.hashMap.ConvertAcessoBioHashMap
+import com.unico_check.hashMap.convertObjToMapReflection
+import com.unico_check.hashMap.errorBioToHashMap
 
 class UnicoCheckCamera: UnicoCheck(), iAcessoBioSelfie {
 
@@ -48,7 +49,7 @@ class UnicoCheckCamera: UnicoCheck(), iAcessoBioSelfie {
     override fun onSuccessSelfie(result: ResultCamera) {
         runCatching {
 
-            channelResult.success(ConvertAcessoBioHashMap.convertObjToMapReflection(result.base64))
+            channelResult.success(convertObjToMapReflection(result.base64))
             finish()
 
         }.onFailure {
@@ -59,7 +60,7 @@ class UnicoCheckCamera: UnicoCheck(), iAcessoBioSelfie {
     override fun onErrorSelfie(errorBio: ErrorBio) {
         runCatching {
 
-            channelResult.error(ReturnConstants.onError, "", ConvertAcessoBioHashMap.errorBioToHashMap(errorBio))
+            channelResult.error(ReturnConstants.onError, "", errorBioToHashMap(errorBio))
             finish()
 
         }.onFailure {

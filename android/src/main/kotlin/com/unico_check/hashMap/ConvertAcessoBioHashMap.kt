@@ -3,35 +3,23 @@ package com.unico_check.hashMap
 import com.acesso.acessobio_android.services.dto.ErrorBio
 import java.util.HashMap
 
-class ConvertAcessoBioHashMap {
-    companion object {
-        fun errorBioToHashMap(error: ErrorBio): HashMap<String, Any> {
 
-            val hashMap: HashMap<String, Any> = HashMap()
+ fun errorBioToHashMap(error: ErrorBio): HashMap<String, Any> {
 
-            hashMap["code"] = error.code
-            hashMap["method"] = error.method
-            hashMap["description"] = error.description
+     val hashMap: HashMap<String, Any> = HashMap()
 
-            return hashMap
-        }
+     hashMap["code"] = error.code
+     hashMap["method"] = error.method
+     hashMap["description"] = error.description
 
-        fun convertObjToMapReflection(result: String): HashMap<String, Any> {
+     return hashMap
+ }
 
-            val hashMap: HashMap<String, Any> = HashMap()
+ fun convertObjToMapReflection(result: String): HashMap<String, Any> {
 
-            hashMap["result"] = result
+     val hashMap: HashMap<String, Any> = HashMap()
 
-            return hashMap
-        }
+     hashMap["result"] = result
 
-        fun convertObjToMapReflection(result: Int): HashMap<String, Any> {
-
-            val hashMap: HashMap<String, Any> = HashMap()
-
-            hashMap["result"] = result
-
-            return hashMap
-        }
-    }
-}
+     return hashMap
+ }

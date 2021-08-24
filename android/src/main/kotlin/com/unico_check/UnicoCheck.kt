@@ -11,7 +11,7 @@ import com.unico_check.config.UnicoTheme
 import com.unico_check.config.UnicoTimer
 import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.ReturnConstants
-import com.unico_check.hashMap.ConvertAcessoBioHashMap
+import com.unico_check.hashMap.errorBioToHashMap
 import com.unico_check.permission.CameraPermission
 import io.flutter.plugin.common.MethodChannel
 
@@ -77,7 +77,7 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
 
         runCatching {
 
-            channelResult.error(ReturnConstants.onErrorAcessoBio, "", ConvertAcessoBioHashMap.errorBioToHashMap(errorBio))
+            channelResult.error(ReturnConstants.onErrorAcessoBio, "", errorBioToHashMap(errorBio))
 
         }.onFailure {
             Log.d(TAG, ReturnConstants.onErrorAcessoBio)
