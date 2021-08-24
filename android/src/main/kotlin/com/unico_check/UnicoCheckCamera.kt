@@ -21,9 +21,7 @@ class UnicoCheckCamera: UnicoCheck(), iAcessoBioSelfie {
     private fun selectCameraMethod(){
         when(methodCall){
 
-            MethodConstants.openCamera -> {
-                openCamera()
-            }
+MethodConstants.openCamera -> openCamera()
 
             else -> channelResult.notImplemented()
         }
