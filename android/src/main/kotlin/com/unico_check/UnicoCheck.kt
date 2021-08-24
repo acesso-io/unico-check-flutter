@@ -60,15 +60,15 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
             .setSafeMode(false)
     }
 
-    fun setPluginContext(res: MethodChannel.Result) {
+    protected fun setPluginContext(res: MethodChannel.Result) {
         channelResult = res
     }
 
-    fun setUnicoTheme(theme: UnicoTheme){
+    protected fun setUnicoTheme(theme: UnicoTheme){
         unicoTheme = theme
     }
 
-    fun setTimer(timer: UnicoTimer){
+    protected fun setTimer(timer: UnicoTimer){
         unicoTimer = timer
     }
 
