@@ -39,14 +39,6 @@ class DocumentCameraActivity : UnicoCheckActivity(), iAcessoBioDocument {
             else -> DocumentType.NONE
         }
     }
-
-         return when(intent.getIntExtra(MethodConstants.document_type, DOC_NONE)){
-              DOC_RG_FRENTE -> DocumentType.RG_FRENTE
-              DOC_RG_VERSO -> DocumentType.RG_VERSO
-              DOC_CNH -> DocumentType.CNH
-             else -> DocumentType.NONE
-          }
-      }
     
     private fun openCameraDocument() {
         acessoBio.build().prepareDocumentCamera(object : DocumentCameraListener {
