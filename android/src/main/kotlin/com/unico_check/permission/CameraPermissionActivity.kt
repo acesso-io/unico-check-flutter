@@ -9,7 +9,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
-open class CameraPermission : AppCompatActivity(){
+abstract class CameraPermissionActivity : AppCompatActivity(){
 
     companion object{
         var REQUESTCODE = 10

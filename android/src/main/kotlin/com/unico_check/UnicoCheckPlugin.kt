@@ -22,38 +22,37 @@ import io.flutter.plugin.common.MethodChannel.Result
 /** UnicoCheckPlugin */
 class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
-    private val REQUEST_BIO = 7
+    companion object {
+        const val BRIDGE_NAME = "acessobio"
+        lateinit var result: Result
+        lateinit var methodCall: MethodCall
+    }
+
     private lateinit var channel: MethodChannel
     private lateinit var activity: Activity
-    private lateinit var result: Result
-    private lateinit var unicoTheme: UnicoTheme
-    private lateinit var unicoTimer: UnicoTimer
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "acessobio")
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, BRIDGE_NAME)
         channel.setMethodCallHandler(this)
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-        this.result = result
 
-        setTheme(call)
-        getTimers(call)
+        UnicoCheckPlugin.result = result
+        UnicoCheckPlugin.methodCall = call
+
         selectTypeOffCamera(call)
-
     }
 
     private fun selectTypeOffCamera(call: MethodCall) {
         when (call.method) {
 
             MethodConstants.openCamera -> openCamera(
-                call.method,
                 call.argument(disableAutoCapture),
                 call.argument(disableSmartFrame)
             )
 
             MethodConstants.openCameraDocument -> openCameraDocument(
-                call.method,
                 call.argument(document_type)
             )
 
@@ -61,44 +60,22 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         }
     }
 
-    private fun setTheme(call: MethodCall) {
-        unicoTheme = UnicoTheme(call)
-    }
+    private fun getIntent(unicoCheckActivity: UnicoCheckActivity): Intent =
+        Intent(activity, unicoCheckActivity::class.java)
 
-    private fun getIntent(unicoCheck: UnicoCheck, methodCall: String): Intent {
+    private fun openCameraDocument(DOCUMENT_TYPE: Int?) {
 
-        unicoCheck.setPluginContext(result)
-        unicoCheck.setUnicoTheme(unicoTheme)
-        unicoCheck.setTimer(unicoTimer)
-
-        val intent = Intent(activity, unicoCheck::class.java)
-        intent.putExtra(MethodConstants.methodCall, methodCall)
-
-        return intent
-    }
-
-    private fun getTimers(call: MethodCall) {
-        unicoTimer = UnicoTimer(
-            call.argument(setTimeoutSession),
-            call.argument(setTimeoutToFaceInference)
-        )
-    }
-
-    private fun openCameraDocument(method: String, DOCUMENT_TYPE: Int?) {
-
-        val intent = getIntent(UnicoCheckDocument(), method)
+        val intent = getIntent(UnicoCheckActivityDocument())
         intent.putExtra(document_type, DOCUMENT_TYPE)
-        activity.startActivityForResult(intent, REQUEST_BIO)
-
+        activity.startActivity(intent)
     }
 
     private fun getCameraIntent(
-        methodCall: String,
         disableAutoCapture: Boolean?,
         disableSmartFrame: Boolean?
     ): Intent {
 
-        val intent = getIntent(UnicoCheckCamera(), methodCall)
+        val intent = getIntent(UnicoCheckActivityCameraActivity())
 
         if (disableAutoCapture != null && disableAutoCapture == true) {
             intent.putExtra(MethodConstants.disableAutoCapture, disableAutoCapture)
@@ -112,19 +89,17 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             intent.putExtra(MethodConstants.disableSmartFrame, false)
         }
 
-
         return intent
     }
 
     private fun openCamera(
-        methodCall: String,
         disableAutoCapture: Boolean?,
         disableSmartFrame: Boolean?
     ) {
 
-        val intent = getCameraIntent(methodCall, disableAutoCapture, disableSmartFrame)
+        val intent = getCameraIntent(disableAutoCapture, disableSmartFrame)
 
-        activity.startActivityForResult(intent, REQUEST_BIO)
+        activity.startActivity(intent)
 
     }
 
@@ -137,11 +112,12 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         activity = binding.activity
     }
 
-    override fun onDetachedFromActivity() { }
+    override fun onDetachedFromActivity() {}
 
-    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) { }
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {}
 
-    override fun onDetachedFromActivityForConfigChanges() { }
+    override fun onDetachedFromActivityForConfigChanges() {}
     //endregion
+
 
 }

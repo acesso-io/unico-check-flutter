@@ -11,26 +11,26 @@ import com.unico_check.constants.ReturnConstants
 import com.unico_check.hashMap.convertObjToMapReflection
 import com.unico_check.hashMap.errorBioToHashMap
 
-class UnicoCheckCamera: UnicoCheck(), iAcessoBioSelfie {
+class SelfieCameraActivity : UnicoCheckActivity(), iAcessoBioSelfie {
 
     override fun callMethodBio() {
         cameraSetings()
         selectCameraMethod()
     }
 
-    private fun selectCameraMethod(){
-        when(methodCall){
+    private fun selectCameraMethod() {
+        when (UnicoCheckPlugin.methodCall.method) {
 
             MethodConstants.openCamera -> openCamera()
 
-            else -> channelResult.notImplemented()
+            else -> UnicoCheckPlugin.result.notImplemented()
         }
     }
 
-    private fun openCamera(){
+    private fun openCamera() {
         acessoBio.build().prepareSelfieCamera(object : SelfieCameraListener {
             override fun onCameraReady(cameraOpener: UnicoCheckCameraOpener.Selfie) {
-                cameraOpener.open(this@UnicoCheckCamera)
+                cameraOpener.open(this@SelfieCameraActivity)
             }
 
             override fun onCameraFailed(message: String) {
@@ -39,7 +39,7 @@ class UnicoCheckCamera: UnicoCheck(), iAcessoBioSelfie {
         })
     }
 
-    private fun cameraSetings(){
+    private fun cameraSetings() {
         acessoBio.setAutoCapture(intent.getBooleanExtra(MethodConstants.disableAutoCapture, false))
         acessoBio.setSmartFrame(intent.getBooleanExtra(MethodConstants.disableAutoCapture, false))
     }
@@ -47,7 +47,7 @@ class UnicoCheckCamera: UnicoCheck(), iAcessoBioSelfie {
     override fun onSuccessSelfie(result: ResultCamera) {
         runCatching {
 
-            channelResult.success(convertObjToMapReflection(result.base64))
+            UnicoCheckPlugin.result.success(convertObjToMapReflection(result.base64))
             finish()
 
         }.onFailure {
@@ -58,7 +58,7 @@ class UnicoCheckCamera: UnicoCheck(), iAcessoBioSelfie {
     override fun onErrorSelfie(errorBio: ErrorBio) {
         runCatching {
 
-            channelResult.error(ReturnConstants.onError, "", errorBioToHashMap(errorBio))
+            UnicoCheckPlugin.result.error(ReturnConstants.onError, "", errorBioToHashMap(errorBio))
             finish()
 
         }.onFailure {

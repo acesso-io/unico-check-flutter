@@ -12,40 +12,35 @@ import com.unico_check.config.UnicoTimer
 import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.ReturnConstants
 import com.unico_check.hashMap.errorBioToHashMap
-import com.unico_check.permission.CameraPermission
+import com.unico_check.permission.CameraPermissionActivity
 import io.flutter.plugin.common.MethodChannel
 
 
-abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
+abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
 
-    companion object { var TAG = "UnicoCheck" }
+    companion object {
+        const val TAG = "UnicoCheck"
+    }
 
-    var methodCall : String? = null
-    lateinit var channelResult: MethodChannel.Result
-    lateinit var unicoCustom: UnicoTheme
-    lateinit var unicoTimer: UnicoTimer
-    lateinit var acessoBio: IAcessoBioBuilder
     private var acessoBioStatus: Boolean = true
 
-    abstract fun callMethodBio()
+    protected lateinit var methodCall: String
+    protected lateinit var acessoBio: IAcessoBioBuilder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        getMethodCall()
         initAcessoBio()
         verifyCanCallMethod()
     }
 
-    private fun getMethodCall(){
-        methodCall = intent.getStringExtra(MethodConstants.methodCall)
-    }
+    abstract fun callMethodBio()
 
     private fun verifyCanCallMethod() {
         if (!getPermission()) {
             getPermission()
         } else {
-            if(acessoBioStatus){
+            if (acessoBioStatus) {
                 callMethodBio()
             }
         }
@@ -53,22 +48,14 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
 
     private fun initAcessoBio() {
         acessoBio = AcessoBio(this, this)
-            .setTimeoutSession(unicoTimer.getTimeoutSession())
-            .setTimeoutToFaceInference(unicoTimer.timeoutToFaceInference())
-            .setTheme(unicoCustom)
             .setSafeMode(false)
-    }
+            .setTheme(UnicoTheme(UnicoCheckPlugin.methodCall))
+            .apply {
+                val unicoTimer = UnicoTimer(UnicoCheckPlugin.methodCall)
 
-    fun setPluginContext(res: MethodChannel.Result) {
-        channelResult = res
-    }
-
-    fun setUnicoTheme(theme: UnicoTheme){
-        unicoCustom = theme
-    }
-
-    fun setTimer(timer: UnicoTimer){
-        unicoTimer = timer
+                setTimeoutSession(unicoTimer.getTimeoutSession())
+                setTimeoutToFaceInference(unicoTimer.timeoutToFaceInference())
+            }
     }
 
     override fun onErrorAcessoBio(errorBio: ErrorBio) {
@@ -76,7 +63,11 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
 
         runCatching {
 
-            channelResult.error(ReturnConstants.onErrorAcessoBio, "", errorBioToHashMap(errorBio))
+            UnicoCheckPlugin.result.error(
+                ReturnConstants.onErrorAcessoBio,
+                "",
+                errorBioToHashMap(errorBio)
+            )
 
         }.onFailure {
             Log.d(TAG, ReturnConstants.onErrorAcessoBio)
@@ -87,7 +78,7 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
     override fun onUserClosedCameraManually() {
         runCatching {
 
-            channelResult.error(ReturnConstants.onUserClosedCameraManually,"", "")
+            UnicoCheckPlugin.result.error(ReturnConstants.onUserClosedCameraManually, "", "")
             finish()
 
         }.onFailure {
@@ -98,7 +89,11 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
     override fun onSystemClosedCameraTimeoutSession() {
         runCatching {
 
-            channelResult.error(ReturnConstants.onSystemClosedCameraTimeoutSession,"" ,"")
+            UnicoCheckPlugin.result.error(
+                ReturnConstants.onSystemClosedCameraTimeoutSession,
+                "",
+                ""
+            )
             finish()
 
         }.onFailure {
@@ -109,7 +104,11 @@ abstract class UnicoCheck : CameraPermission(), AcessoBioListener {
     override fun onSystemChangedTypeCameraTimeoutFaceInference() {
         runCatching {
 
-            channelResult.error(ReturnConstants.onSystemChangedTypeCameraTimeoutFaceInference,"", "")
+            UnicoCheckPlugin.result.error(
+                ReturnConstants.onSystemChangedTypeCameraTimeoutFaceInference,
+                "",
+                ""
+            )
             finish()
 
         }.onFailure {

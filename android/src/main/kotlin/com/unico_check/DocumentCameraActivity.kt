@@ -9,34 +9,41 @@ import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.ReturnConstants
 import com.unico_check.hashMap.convertObjToMapReflection
 
-class UnicoCheckDocument : UnicoCheck(), iAcessoBioDocument {
+class DocumentCameraActivity : UnicoCheckActivity(), iAcessoBioDocument {
+
+    companion object {
+        const val RG_FRENTE = 501
+        const val RG_VERSO = 502
+        const val CNH = 4
+        const val NONE = 0
+    }
 
     override fun callMethodBio() {
         selectCameraMethod()
     }
 
     private fun selectCameraMethod() {
-        when(methodCall){
+        when (UnicoCheckPlugin.methodCall.method) {
 
             MethodConstants.openCameraDocument -> openCameraDocument()
 
-            else ->  channelResult.notImplemented()
+            else -> UnicoCheckPlugin.result.notImplemented()
         }
     }
 
     private fun selectDocument(): DocumentType {
-        return when(intent.getIntExtra(MethodConstants.document_type,0)){
-            501 -> DocumentType.RG_FRENTE
-            502 -> DocumentType.RG_VERSO
-            4 -> DocumentType.CNH
+        return when (intent.getIntExtra(MethodConstants.document_type, NONE)) {
+            RG_FRENTE -> DocumentType.RG_FRENTE
+            RG_VERSO -> DocumentType.RG_VERSO
+            CNH -> DocumentType.CNH
             else -> DocumentType.NONE
         }
     }
-    
+
     private fun openCameraDocument() {
         acessoBio.build().prepareDocumentCamera(object : DocumentCameraListener {
             override fun onCameraReady(cameraOpener: UnicoCheckCameraOpener.Document) {
-                cameraOpener.open(selectDocument(), this@UnicoCheckDocument)
+                cameraOpener.open(selectDocument(), this@DocumentCameraActivity)
             }
 
             override fun onCameraFailed(message: String) {
@@ -48,7 +55,7 @@ class UnicoCheckDocument : UnicoCheck(), iAcessoBioDocument {
     override fun onSuccessDocument(base64: String) {
         runCatching {
 
-            channelResult.success(convertObjToMapReflection(base64))
+            UnicoCheckPlugin.result.success(convertObjToMapReflection(base64))
             finish()
 
         }.onFailure {
@@ -59,7 +66,11 @@ class UnicoCheckDocument : UnicoCheck(), iAcessoBioDocument {
     override fun onErrorDocument(error: String) {
         runCatching {
 
-            channelResult.error(ReturnConstants.onError,"", convertObjToMapReflection(error))
+            UnicoCheckPlugin.result.error(
+                ReturnConstants.onError,
+                "",
+                convertObjToMapReflection(error)
+            )
             finish()
 
         }.onFailure {

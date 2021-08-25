@@ -4,11 +4,11 @@
     <application>
 
         <activity
-            android:name=".UnicoCheckDocument"
+            android:name=".UnicoCheckActivityDocument"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".UnicoCheckCamera"
+            android:name=".UnicoCheckActivityCameraActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
     </application>
