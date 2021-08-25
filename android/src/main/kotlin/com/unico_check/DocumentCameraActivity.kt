@@ -9,7 +9,7 @@ import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.ReturnConstants
 import com.unico_check.hashMap.convertObjToMapReflection
 
-class DocumentCameraActivity : UnicoCheckActivity(), iAcessoBioDocument {
+class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
 
     companion object {
         const val RG_FRENTE = 501
@@ -39,7 +39,7 @@ class DocumentCameraActivity : UnicoCheckActivity(), iAcessoBioDocument {
             else -> DocumentType.NONE
         }
     }
-    
+
     private fun openCameraDocument() {
         acessoBio.build().prepareDocumentCamera(object : DocumentCameraListener {
             override fun onCameraReady(cameraOpener: UnicoCheckCameraOpener.Document) {

@@ -11,7 +11,7 @@ import com.unico_check.constants.ReturnConstants
 import com.unico_check.hashMap.convertObjToMapReflection
 import com.unico_check.hashMap.errorBioToHashMap
 
-class SelfieCameraActivity : UnicoCheckActivity(), iAcessoBioSelfie {
+class SelfieCameraActivity : CameraActivity(), iAcessoBioSelfie {
 
     override fun callMethodBio() {
         cameraSetings()

@@ -6,11 +6,11 @@ import androidx.annotation.NonNull
 import com.unico_check.config.UnicoTheme
 import com.unico_check.config.UnicoTimer
 import com.unico_check.constants.MethodConstants
-import com.unico_check.constants.MethodConstants.Companion.disableAutoCapture
-import com.unico_check.constants.MethodConstants.Companion.disableSmartFrame
-import com.unico_check.constants.MethodConstants.Companion.document_type
-import com.unico_check.constants.MethodConstants.Companion.setTimeoutSession
-import com.unico_check.constants.MethodConstants.Companion.setTimeoutToFaceInference
+import com.unico_check.constants.MethodConstants.disableAutoCapture
+import com.unico_check.constants.MethodConstants.disableSmartFrame
+import com.unico_check.constants.MethodConstants.document_type
+import com.unico_check.constants.MethodConstants.setTimeoutSession
+import com.unico_check.constants.MethodConstants.setTimeoutToFaceInference
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -60,12 +60,8 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         }
     }
 
-    private fun getIntent(unicoCheckActivity: UnicoCheckActivity): Intent =
-        Intent(activity, unicoCheckActivity::class.java)
-
     private fun openCameraDocument(DOCUMENT_TYPE: Int?) {
-
-        val intent = getIntent(UnicoCheckActivityDocument())
+        val intent = Intent(activity, DocumentCameraActivity::class.java)
         intent.putExtra(document_type, DOCUMENT_TYPE)
         activity.startActivity(intent)
     }
@@ -75,7 +71,7 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         disableSmartFrame: Boolean?
     ): Intent {
 
-        val intent = getIntent(UnicoCheckActivityCameraActivity())
+        val intent = Intent(activity, SelfieCameraActivity::class.java)
 
         if (disableAutoCapture != null && disableAutoCapture == true) {
             intent.putExtra(MethodConstants.disableAutoCapture, disableAutoCapture)
