@@ -24,14 +24,21 @@ class UnicoCheckDocument : UnicoCheck(), iAcessoBioDocument {
         }
     }
 
+companion object {
+    const val DOC_NONE = 0
+    const val DOC_RG_FRENTE = 501
+    const val DOC_RG_VERSO = 502
+    const val DOC_CNH = 4
+}
+
     private fun selectDocument(): DocumentType {
-        return when(intent.getIntExtra(MethodConstants.document_type,0)){
-            501 -> DocumentType.RG_FRENTE
-            502 -> DocumentType.RG_VERSO
-            4 -> DocumentType.CNH
-            else -> DocumentType.NONE
-        }
-    }
+         return when(intent.getIntExtra(MethodConstants.document_type, DOC_NONE)){
+              DOC_RG_FRENTE -> DocumentType.RG_FRENTE
+              DOC_RG_VERSO -> DocumentType.RG_VERSO
+              DOC_CNH -> DocumentType.CNH
+             else -> DocumentType.NONE
+          }
+      }
     
     private fun openCameraDocument() {
         acessoBio.build().prepareDocumentCamera(object : DocumentCameraListener {
