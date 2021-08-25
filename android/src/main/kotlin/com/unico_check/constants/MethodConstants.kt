@@ -2,18 +2,18 @@ package com.unico_check.constants
 
 open class MethodConstants{
     companion object{
-        var methodCall: String  = "methodCall"
+        const val methodCall: String  = "methodCall"
 
-        var openCamera: String  = "OpenCamera"
-        var openCameraDocument: String = "OpenCameraDocument"
+        const val openCamera: String  = "OpenCamera"
+        const val openCameraDocument: String = "OpenCameraDocument"
 
-        var disableAutoCapture: String = "disableAutoCapture"
-        var disableSmartFrame: String = "disableSmartFrame"
+        const val disableAutoCapture: String = "disableAutoCapture"
+        const val disableSmartFrame: String = "disableSmartFrame"
 
-        var document_type: String = "DOCUMENT_TYPE"
+        const val document_type: String = "DOCUMENT_TYPE"
 
-        var setTimeoutSession: String = "setTimeoutSession"
-        var setTimeoutToFaceInference: String = "setTimeoutToFaceInference"
+        const val setTimeoutSession: String = "setTimeoutSession"
+        const val setTimeoutToFaceInference: String = "setTimeoutToFaceInference"
     }
 }
 

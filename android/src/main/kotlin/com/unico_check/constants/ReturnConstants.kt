@@ -2,15 +2,15 @@ package com.unico_check.constants
 
 open class ReturnConstants{
     companion object{
-        var onError: String  = "onError"
-        var onErrorAcessoBio: String  = "onErrorAcessoBio"
-        var onUserClosedCameraManually: String  = "onUserClosedCameraManually"
-        var onSystemClosedCameraTimeoutSession: String  = "onSystemClosedCameraTimeoutSession"
-        var onSystemChangedTypeCameraTimeoutFaceInference: String  = "onSystemChangedTypeCameraTimeoutFaceInference"
+        const val onError: String  = "onError"
+        const val onErrorAcessoBio: String  = "onErrorAcessoBio"
+        const val onUserClosedCameraManually: String  = "onUserClosedCameraManually"
+        const val onSystemClosedCameraTimeoutSession: String  = "onSystemClosedCameraTimeoutSession"
+        const val onSystemChangedTypeCameraTimeoutFaceInference: String  = "onSystemChangedTypeCameraTimeoutFaceInference"
 
-        var onSuccessSelfie: String  = "onSuccessSelfie"
-        var onErrorSelfie: String  = "onErrorSelfie"
-        var onSuccessDocument: String  = "onSuccessDocument"
-        var onErrorDocument: String  = "onErrorDocument"
+        const val onSuccessSelfie: String  = "onSuccessSelfie"
+        const val onErrorSelfie: String  = "onErrorSelfie"
+        const val onSuccessDocument: String  = "onSuccessDocument"
+        const val onErrorDocument: String  = "onErrorDocument"
     }
 }
