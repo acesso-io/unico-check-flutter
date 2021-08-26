@@ -2,8 +2,7 @@ import 'package:get/get.dart';
 import 'package:unico_check/unico_check.dart';
 import 'package:unico_check_example/utils/snackbar.util.dart';
 
-class AcessoBioDocumentController extends GetxController
-    implements IAcessoBioDocument {
+class AcessoBioDocumentController implements IAcessoBioDocument {
   late UnicoCheck _unico;
 
   AcessoBioDocumentController() {
@@ -57,5 +56,4 @@ class AcessoBioDocumentController extends GetxController
   void systemClosedCameraTimeoutSession() {
     SnackbarUtil.showError(message: "Timeout: close camera ");
   }
-
 }

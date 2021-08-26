@@ -2,7 +2,8 @@ import 'package:get/get.dart';
 import 'package:unico_check/unico_check.dart';
 import 'package:unico_check_example/utils/snackbar.util.dart';
 
-class AcessoBioCameraNormalController extends GetxController implements IAcessoBioCamera {
+class AcessoBioCameraNormalController extends GetxController
+    implements IAcessoBioCamera {
   late UnicoCheck _unico;
 
   AcessoBioCameraNormalController() {
@@ -10,8 +11,8 @@ class AcessoBioCameraNormalController extends GetxController implements IAcessoB
   }
 
   void openCamera() {
-    _unico.camera!.disableSmartFrame();
-    _unico.camera!.disableAutoCapture();
+    _unico.camera!.setAutoCapture(false);
+    _unico.camera!.setSmartFrame(false);
     _unico.camera!.openCamera();
   }
 
@@ -21,18 +22,8 @@ class AcessoBioCameraNormalController extends GetxController implements IAcessoB
   }
 
   @override
-  void onErrorDocumentInsert(String error) {
-    SnackbarUtil.showError(message: error);
-  }
-
-  @override
   void onSuccessCamera(CameraResponse response) {
     SnackbarUtil.showSuccess(message: "Success");
-  }
-
-  @override
-  void onSucessDocumentInsert(String processId, String typed) {
-    SnackbarUtil.showSuccess(message: "Success ID:"+processId);
   }
 
   @override
@@ -54,5 +45,4 @@ class AcessoBioCameraNormalController extends GetxController implements IAcessoB
   void systemClosedCameraTimeoutSession() {
     SnackbarUtil.showError(message: "Timeout: close camera ");
   }
-
 }

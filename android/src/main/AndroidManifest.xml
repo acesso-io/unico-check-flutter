@@ -1,14 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.unico_check">
+    package="com.unico_check">
 
     <application>
 
         <activity
-            android:name=".AcessoBioDocument"
+            android:name=".SelfieCameraActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".AcessoBioCamera"
+            android:name=".DocumentCameraActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
     </application>

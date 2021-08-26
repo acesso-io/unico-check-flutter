@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - unico_check (1.0.2):
+  - unico_check (2.0.0-beta.3):
     - Flutter
 
 DEPENDENCIES:
@@ -15,7 +15,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  unico_check: a62fc2b3b15e5cc0fa98957672c5a0e92d3d1759
+  unico_check: 104430480bc2128afd5a66b22dc05f9f93cd16c9
 
 PODFILE CHECKSUM: 765b9780ca1e29cb03c4f1888b8fb3f20ad8271f
 

@@ -1,6 +1,5 @@
 class UnicoConfig {
   ///Android custom layout
-  String? androidColorSilhoutte;
   String? androidColorBackground;
   String? androidColorBoxMessage;
   String? androidColorTextMessage;
@@ -12,6 +11,8 @@ class UnicoConfig {
   String? androidColorIconTakePictureButton;
   String? androidColorBackgroundBottomDocument;
   String? androidColorTextBottomDocument;
+  String? androidColorSilhouetteSuccess;
+  String? androidColorSilhouetteError;
 
   ///IOS custom layout
   String? iosColorSilhoutteNeutra;
@@ -30,7 +31,6 @@ class UnicoConfig {
 
   ///Objeto de configuracao unico
   UnicoConfig({
-    this.androidColorSilhoutte,
     this.androidColorBackground,
     this.androidColorBoxMessage,
     this.androidColorTextMessage,
@@ -42,6 +42,8 @@ class UnicoConfig {
     this.androidColorIconTakePictureButton,
     this.androidColorBackgroundBottomDocument,
     this.androidColorTextBottomDocument,
+    this.androidColorSilhouetteSuccess,
+    this.androidColorSilhouetteError,
     this.iosColorSilhoutteNeutra,
     this.iosColorSilhoutteSuccess,
     this.iosColorSilhoutteError,
@@ -59,46 +61,49 @@ class UnicoConfig {
     var map = <String, dynamic>{
       ///Android custom layout
       ///adiciona cor a silhueta de captura
-      'setAndroidColorSilhoutte': androidColorSilhoutte,
+      'androidColorBackground': androidColorBackground,
 
       ///adiciona cor no funudo da captura
-      'setAndroidColorBackground': androidColorBackground,
+      'androidColorBoxMessage': androidColorBoxMessage,
 
       ///adiciona cor no box de mensagem
-      'setAndroidColorBoxMessage': androidColorBoxMessage,
+      'androidColorTextMessage': androidColorTextMessage,
 
       ///adiciona cor no texto da mensagem
-      'setAndroidColorTextMessage': androidColorTextMessage,
+      'androidColorBackgroundPopupError': androidColorBackgroundPopupError,
 
       ///adiciona cor no fundo do popup de erro
-      'setAndroidColorBackgroundPopupError': androidColorBackgroundPopupError,
+      'androidColorTextPopupError': androidColorTextPopupError,
 
       ///adiciona cor no texto de erro do popup
-      'setAndroidColorTextPopupError': androidColorTextPopupError,
-
-      ///adiciona cor no botão popup
-      'setAndroidColorBackgroundButtonPopupError':
+      'androidColorBackgroundButtonPopupError':
           androidColorBackgroundButtonPopupError,
 
-      ///adiciona cor no texto do botão do popup
-      'setAndroidColorTextButtonPopupError': androidColorTextButtonPopupError,
+      ///adiciona cor no botão popup
+      'androidColorTextButtonPopupError': androidColorTextButtonPopupError,
 
-      ///adiciona cor no fundo de captura
-      'setAndroidColorBackgroundTakePictureButton':
+      ///adiciona cor no texto do botão do popup
+      'androidColorBackgroundTakePictureButton':
           androidColorBackgroundTakePictureButton,
 
-      ///adiciona cor no icone do botão de captura
-      'setAndroidColorIconTakePictureButton': androidColorIconTakePictureButton,
+      ///adiciona cor no fundo de captura
+      'androidColorIconTakePictureButton': androidColorIconTakePictureButton,
 
-      ///adiciona cor no fundo do botão de captura
-      'setAndroidColorBackgroundBottomDocument':
+      ///adiciona cor no icone do botão de captura
+      'androidColorBackgroundBottomDocument':
           androidColorBackgroundBottomDocument,
 
-      ///adiciona cor no texto do botão de captura documento
-      'setAndroidColorTextBottomDocument': androidColorTextBottomDocument,
+      ///adiciona cor no fundo do botão de captura
+      'androidColorTextBottomDocument': androidColorTextBottomDocument,
 
-      ///IOS custom layout
-      ///adiciona cor na silhueta de captura
+      ///adiciona cor no texto do botão de captura documento
+      'androidColorSilhouetteSuccess': androidColorSilhouetteSuccess,
+
+      ///adiciona cor no texto do botão de captura documento
+      'androidColorSilhouetteError': androidColorSilhouetteError,
+
+      /// IOS custom layout
+      /// adiciona cor na silhueta de captura
       'setIosColorSilhoutteNeutra': iosColorSilhoutteNeutra,
 
       ///adiciona cor na silhueta de sucesso
