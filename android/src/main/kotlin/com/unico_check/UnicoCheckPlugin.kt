@@ -3,16 +3,14 @@ package com.unico_check
 import android.app.Activity
 import android.content.Intent
 import androidx.annotation.NonNull
-import com.unico_check.config.UnicoCameraType
 import com.unico_check.config.UnicoTheme
 import com.unico_check.config.UnicoTimer
 import com.unico_check.constants.MethodConstants
-import com.unico_check.constants.MethodConstants.Companion.disableAutoCapture
-import com.unico_check.constants.MethodConstants.Companion.disableSmartFrame
-import com.unico_check.constants.MethodConstants.Companion.document_type
-import com.unico_check.constants.MethodConstants.Companion.openCamera
-import com.unico_check.constants.MethodConstants.Companion.setTimeoutSession
-import com.unico_check.constants.MethodConstants.Companion.setTimeoutToFaceInference
+import com.unico_check.constants.MethodConstants.disableAutoCapture
+import com.unico_check.constants.MethodConstants.disableSmartFrame
+import com.unico_check.constants.MethodConstants.document_type
+import com.unico_check.constants.MethodConstants.setTimeoutSession
+import com.unico_check.constants.MethodConstants.setTimeoutToFaceInference
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -24,38 +22,37 @@ import io.flutter.plugin.common.MethodChannel.Result
 /** UnicoCheckPlugin */
 class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
-    private val REQUEST_BIO = 7
+    companion object {
+        const val BRIDGE_NAME = "acessobio"
+        lateinit var result: Result
+        lateinit var methodCall: MethodCall
+    }
+
     private lateinit var channel: MethodChannel
     private lateinit var activity: Activity
-    private lateinit var result: Result
-    private lateinit var unicoTheme: UnicoTheme
-    private lateinit var unicoTimer: UnicoTimer
-    private lateinit var unicoCameraType: UnicoCameraType
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "acessobio")
+        channel = MethodChannel(flutterPluginBinding.binaryMessenger, BRIDGE_NAME)
         channel.setMethodCallHandler(this)
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
 
-        this.result = result
+        UnicoCheckPlugin.result = result
+        UnicoCheckPlugin.methodCall = call
 
-        setTheme(call)
-        setTimers(call)
-        setCameraType(call)
-        selectCameraMethod(call)
+        selectTypeOffCamera(call)
     }
 
-    private fun selectCameraMethod(call: MethodCall) {
+    private fun selectTypeOffCamera(call: MethodCall) {
         when (call.method) {
 
-            openCamera -> openCamera(
-                call.method
+            MethodConstants.openCamera -> openCamera(
+                call.argument(disableAutoCapture),
+                call.argument(disableSmartFrame)
             )
 
             MethodConstants.openCameraDocument -> openCameraDocument(
-                call.method,
                 call.argument(document_type)
             )
 
@@ -63,43 +60,43 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         }
     }
 
-    private fun setCameraType(call: MethodCall){
-        unicoCameraType = UnicoCameraType(call.argument(disableAutoCapture), call.argument(disableSmartFrame))
+    private fun openCameraDocument(DOCUMENT_TYPE: Int?) {
+        val intent = Intent(activity, DocumentCameraActivity::class.java)
+        intent.putExtra(document_type, DOCUMENT_TYPE)
+        activity.startActivity(intent)
     }
 
-    private fun setTheme(call: MethodCall) {
-        unicoTheme = UnicoTheme(call)
-    }
+    private fun getCameraIntent(
+        disableAutoCapture: Boolean?,
+        disableSmartFrame: Boolean?
+    ): Intent {
 
-    private fun setTimers(call: MethodCall) {
-        unicoTimer = UnicoTimer(
-            call.argument(setTimeoutSession),
-            call.argument(setTimeoutToFaceInference)
-        )
-    }
+        val intent = Intent(activity, SelfieCameraActivity::class.java)
 
-    private fun getIntent(unicoCheck: UnicoCheck, methodCall: String): Intent {
+        if (disableAutoCapture != null && disableAutoCapture == true) {
+            intent.putExtra(MethodConstants.disableAutoCapture, disableAutoCapture)
+        } else {
+            intent.putExtra(MethodConstants.disableAutoCapture, false)
+        }
 
-        unicoCheck.setPluginContext(result)
-        unicoCheck.setUnicoTheme(unicoTheme)
-        unicoCheck.setTimer(unicoTimer)
-        unicoCheck.setCameraType(unicoCameraType)
-
-        val intent = Intent(activity, unicoCheck::class.java)
-        intent.putExtra(MethodConstants.methodCall, methodCall)
+        if (disableSmartFrame != null && disableSmartFrame == true) {
+            intent.putExtra(MethodConstants.disableSmartFrame, disableSmartFrame)
+        } else {
+            intent.putExtra(MethodConstants.disableSmartFrame, false)
+        }
 
         return intent
     }
 
-    private fun openCameraDocument(method: String, DOCUMENT_TYPE: Int?) {
+    private fun openCamera(
+        disableAutoCapture: Boolean?,
+        disableSmartFrame: Boolean?
+    ) {
 
-        val intent = getIntent(UnicoCheckDocument(), method)
-        intent.putExtra(document_type, DOCUMENT_TYPE)
-        activity.startActivityForResult(intent, REQUEST_BIO)
-    }
+        val intent = getCameraIntent(disableAutoCapture, disableSmartFrame)
 
-    private fun openCamera(methodCall: String) {
-        activity.startActivityForResult(getIntent(UnicoCheckCamera(),methodCall), REQUEST_BIO)
+        activity.startActivity(intent)
+
     }
 
     //region ActivityAware
@@ -111,11 +108,12 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         activity = binding.activity
     }
 
-    override fun onDetachedFromActivity() { }
+    override fun onDetachedFromActivity() {}
 
-    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) { }
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {}
 
-    override fun onDetachedFromActivityForConfigChanges() { }
+    override fun onDetachedFromActivityForConfigChanges() {}
     //endregion
+
 
 }

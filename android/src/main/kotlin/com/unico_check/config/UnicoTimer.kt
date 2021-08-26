@@ -1,15 +1,16 @@
 package com.unico_check.config
 
-class UnicoTimer(
-    var timeoutSession: Double?,
-    var timeoutToFaceInference: Double?
-){
+import com.unico_check.constants.MethodConstants
+import io.flutter.plugin.common.MethodCall
+
+class UnicoTimer(private val call: MethodCall ){
+
     fun getTimeoutSession(): Double{
-        return timeoutSession ?: 40.5
+        return call.argument(MethodConstants.setTimeoutSession) ?: 40.5
     }
 
     fun timeoutToFaceInference(): Double{
-        return timeoutToFaceInference ?: 15.0
+        return call.argument(MethodConstants.setTimeoutToFaceInference) ?: 15.0
     }
 }
 

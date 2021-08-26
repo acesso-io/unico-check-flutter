@@ -3,7 +3,7 @@ package com.unico_check.config
 import com.acesso.acessobio_android.onboarding.IAcessoBioTheme
 import io.flutter.plugin.common.MethodCall
 
-class UnicoTheme(private val call: MethodCall) : IAcessoBioTheme {
+data class UnicoTheme(private val call: MethodCall): IAcessoBioTheme {
 
     override fun getColorBackground(): Any {
         return call.argument("androidColorBackground") ?: 0

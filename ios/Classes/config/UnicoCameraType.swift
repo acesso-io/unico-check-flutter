@@ -1,8 +1,8 @@
 //
 //  UnicoCameraType.swift
-//  unico_check
+//  Pods
 //
-//  Created by Lucas Diniz Silva on 23/08/21.
+//  Created by Lucas Diniz Silva on 26/08/21.
 //
 
 import Foundation
