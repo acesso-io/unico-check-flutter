@@ -7,15 +7,18 @@
 
 class AcessoBioDocument: AcessoBioView, AcessoBioDocumentDelegate, DocumentCameraDelegate{
     
+    static let rgFrente = 501
+    static let rgVerso = 502
+    static let CNH = 4
     var document: DocumentEnums = DocumentEnums.none
     
     override func callMethodBio(){
         selectDocument()
-        switch method {
+        switch SwiftUnicoCheckPlugin.methodCall {
             
             case MethodConstansts.openCameraDocument: unicoCheck.build().prepareDocumentCamera(self)
                 
-            default: flutterResult(FlutterMethodNotImplemented)
+            default: SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
         }
     }
     
@@ -29,23 +32,23 @@ class AcessoBioDocument: AcessoBioView, AcessoBioDocumentDelegate, DocumentCamer
     func onCameraFailedDocument(_ message: String!) { }
     
     func selectDocument(){
-        let document_type = valueExtra["DOCUMENT_TYPE"] as? Int
+        let document_type = SwiftUnicoCheckPlugin.argument[MethodConstansts.document_type] as? Int
         
         switch document_type {
-            case 501: do { document = DocumentEnums.rgFrente }
-            case 502: do { document = DocumentEnums.rgVerso }
-            case 4: do { document = DocumentEnums.CNH }
+            case AcessoBioDocument.rgFrente: do { document = DocumentEnums.rgFrente }
+            case AcessoBioDocument.rgVerso: do { document = DocumentEnums.rgVerso }
+            case AcessoBioDocument.CNH: do { document = DocumentEnums.CNH }
                 
             default: document = DocumentEnums.none
         }
     }
 
     func onSuccessDocument(_ result: DocumentResult!) {
-        flutterResult(ConvertToHashMap.convertObjToDicionary(result: result))
+        SwiftUnicoCheckPlugin.result(ConvertToHashMap.convertObjToDicionary(result: result))
     }
     
     func onErrorDocument(_ errorBio: ErrorBio!) {
-        flutterResult(
+        SwiftUnicoCheckPlugin.result(
             FlutterError(code: ReturnCostants.onError, message: "", details: ConvertToHashMap.convertObjToDicionary(result: errorBio))
         )
     }

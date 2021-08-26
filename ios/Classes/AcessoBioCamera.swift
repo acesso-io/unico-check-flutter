@@ -8,11 +8,11 @@
 class AcessoBioCamera: AcessoBioView, AcessoBioSelfieDelegate, SelfieCameraDelegate {
 
     override func callMethodBio(){
-        switch method {
+        switch SwiftUnicoCheckPlugin.methodCall {
             
             case MethodConstansts.openCamera: unicoCheck.build().prepareSelfieCamera(self)
             
-            default: flutterResult(FlutterMethodNotImplemented)
+            default: SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
         }
     }
     
@@ -20,16 +20,14 @@ class AcessoBioCamera: AcessoBioView, AcessoBioSelfieDelegate, SelfieCameraDeleg
         cameraOpener.open(self)
     }
     
-    func onCameraFailed(_ message: String!) {
-        
-    }
+    func onCameraFailed(_ message: String!) {}
 
     func onSuccessSelfie(_ result: SelfieResult!) {
-        flutterResult(ConvertToHashMap.convertObjToDicionary(result: result))
+        SwiftUnicoCheckPlugin.result(ConvertToHashMap.convertObjToDicionary(result: result))
     }
     
     func onErrorSelfie(_ errorBio: ErrorBio!) {
-        flutterResult(
+        SwiftUnicoCheckPlugin.result(
             FlutterError(code: ReturnCostants.onError, message: "", details: ConvertToHashMap.convertObjToDicionary(result: errorBio))
         )
     }

@@ -10,17 +10,10 @@ import Flutter
 
 class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
     
-    var method: String!
+    private var method: String!
     var unicoCheck: AcessoBioManager!
-    var flutterResult: FlutterResult!
-    var unicoTheme: UnicoTheme!
-    var unicoTimer: UnicoTimer!
-    var unicoCameraType: UnicoCameraType!
-
-    var isOpenCamera: Bool =  false
-    var acecessoBioStatus = true
-    
-    var valueExtra = [String:Any]()
+    private var isOpenCamera: Bool =  false
+    private var acecessoBioStatus = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,54 +27,56 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
     func callMethodBio(){}
     
     override func viewWillAppear(_ animated: Bool) {
-        if(isOpenCamera){
+        if(isOpenCamera) {
             self.dismiss(animated: true, completion: nil)
         }
         isOpenCamera = true
     }
     
-    private func setUi(){
+    private func setUi() {
         self.view.backgroundColor = UIColor(white: 1, alpha: 0.0)
         self.navigationController!.setToolbarHidden(true, animated: false)
     }
     
-    private func initAcessoBio(){
+    private func initAcessoBio() {
         unicoCheck = AcessoBioManager(viewController: self)
-        unicoCheck.setSmartFrame(unicoCameraType.smartFrame)
-        unicoCheck.setAutoCapture(unicoCameraType.autoCapture)
+        
+        let cameraType = UnicoCameraType(argument: SwiftUnicoCheckPlugin.argument)
+        let unicoTimer = UnicoTimer(argument: SwiftUnicoCheckPlugin.argument)
+        
+        unicoCheck.setSmartFrame(cameraType.smartFrame)
+        unicoCheck.setAutoCapture(cameraType.autoCapture)
         unicoCheck.setTimeoutSession(unicoTimer.timeoutSession)
         unicoCheck.setTimeoutToFaceInference(unicoTimer.timeoutToFaceInference)
-        unicoCheck.setTheme(unicoTheme)
-//        unicoCheck.setLanguageOrigin(LanguageOrigin.Flutter, release: "2.0.0-beta.3")
+        unicoCheck.setTheme(UnicoTheme(argument: SwiftUnicoCheckPlugin.argument))
     }
     
     func onErrorAcessoBioManager(_ error: ErrorBio!) {
         acecessoBioStatus = false
-        flutterResult(
+        SwiftUnicoCheckPlugin.result(
             FlutterError(code: ReturnCostants.onErrorAcessoBio, message: "", details: ConvertToHashMap.convertObjToDicionary(result: error))
         )
         self.dismiss(animated: true, completion: nil)
     }
     
     func onUserClosedCameraManually() {
-        flutterResult(
+        SwiftUnicoCheckPlugin.result(
             FlutterError(code: ReturnCostants.onUserClosedCameraManually, message: "", details: "")
         )
         self.dismiss(animated: true, completion: nil)
     }
     
     func onSystemClosedCameraTimeoutSession() {
-        flutterResult(
+        SwiftUnicoCheckPlugin.result(
             FlutterError(code: ReturnCostants.onSystemClosedCameraTimeoutSession, message: "", details: "")
         )
         self.dismiss(animated: true, completion: nil)
     }
     
     func onSystemChangedTypeCameraTimeoutFaceInference() {
-        flutterResult(
+        SwiftUnicoCheckPlugin.result(
             FlutterError(code: ReturnCostants.onSystemChangedTypeCameraTimeoutFaceInference, message: "", details: "")
         )
         self.dismiss(animated: true, completion: nil)
     }
-    
 }

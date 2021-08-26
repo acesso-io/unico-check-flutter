@@ -8,14 +8,14 @@
 import Foundation
 
 class ReturnCostants {
-    static var onError: String  = "onError"
-    static var onErrorAcessoBio: String  = "onErrorAcessoBio"
-    static var onUserClosedCameraManually: String  = "onUserClosedCameraManually"
-    static var onSystemClosedCameraTimeoutSession: String  = "onSystemClosedCameraTimeoutSession"
-    static var onSystemChangedTypeCameraTimeoutFaceInference: String  = "onSystemChangedTypeCameraTimeoutFaceInference"
+    static let onError: String  = "onError"
+    static let onErrorAcessoBio: String  = "onErrorAcessoBio"
+    static let onUserClosedCameraManually: String  = "onUserClosedCameraManually"
+    static let onSystemClosedCameraTimeoutSession: String  = "onSystemClosedCameraTimeoutSession"
+    static let onSystemChangedTypeCameraTimeoutFaceInference: String  = "onSystemChangedTypeCameraTimeoutFaceInference"
 
-    static var onSuccessSelfie: String  = "onSuccessSelfie"
-    static var onErrorSelfie: String  = "onErrorSelfie"
-    static var onSuccessDocument: String  = "onSuccessDocument"
-    static var onErrorDocument: String  = "onErrorDocument"
+    static let onSuccessSelfie: String  = "onSuccessSelfie"
+    static let onErrorSelfie: String  = "onErrorSelfie"
+    static let onSuccessDocument: String  = "onSuccessDocument"
+    static let onErrorDocument: String  = "onErrorDocument"
 }

@@ -9,17 +9,17 @@ import Foundation
 
 class MethodConstansts {
    
-    static var methodCall: String  = "methodCall"
+    static let methodCall: String  = "methodCall"
 
-    static var openCamera: String  = "OpenCamera"
-    static var openCameraDocument: String = "OpenCameraDocument"
+    static let openCamera: String  = "OpenCamera"
+    static let openCameraDocument: String = "OpenCameraDocument"
 
-    static var disableAutoCapture: String = "disableAutoCapture"
-    static var disableSmartFrame: String = "disableSmartFrame"
+    static let disableAutoCapture: String = "disableAutoCapture"
+    static let disableSmartFrame: String = "disableSmartFrame"
 
-    static var document_type: String = "DOCUMENT_TYPE"
+    static let document_type: String = "DOCUMENT_TYPE"
 
-    static var setTimeoutSession: String = "setTimeoutSession"
-    static var setTimeoutToFaceInference: String = "setTimeoutToFaceInference"
+    static let setTimeoutSession: String = "setTimeoutSession"
+    static let setTimeoutToFaceInference: String = "setTimeoutToFaceInference"
     
 }
