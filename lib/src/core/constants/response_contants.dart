@@ -15,4 +15,16 @@ class ResponseConstants {
   ///tempo de cessão da camera inteligente encerrou
   static const String onSystemChangedTypeCameraTimeoutFaceInference =
       "onSystemChangedTypeCameraTimeoutFaceInference";
+
+  ///on success selfie
+  static const String onSuccessSelfie = "onSuccessSelfie";
+
+  ///on error selfie
+  static const onErrorSelfie = "onErrorSelfie";
+
+  ///on success document
+  static const onSuccessDocument = "onSuccessDocument";
+
+  ///on error document
+  static const onErrorDocument = "onErrorDocument";
 }
