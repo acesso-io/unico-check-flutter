@@ -9,7 +9,7 @@ import Foundation
 
 class UnicoTheme: NSObject, AcessoBioThemeDelegate {
     
-    var argument: Dictionary<String, Any>
+    private var argument: Dictionary<String, Any>
     
     init(argument: Dictionary<String, Any>){
         self.argument = argument
@@ -66,6 +66,5 @@ class UnicoTheme: NSObject, AcessoBioThemeDelegate {
     func getColorSilhouetteError() -> Any? {
         return self.argument["iosColorSilhouetteError"] as? String ?? nil
     }
-    
 }
 

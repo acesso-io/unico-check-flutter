@@ -10,7 +10,7 @@ class Initializer {
     final unicoInit = UnicoConfig(
       //Time
       setTimeoutSession: 50.0,
-      setTimeoutToFaceInference: 50.0,
+      setTimeoutToFaceInference: 16.0,
 
       //Android
       androidColorBackground: "#708090",
@@ -29,14 +29,14 @@ class Initializer {
 
       //iOS
       iosColorBackground: "#708090",
-      iosColorBoxMessage: "#B0C4DE",
-      iosColorTextMessage: "#00FFFF",
+      iosColorBoxMessage: "#b434eb",
+      iosColorTextMessage: "#000000",
       iosColorBackgroundPopupError: "#8B4513",
       iosColorTextPopupError: "#BC8F8F",
       iosColorBackgroundButtonPopupError: "#0080ff",
       iosColorTextButtonPopupError: "#F4A460",
       iosColorBackgroundTakePictureButton: "#FFDEAD",
-      iosColorIconTakePictureButton: "#F5DEB3",
+      iosColorIconTakePictureButton: "#000000",
       iosColorBackgroundBottomDocument: "#DEB887",
       iosColorTextBottomDocument: "#D2B48C",
       iosColorSilhouetteSuccess: "#7B68EE",

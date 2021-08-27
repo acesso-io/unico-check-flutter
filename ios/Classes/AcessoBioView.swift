@@ -44,10 +44,10 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
         let cameraType = UnicoCameraType(argument: SwiftUnicoCheckPlugin.argument)
         let unicoTimer = UnicoTimer(argument: SwiftUnicoCheckPlugin.argument)
         
-        unicoCheck.setSmartFrame(cameraType.smartFrame)
-        unicoCheck.setAutoCapture(cameraType.autoCapture)
-        unicoCheck.setTimeoutSession(unicoTimer.timeoutSession)
-        unicoCheck.setTimeoutToFaceInference(unicoTimer.timeoutToFaceInference)
+        unicoCheck.setSmartFrame(cameraType.getSmartFrame())
+        unicoCheck.setAutoCapture(cameraType.getAutoCapture())
+        unicoCheck.setTimeoutSession(unicoTimer.getTimeoutSession())
+        unicoCheck.setTimeoutToFaceInference(unicoTimer.getTimeoutToFaceInference())
         unicoCheck.setTheme(UnicoTheme(argument: SwiftUnicoCheckPlugin.argument))
     }
     

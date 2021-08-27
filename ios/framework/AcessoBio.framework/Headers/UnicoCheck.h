@@ -13,7 +13,6 @@
 #endif
 
 #import "ErrorBio.h"
-
 #import "iAcessoBioBuilder.h"
 #import "AcessoBioManagerDelegate.h"
 #import "AcessoBioSelfieDelegate.h"
