@@ -5,89 +5,51 @@
 //  Created by Lucas Diniz Silva on 26/02/21.
 //
 
-class AcessoBioDocument: AcessoBioView{
+class AcessoBioDocument: AcessoBioView, AcessoBioDocumentDelegate, DocumentCameraDelegate{
+    
+    static let rgFrente = 501
+    static let rgVerso = 502
+    static let CNH = 4
+    var document: DocumentEnums = DocumentEnums.none
     
     override func callMethodBio(){
-        switch method {
+        selectDocument()
+        switch SwiftUnicoCheckPlugin.methodCall {
             
-            case "openCameraDocumentOCR":openCameraDocumentOCR()
-            case "openFaceMatch":openFaceMatch()
-            case "openCameraDocument":openCameraDocuments()
+            case MethodConstansts.openCameraDocument: unicoCheck.build().prepareDocumentCamera(self)
                 
-            default: flutterResult(FlutterMethodNotImplemented)
+            default: SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
         }
     }
     
-    func openCameraDocumentOCR(){
-        let document_type = valueExtra["DOCUMENT_TYPE"] as? Int
-        var document = DocumentType.none
-        
-        switch document_type {
-            case 501: do { document = DocumentType.CNH }
-            case 502: do { document = DocumentType.CNH }
-            case 4: do { document = DocumentType.CNH }
-            case 99: do { document = DocumentType.CNH }
-                
-            default: document = DocumentType.none
-        }
-        
-        if(document_type != 0 && document_type != nil){
-            acessoBioManager.openCameraDocumentOCR(document)
-        }else{
-            onError(msg: "Informe tipo de documento")
-        }
+    func onCameraReadyDocument(_ cameraOpener: AcessoBioCameraOpenerDelegate!) {
+        cameraOpener.openDocument(
+            document,
+            delegate: self
+        )
     }
     
-    func openFaceMatch(){
-        let document_type = valueExtra["DOCUMENT_TYPE"] as? Int
-        var document = DocumentType.none
-        
-        switch document_type {
-            case 501: do { document = DocumentType.CNH }
-            case 502: do { document = DocumentType.CNH }
-            case 4: do { document = DocumentType.CNH }
-            case 99: do { document = DocumentType.CNH }
-                
-            default: document = DocumentType.none
-        }
-        
-        if(document_type != 0 && document_type != nil){
-            acessoBioManager.openCameraDocumentFacematch(document)
-        }else{
-            onError(msg: "Informe tipo de documento")
-        }
-    }
+    func onCameraFailedDocument(_ message: String!) { }
     
-    func openCameraDocuments(){
-        let document_type = valueExtra["DOCUMENT_TYPE"] as? Int
-        var document = DocumentType.none
+    func selectDocument(){
+        let document_type = SwiftUnicoCheckPlugin.argument[MethodConstansts.document_type] as? Int
         
         switch document_type {
-            case 501: do { document = DocumentType.CNH }
-            case 502: do { document = DocumentType.CNH }
-            case 4: do { document = DocumentType.CNH }
-            case 99: do { document = DocumentType.CNH }
+            case AcessoBioDocument.rgFrente: do { document = DocumentEnums.rgFrente }
+            case AcessoBioDocument.rgVerso: do { document = DocumentEnums.rgVerso }
+            case AcessoBioDocument.CNH: do { document = DocumentEnums.CNH }
                 
-            default: document = DocumentType.none
-        }
-        
-        if(document_type != 0 && document_type != nil){
-            acessoBioManager.openCameraDocuments(document)
-        }else{
-            onError(msg: "Informe tipo de documento")
+            default: document = DocumentEnums.none
         }
     }
 
-    
-    //results
-    func onSuccesCameraDocument(_ result: CameraDocumentResult!){
-        flutterResult(convertObjToDicionary(result: result, status: 1))
+    func onSuccessDocument(_ result: DocumentResult!) {
+        SwiftUnicoCheckPlugin.result(ConvertToHashMap.convertObjToDicionary(result: result))
     }
     
-    func onErrorCameraDocument(_ error: String!){
-        flutterResult(convertObjToDicionary(result: error, status: 0))
+    func onErrorDocument(_ errorBio: ErrorBio!) {
+        SwiftUnicoCheckPlugin.result(
+            FlutterError(code: ReturnCostants.onError, message: "", details: ConvertToHashMap.convertObjToDicionary(result: errorBio))
+        )
     }
-
-        
-
 }

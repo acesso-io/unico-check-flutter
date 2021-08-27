@@ -10,7 +10,7 @@ class Initializer {
     final unicoInit = UnicoConfig(
       //Time
       setTimeoutSession: 50.0,
-      setTimeoutToFaceInference: 50.0,
+      setTimeoutToFaceInference: 16.0,
 
       //Android
       androidColorBackground: "#708090",
@@ -25,17 +25,22 @@ class Initializer {
       androidColorBackgroundBottomDocument: "#DEB887",
       androidColorTextBottomDocument: "#D2B48C",
       androidColorSilhouetteSuccess: "#7B68EE",
+      androidColorSilhouetteError: "#DEB887",
 
       //iOS
-      // iosColorSilhoutteNeutra: "#0080ff",
-      // iosColorSilhoutteSuccess: "#0080ff",
-      // iosColorSilhoutteError: "#0080ff",
-      // iosColorBackground: "#0080ff",
-      // iosColorBackgroundBoxStatus: "#0080ff",
-      // iosColorTextBoxStatus: "#0080ff",
-      // iosColorBackgroundPopupError: "#0080ff",
-      // iosColorTextPopupError: "#0080ff",
-      // iosImageIconPopupError: "#0080ff",
+      iosColorBackground: "#708090",
+      iosColorBoxMessage: "#b434eb",
+      iosColorTextMessage: "#000000",
+      iosColorBackgroundPopupError: "#8B4513",
+      iosColorTextPopupError: "#BC8F8F",
+      iosColorBackgroundButtonPopupError: "#0080ff",
+      iosColorTextButtonPopupError: "#F4A460",
+      iosColorBackgroundTakePictureButton: "#FFDEAD",
+      iosColorIconTakePictureButton: "#000000",
+      iosColorBackgroundBottomDocument: "#DEB887",
+      iosColorTextBottomDocument: "#D2B48C",
+      iosColorSilhouetteSuccess: "#7B68EE",
+      iosColorSilhouetteError: "#DEB887",
     );
     Get.put(unicoInit);
   }

@@ -6,14 +6,13 @@
 //  Copyright © 2020 Matheus  domingos. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CameraFaceResult : NSObject
+@interface SelfieResult : NSObject
 
 @property(strong, nonatomic) NSString *base64;
-@property(strong, nonatomic) NSString *processId;
 
 @end
 

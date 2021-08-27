@@ -21,8 +21,9 @@ class AcessoBioCameraController extends GetxController
   }
 
   @override
-  void onErrorAcessoBio(ErrorBioResponse error) {
-    SnackbarUtil.showSuccess(message: error.description);
+  void onSuccessCamera(CameraResponse response) {
+    _base64 = response.base64;
+    SnackbarUtil.showSuccess(message: "success");
   }
 
   @override
@@ -31,14 +32,8 @@ class AcessoBioCameraController extends GetxController
   }
 
   @override
-  void onErrorDocumentInsert(String error) {
-    SnackbarUtil.showSuccess(message: error);
-  }
-
-  @override
-  void onSuccessCamera(CameraResponse response) {
-    _base64 = response.base64;
-    SnackbarUtil.showSuccess(message: "success");
+  void onErrorAcessoBio(ErrorBioResponse error) {
+    SnackbarUtil.showSuccess(message: error.description);
   }
 
   @override

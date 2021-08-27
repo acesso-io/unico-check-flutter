@@ -15,15 +15,19 @@ class UnicoConfig {
   String? androidColorSilhouetteError;
 
   ///IOS custom layout
-  String? iosColorSilhoutteNeutra;
-  String? iosColorSilhoutteSuccess;
-  String? iosColorSilhoutteError;
   String? iosColorBackground;
-  String? iosColorBackgroundBoxStatus;
-  String? iosColorTextBoxStatus;
+  String? iosColorBoxMessage;
+  String? iosColorTextMessage;
   String? iosColorBackgroundPopupError;
   String? iosColorTextPopupError;
-  String? iosImageIconPopupError;
+  String? iosColorBackgroundButtonPopupError;
+  String? iosColorTextButtonPopupError;
+  String? iosColorBackgroundTakePictureButton;
+  String? iosColorIconTakePictureButton;
+  String? iosColorBackgroundBottomDocument;
+  String? iosColorTextBottomDocument;
+  String? iosColorSilhouetteSuccess;
+  String? iosColorSilhouetteError;
 
   ///Timers
   double? setTimeoutSession;
@@ -44,15 +48,19 @@ class UnicoConfig {
     this.androidColorTextBottomDocument,
     this.androidColorSilhouetteSuccess,
     this.androidColorSilhouetteError,
-    this.iosColorSilhoutteNeutra,
-    this.iosColorSilhoutteSuccess,
-    this.iosColorSilhoutteError,
     this.iosColorBackground,
-    this.iosColorBackgroundBoxStatus,
-    this.iosColorTextBoxStatus,
+    this.iosColorBoxMessage,
+    this.iosColorTextMessage,
     this.iosColorBackgroundPopupError,
     this.iosColorTextPopupError,
-    this.iosImageIconPopupError,
+    this.iosColorBackgroundButtonPopupError,
+    this.iosColorTextButtonPopupError,
+    this.iosColorBackgroundTakePictureButton,
+    this.iosColorIconTakePictureButton,
+    this.iosColorBackgroundBottomDocument,
+    this.iosColorTextBottomDocument,
+    this.iosColorSilhouetteSuccess,
+    this.iosColorSilhouetteError,
     this.setTimeoutSession,
     this.setTimeoutToFaceInference,
   });
@@ -60,76 +68,90 @@ class UnicoConfig {
   Map<dynamic, dynamic> get getCommonMap {
     var map = <String, dynamic>{
       ///Android custom layout
-      ///adiciona cor a silhueta de captura
+      /// Cor de sucesso da silhueta.
       'androidColorBackground': androidColorBackground,
 
-      ///adiciona cor no funudo da captura
+      /// Cor de fundo da mensagem.
       'androidColorBoxMessage': androidColorBoxMessage,
 
-      ///adiciona cor no box de mensagem
+      /// Cor de texto da mensagem.
       'androidColorTextMessage': androidColorTextMessage,
 
-      ///adiciona cor no texto da mensagem
+      /// Cor de fundo do popup.
       'androidColorBackgroundPopupError': androidColorBackgroundPopupError,
 
-      ///adiciona cor no fundo do popup de erro
+      /// Cor de texto e ícones do popup.
       'androidColorTextPopupError': androidColorTextPopupError,
 
-      ///adiciona cor no texto de erro do popup
+      /// Cor de fundo do botão do popup.
       'androidColorBackgroundButtonPopupError':
           androidColorBackgroundButtonPopupError,
 
-      ///adiciona cor no botão popup
+      /// Cor de texto do botão do popup.
       'androidColorTextButtonPopupError': androidColorTextButtonPopupError,
 
-      ///adiciona cor no texto do botão do popup
+      /// Cor de fundo do botão de tirar foto manualmente.
       'androidColorBackgroundTakePictureButton':
           androidColorBackgroundTakePictureButton,
 
-      ///adiciona cor no fundo de captura
+      /// Cor de ícone do botão de tirar foto manualmente.
       'androidColorIconTakePictureButton': androidColorIconTakePictureButton,
 
       ///adiciona cor no icone do botão de captura
       'androidColorBackgroundBottomDocument':
           androidColorBackgroundBottomDocument,
 
-      ///adiciona cor no fundo do botão de captura
+      ///Cor de fundo do box na captura de documentos.
       'androidColorTextBottomDocument': androidColorTextBottomDocument,
 
-      ///adiciona cor no texto do botão de captura documento
+      /// Cor de sucesso da silhueta.
       'androidColorSilhouetteSuccess': androidColorSilhouetteSuccess,
 
-      ///adiciona cor no texto do botão de captura documento
+      /// Cor de erro da silhueta.
       'androidColorSilhouetteError': androidColorSilhouetteError,
 
       /// IOS custom layout
-      /// adiciona cor na silhueta de captura
-      'setIosColorSilhoutteNeutra': iosColorSilhoutteNeutra,
+      /// Cor de fundo da silhueta.
+      'iosColorBackground': iosColorBackground,
 
-      ///adiciona cor na silhueta de sucesso
-      'setIosColorSilhoutteSuccess': iosColorSilhoutteSuccess,
+      /// Cor de fundo da mensagem
+      'iosColorBoxMessage': iosColorBoxMessage,
 
-      ///adiciona cor na silhueta de erro
-      'setIosColorSilhoutteError': iosColorSilhoutteError,
+      /// Cor de texto da mensagem
+      'iosColorTextMessage': iosColorTextMessage,
 
-      ///adiciona cor no fundo de captura
-      'setIosColorBackground': iosColorBackground,
+      /// Cor de fundo do popup
+      'iosColorBackgroundPopupError': iosColorBackgroundPopupError,
 
-      ///adiciona cor no fundo da caixa de status
-      'setIosColorBackgroundBoxStatus': iosColorBackgroundBoxStatus,
+      /// Cor de texto e ícones do popup.
+      'iosColorTextPopupError': iosColorTextPopupError,
 
-      ///adiciona cor no texto da caixa de status
-      'setIosColorTextBoxStatus': iosColorTextBoxStatus,
+      /// Cor de fundo do botão do popup.
+      'iosColorBackgroundButtonPopupError': iosColorBackgroundButtonPopupError,
 
-      ///adiciona cor no fundo do icone popup de erro
-      'setIosColorBackgroundPopupError': iosColorBackgroundPopupError,
+      /// Cor de fundo do botão do popup.
+      'iosColorTextButtonPopupError': iosColorTextButtonPopupError,
 
-      ///adiciona cor no texto popup de erro
-      'setIosColorTextPopupError': iosColorTextPopupError,
+      /// Cor de fundo do botão de tirar foto manualmente.
+      'iosColorBackgroundTakePictureButton':
+          iosColorBackgroundTakePictureButton,
 
-      ///adiciona cor no icone popup erro
-      'setIosImageIconPopupError': iosImageIconPopupError,
+      /// Cor de ícone do botão de tirar foto manualmente.
+      'iosColorIconTakePictureButton': iosColorIconTakePictureButton,
 
+      /// Cor de fundo do box na captura de documentos.
+      'iosColorBackgroundBottomDocument': iosColorBackgroundBottomDocument,
+
+      /// Cor de texto do box na captura de documentos.
+      'iosColorTextBottomDocument': iosColorTextBottomDocument,
+
+      /// Cor de sucesso da silhueta.
+      'iosColorSilhouetteSuccess': iosColorSilhouetteSuccess,
+
+      /// Cor de erro da silhueta.
+      'iosColorSilhouetteError': iosColorSilhouetteError,
+
+      ///Config Timmers
       ///adiciona timer de sessão
       'setTimeoutSession': setTimeoutSession,
 

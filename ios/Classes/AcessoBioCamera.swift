@@ -5,40 +5,30 @@
 //  Created by Lucas Diniz Silva on 26/02/21.
 //
 
-class AcessoBioCamera: AcessoBioView {
-    
+class AcessoBioCamera: AcessoBioView, AcessoBioSelfieDelegate, SelfieCameraDelegate {
+
     override func callMethodBio(){
-        cameraSetings()
-        switch method {
+        switch SwiftUnicoCheckPlugin.methodCall {
             
-            case "openCamera": acessoBioManager.openCameraFace()
+            case MethodConstansts.openCamera: unicoCheck.build().prepareSelfieCamera(self)
             
-                
-            default: flutterResult(FlutterMethodNotImplemented)
-                
+            default: SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
         }
     }
     
-    func cameraSetings(){
-        let disableAutoCapture = valueExtra["disableAutoCapture"] as? Bool
-        let disableSmartFrame = valueExtra["disableSmartFrame"] as? Bool
-        
-        if( disableAutoCapture != nil && disableAutoCapture == true){
-            acessoBioManager.disableAutoCapture()
-        }
-        if(disableAutoCapture != nil && disableSmartFrame == true){
-            acessoBioManager.disableSmartCamera()
-        }
+    func onCameraReady(_ cameraOpener: AcessoBioCameraOpenerDelegate!) {
+        cameraOpener.open(self)
     }
+    
+    func onCameraFailed(_ message: String!) {}
 
-    
-    func onSuccesCameraFace(_ result: CameraFaceResult!){
-        flutterResult(convertObjToDicionary(result: result, status: 1))
+    func onSuccessSelfie(_ result: SelfieResult!) {
+        SwiftUnicoCheckPlugin.result(ConvertToHashMap.convertObjToDicionary(result: result))
     }
     
-    func onErrorCameraFace(_ error: String!){
-        flutterResult(convertObjToDicionary(result: error, status: 0))
+    func onErrorSelfie(_ errorBio: ErrorBio!) {
+        SwiftUnicoCheckPlugin.result(
+            FlutterError(code: ReturnCostants.onError, message: "", details: ConvertToHashMap.convertObjToDicionary(result: errorBio))
+        )
     }
-    
-
 }
