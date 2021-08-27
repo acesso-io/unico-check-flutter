@@ -19,5 +19,11 @@ void validateResponse({
   } else if (response.code ==
       ResponseConstants.onSystemChangedTypeCameraTimeoutFaceInference) {
     callbacks.systemChangedTypeCameraTimeoutFaceInference();
+  } else {
+    callbacks.onErrorAcessoBio(ErrorBioResponse(<String, dynamic>{
+      'code': '0',
+      'method': 'response',
+      'description': 'unknown answer',
+    }));
   }
 }
