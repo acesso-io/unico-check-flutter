@@ -41,9 +41,10 @@ class DocumentFunctions {
     } on PlatformException catch (exeption) {
       if (exeption.code == ResponseConstants.onError) {
         final error = ErrorBioResponse(exeption.details);
-        _callbacks.onErrorDocument(exeption.details);
+        _callbacks.onErrorDocument(error);
+      } else {
+        validateResponse(callbacks: _callbacks, response: exeption);
       }
-      validateResponse(callbacks: _callbacks, response: exeption);
     }
   }
 }

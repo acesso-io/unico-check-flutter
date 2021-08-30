@@ -121,8 +121,7 @@ void main() {
     test('open_document_rg_frente_error', () async {
       setOnErrorResponse();
       _unico = UnicoCheck(
-          context: Results(ResponseConstants.onErrorDocument),
-          config: UnicoConfig());
+          context: Results(ResponseConstants.onError), config: UnicoConfig());
       _unico.document!
           .openCameraDocument(documentType: DocumentsTypeConstants.rg_frente);
     });
@@ -130,8 +129,7 @@ void main() {
     test('open_document_rg_verso_error', () async {
       setOnErrorResponse();
       _unico = UnicoCheck(
-          context: Results(ResponseConstants.onErrorDocument),
-          config: UnicoConfig());
+          context: Results(ResponseConstants.onError), config: UnicoConfig());
       _unico.document!
           .openCameraDocument(documentType: DocumentsTypeConstants.rg_verso);
     });
@@ -162,6 +160,35 @@ void main() {
       _unico.document!
           .openCameraDocument(documentType: DocumentsTypeConstants.rg_verso);
     });
+
+    test('open_document_cnh_closed_manual', () async {
+      setOnCameraClosedManual();
+      _unico = UnicoCheck(
+          context: Results(ResponseConstants.onUserClosedCameraManually),
+          config: UnicoConfig());
+      _unico.document!
+          .openCameraDocument(documentType: DocumentsTypeConstants.cnh);
+    });
+
+    test('open_document_on_camera_time_session', () async {
+      setsystemClosedCameraTimeoutSession();
+      _unico = UnicoCheck(
+          context:
+              Results(ResponseConstants.onSystemClosedCameraTimeoutSession),
+          config: UnicoConfig());
+      _unico.document!
+          .openCameraDocument(documentType: DocumentsTypeConstants.rg_frente);
+    });
+
+    test('open_document_on_camera_face_inference', () async {
+      systemChangedTypeCameraTimeoutFaceInference();
+      _unico = UnicoCheck(
+          context: Results(
+              ResponseConstants.onSystemChangedTypeCameraTimeoutFaceInference),
+          config: UnicoConfig());
+      _unico.document!
+          .openCameraDocument(documentType: DocumentsTypeConstants.rg_verso);
+    });
   });
 }
 
@@ -181,9 +208,9 @@ class Results implements IAcessoBioDocument {
   }
 
   @override
-  void onErrorDocument(String error) async {
+  void onErrorDocument(ErrorBioResponse error) async {
     if (onTest == ResponseConstants.onError) {
-      expect(error.isEmpty, false);
+      expect(error.description.isEmpty, false);
     } else {
       expect(true, false);
     }

@@ -1,3 +1,4 @@
+import '../../../unico_check.dart';
 import '../response/success/camera_document.response.dart';
 import 'acesso_bio.interface.dart';
 
@@ -7,5 +8,5 @@ import 'acesso_bio.interface.dart';
 abstract class IAcessoBioDocument extends IAcessoBio {
   void onSuccesstDocument(CameraDocumentResponse response);
 
-  void onErrorDocument(String error);
+  void onErrorDocument(ErrorBioResponse error);
 }

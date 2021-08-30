@@ -5,8 +5,10 @@ import com.acesso.acessobio_android.iAcessoBioDocument
 import com.acesso.acessobio_android.onboarding.camera.UnicoCheckCameraOpener
 import com.acesso.acessobio_android.onboarding.camera.document.DocumentCameraListener
 import com.acesso.acessobio_android.onboarding.types.DocumentType
+import com.acesso.acessobio_android.services.dto.ErrorBio
 import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.ReturnConstants
+import com.unico_check.hashMap.errorBioToHashMap
 import com.unico_check.hashMap.convertObjToMapReflection
 
 class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
@@ -69,7 +71,7 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
             UnicoCheckPlugin.result.error(
                 ReturnConstants.onError,
                 "",
-                convertObjToMapReflection(error)
+                errorBioToHashMap(ErrorBio(0,"onErrorDocument",error))
             )
             finish()
 

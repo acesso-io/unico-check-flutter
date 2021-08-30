@@ -21,7 +21,7 @@ void validateResponse({
     callbacks.systemChangedTypeCameraTimeoutFaceInference();
   } else {
     callbacks.onErrorAcessoBio(ErrorBioResponse(<String, dynamic>{
-      'code': '0',
+      'code': 0,
       'method': 'response',
       'description': 'unknown answer',
     }));
