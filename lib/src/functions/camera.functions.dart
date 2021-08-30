@@ -54,7 +54,7 @@ class CameraFunctions {
     } on PlatformException catch (exeption) {
       if (exeption.code == ResponseConstants.onError) {
         final error = ErrorBioResponse(exeption.details);
-        _callbacks.onErrorCamera((error));
+        _callbacks.onErrorCamera(error);
       } else {
         validateResponse(callbacks: _callbacks, response: exeption);
       }

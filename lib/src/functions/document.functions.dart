@@ -6,6 +6,7 @@ import 'package:unico_check/src/core/constants/response_contants.dart';
 import 'package:unico_check/src/core/response/success/camera_document.response.dart';
 import 'package:unico_check/src/core/response/validate_response.dart';
 
+import '../../unico_check.dart';
 import '../unico_config.dart';
 
 class DocumentFunctions {
@@ -39,9 +40,11 @@ class DocumentFunctions {
       _callbacks.onSuccesstDocument(response);
     } on PlatformException catch (exeption) {
       if (exeption.code == ResponseConstants.onError) {
-        _callbacks.onErrorDocument(exeption.details);
+        final error = ErrorBioResponse(exeption.details);
+        _callbacks.onErrorDocument(error);
+      } else {
+        validateResponse(callbacks: _callbacks, response: exeption);
       }
-      validateResponse(callbacks: _callbacks, response: exeption);
     }
   }
 }

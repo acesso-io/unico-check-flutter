@@ -28,8 +28,8 @@ class AcessoBioDocumentController implements IAcessoBioDocument {
   }
 
   @override
-  void onErrorDocument(String error) {
-    SnackbarUtil.showError(message: error);
+  void onErrorDocument(ErrorBioResponse error) {
+    SnackbarUtil.showError(message: error.description);
   }
 
   @override
