@@ -258,11 +258,11 @@ class Results implements IAcessoBioCamera {
 
   @override
   void onErrorAcessoBio(ErrorBioResponse error) async {
-    if (onTest == 0) {
-      expect(await error.description.isEmpty, false);
-      expect(await error.method.isEmpty, false);
+    if (onTest == ResponseConstants.onErrorAcessoBio) {
+      expect(error.description.isEmpty, false);
+      expect(error.method.isEmpty, false);
     } else {
-      expect(await true, false);
+      expect(true, false);
     }
     returned_in_interface = true;
   }
