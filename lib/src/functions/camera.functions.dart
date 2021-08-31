@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:unico_check/src/core/abstracts/acesso_bio_camera.interface.dart';
+import 'package:unico_check/src/core/abstracts/acesso_bio_selfie.interface.dart';
 import 'package:unico_check/src/core/constants/map.constants.dart';
 import 'package:unico_check/src/core/constants/methods_channels.constants.dart';
 import 'package:unico_check/src/core/constants/response_contants.dart';
@@ -12,7 +12,7 @@ import '../unico_config.dart';
 class CameraFunctions {
   final MethodChannel _channel;
   final UnicoConfig _config;
-  final IAcessoBioCamera _callbacks;
+  final IAcessoBioSelfie _callbacks;
 
   bool _disableAutoCapture = false;
   bool _disableSmartFrame = false;
@@ -20,7 +20,7 @@ class CameraFunctions {
   CameraFunctions({
     required MethodChannel channel,
     required UnicoConfig config,
-    required IAcessoBioCamera callbacks,
+    required IAcessoBioSelfie callbacks,
   })   : _channel = channel,
         _config = config,
         _callbacks = callbacks;
@@ -50,11 +50,11 @@ class CameraFunctions {
       );
 
       final response = CameraResponse.fromJson(result);
-      _callbacks.onSuccessCamera(response);
+      _callbacks.onSuccessSelfie(response);
     } on PlatformException catch (exeption) {
       if (exeption.code == ResponseConstants.onError) {
         final error = ErrorBioResponse(exeption.details);
-        _callbacks.onErrorCamera(error);
+        _callbacks.onErrorSelfie(error);
       } else {
         validateResponse(callbacks: _callbacks, response: exeption);
       }

@@ -37,7 +37,7 @@ class DocumentFunctions {
       );
 
       final response = CameraDocumentResponse.fromJson(result);
-      _callbacks.onSuccesstDocument(response);
+      _callbacks.onSuccessDocument(response);
     } on PlatformException catch (exeption) {
       if (exeption.code == ResponseConstants.onError) {
         final error = ErrorBioResponse(exeption.details);
