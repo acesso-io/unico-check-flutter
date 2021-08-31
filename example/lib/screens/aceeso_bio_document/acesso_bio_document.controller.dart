@@ -33,7 +33,7 @@ class AcessoBioDocumentController implements IAcessoBioDocument {
   }
 
   @override
-  void onSuccesstDocument(CameraDocumentResponse response) {
+  void onSuccessDocument(CameraDocumentResponse response) {
     SnackbarUtil.showSuccess(message: "Success");
   }
 
@@ -43,17 +43,17 @@ class AcessoBioDocumentController implements IAcessoBioDocument {
   }
 
   @override
-  void userClosedCameraManually() {
+  void onUserClosedCameraManually() {
     SnackbarUtil.showError(message: "Camera fecheda manualmente");
   }
 
   @override
-  void systemChangedTypeCameraTimeoutFaceInference() {
+  void onSystemChangedTypeCameraTimeoutFaceInference() {
     SnackbarUtil.showError(message: "Timeout: changed to camera normal ");
   }
 
   @override
-  void systemClosedCameraTimeoutSession() {
+  void onSystemClosedCameraTimeoutSession() {
     SnackbarUtil.showError(message: "Timeout: close camera ");
   }
 }

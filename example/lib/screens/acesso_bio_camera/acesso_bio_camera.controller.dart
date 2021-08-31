@@ -4,14 +4,12 @@ import 'package:unico_check/unico_check.dart';
 import 'package:unico_check_example/utils/snackbar.util.dart';
 
 class AcessoBioCameraController extends GetxController
-    implements IAcessoBioCamera {
+    implements IAcessoBioSelfie {
   late UnicoCheck _unico;
-  String _base64 = "";
   late ValueNotifier<String> base64;
 
   AcessoBioCameraController() {
     _unico = UnicoCheck(context: this, config: Get.find());
-    base64 = new ValueNotifier<String>(_base64);
   }
 
   void openCamera() {
@@ -21,38 +19,32 @@ class AcessoBioCameraController extends GetxController
   }
 
   @override
-  void onSuccessCamera(CameraResponse response) {
-    _base64 = response.base64;
-    SnackbarUtil.showSuccess(message: "success");
-  }
-
-  @override
-  void onErrorCamera(ErrorBioResponse error) {
-    SnackbarUtil.showSuccess(message: error.description);
-  }
-
-  @override
   void onErrorAcessoBio(ErrorBioResponse error) {
     SnackbarUtil.showSuccess(message: error.description);
   }
 
   @override
-  void onSucessDocumentInsert(String processId, String typed) {
-    SnackbarUtil.showSuccess(message: "success ID: " + processId);
+  void onErrorSelfie(ErrorBioResponse error) {
+    SnackbarUtil.showSuccess(message: error.description);
   }
 
   @override
-  void userClosedCameraManually() {
-    SnackbarUtil.showError(message: "Camera fecheda manualmente");
+  void onSuccessSelfie(CameraResponse response) {
+    SnackbarUtil.showSuccess(message: "sucesso");
   }
 
   @override
-  void systemChangedTypeCameraTimeoutFaceInference() {
-    SnackbarUtil.showError(message: "Timeout: changed to camera normal ");
+  void onSystemChangedTypeCameraTimeoutFaceInference() {
+    SnackbarUtil.showSuccess(message: "");
   }
 
   @override
-  void systemClosedCameraTimeoutSession() {
-    SnackbarUtil.showError(message: "Timeout: close camera ");
+  void onSystemClosedCameraTimeoutSession() {
+    SnackbarUtil.showSuccess(message: "");
+  }
+
+  @override
+  void onUserClosedCameraManually() {
+    SnackbarUtil.showSuccess(message: "");
   }
 }

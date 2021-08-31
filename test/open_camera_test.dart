@@ -77,8 +77,8 @@ void main() {
 
   test('create_unico_check', () async {
     _unico = UnicoCheck(context: Results(""), config: UnicoConfig());
-    expect(await _unico.runtimeType, UnicoCheck);
-    expect(await _unico.camera.runtimeType, CameraFunctions);
+    expect(_unico.runtimeType, UnicoCheck);
+    expect(_unico.camera.runtimeType, CameraFunctions);
   });
 
   test('create_unico_check_config_ios', () async {
@@ -230,13 +230,13 @@ void main() {
   });
 }
 
-class Results implements IAcessoBioCamera {
+class Results implements IAcessoBioSelfie {
   String onTest;
 
   Results(this.onTest);
 
   @override
-  void onSuccessCamera(CameraResponse response) async {
+  void onSuccessSelfie(CameraResponse response) async {
     if (onTest == ResponseConstants.onSuccessSelfie) {
       expect(response.base64.isEmpty, false);
     } else {
@@ -246,7 +246,7 @@ class Results implements IAcessoBioCamera {
   }
 
   @override
-  void onErrorCamera(ErrorBioResponse error) async {
+  void onErrorSelfie(ErrorBioResponse error) async {
     if (onTest == ResponseConstants.onError) {
       expect(error.description.isEmpty, false);
       expect(error.method.isEmpty, false);
@@ -268,7 +268,7 @@ class Results implements IAcessoBioCamera {
   }
 
   @override
-  void userClosedCameraManually() async {
+  void onUserClosedCameraManually() async {
     if (onTest == ResponseConstants.onUserClosedCameraManually) {
       expect(true, true);
     } else {
@@ -278,7 +278,7 @@ class Results implements IAcessoBioCamera {
   }
 
   @override
-  void systemClosedCameraTimeoutSession() async {
+  void onSystemClosedCameraTimeoutSession() async {
     if (onTest == ResponseConstants.onSystemClosedCameraTimeoutSession) {
       expect(true, true);
     } else {
@@ -288,7 +288,7 @@ class Results implements IAcessoBioCamera {
   }
 
   @override
-  void systemChangedTypeCameraTimeoutFaceInference() async {
+  void onSystemChangedTypeCameraTimeoutFaceInference() async {
     if (onTest ==
         ResponseConstants.onSystemChangedTypeCameraTimeoutFaceInference) {
       expect(true, true);

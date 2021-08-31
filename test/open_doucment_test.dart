@@ -198,7 +198,7 @@ class Results implements IAcessoBioDocument {
   Results(this.onTest);
 
   @override
-  void onSuccesstDocument(CameraDocumentResponse response) async {
+  void onSuccessDocument(CameraDocumentResponse response) async {
     if (onTest == ResponseConstants.onSuccessDocument) {
       expect(response.base64.isEmpty, false);
     } else {
@@ -229,7 +229,7 @@ class Results implements IAcessoBioDocument {
   }
 
   @override
-  void userClosedCameraManually() async {
+  void onUserClosedCameraManually() async {
     if (onTest == ResponseConstants.onUserClosedCameraManually) {
       expect(true, true);
     } else {
@@ -239,7 +239,7 @@ class Results implements IAcessoBioDocument {
   }
 
   @override
-  void systemClosedCameraTimeoutSession() async {
+  void onSystemClosedCameraTimeoutSession() async {
     if (onTest == ResponseConstants.onSystemClosedCameraTimeoutSession) {
       expect(true, true);
     } else {
@@ -249,7 +249,7 @@ class Results implements IAcessoBioDocument {
   }
 
   @override
-  void systemChangedTypeCameraTimeoutFaceInference() async {
+  void onSystemChangedTypeCameraTimeoutFaceInference() async {
     if (onTest ==
         ResponseConstants.onSystemChangedTypeCameraTimeoutFaceInference) {
       expect(true, true);

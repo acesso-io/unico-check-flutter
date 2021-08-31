@@ -3,7 +3,7 @@ import 'package:unico_check/unico_check.dart';
 import 'package:unico_check_example/utils/snackbar.util.dart';
 
 class AcessoBioCameraNormalController extends GetxController
-    implements IAcessoBioCamera {
+    implements IAcessoBioSelfie {
   late UnicoCheck _unico;
 
   AcessoBioCameraNormalController() {
@@ -17,12 +17,12 @@ class AcessoBioCameraNormalController extends GetxController
   }
 
   @override
-  void onErrorCamera(ErrorBioResponse error) {
+  void onErrorSelfie(ErrorBioResponse error) {
     SnackbarUtil.showError(message: error.description);
   }
 
   @override
-  void onSuccessCamera(CameraResponse response) {
+  void onSuccessSelfie(CameraResponse response) {
     SnackbarUtil.showSuccess(message: "Success");
   }
 
@@ -32,17 +32,17 @@ class AcessoBioCameraNormalController extends GetxController
   }
 
   @override
-  void userClosedCameraManually() {
+  void onUserClosedCameraManually() {
     SnackbarUtil.showError(message: "Camera fecheda manualmente");
   }
 
   @override
-  void systemChangedTypeCameraTimeoutFaceInference() {
+  void onSystemChangedTypeCameraTimeoutFaceInference() {
     SnackbarUtil.showError(message: "Timeout: changed to camera normal ");
   }
 
   @override
-  void systemClosedCameraTimeoutSession() {
+  void onSystemClosedCameraTimeoutSession() {
     SnackbarUtil.showError(message: "Timeout: close camera ");
   }
 }
