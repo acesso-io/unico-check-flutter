@@ -9,12 +9,12 @@ import Foundation
 
 class UnicoTimer {
     
-    private var timeoutSession: Double = 50.0
-    private var timeoutToFaceInference: Double = 15.0
+    private var timeoutSession: Double
+    private var timeoutToFaceInference: Double
     
     init(argument: Dictionary<String, Any>) {
-        self.timeoutSession = argument[MethodConstansts.setTimeoutSession] as! Double
-        self.timeoutToFaceInference = argument[MethodConstansts.setTimeoutToFaceInference] as! Double
+        self.timeoutSession = argument[MethodConstansts.setTimeoutSession] as? Double ?? 50.0
+        self.timeoutToFaceInference = argument[MethodConstansts.setTimeoutToFaceInference] as? Double ?? 15.0
     }
 
     func getTimeoutSession() -> Double{

@@ -32,12 +32,12 @@ class _MyHomePageState extends State<MyHomePage>
     implements IAcessoBioSelfie, IAcessoBioDocument {
   late UnicoCheck unicoCheck;
   final unicoConfig = UnicoConfig(
-    setTimeoutSession: 50.0,
-    setTimeoutToFaceInference: 16.0,
-    androidColorSilhouetteSuccess: "#03fc73",
-    androidColorSilhouetteError: "#fc0303",
-    iosColorSilhouetteSuccess: "#03fc73",
-    iosColorSilhouetteError: "#fc0303",
+    // setTimeoutSession: 50.0,
+    // setTimeoutToFaceInference: 16.0,
+    // androidColorSilhouetteSuccess: "#03fc73",
+    // androidColorSilhouetteError: "#fc0303",
+    // iosColorSilhouetteSuccess: "#03fc73",
+    // iosColorSilhouetteError: "#fc0303",
   );
 
   @override
