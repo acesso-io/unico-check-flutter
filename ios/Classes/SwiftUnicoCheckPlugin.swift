@@ -13,7 +13,7 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
         let instance = SwiftUnicoCheckPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
-
+    
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         
         SwiftUnicoCheckPlugin.result = result
@@ -22,7 +22,7 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
        
         selectCameraMethod()
     }
-    
+
     private func selectCameraMethod(){
         
         switch SwiftUnicoCheckPlugin.methodCall {
@@ -39,7 +39,7 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
     }
     
     private func openCamera() {
-        initView(acessoBioView: AcessoBioCamera() )
+        initView(acessoBioView: AcessoBioCamera())
     }
     
     private func initView(acessoBioView:AcessoBioView ){
@@ -51,5 +51,4 @@ public class SwiftUnicoCheckPlugin: NSObject, FlutterPlugin {
         viewController.present(nav, animated: false, completion: nil)
     }
 }
-
         

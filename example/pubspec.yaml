@@ -9,18 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  # This package is used for dependece injection, navigation and State Managament.
-  get: 4.1.4
+  fluttertoast: ^8.0.8
 
   unico_check:
-    # When depending on this package from a real application you should use:
-    #   unico_check: ^x.y.z
-    # See https://dart.dev/tools/pub/dependencies#version-constraints
-    # The example app is bundled with the plugin so we use a path dependency on
-    # the parent directory to use the current plugin's version.
     path: ../
-
 
 dev_dependencies:
   flutter_test:
