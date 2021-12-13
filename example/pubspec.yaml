@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  fluttertoast: ^8.0.8
 
   # This package is used for dependece injection, navigation and State Managament.
   get: 4.1.4
