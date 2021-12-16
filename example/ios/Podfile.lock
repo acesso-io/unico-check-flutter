@@ -5,6 +5,10 @@ PODS:
   - Sentry (7.5.4):
     - Sentry/Core (= 7.5.4)
   - Sentry/Core (7.5.4)
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
+  - Toast (4.0.0)
   - unico_check (2.0.0-beta.3):
     - Flutter
     - unicocheck-ios (~> 1.0.2)
@@ -15,6 +19,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - unico_check (from `.symlinks/plugins/unico_check/ios`)
 
 SPEC REPOS:
@@ -23,10 +28,13 @@ SPEC REPOS:
     - JOSESwift
     - Sentry
     - unicocheck-ios
+    - Toast
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
   unico_check:
     :path: ".symlinks/plugins/unico_check/ios"
 
@@ -37,6 +45,10 @@ SPEC CHECKSUMS:
   Sentry: 5c5dd4005f3b7b9765d5a8871232cddbd0d888b7
   unico_check: 7454a44ba876ad467168cfb05d7b5ae7d35d0636
   unicocheck-ios: 9b95132b049cb1baeb77e2500a61980830ff945b
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  unico_check: 104430480bc2128afd5a66b22dc05f9f93cd16c9
 
 PODFILE CHECKSUM: 59f8de8f40bb382091a43991ef43c063d955e661
 

@@ -60,20 +60,32 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  get:
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  fluttertoast:
     dependency: "direct main"
     description:
-      name: get
+      name: fluttertoast
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.1.4"
+    version: "8.0.8"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.3"
   matcher:
     dependency: transitive
     description:
       name: matcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.10"
+    version: "0.12.11"
   meta:
     dependency: transitive
     description:
@@ -148,7 +160,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "2.0.0-beta.3"
+    version: "2.0.0"
   vector_math:
     dependency: transitive
     description:

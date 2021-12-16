@@ -5,7 +5,7 @@ import 'package:unico_check/src/core/constants/response_contants.dart';
 import 'package:unico_check/src/functions/camera.functions.dart';
 import 'package:unico_check/unico_check.dart';
 
-bool returned_in_interface = false;
+bool returnedInInterface = false;
 
 void main() {
   const MethodChannel channel = MethodChannel('acessobio');
@@ -183,7 +183,7 @@ void main() {
 
   group('CallBack', () {
     tearDown(() {
-      expect(returned_in_interface, true);
+      expect(returnedInInterface, true);
       channel.setMockMethodCallHandler(null);
     });
 
@@ -242,7 +242,7 @@ class Results implements IAcessoBioSelfie {
     } else {
       expect(true, false);
     }
-    returned_in_interface = true;
+    returnedInInterface = true;
   }
 
   @override
@@ -253,7 +253,7 @@ class Results implements IAcessoBioSelfie {
     } else {
       expect(true, false);
     }
-    returned_in_interface = true;
+    returnedInInterface = true;
   }
 
   @override
@@ -264,7 +264,7 @@ class Results implements IAcessoBioSelfie {
     } else {
       expect(true, false);
     }
-    returned_in_interface = true;
+    returnedInInterface = true;
   }
 
   @override
@@ -274,7 +274,7 @@ class Results implements IAcessoBioSelfie {
     } else {
       expect(true, false);
     }
-    returned_in_interface = true;
+    returnedInInterface = true;
   }
 
   @override
@@ -284,7 +284,7 @@ class Results implements IAcessoBioSelfie {
     } else {
       expect(true, false);
     }
-    returned_in_interface = true;
+    returnedInInterface = true;
   }
 
   @override
@@ -295,6 +295,6 @@ class Results implements IAcessoBioSelfie {
     } else {
       expect(true, false);
     }
-    returned_in_interface = true;
+    returnedInInterface = true;
   }
 }
