@@ -4,14 +4,14 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'unico_check'
-  s.version          = '2.0.0-beta.3'
+  s.version          = '2.0.1'
   s.summary          = 'Esta biblioteca visa implementar a tecnologia Unico.'
   s.description      = <<-DESC
 Esta biblioteca visa implementar a tecnologia Unico.
                        DESC
-  s.homepage         = 'http://example.com'
+  s.homepage         = 'https://www3.acesso.io/sdkbio'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'unico id tech' => 'suporte.unicocheck@unico.io' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
