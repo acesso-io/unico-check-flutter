@@ -1,5 +1,8 @@
 
 
+
+## 2.0.2
+* Updated iOS Version
 ## 2.0.1
 * Fix bug in iOS when open camera
 ## 2.0.0
