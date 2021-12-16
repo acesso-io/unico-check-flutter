@@ -1,6 +1,3 @@
-
-
-
 ## 2.0.2
 * Updated iOS Version
 ## 2.0.1
