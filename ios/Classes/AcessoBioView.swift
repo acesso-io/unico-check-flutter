@@ -13,7 +13,7 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
     private var method: String!
     var unicoCheck: AcessoBioManager!
     private var isOpenCamera: Bool =  false
-    private var acecessoBioStatus = true
+    private var acessoBioStatus = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
         setUi()
         initAcessoBio()
         
-        if(acecessoBioStatus){ callMethodBio() }
+        if(acessoBioStatus){ callMethodBio() }
     }
     
     func callMethodBio(){}
@@ -52,7 +52,7 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
     }
     
     func onErrorAcessoBioManager(_ error: ErrorBio!) {
-        acecessoBioStatus = false
+        acessoBioStatus = false
         SwiftUnicoCheckPlugin.result(
             FlutterError(code: ReturnCostants.onErrorAcessoBio, message: "", details: ConvertToHashMap.convertObjToDicionary(result: error))
         )

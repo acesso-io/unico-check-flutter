@@ -15,8 +15,8 @@ Esta biblioteca visa implementar a tecnologia Unico.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
+  s.dependency  'unicocheck-ios', '~> 1.0.2'
   s.static_framework = false
-  s.ios.vendored_frameworks = 'framework/AcessoBio.framework'
   s.platform = :ios, '11.0'
 
   # Flutter.framework does not contain a i386 slice.

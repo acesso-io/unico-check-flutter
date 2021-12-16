@@ -42,6 +42,7 @@ class AcessoBioDocument: AcessoBioView, AcessoBioDocumentDelegate, DocumentCamer
             default: document = DocumentEnums.none
         }
     }
+    
 
     func onSuccessDocument(_ result: DocumentResult!) {
         SwiftUnicoCheckPlugin.result(ConvertToHashMap.convertObjToDicionary(result: result))
