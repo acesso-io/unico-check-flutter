@@ -60,6 +60,17 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         }
     }
 
+    private fun openCamera(
+        disableAutoCapture: Boolean?,
+        disableSmartFrame: Boolean?
+    ) {
+
+        val intent = getCameraIntent(disableAutoCapture, disableSmartFrame)
+
+        activity.startActivity(intent)
+
+    }
+
     private fun openCameraDocument(DOCUMENT_TYPE: Int?) {
         val intent = Intent(activity, DocumentCameraActivity::class.java)
         intent.putExtra(document_type, DOCUMENT_TYPE)
@@ -88,16 +99,7 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         return intent
     }
 
-    private fun openCamera(
-        disableAutoCapture: Boolean?,
-        disableSmartFrame: Boolean?
-    ) {
 
-        val intent = getCameraIntent(disableAutoCapture, disableSmartFrame)
-
-        activity.startActivity(intent)
-
-    }
 
     //region ActivityAware
     override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {

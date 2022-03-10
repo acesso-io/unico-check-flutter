@@ -23,9 +23,10 @@ class UnicoCheck {
 
   /// ```Context``` é a classe que você irá implementar a interface que você gostaria
   /// de utilizar
-  UnicoCheck({required Object context, required UnicoConfig config})
-      : _config = config {
+  UnicoCheck({required Object context, required UnicoConfig config}): _config = config {
+
     if (context is IAcessoBioDocument || context is IAcessoBioSelfie) {
+
       ///IAcessoBioDocument implementa as funcionalidades de documento
       ///Para receber os resultados da captura do documento
       ///implemente a interface IAcessoBioDocument
@@ -47,6 +48,8 @@ class UnicoCheck {
           callbacks: context,
         );
       }
+
+
     } else {
       throw new Exception(
           'Implementa a interface para receber o resultado: ( IAcessoBioDocument e/ou IAcessoBioCamera ) ');

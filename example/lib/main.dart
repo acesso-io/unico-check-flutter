@@ -70,13 +70,13 @@ class _MyHomePageState extends State<MyHomePage>
 
   void openCameraDocumentRGfrente() {
     unicoCheck.document!.openCameraDocument(
-      documentType: DocumentsTypeConstants.cnh,
+      documentType: DocumentsTypeConstants.rg_frente,
     );
   }
 
   void openCameraDocumentRGverso() {
     unicoCheck.document!.openCameraDocument(
-      documentType: DocumentsTypeConstants.cnh,
+      documentType: DocumentsTypeConstants.rg_verso,
     );
   }
 

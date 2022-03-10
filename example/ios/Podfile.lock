@@ -9,7 +9,7 @@ PODS:
     - Sentry/Core (= 7.5.4)
   - Sentry/Core (7.5.4)
   - Toast (4.0.0)
-  - unico_check (2.0.1):
+  - unico_check (2.0.2):
     - Flutter
     - unicocheck-ios (~> 1.0.2)
   - unicocheck-ios (1.0.2):
@@ -45,9 +45,9 @@ SPEC CHECKSUMS:
   JOSESwift: 7ff178bb9173ff42c6e990929a9f2fa702a34f69
   Sentry: 5c5dd4005f3b7b9765d5a8871232cddbd0d888b7
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
-  unico_check: cd46ff48223736e64dbdcf132770fe09fc6936c0
+  unico_check: 982b5a98420b6bc7c501dd52e4816ca852d42ae4
   unicocheck-ios: 9b95132b049cb1baeb77e2500a61980830ff945b
 
 PODFILE CHECKSUM: 59f8de8f40bb382091a43991ef43c063d955e661
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.2
