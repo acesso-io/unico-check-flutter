@@ -3,7 +3,6 @@ import 'package:unico_check/src/clean/api/unico.check.camera.dart';
 import 'package:unico_check/src/clean/api/unico.check.camera.impl.dart';
 
 class UnicoCheck extends UnicoCheckBuilder {
-
   @override
   UnicoCheckCamera build() {
     return new UnicoCheckImpl();

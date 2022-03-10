@@ -1,3 +1,9 @@
+import 'package:unico_check/src/clean/domain/entities/prepare.dart';
+
 abstract class Channel {
-  Future<Map<String, dynamic>> callMethod({required String method, required String request});
+  void callMethodPrepareCamera(
+      {required String method, required Prepare prepare});
+
+  void callMethodOpenCamera(
+      {required String method, required String request});
 }

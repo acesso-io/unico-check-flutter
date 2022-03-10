@@ -1,7 +1,7 @@
-abstract class SelfieCameraListener {
+import 'package:unico_check/src/clean/api/camera/selfie/unico.check.camera.opener.selfie.dart';
 
-  void onCameraReady(UnicoCheckCameraOpener.Selfie cameraOpener);
+abstract class SelfieCameraListener {
+  void onCameraReady(UnicoCheckCameraOpenerSelfie cameraOpener);
 
   void onCameraFailed(String message);
-
 }

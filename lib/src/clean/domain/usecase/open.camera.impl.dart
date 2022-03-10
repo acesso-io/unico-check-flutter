@@ -1,16 +1,16 @@
 import 'package:unico_check/src/clean/data/repository/channel.dart';
 import 'package:unico_check/src/clean/domain/entities/methods.constants.open.camera.dart';
-import 'package:unico_check/src/clean/domain/entities/methods.constants.prepare.camera.dart';
+import 'package:unico_check/src/clean/domain/interface/open.camera.dart';
 
-class OpenCamera {
+class OpenCameraImpl extends OpenCamera{
   late Channel _channel;
 
-  OpenCamera(Channel channel) {
+  OpenCameraImpl(Channel channel) {
     _channel = channel;
   }
 
-  Future<Map<String, dynamic>> openCamera(
+  void openCamera(
       {required MethodsConstantsOpenCamera method, required String request}) {
-    return _channel.callMethod(method: method.name, request: request);
+    return _channel.callMethodOpenCamera(method: method.name, request: request);
   }
 }

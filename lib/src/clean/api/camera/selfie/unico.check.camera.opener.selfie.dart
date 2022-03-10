@@ -1,3 +1,5 @@
+import 'package:unico_check/src/clean/api/camera/selfie/unico.selfie.dart';
+
 abstract class UnicoCheckCameraOpenerSelfie {
-  void open(iAcessoBioSelfie listener);
+  void open(UnicoSelfie listener);
 }

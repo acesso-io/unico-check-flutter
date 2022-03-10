@@ -1,5 +1,4 @@
 class UnicoConfig {
-
   ///Android custom layout
   String? androidColorBackground;
   String? androidColorBoxMessage;
@@ -86,21 +85,21 @@ class UnicoConfig {
 
       /// Cor de fundo do botão do popup.
       'androidColorBackgroundButtonPopupError':
-      androidColorBackgroundButtonPopupError,
+          androidColorBackgroundButtonPopupError,
 
       /// Cor de texto do botão do popup.
       'androidColorTextButtonPopupError': androidColorTextButtonPopupError,
 
       /// Cor de fundo do botão de tirar foto manualmente.
       'androidColorBackgroundTakePictureButton':
-      androidColorBackgroundTakePictureButton,
+          androidColorBackgroundTakePictureButton,
 
       /// Cor de ícone do botão de tirar foto manualmente.
       'androidColorIconTakePictureButton': androidColorIconTakePictureButton,
 
       ///adiciona cor no icone do botão de captura
       'androidColorBackgroundBottomDocument':
-      androidColorBackgroundBottomDocument,
+          androidColorBackgroundBottomDocument,
 
       ///Cor de fundo do box na captura de documentos.
       'androidColorTextBottomDocument': androidColorTextBottomDocument,
@@ -135,7 +134,7 @@ class UnicoConfig {
 
       /// Cor de fundo do botão de tirar foto manualmente.
       'iosColorBackgroundTakePictureButton':
-      iosColorBackgroundTakePictureButton,
+          iosColorBackgroundTakePictureButton,
 
       /// Cor de ícone do botão de tirar foto manualmente.
       'iosColorIconTakePictureButton': iosColorIconTakePictureButton,
