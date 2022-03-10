@@ -1,7 +1,6 @@
+import 'package:unico_check/src/clean/api/camera/document/unico.check.camera.opener.document.dart';
+
 abstract class DocumentCameraListener {
-
-   void onCameraReady(UnicoCheckCameraOpener.Document cameraOpener);
-
+  void onCameraReady(UnicoCheckCameraOpenerDocument cameraOpener);
   void onCameraFailed(String message);
-
 }
