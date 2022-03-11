@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:unico_check/src/clean/api/camera/selfie/unico.check.camera.opener.selfie.dart';
+import 'package:unico_check/src/clean/domain/entities/unico.error.dart';
 import 'package:unico_check/unico_check.dart';
 
 void main() {
@@ -29,8 +31,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage>
-    implements IAcessoBioSelfie, IAcessoBioDocument {
+    implements IAcessoBioSelfie, IAcessoBioDocument, SelfieCameraListener {
   late UnicoCheck unicoCheck;
+
   final unicoConfig = UnicoConfig(
     setTimeoutSession: 50.0,
     setTimeoutToFaceInference: 16.0,
@@ -47,37 +50,42 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void initAcessoBio() {
-    unicoCheck = new UnicoCheck(context: this, config: unicoConfig);
+    // unicoCheck = new UnicoCheck(context: this, config: unicoConfig);
+
+    unicoCheck = new UnicoCheck();
+
+    unicoCheck.build().prepareSelfieCamera(jsonName: "jsonName", listener: this);
+
   }
 
   void openCamera() {
-    unicoCheck.camera!.setAutoCapture(true);
-    unicoCheck.camera!.setSmartFrame(true);
-    unicoCheck.camera!.openCamera();
+    // unicoCheck.camera!.setAutoCapture(true);
+    // unicoCheck.camera!.setSmartFrame(true);
+    // unicoCheck.camera!.openCamera();
   }
 
   void openCameraNormal() {
-    unicoCheck.camera!.setAutoCapture(false);
-    unicoCheck.camera!.setSmartFrame(false);
-    unicoCheck.camera!.openCamera();
+    // unicoCheck.camera!.setAutoCapture(false);
+    // unicoCheck.camera!.setSmartFrame(false);
+    // unicoCheck.camera!.openCamera();
   }
 
   void openCameraDocumentCNH() {
-    unicoCheck.document!.openCameraDocument(
-      documentType: DocumentsTypeConstants.cnh,
-    );
+    // unicoCheck.document!.openCameraDocument(
+    //   documentType: DocumentsTypeConstants.cnh,
+    // );
   }
 
   void openCameraDocumentRGfrente() {
-    unicoCheck.document!.openCameraDocument(
-      documentType: DocumentsTypeConstants.rg_frente,
-    );
+    // unicoCheck.document!.openCameraDocument(
+    //   documentType: DocumentsTypeConstants.rg_frente,
+    // );
   }
 
   void openCameraDocumentRGverso() {
-    unicoCheck.document!.openCameraDocument(
-      documentType: DocumentsTypeConstants.rg_verso,
-    );
+    // unicoCheck.document!.openCameraDocument(
+    //   documentType: DocumentsTypeConstants.rg_verso,
+    // );
   }
 
   @override
@@ -215,5 +223,15 @@ class _MyHomePageState extends State<MyHomePage>
       backgroundColor: Colors.amber,
       fontSize: 14,
     );
+  }
+
+  @override
+  void onCameraFailed(UnicoError? error) {
+
+  }
+
+  @override
+  void onCameraReady(UnicoCheckCameraOpenerSelfie cameraOpener) {
+
   }
 }

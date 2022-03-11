@@ -8,3 +8,6 @@ export './src/main.dart';
 export 'src/core/constants/document_type.constants.dart';
 export 'src/core/constants/document_type.constants.dart';
 export 'src/unico_config.dart';
+//
+export 'src/clean/api/unico.check.dart';
+export 'src/clean/api/camera/selfie/selfie.camera.listener.dart';
