@@ -43,7 +43,7 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
     }
 
     private fun openCameraDocument() {
-        acessoBio.build().prepareDocumentCamera(object : DocumentCameraListener {
+        acessoBio.build().prepareDocumentCamera("" ,object : DocumentCameraListener {
             override fun onCameraReady(cameraOpener: UnicoCheckCameraOpener.Document) {
                 cameraOpener.open(selectDocument(), this@DocumentCameraActivity)
             }
@@ -71,7 +71,7 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
             UnicoCheckPlugin.result.error(
                 ReturnConstants.onError,
                 "",
-                errorBioToHashMap(ErrorBio(0,"onErrorDocument",error))
+                errorBioToHashMap(ErrorBio(0,"onErrorDocument"))
             )
             finish()
 

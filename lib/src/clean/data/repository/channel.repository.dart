@@ -16,14 +16,12 @@ class ChannelRepository extends Channel {
   }
 
   @override
-  PrepareCameraResponse callMethodPrepareCamera(
+  Future<PrepareCameraResponse> callMethodPrepareCamera(
       {required String method, required Prepare prepare}) {
 
     Future<Map<dynamic, dynamic>> result = _channelUnico.callMethod(
         method: method, request: prepare.getPrepareCameraMap);
 
-
-    return new PrepareCameraResponse().getPrepareCameraResponse();
-
+    return new PrepareCameraResponse().getPrepare(result);
   }
 }

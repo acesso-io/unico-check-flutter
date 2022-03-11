@@ -5,7 +5,7 @@ enum cameraResponse { success, code, message }
 class PrepareCameraResponse {
   late bool _success;
   late UnicoError? _error;
-  
+
   bool getSuccess() {
     return _success;
   }
@@ -14,13 +14,11 @@ class PrepareCameraResponse {
     return _error;
   }
 
-  Future<PrepareCameraResponse> getPrepare(Future<Map<dynamic, dynamic>> map) async {
+  Future<PrepareCameraResponse> getPrepare(
+      Future<Map<dynamic, dynamic>> map) async {
+    Map<dynamic, dynamic> mymap = await map;
 
-    Map<dynamic, dynamic> mymap = map;
-
-    await map[cameraResponse.success]
-
-    return mymap
+    return getValue(mymap);
   }
 
   PrepareCameraResponse getValue(Map value) {
@@ -40,6 +38,6 @@ class PrepareCameraResponse {
       return this;
     }
   }
-
+}
 
 

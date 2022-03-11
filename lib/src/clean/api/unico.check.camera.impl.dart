@@ -16,20 +16,22 @@ class UnicoCheckImpl extends UnicoCheckCamera {
   }
 
   @override
-  void prepareDocumentCamera(
+  void prepareDocumentCamera (
       {required String jsonName, required DocumentCameraListener listener}) {}
 
   @override
-  void prepareSelfieCamera(
-      {required String jsonName, required SelfieCameraListener listener}) {
-    PrepareCameraResponse prepareCameraResponse = _prepareCamera.prepareCamera(
-        method: MethodsConstantsPrepareCamera.prepare_camera_selfie,
-        prepare: new Prepare(jsonName));
+  void prepareSelfieCamera (
+      {required String jsonName, required SelfieCameraListener listener}) async {
 
-    if (prepareCameraResponse.getSuccess()) {
-      listener.onCameraReady(new SelfieCameraOpener());
+    PrepareCameraResponse prepareCameraResponse = await _prepareCamera.prepareCamera(
+        method: MethodsConstantsPrepareCamera.prepare_camera_selfie,
+        prepare: new Prepare(jsonName)
+    );
+
+    if (prepareCameraResponse.getSuccess()){
+        listener.onCameraReady(new SelfieCameraOpener());
     } else {
-      listener.onCameraFailed(prepareCameraResponse.getUnicoError());
+        listener.onCameraFailed(prepareCameraResponse.getUnicoError());
     }
   }
 }

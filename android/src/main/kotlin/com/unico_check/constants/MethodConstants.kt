@@ -3,6 +3,10 @@ package com.unico_check.constants
 object MethodConstants {
     const val methodCall: String = "methodCall"
 
+    const val prepareCameraSelfie: String = "prepare_camera_selfie"
+    const val jsonName: String = "jsonName"
+
+
     const val openCamera: String = "OpenCamera"
     const val openCameraDocument: String = "OpenCameraDocument"
 

@@ -9,6 +9,7 @@ import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.MethodConstants.disableAutoCapture
 import com.unico_check.constants.MethodConstants.disableSmartFrame
 import com.unico_check.constants.MethodConstants.document_type
+import com.unico_check.constants.MethodConstants.jsonName
 import com.unico_check.constants.MethodConstants.setTimeoutSession
 import com.unico_check.constants.MethodConstants.setTimeoutToFaceInference
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -47,6 +48,10 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private fun selectTypeOffCamera(call: MethodCall) {
         when (call.method) {
 
+            MethodConstants.prepareCameraSelfie -> prepareCamera(
+                call.argument(jsonName)
+            )
+
             MethodConstants.openCamera -> openCamera(
                 call.argument(disableAutoCapture),
                 call.argument(disableSmartFrame)
@@ -58,6 +63,12 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
             else -> result.notImplemented()
         }
+    }
+
+    private fun prepareCamera(jsonName: String?) {
+        val intent = Intent(activity, DocumentCameraActivity::class.java)
+        intent.putExtra(document_type, jsonName)
+        activity.startActivity(intent)
     }
 
     private fun openCamera(

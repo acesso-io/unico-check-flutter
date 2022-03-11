@@ -9,11 +9,10 @@ import com.acesso.acessobio_android.onboarding.IAcessoBioBuilder
 import com.acesso.acessobio_android.services.dto.ErrorBio
 import com.unico_check.config.UnicoTheme
 import com.unico_check.config.UnicoTimer
-import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.ReturnConstants
 import com.unico_check.hashMap.errorBioToHashMap
 import com.unico_check.permission.CameraPermissionActivity
-import io.flutter.plugin.common.MethodChannel
+
 
 
 abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
@@ -48,13 +47,11 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
 
     private fun initAcessoBio() {
         acessoBio = AcessoBio(this, this)
-            .setSafeMode(false)
             .setTheme(UnicoTheme(UnicoCheckPlugin.methodCall))
             .apply {
                 val unicoTimer = UnicoTimer(UnicoCheckPlugin.methodCall)
 
                 setTimeoutSession(unicoTimer.getTimeoutSession())
-                setTimeoutToFaceInference(unicoTimer.timeoutToFaceInference())
             }
     }
 

@@ -3,6 +3,6 @@ import 'package:unico_check/src/clean/domain/entities/prepare.camera.response.da
 import 'package:unico_check/src/clean/domain/entities/prepare.dart';
 
 abstract class PrepareCamera {
-  PrepareCameraResponse prepareCamera(
+  Future<PrepareCameraResponse> prepareCamera(
       {required MethodsConstantsPrepareCamera method, required Prepare prepare});
 }

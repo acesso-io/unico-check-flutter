@@ -2,7 +2,7 @@ import 'package:flutter/services.dart';
 import 'channel.unico.dart';
 
 class ChannelUnicoSource extends ChannelUnico {
-  static const _channel = MethodChannel('unico');
+  static const _channel = MethodChannel('acessobio');
 
   @override
   Future<Map<dynamic, dynamic>> callMethod({required String method, required Map<dynamic, dynamic> request}) async {

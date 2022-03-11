@@ -28,7 +28,7 @@ class SelfieCameraActivity : CameraActivity(), iAcessoBioSelfie {
     }
 
     private fun openCamera() {
-        acessoBio.build().prepareSelfieCamera(object : SelfieCameraListener {
+        acessoBio.build().prepareSelfieCamera("", object : SelfieCameraListener {
             override fun onCameraReady(cameraOpener: UnicoCheckCameraOpener.Selfie) {
                 cameraOpener.open(this@SelfieCameraActivity)
             }

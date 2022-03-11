@@ -12,7 +12,7 @@ class PrepareCameraImpl extends PrepareCamera {
   }
 
   @override
-  PrepareCameraResponse prepareCamera(
+  Future<PrepareCameraResponse> prepareCamera(
       {required MethodsConstantsPrepareCamera method,
       required Prepare prepare}) {
 

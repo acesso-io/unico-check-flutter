@@ -9,7 +9,6 @@ import java.util.HashMap
      val hashMap: HashMap<String, Any> = HashMap()
 
      hashMap["code"] = error.code
-     hashMap["method"] = error.method
      hashMap["description"] = error.description
 
      return hashMap
