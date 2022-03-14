@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:unico_check/src/clean/api/camera/selfie/unico.check.camera.opener.selfie.dart';
-import 'package:unico_check/src/clean/domain/entities/unico.error.dart';
 import 'package:unico_check/unico_check.dart';
 
 void main() {
@@ -31,7 +29,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage>
-    implements IAcessoBioSelfie, IAcessoBioDocument, SelfieCameraListener {
+    implements /*IAcessoBioSelfie, IAcessoBioDocument*/ UnicoSelfie {
   late UnicoCheck unicoCheck;
 
   final unicoConfig = UnicoConfig(
@@ -54,7 +52,11 @@ class _MyHomePageState extends State<MyHomePage>
 
     unicoCheck = new UnicoCheck();
 
-    unicoCheck.build().prepareSelfieCamera(jsonName: "jsonName", listener: this);
+    unicoCheck
+        .setTheme(unicoConfig: unicoConfig)
+        .build()
+        .openCameraSelfie(jsonFileName: "unico-check-mobile-services", listener: this);
+
 
   }
 
@@ -194,15 +196,15 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   ///Selfie callbacks
-  @override
-  void onSuccessSelfie(CameraResponse response) {
-    showToast("Sucesso na captura, aqui temos o base64");
-  }
-
-  @override
-  void onErrorSelfie(ErrorBioResponse error) {
-    showToast("Erro ao abrir a camera: " + error.description);
-  }
+  // @override
+  // void onSuccessSelfie(CameraResponse response) {
+  //   showToast("Sucesso na captura, aqui temos o base64");
+  // }
+  //
+  // @override
+  // void onErrorSelfie(ErrorBioResponse error) {
+  //   showToast("Erro ao abrir a camera: " + error.description);
+  // }
 
   ///Document callbacks
   @override
@@ -226,12 +228,12 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   @override
-  void onCameraFailed(UnicoError? error) {
+  void onErrorSelfie(UnicoError errorBio) {
 
   }
 
   @override
-  void onCameraReady(UnicoCheckCameraOpenerSelfie cameraOpener) {
+  void onSuccessSelfie(ResultCameraSelfie result) {
 
   }
 

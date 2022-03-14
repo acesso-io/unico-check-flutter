@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class ResultCameraDocument {
     late String base64;
     late String encrypted;

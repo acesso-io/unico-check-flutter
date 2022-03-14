@@ -1,10 +1,7 @@
-import 'package:unico_check/src/clean/domain/entities/prepare.camera.response.dart';
-import 'package:unico_check/src/clean/domain/entities/prepare.dart';
+
+import 'package:unico_check/src/clean/domain/entities/open.camera.request.dart';
 
 abstract class Channel {
-  Future<PrepareCameraResponse> callMethodPrepareCamera(
-      {required String method, required Prepare prepare});
-
   void callMethodOpenCamera(
-      {required String method, required String request});
+      {required String method, required OpenCameraRequest request});
 }

@@ -1,5 +1,4 @@
-import 'package:unico_check/src/clean/domain/entities/prepare.camera.response.dart';
-import 'package:unico_check/src/clean/domain/entities/prepare.dart';
+import 'package:unico_check/src/clean/domain/entities/open.camera.request.dart';
 import 'package:unico_check/src/clean/plugins/channel/channel.unico.dart';
 import 'channel.dart';
 
@@ -11,17 +10,17 @@ class ChannelRepository extends Channel {
   }
 
   @override
-  void callMethodOpenCamera({required String method, required String request}) {
-    // _channelUnico.callMethod(method: method, request: request)
+  void callMethodOpenCamera({required String method, required OpenCameraRequest request}) {
+     _channelUnico.callMethod(method: method, request: request.getOpenCameraRequest);
   }
 
-  @override
-  Future<PrepareCameraResponse> callMethodPrepareCamera(
-      {required String method, required Prepare prepare}) {
-
-    Future<Map<dynamic, dynamic>> result = _channelUnico.callMethod(
-        method: method, request: prepare.getPrepareCameraMap);
-
-    return new PrepareCameraResponse().getPrepare(result);
-  }
+  // @override
+  // Future<PrepareCameraResponse> callMethodPrepareCamera(
+  //     {required String method, required Prepare prepare}) {
+  //
+  //   Future<Map<dynamic, dynamic>> result = _channelUnico.callMethod(
+  //       method: method, request: prepare.getPrepareCameraMap);
+  //
+  //   return new PrepareCameraResponse().getPrepare(result);
+  // }
 }

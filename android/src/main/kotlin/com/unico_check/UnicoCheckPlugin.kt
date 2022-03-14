@@ -12,6 +12,7 @@ import com.unico_check.constants.MethodConstants.document_type
 import com.unico_check.constants.MethodConstants.jsonName
 import com.unico_check.constants.MethodConstants.setTimeoutSession
 import com.unico_check.constants.MethodConstants.setTimeoutToFaceInference
+import com.unico_check.constants.ReturnConstants.onErrorJsonFileName
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -48,11 +49,8 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private fun selectTypeOffCamera(call: MethodCall) {
         when (call.method) {
 
-            MethodConstants.prepareCameraSelfie -> prepareCamera(
-                call.argument(jsonName)
-            )
-
             MethodConstants.openCamera -> openCamera(
+                call.argument(jsonName),
                 call.argument(disableAutoCapture),
                 call.argument(disableSmartFrame)
             )
@@ -65,18 +63,14 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         }
     }
 
-    private fun prepareCamera(jsonName: String?) {
-        val intent = Intent(activity, DocumentCameraActivity::class.java)
-        intent.putExtra(document_type, jsonName)
-        activity.startActivity(intent)
-    }
 
     private fun openCamera(
+        jsonName: String?,
         disableAutoCapture: Boolean?,
         disableSmartFrame: Boolean?
     ) {
 
-        val intent = getCameraIntent(disableAutoCapture, disableSmartFrame)
+        val intent = getCameraIntent(jsonName, disableAutoCapture, disableSmartFrame)
 
         activity.startActivity(intent)
 
@@ -89,6 +83,7 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     }
 
     private fun getCameraIntent(
+        jsonName: String?,
         disableAutoCapture: Boolean?,
         disableSmartFrame: Boolean?
     ): Intent {
@@ -107,9 +102,14 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             intent.putExtra(MethodConstants.disableSmartFrame, false)
         }
 
+        if (jsonName == "" || jsonName == null) {
+            result.error("0", onErrorJsonFileName, null)
+        } else {
+            intent.putExtra(MethodConstants.jsonName, jsonName)
+        }
+
         return intent
     }
-
 
 
     //region ActivityAware

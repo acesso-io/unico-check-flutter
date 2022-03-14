@@ -11,4 +11,5 @@ object ReturnConstants {
     const val onErrorSelfie: String = "onErrorSelfie"
     const val onSuccessDocument: String = "onSuccessDocument"
     const val onErrorDocument: String = "onErrorDocument"
+    const val onErrorJsonFileName: String = "json file name not informed"
 }

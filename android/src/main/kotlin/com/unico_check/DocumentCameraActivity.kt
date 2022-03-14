@@ -44,6 +44,7 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
 
     private fun openCameraDocument() {
         acessoBio.build().prepareDocumentCamera("" ,object : DocumentCameraListener {
+
             override fun onCameraReady(cameraOpener: UnicoCheckCameraOpener.Document) {
                 cameraOpener.open(selectDocument(), this@DocumentCameraActivity)
             }
@@ -51,6 +52,7 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
             override fun onCameraFailed(message: String) {
                 Log.d(TAG, ReturnConstants.onError)
             }
+
         })
     }
 

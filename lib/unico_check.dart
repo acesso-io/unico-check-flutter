@@ -7,7 +7,10 @@ export './src/core/response/success/camera_document.response.dart';
 export './src/main.dart';
 export 'src/core/constants/document_type.constants.dart';
 export 'src/core/constants/document_type.constants.dart';
-export 'src/unico_config.dart';
+//export 'src/unico_config.dart';
 //
 export 'src/clean/api/unico.check.dart';
-export 'src/clean/api/camera/selfie/selfie.camera.listener.dart';
+export 'src/clean/api/camera/selfie/unico.selfie.dart';
+export 'src/clean/domain/entities/unico.error.dart';
+export 'src/clean/domain/entities/result.camera.selfie.dart';
+export 'src/clean/domain/entities/unico.config.dart';
