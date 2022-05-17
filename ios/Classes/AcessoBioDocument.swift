@@ -6,7 +6,6 @@
 //
 
 class AcessoBioDocument: AcessoBioView, AcessoBioDocumentDelegate, DocumentCameraDelegate{
-    
     static let rgFrente = 501
     static let rgVerso = 502
     static let CNH = 4
@@ -16,7 +15,7 @@ class AcessoBioDocument: AcessoBioView, AcessoBioDocumentDelegate, DocumentCamer
         selectDocument()
         switch SwiftUnicoCheckPlugin.methodCall {
             
-            case MethodConstansts.openCameraDocument: unicoCheck.build().prepareDocumentCamera(self)
+        case MethodConstansts.openCameraDocument: unicoCheck.build().prepareDocumentCamera(self, jsonConfigName: readLocalJsonFile(forName: kLocalJsonName), bundle: Bundle.main)
                 
             default: SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
         }
@@ -52,5 +51,19 @@ class AcessoBioDocument: AcessoBioView, AcessoBioDocumentDelegate, DocumentCamer
         SwiftUnicoCheckPlugin.result(
             FlutterError(code: ReturnCostants.onError, message: "", details: ConvertToHashMap.convertObjToDicionary(result: errorBio))
         )
+    }
+    
+    func onCameraFailedDocument(_ message: ErrorPrepare!) {
+        SwiftUnicoCheckPlugin.result(
+            FlutterError(code: ReturnCostants.onError, message: "", details: ConvertToHashMap.convertObjToDicionary(result:message)))
+    }
+    
+    private func readLocalJsonFile(forName name: String) -> String? {
+        do {
+            if let fileName = Bundle.main.path(forResource: name, ofType: "json") {
+                return fileName
+            }
+        }
+        return nil
     }
 }

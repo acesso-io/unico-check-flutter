@@ -1,5 +1,8 @@
-abstract class UnicoDocument {
-  void onSuccessDocument(String base64);
+import 'package:unico_check/src/clean/domain/entities/result.camera.document.dart';
+import 'package:unico_check/src/clean/domain/entities/unico.error.dart';
 
-  void onErrorDocument(String error);
+abstract class UnicoDocument {
+  void onSuccessDocument(ResultCameraDocument base64);
+
+  void onErrorDocument(UnicoError error);
 }

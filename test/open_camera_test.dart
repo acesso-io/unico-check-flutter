@@ -13,7 +13,7 @@ void main() {
 
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  //region MOC RESULTS
+  //region MOC RESULTS//////
   void setOnSuccessResponse() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
       if (methodCall.method == MethodsChannelsConstants.openCamera) {

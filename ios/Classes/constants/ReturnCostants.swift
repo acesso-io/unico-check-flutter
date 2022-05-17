@@ -13,7 +13,6 @@ class ReturnCostants {
     static let onUserClosedCameraManually: String  = "onUserClosedCameraManually"
     static let onSystemClosedCameraTimeoutSession: String  = "onSystemClosedCameraTimeoutSession"
     static let onSystemChangedTypeCameraTimeoutFaceInference: String  = "onSystemChangedTypeCameraTimeoutFaceInference"
-
     static let onSuccessSelfie: String  = "onSuccessSelfie"
     static let onErrorSelfie: String  = "onErrorSelfie"
     static let onSuccessDocument: String  = "onSuccessDocument"
