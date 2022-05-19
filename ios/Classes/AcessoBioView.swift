@@ -49,6 +49,7 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
         unicoCheck.setTimeoutSession(unicoTimer.getTimeoutSession())
         unicoCheck.setTimeoutToFaceInference(unicoTimer.getTimeoutToFaceInference())
         unicoCheck.setTheme(UnicoTheme(argument: SwiftUnicoCheckPlugin.argument))
+        
     }
     
     func onErrorAcessoBioManager(_ error: ErrorBio!) {

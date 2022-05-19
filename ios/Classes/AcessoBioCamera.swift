@@ -24,6 +24,7 @@ class AcessoBioCamera: AcessoBioView, AcessoBioSelfieDelegate, SelfieCameraDeleg
 
     func onSuccessSelfie(_ result: SelfieResult!) {
         SwiftUnicoCheckPlugin.result(ConvertToHashMap.convertObjToDicionary(result: result))
+        
     }
     
     func onErrorSelfie(_ errorBio: ErrorBio!) {

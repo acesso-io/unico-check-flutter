@@ -9,9 +9,19 @@ class ChannelRepository extends Channel {
     _channelUnico = channelUnico;
   }
 
+  // @override
+  // void callMethodOpenCamera(
+  //     {required String method, required OpenCameraRequest request}) {
+  //   _channelUnico.callMethod(
+  //       method: method, request: request.getOpenCameraRequest);
+  // }
+
   @override
-  void callMethodOpenCamera({required String method, required OpenCameraRequest request}) {
-     _channelUnico.callMethod(method: method, request: request.getOpenCameraRequest);
+  String callMethodOpenCamera(
+      {required String method, required OpenCameraRequest request}) {
+    String openCameraReturn = _channelUnico.callMethod(
+        method: method, request: request.getOpenCameraRequest) as String;
+    return openCameraReturn;
   }
 
   // @override

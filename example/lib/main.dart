@@ -52,24 +52,19 @@ class _MyHomePageState extends State<MyHomePage>
 
     unicoCheck = new UnicoCheck();
 
-    unicoCheck
-        .setTheme(unicoConfig: unicoConfig)
-        .build()
-        .openCameraSelfie(jsonFileName: "unico-check-mobile-services", listener: this);
-
-
+    unicoCheck.setTheme(unicoConfig: unicoConfig).build().openCameraSelfie(
+        jsonFileName: "unico-check-mobile-services", listener: this);
   }
 
-  void openCamera() {
-    // unicoCheck.camera!.setAutoCapture(true);
-    // unicoCheck.camera!.setSmartFrame(true);
-    // unicoCheck.camera!.openCamera();
-  }
+  void openCamera() {}
 
   void openCameraNormal() {
     // unicoCheck.camera!.setAutoCapture(false);
     // unicoCheck.camera!.setSmartFrame(false);
     // unicoCheck.camera!.openCamera();
+    // unicoCheck = new UnicoCheck();
+    // unicoCheck.setTheme(unicoConfig: unicoConfig).build().openCameraSelfie(
+    //     jsonFileName: "unico-check-mobile-services", listener: this);
   }
 
   void openCameraDocumentCNH() {
@@ -197,12 +192,13 @@ class _MyHomePageState extends State<MyHomePage>
 
   ///Selfie callbacks
   // @override
-  // void onSuccessSelfie(CameraResponse response) {
+  // Future<void> onSuccessSelfie(CameraResponse response) async {
   //   showToast("Sucesso na captura, aqui temos o base64");
   // }
-  //
+
+  // //
   // @override
-  // void onErrorSelfie(ErrorBioResponse error) {
+  // Future<void> onErrorSelfie(ErrorBioResponse error) async {
   //   showToast("Erro ao abrir a camera: " + error.description);
   // }
 
@@ -228,14 +224,12 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   @override
-  void onErrorSelfie(UnicoError errorBio) {
-
+  void onErrorSelfie(UnicoError errorBio) async {
+    showToast("error" + errorBio.description);
   }
 
   @override
   void onSuccessSelfie(ResultCameraSelfie result) {
-
+    print(result);
   }
-
-
 }

@@ -1,4 +1,4 @@
-enum MethodsConstantsOpenCamera {
+enum MethodsChannel {
   open_camera,
   open_camera_normal,
   open_camera_document_cnh,

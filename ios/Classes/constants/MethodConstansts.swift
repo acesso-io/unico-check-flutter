@@ -11,11 +11,11 @@ class MethodConstansts {
    
     static let methodCall: String  = "methodCall"
 
-    static let openCamera: String  = "OpenCamera"
-    static let openCameraDocument: String = "OpenCameraDocument"
+    static let openCamera: String  = "open_camera"
+    static let openCameraDocument: String = "open_camera_document"
 
-    static let disableAutoCapture: String = "disableAutoCapture"
-    static let disableSmartFrame: String = "disableSmartFrame"
+    static let disableAutoCapture: String = "disable_auto_capture"
+    static let disableSmartFrame: String = "disable_smart_frame"
 
     static let document_type: String = "DOCUMENT_TYPE"
 

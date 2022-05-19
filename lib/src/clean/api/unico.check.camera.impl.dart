@@ -1,14 +1,13 @@
 import 'package:unico_check/src/clean/api/camera/document/unico.document.dart';
 import 'package:unico_check/src/clean/api/camera/selfie/unico.selfie.dart';
 import 'package:unico_check/src/clean/domain/entities/document.type.dart';
-import 'package:unico_check/src/clean/domain/entities/methods.constants.open.camera.dart';
+import 'package:unico_check/src/clean/domain/entities/methods.channel.dart';
 import 'package:unico_check/src/clean/domain/entities/open.camera.request.dart';
 import 'package:unico_check/src/clean/domain/entities/unico.config.dart';
 import 'package:unico_check/src/clean/domain/interface/open.camera.dart';
 import 'camera/unico.check.camera.opener.dart';
 
 class UnicoCheckImpl extends UnicoCheckCameraOpener {
-
   late OpenCamera _openCamera;
   late OpenCameraRequest _openCameraRequest;
   late UnicoConfig _unicoConfig;
@@ -30,18 +29,19 @@ class UnicoCheckImpl extends UnicoCheckCameraOpener {
   }
 
   @override
-  void openCameraSelfie({
-    required String jsonFileName,
-    required UnicoSelfie listener
-  }) {
+  void openCameraSelfie(
+      {required String jsonFileName, required UnicoSelfie listener}) {
     _openCameraRequest.setJsonFilneName(jsonFileName);
     _openCameraRequest.setUnicoConfig(_unicoConfig);
-    _openCamera.openCamera(method: MethodsConstantsOpenCamera.open_camera, request: _openCameraRequest);
+    _openCamera.openCamera(
+        method: MethodsChannel.open_camera, request: _openCameraRequest);
   }
 
   @override
-  void openCameraDocument({required String jsonFileName, required DocumentType documentType, required UnicoDocument listener}) {}
-
+  void openCameraDocument(
+      {required String jsonFileName,
+      required DocumentType documentType,
+      required UnicoDocument listener}) {}
 
   // @override
   // void prepareSelfieCamera (
@@ -58,6 +58,5 @@ class UnicoCheckImpl extends UnicoCheckCameraOpener {
   //       listener.onCameraFailed(prepareCameraResponse.getUnicoError());
   //   }
   // }
-
 
 }
