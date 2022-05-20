@@ -1,6 +1,7 @@
-import 'package:unico_check/src/clean/api/camera/selfie/unico.selfie.dart';
+import 'package:unico_check/src/clean/api/response/document/unico.document.dart';
+import 'package:unico_check/src/clean/api/response/selfie/unico.selfie.dart';
 import 'package:unico_check/src/clean/domain/entities/document.type.dart';
-import 'document/unico.document.dart';
+
 
 abstract class UnicoCheckCameraOpener {
   void openCameraSelfie({required String jsonFileName, required UnicoSelfie listener});

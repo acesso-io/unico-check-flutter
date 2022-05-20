@@ -6,10 +6,11 @@ import com.acesso.acessobio_android.onboarding.camera.UnicoCheckCameraOpener
 import com.acesso.acessobio_android.onboarding.camera.document.DocumentCameraListener
 import com.acesso.acessobio_android.onboarding.types.DocumentType
 import com.acesso.acessobio_android.services.dto.ErrorBio
+import com.acesso.acessobio_android.services.dto.ResultCamera
 import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.ReturnConstants
+import com.unico_check.hashMap.convertObjToHashMap
 import com.unico_check.hashMap.errorBioToHashMap
-import com.unico_check.hashMap.convertObjToMapReflection
 
 class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
 
@@ -20,7 +21,10 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
         const val NONE = 0
     }
 
+    private var jsonFileName = ""
+
     override fun callMethodBio() {
+        jsonFileName()
         selectCameraMethod()
     }
 
@@ -43,7 +47,7 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
     }
 
     private fun openCameraDocument() {
-        acessoBio.build().prepareDocumentCamera("" ,object : DocumentCameraListener {
+        acessoBio.build().prepareDocumentCamera(jsonFileName, object : DocumentCameraListener {
 
             override fun onCameraReady(cameraOpener: UnicoCheckCameraOpener.Document) {
                 cameraOpener.open(selectDocument(), this@DocumentCameraActivity)
@@ -56,10 +60,18 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
         })
     }
 
-    override fun onSuccessDocument(base64: String) {
+    private fun jsonFileName() {
+        try {
+            jsonFileName = intent.getStringExtra(MethodConstants.jsonName).toString()
+        } catch (e: Exception) {
+            UnicoCheckPlugin.result.error("0", ReturnConstants.onErrorJsonFileName, null)
+        }
+    }
+
+    override fun onSuccessDocument(result: ResultCamera) {
         runCatching {
 
-            UnicoCheckPlugin.result.success(convertObjToMapReflection(base64))
+            UnicoCheckPlugin.result.success(convertObjToHashMap(result.base64, result.encrypted))
             finish()
 
         }.onFailure {
@@ -73,7 +85,7 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
             UnicoCheckPlugin.result.error(
                 ReturnConstants.onError,
                 "",
-                errorBioToHashMap(ErrorBio(0,"onErrorDocument"))
+                errorBioToHashMap(ErrorBio(0, "onErrorDocument"))
             )
             finish()
 

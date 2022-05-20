@@ -29,10 +29,6 @@ class UnicoConfig {
   String? iosColorSilhouetteSuccess;
   String? iosColorSilhouetteError;
 
-  ///Timers
-  double? setTimeoutSession;
-  double? setTimeoutToFaceInference;
-
   ///Objeto de configuracao unico
   UnicoConfig({
     this.androidColorBackground,
@@ -60,9 +56,7 @@ class UnicoConfig {
     this.iosColorBackgroundBottomDocument,
     this.iosColorTextBottomDocument,
     this.iosColorSilhouetteSuccess,
-    this.iosColorSilhouetteError,
-    this.setTimeoutSession,
-    this.setTimeoutToFaceInference,
+    this.iosColorSilhouetteError
   });
 
   Map<dynamic, dynamic> get getCommonMap {
@@ -149,14 +143,7 @@ class UnicoConfig {
       'iosColorSilhouetteSuccess': iosColorSilhouetteSuccess,
 
       /// Cor de erro da silhueta.
-      'iosColorSilhouetteError': iosColorSilhouetteError,
-
-      ///Config Timmers
-      ///adiciona timer de sessão
-      'setTimeoutSession': setTimeoutSession,
-
-      ///adiciona timer de inferencia do rosto
-      'setTimeoutToFaceInference': setTimeoutToFaceInference,
+      'iosColorSilhouetteError': iosColorSilhouetteError
     };
 
     return map;

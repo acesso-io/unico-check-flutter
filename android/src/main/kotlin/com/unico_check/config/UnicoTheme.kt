@@ -57,4 +57,7 @@ data class UnicoTheme(private val call: MethodCall): IAcessoBioTheme {
         return call.argument("androidColorSilhouetteError") ?: 0
     }
 
+    override fun getColorSilhouetteNeutral(): Any {
+        return call.argument("androidColorSilhouetteError") ?: 0
+    }
 }

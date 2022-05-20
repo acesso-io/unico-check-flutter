@@ -10,8 +10,8 @@ export 'src/core/constants/document_type.constants.dart';
 //export 'src/unico_config.dart';
 
 // clean
-export 'src/clean/api/unico.check.dart';
-export 'src/clean/api/camera/selfie/unico.selfie.dart';
+export 'src/clean/api/unico.check.builder.default.dart';
+export 'src/clean/api/response/selfie/unico.selfie.dart';
 export 'src/clean/domain/entities/unico.error.dart';
-export 'src/clean/domain/entities/result.camera.selfie.dart';
+export 'src/clean/domain/entities/result.camera.dart';
 export 'src/clean/domain/entities/unico.config.dart';

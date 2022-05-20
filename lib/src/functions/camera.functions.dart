@@ -42,6 +42,7 @@ class CameraFunctions {
     map[MapConstants.disableSmartFrame] = _disableSmartFrame;
 
     try {
+
       final result = Map<String, dynamic>.from(
         await _channel.invokeMethod(
           MethodsChannelsConstants.openCamera,

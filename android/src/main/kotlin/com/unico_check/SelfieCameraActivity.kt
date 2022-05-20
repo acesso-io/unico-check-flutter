@@ -2,7 +2,6 @@ package com.unico_check
 
 import android.util.Log
 import com.acesso.acessobio_android.iAcessoBioSelfie
-import com.acesso.acessobio_android.onboarding.camera.UnicoCheckCamera
 import com.acesso.acessobio_android.onboarding.camera.UnicoCheckCameraOpener
 import com.acesso.acessobio_android.onboarding.camera.selfie.SelfieCameraListener
 import com.acesso.acessobio_android.services.dto.ErrorBio
@@ -10,7 +9,7 @@ import com.acesso.acessobio_android.services.dto.ResultCamera
 import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.ReturnConstants
 import com.unico_check.constants.ReturnConstants.onErrorJsonFileName
-import com.unico_check.hashMap.convertObjToMapReflection
+import com.unico_check.hashMap.convertObjToHashMap
 import com.unico_check.hashMap.errorBioToHashMap
 
 class SelfieCameraActivity : CameraActivity(), iAcessoBioSelfie {
@@ -60,7 +59,7 @@ class SelfieCameraActivity : CameraActivity(), iAcessoBioSelfie {
     override fun onSuccessSelfie(result: ResultCamera) {
         runCatching {
 
-            UnicoCheckPlugin.result.success(convertObjToMapReflection(result.base64))
+            UnicoCheckPlugin.result.success(convertObjToHashMap(result.base64, result.encrypted))
             finish()
 
         }.onFailure {
@@ -78,6 +77,4 @@ class SelfieCameraActivity : CameraActivity(), iAcessoBioSelfie {
             Log.d(TAG, ReturnConstants.onErrorSelfie)
         }
     }
-
-
 }

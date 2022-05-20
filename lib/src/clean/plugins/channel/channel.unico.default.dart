@@ -1,18 +1,17 @@
 import 'package:flutter/services.dart';
-import 'channel.unico.dart';
+import '../../adapter/repository/plugin/channel.unico.dart';
 
-class ChannelUnicoSource extends ChannelUnico {
+class ChannelUnicoDefault extends ChannelUnico {
   static const _channel = MethodChannel('acessobio');
 
   @override
-  Future<dynamic> callMethod(
+  Future<Map<dynamic, dynamic>> callMethod(
       {required String method, required Map<dynamic, dynamic> request}) async {
     try {
-      Map<dynamic, dynamic> newChannel = await _channel.invokeMethod(
+      return await _channel.invokeMethod(
         method,
         request,
       );
-      return newChannel;
     } on PlatformException catch (exeption) {
       return <dynamic, dynamic>{
         'code': exeption.code,

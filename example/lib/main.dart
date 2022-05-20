@@ -33,8 +33,6 @@ class _MyHomePageState extends State<MyHomePage>
   late UnicoCheck unicoCheck;
 
   final unicoConfig = UnicoConfig(
-    setTimeoutSession: 50.0,
-    setTimeoutToFaceInference: 16.0,
     androidColorSilhouetteSuccess: "#03fc73",
     androidColorSilhouetteError: "#fc0303",
     iosColorSilhouetteSuccess: "#03fc73",
@@ -52,8 +50,12 @@ class _MyHomePageState extends State<MyHomePage>
 
     unicoCheck = new UnicoCheck();
 
-    unicoCheck.setTheme(unicoConfig: unicoConfig).build().openCameraSelfie(
-        jsonFileName: "unico-check-mobile-services", listener: this);
+    unicoCheck
+        .setTheme(unicoConfig: unicoConfig)
+        .build()
+        .openCameraSelfie(
+          jsonFileName: "unico-check-mobile-services.json", listener: this
+        );
   }
 
   void openCamera() {}
@@ -229,7 +231,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   @override
-  void onSuccessSelfie(ResultCameraSelfie result) {
+  void onSuccessSelfie(ResultCamera result) {
     print(result);
   }
 }
