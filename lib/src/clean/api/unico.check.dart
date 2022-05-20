@@ -8,7 +8,6 @@ import 'package:unico_check/src/clean/plugins/channel/channel.unico.source.dart'
 import 'camera/unico.check.camera.opener.dart';
 
 class UnicoCheck extends UnicoCheckBuilder {
-
   late UnicoConfig _unicoConfig;
   late bool _autoCaptrue = true;
   late bool _smartFrame = true;
@@ -16,22 +15,22 @@ class UnicoCheck extends UnicoCheckBuilder {
   @override
   UnicoCheckCameraOpener build() {
     return new UnicoCheckImpl(
-        openCamera: new OpenCameraImpl(new ChannelRepository(new ChannelUnicoSource())),
+        openCamera:
+            new OpenCameraImpl(new ChannelRepository(new ChannelUnicoSource())),
         openCameraRequest: new OpenCameraRequest(),
         unicoConfig: _unicoConfig,
         autoCaptrue: _autoCaptrue,
-        smartFrame: _smartFrame
-    );
+        smartFrame: _smartFrame);
   }
 
   @override
-  UnicoCheckBuilder setAutoCapture({ required bool autoCaptrue }) {
+  UnicoCheckBuilder setAutoCapture({required bool autoCaptrue}) {
     _autoCaptrue = autoCaptrue;
     return this;
   }
 
   @override
-  UnicoCheckBuilder setSmartFrame({ required bool smartFrame}) {
+  UnicoCheckBuilder setSmartFrame({required bool smartFrame}) {
     _smartFrame = smartFrame;
     return this;
   }
