@@ -9,16 +9,20 @@ import com.acesso.acessobio_android.services.dto.ErrorBio
 import com.acesso.acessobio_android.services.dto.ResultCamera
 import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.ReturnConstants
-import com.unico_check.hashMap.convertObjToHashMap
 import com.unico_check.hashMap.errorBioToHashMap
+import com.unico_check.hashMap.successBioToHashMap
 
 class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
 
     companion object {
-        const val RG_FRENTE = 501
-        const val RG_VERSO = 502
-        const val CNH = 4
-        const val NONE = 0
+        const val RG_FRENTE = "RG_FRENTE"
+        const val RG_VERSO = "RG_VERSO"
+        const val CNH = "CNH"
+        const val CNH_FRENTE = "CNH_FRENTE"
+        const val CNH_VERSO = "CNH_VERSO"
+        const val CPF = "CPF"
+        const val NONE = "NONE"
+        const val errorLog = "error to return value"
     }
 
     private var jsonFileName = ""
@@ -31,17 +35,20 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
     private fun selectCameraMethod() {
         when (UnicoCheckPlugin.methodCall.method) {
 
-            MethodConstants.openCameraDocument -> openCameraDocument()
+            MethodConstants.OPEN_CAMERA_DOCUMENT -> openCameraDocument()
 
             else -> UnicoCheckPlugin.result.notImplemented()
         }
     }
 
     private fun selectDocument(): DocumentType {
-        return when (intent.getIntExtra(MethodConstants.document_type, NONE)) {
+        return when (intent.getStringExtra(MethodConstants.DOCUMENT_TYPE)) {
             RG_FRENTE -> DocumentType.RG_FRENTE
             RG_VERSO -> DocumentType.RG_VERSO
             CNH -> DocumentType.CNH
+            CNH_FRENTE -> DocumentType.CNH_FRENTE
+            CNH_VERSO -> DocumentType.CNH_VERSO
+            CPF -> DocumentType.CPF
             else -> DocumentType.NONE
         }
     }
@@ -54,28 +61,41 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
             }
 
             override fun onCameraFailed(message: String) {
-                Log.d(TAG, ReturnConstants.onError)
+                UnicoCheckPlugin.result.error(
+                    ReturnConstants.ON_CAMERA_FAILED_PREPARE.code,
+                    ReturnConstants.ON_CAMERA_FAILED_PREPARE.message,
+                    errorBioToHashMap(
+                        ErrorBio(
+                            ReturnConstants.ON_CAMERA_FAILED_PREPARE.code.toInt(),
+                            message
+                        )
+                    )
+                )
             }
-
         })
     }
 
     private fun jsonFileName() {
         try {
-            jsonFileName = intent.getStringExtra(MethodConstants.jsonName).toString()
+            jsonFileName = intent.getStringExtra(MethodConstants.JSON_NAME).toString()
         } catch (e: Exception) {
-            UnicoCheckPlugin.result.error("0", ReturnConstants.onErrorJsonFileName, null)
+            UnicoCheckPlugin.result.error(
+                ReturnConstants.ON_ERROR_JSON_FILE_NAME.code,
+                ReturnConstants.ON_ERROR_JSON_FILE_NAME.message,
+                null
+            )
         }
     }
 
     override fun onSuccessDocument(result: ResultCamera) {
         runCatching {
 
-            UnicoCheckPlugin.result.success(convertObjToHashMap(result.base64, result.encrypted))
+            UnicoCheckPlugin.result.success(successBioToHashMap(result.base64, result.encrypted))
             finish()
 
         }.onFailure {
-            Log.d(TAG, ReturnConstants.onSuccessDocument)
+            Log.d(TAG, errorLog)
+            finish()
         }
     }
 
@@ -83,15 +103,20 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
         runCatching {
 
             UnicoCheckPlugin.result.error(
-                ReturnConstants.onError,
-                "",
-                errorBioToHashMap(ErrorBio(0, "onErrorDocument"))
+                ReturnConstants.ON_ERROR_DOCUMENT.code,
+                ReturnConstants.ON_ERROR_DOCUMENT.message,
+                errorBioToHashMap(
+                    ErrorBio(
+                        ReturnConstants.ON_ERROR_DOCUMENT.code.toInt(),
+                        error
+                    )
+                )
             )
             finish()
 
         }.onFailure {
-            Log.d(TAG, ReturnConstants.onErrorDocument)
+            Log.d(TAG, errorLog)
+            finish()
         }
     }
-
 }

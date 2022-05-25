@@ -1,6 +1,10 @@
-import 'package:unico_check/src/clean/domain/entities/channel.result.dart';
+import 'package:unico_check/src/clean/domain/entities/methods.channel.dart';
 import 'package:unico_check/src/clean/domain/entities/open.camera.request.dart';
+import 'package:unico_check/src/clean/domain/usecase/open.camera.usecase.listener.dart';
 
 abstract class OpenCameraUseCase {
-  Future<ChannelResult> openCamera({required OpenCameraRequest request});
+  void openCamera(
+      {required OpenCameraRequest request,
+      required MethodsChannel methodsChannel,
+      required OpenCameraUseCaseListener openCameraUseCaseListener});
 }

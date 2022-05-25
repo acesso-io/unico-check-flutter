@@ -29,15 +29,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage>
-    implements /*IAcessoBioSelfie, IAcessoBioDocument*/ UnicoSelfie {
-  late UnicoCheck unicoCheck;
+    implements UnicoListener, UnicoDocument, UnicoSelfie {
+  late UnicoCheckBuilder unicoCheck;
+  String jsonName = "unico-check-mobile-services.json";
 
-  final unicoConfig = UnicoConfig(
-    androidColorSilhouetteSuccess: "#03fc73",
-    androidColorSilhouetteError: "#fc0303",
-    iosColorSilhouetteSuccess: "#03fc73",
-    iosColorSilhouetteError: "#fc0303",
-  );
+  final theme = UnicoTheme(
+      colorSilhouetteSuccess: "#4ca832",
+      colorSilhouetteError: "#fcdb03",
+      colorBackground: "#3295a8");
 
   @override
   void initState() {
@@ -46,45 +45,61 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void initAcessoBio() {
-    // unicoCheck = new UnicoCheck(context: this, config: unicoConfig);
-
-    unicoCheck = new UnicoCheck();
-
-    unicoCheck
-        .setTheme(unicoConfig: unicoConfig)
-        .build()
-        .openCameraSelfie(
-          jsonFileName: "unico-check-mobile-services.json", listener: this
-        );
+    unicoCheck = new UnicoCheck(this).setTheme(unicoTheme: theme);
   }
 
-  void openCamera() {}
+  void openCamera() {
+    unicoCheck
+        .setAutoCapture(autoCapture: true)
+        .setSmartFrame(smartFrame: true)
+        .build()
+        .openCameraSelfie(jsonFileName: jsonName, listener: this);
+  }
 
   void openCameraNormal() {
-    // unicoCheck.camera!.setAutoCapture(false);
-    // unicoCheck.camera!.setSmartFrame(false);
-    // unicoCheck.camera!.openCamera();
-    // unicoCheck = new UnicoCheck();
-    // unicoCheck.setTheme(unicoConfig: unicoConfig).build().openCameraSelfie(
-    //     jsonFileName: "unico-check-mobile-services", listener: this);
+    unicoCheck
+        .setAutoCapture(autoCapture: false)
+        .setSmartFrame(smartFrame: false)
+        .build()
+        .openCameraSelfie(jsonFileName: jsonName, listener: this);
   }
 
   void openCameraDocumentCNH() {
-    // unicoCheck.document!.openCameraDocument(
-    //   documentType: DocumentsTypeConstants.cnh,
-    // );
+    unicoCheck.build().openCameraDocument(
+        jsonFileName: jsonName, documentType: DocumentType.CNH, listener: this);
   }
 
-  void openCameraDocumentRGfrente() {
-    // unicoCheck.document!.openCameraDocument(
-    //   documentType: DocumentsTypeConstants.rg_frente,
-    // );
+  void openCameraDocumentCNHFrente() {
+    unicoCheck.build().openCameraDocument(
+        jsonFileName: jsonName,
+        documentType: DocumentType.CNH_FRENTE,
+        listener: this);
   }
 
-  void openCameraDocumentRGverso() {
-    // unicoCheck.document!.openCameraDocument(
-    //   documentType: DocumentsTypeConstants.rg_verso,
-    // );
+  void openCameraDocumentCNHVerso() {
+    unicoCheck.build().openCameraDocument(
+        jsonFileName: jsonName,
+        documentType: DocumentType.CNH_VERSO,
+        listener: this);
+  }
+
+  void openCameraDocumentRGFrente() {
+    unicoCheck.build().openCameraDocument(
+        jsonFileName: jsonName,
+        documentType: DocumentType.RG_FRENTE,
+        listener: this);
+  }
+
+  void openCameraDocumentRGVerso() {
+    unicoCheck.build().openCameraDocument(
+        jsonFileName: jsonName,
+        documentType: DocumentType.RG_VERSO,
+        listener: this);
+  }
+
+  void openCameraDocumentCPF() {
+    unicoCheck.build().openCameraDocument(
+        jsonFileName: jsonName, documentType: DocumentType.CPF, listener: this);
   }
 
   @override
@@ -93,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage>
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -153,7 +168,23 @@ class _MyHomePageState extends State<MyHomePage>
             Container(
               margin: EdgeInsets.all(10),
               child: FlatButton(
-                  onPressed: openCameraDocumentRGfrente,
+                  onPressed: openCameraDocumentCNHFrente,
+                  child: Text('Documentos CNH Frente'),
+                  color: Color(0xFF1172EB),
+                  textColor: Colors.white),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: FlatButton(
+                  onPressed: openCameraDocumentCNHVerso,
+                  child: Text('Documentos CNH Verso'),
+                  color: Color(0xFF1172EB),
+                  textColor: Colors.white),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: FlatButton(
+                  onPressed: openCameraDocumentRGFrente,
                   child: Text('Documentos RG Frente'),
                   color: Color(0xFF1172EB),
                   textColor: Colors.white),
@@ -161,8 +192,16 @@ class _MyHomePageState extends State<MyHomePage>
             Container(
               margin: EdgeInsets.all(10),
               child: FlatButton(
-                  onPressed: openCameraDocumentRGverso,
+                  onPressed: openCameraDocumentRGVerso,
                   child: Text('Documentos RG verso'),
+                  color: Color(0xFF1172EB),
+                  textColor: Colors.white),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: FlatButton(
+                  onPressed: openCameraDocumentCPF,
+                  child: Text('Documentos CPF'),
                   color: Color(0xFF1172EB),
                   textColor: Colors.white),
             ),
@@ -172,8 +211,8 @@ class _MyHomePageState extends State<MyHomePage>
     );
   }
 
-  ///Acessobio callbacks
-  void onErrorAcessoBio(ErrorBioResponse error) {
+  ///Unico callbacks
+  void onErrorAcessoBio(UnicoError error) {
     showToast("Erro ao abrir a camera: " + error.description);
   }
 
@@ -193,25 +232,24 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   ///Selfie callbacks
-  // @override
-  // Future<void> onSuccessSelfie(CameraResponse response) async {
-  //   showToast("Sucesso na captura, aqui temos o base64");
-  // }
-
-  // //
-  // @override
-  // Future<void> onErrorSelfie(ErrorBioResponse error) async {
-  //   showToast("Erro ao abrir a camera: " + error.description);
-  // }
-
-  ///Document callbacks
   @override
-  void onSuccessDocument(CameraDocumentResponse response) {
-    showToast("Sucesso na captura, aqui temos o base64");
+  void onSuccessSelfie(ResultCamera result) {
+    showToast("Sucesso na captura, aqui temos o base64 e encrypted ");
   }
 
   @override
-  void onErrorDocument(ErrorBioResponse error) {
+  void onErrorSelfie(UnicoError result) {
+    showToast("Erro ao abrir a camera: " + result.description);
+  }
+
+  ///Document callbacks
+  @override
+  void onSuccessDocument(ResultCamera base64) {
+    showToast("Sucesso na captura, aqui temos o base64 e encrypted ");
+  }
+
+  @override
+  void onErrorDocument(UnicoError error) {
     showToast("Erro ao abrir a camera: " + error.description);
   }
 
@@ -223,15 +261,5 @@ class _MyHomePageState extends State<MyHomePage>
       backgroundColor: Colors.amber,
       fontSize: 14,
     );
-  }
-
-  @override
-  void onErrorSelfie(UnicoError errorBio) async {
-    showToast("error" + errorBio.description);
-  }
-
-  @override
-  void onSuccessSelfie(ResultCamera result) {
-    print(result);
   }
 }

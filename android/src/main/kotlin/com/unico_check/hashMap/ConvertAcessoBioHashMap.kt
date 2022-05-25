@@ -15,13 +15,23 @@ fun errorBioToHashMap(error: ErrorBio): HashMap<String, Any> {
     return hashMap
 }
 
-fun convertObjToHashMap(base64: String, encrypted: String): HashMap<String, Any> {
+fun successBioToHashMap(base64: String, encrypted: String): HashMap<String, Any> {
 
     val hashMap: HashMap<String, Any> = HashMap()
 
     hashMap["status"] = true
     hashMap["base64"] = base64
     hashMap["encrypted"] = encrypted
+
+    return hashMap
+}
+
+fun errorNotifier(errorMethodName: String): HashMap<String, Any> {
+
+    val hashMap: HashMap<String, Any> = HashMap()
+
+    hashMap["status"] = false
+    hashMap["errorMethodName"] = errorMethodName
 
     return hashMap
 }

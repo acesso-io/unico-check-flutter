@@ -8,5 +8,5 @@ import 'acesso_bio_listener.interface.dart';
 abstract class IAcessoBioDocument extends AcessoBioListener {
   void onSuccessDocument(CameraDocumentResponse response);
 
-  void onErrorDocument(ErrorBioResponse error);
+  void onErrorDocument(UnicoError error);
 }
