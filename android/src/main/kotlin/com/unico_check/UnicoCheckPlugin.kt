@@ -3,14 +3,13 @@ package com.unico_check
 import android.app.Activity
 import android.content.Intent
 import androidx.annotation.NonNull
-import com.unico_check.config.UnicoTheme
-import com.unico_check.config.UnicoTimer
 import com.unico_check.constants.MethodConstants
-import com.unico_check.constants.MethodConstants.disableAutoCapture
-import com.unico_check.constants.MethodConstants.disableSmartFrame
-import com.unico_check.constants.MethodConstants.document_type
-import com.unico_check.constants.MethodConstants.setTimeoutSession
-import com.unico_check.constants.MethodConstants.setTimeoutToFaceInference
+import com.unico_check.constants.MethodConstants.AUTO_CAPTURE
+import com.unico_check.constants.MethodConstants.BRIDGE_NAME
+import com.unico_check.constants.MethodConstants.DOCUMENT_TYPE
+import com.unico_check.constants.MethodConstants.JSON_NAME
+import com.unico_check.constants.MethodConstants.SMART_FRAME
+import com.unico_check.constants.ReturnConstants
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -23,12 +22,11 @@ import io.flutter.plugin.common.MethodChannel.Result
 class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     companion object {
-        const val BRIDGE_NAME = "acessobio"
         lateinit var result: Result
         lateinit var methodCall: MethodCall
+        lateinit var channel: MethodChannel
     }
 
-    private lateinit var channel: MethodChannel
     private lateinit var activity: Activity
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
@@ -37,7 +35,6 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     }
 
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-
         UnicoCheckPlugin.result = result
         UnicoCheckPlugin.methodCall = call
 
@@ -47,56 +44,54 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private fun selectTypeOffCamera(call: MethodCall) {
         when (call.method) {
 
-            MethodConstants.openCamera -> openCamera(
-                call.argument(disableAutoCapture),
-                call.argument(disableSmartFrame)
+            MethodConstants.OPEN_CAMERA_SELFIE -> getCameraSelfie(
+                call.argument(AUTO_CAPTURE),
+                call.argument(SMART_FRAME),
+                call.argument(JSON_NAME)
             )
 
-            MethodConstants.openCameraDocument -> openCameraDocument(
-                call.argument(document_type)
+            MethodConstants.OPEN_CAMERA_DOCUMENT -> openCameraDocument(
+                call.argument(DOCUMENT_TYPE),
+                call.argument(JSON_NAME)
             )
 
             else -> result.notImplemented()
         }
     }
 
-    private fun openCameraDocument(DOCUMENT_TYPE: Int?) {
+    private fun setJsonFileName(jsonName: String?, intent: Intent) {
+        if (jsonName == "" || jsonName == null) {
+            result.error(
+                ReturnConstants.ON_ERROR_JSON_FILE_NAME.code,
+                ReturnConstants.ON_ERROR_JSON_FILE_NAME.message,
+                null
+            )
+        } else {
+            intent.putExtra(JSON_NAME, jsonName)
+        }
+    }
+
+    private fun openCameraDocument(document_type: String?, jsonName: String?) {
         val intent = Intent(activity, DocumentCameraActivity::class.java)
-        intent.putExtra(document_type, DOCUMENT_TYPE)
+
+        intent.putExtra(DOCUMENT_TYPE, document_type)
+        setJsonFileName(jsonName, intent)
+
         activity.startActivity(intent)
     }
 
-    private fun getCameraIntent(
+    private fun getCameraSelfie(
         disableAutoCapture: Boolean?,
-        disableSmartFrame: Boolean?
-    ): Intent {
-
+        disableSmartFrame: Boolean?,
+        jsonName: String?
+    ) {
         val intent = Intent(activity, SelfieCameraActivity::class.java)
 
-        if (disableAutoCapture != null && disableAutoCapture == true) {
-            intent.putExtra(MethodConstants.disableAutoCapture, disableAutoCapture)
-        } else {
-            intent.putExtra(MethodConstants.disableAutoCapture, false)
-        }
-
-        if (disableSmartFrame != null && disableSmartFrame == true) {
-            intent.putExtra(MethodConstants.disableSmartFrame, disableSmartFrame)
-        } else {
-            intent.putExtra(MethodConstants.disableSmartFrame, false)
-        }
-
-        return intent
-    }
-
-    private fun openCamera(
-        disableAutoCapture: Boolean?,
-        disableSmartFrame: Boolean?
-    ) {
-
-        val intent = getCameraIntent(disableAutoCapture, disableSmartFrame)
+        intent.putExtra(AUTO_CAPTURE, disableAutoCapture)
+        intent.putExtra(SMART_FRAME, disableSmartFrame)
+        setJsonFileName(jsonName, intent)
 
         activity.startActivity(intent)
-
     }
 
     //region ActivityAware
@@ -114,6 +109,4 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
     override fun onDetachedFromActivityForConfigChanges() {}
     //endregion
-
-
 }

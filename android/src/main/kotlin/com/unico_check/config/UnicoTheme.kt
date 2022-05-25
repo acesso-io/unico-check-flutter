@@ -1,60 +1,65 @@
 package com.unico_check.config
 
 import com.acesso.acessobio_android.onboarding.IAcessoBioTheme
+import com.unico_check.constants.MethodConstants.UNICO_THEME
 import io.flutter.plugin.common.MethodCall
 
-data class UnicoTheme(private val call: MethodCall): IAcessoBioTheme {
+data class UnicoTheme(private val theme: Map<Any, Any>) : IAcessoBioTheme {
+
 
     override fun getColorBackground(): Any {
-        return call.argument("androidColorBackground") ?: 0
+        return theme["colorBackground"] ?: 0
     }
 
     override fun getColorBoxMessage(): Any {
-        return call.argument("androidColorBoxMessage") ?: 0
+        return theme["colorBoxMessage"] ?: 0
     }
 
     override fun getColorTextMessage(): Any {
-        return call.argument("androidColorTextMessage") ?: 0
+        return theme["colorTextMessage"] ?: 0
     }
 
     override fun getColorBackgroundPopupError(): Any {
-        return call.argument("androidColorBackgroundPopupError") ?: 0
+        return theme["colorBackgroundPopupError"] ?: 0
     }
 
     override fun getColorTextPopupError(): Any {
-        return call.argument("androidColorTextPopupError") ?: 0
+        return theme["colorTextPopupError"] ?: 0
     }
 
     override fun getColorBackgroundButtonPopupError(): Any {
-        return call.argument("androidColorBackgroundButtonPopupError") ?: 0
+        return theme["colorBackgroundButtonPopupError"] ?: 0
     }
 
     override fun getColorTextButtonPopupError(): Any {
-        return call.argument("androidColorTextButtonPopupError") ?: 0
+        return theme["colorTextButtonPopupError"] ?: 0
     }
 
     override fun getColorBackgroundTakePictureButton(): Any {
-        return call.argument("androidColorBackgroundTakePictureButton") ?: 0
+        return theme["colorBackgroundTakePictureButton"] ?: 0
     }
 
     override fun getColorIconTakePictureButton(): Any {
-        return call.argument("androidColorIconTakePictureButton") ?: 0
+        return theme["colorIconTakePictureButton"] ?: 0
     }
 
     override fun getColorBackgroundBottomDocument(): Any {
-        return call.argument("androidColorBackgroundBottomDocument") ?: 0
+        return theme["colorBackgroundBottomDocument"] ?: 0
     }
 
     override fun getColorTextBottomDocument(): Any {
-        return call.argument("androidColorTextBottomDocument") ?: 0
+        return theme["colorTextBottomDocument"] ?: 0
     }
 
     override fun getColorSilhouetteSuccess(): Any {
-        return call.argument("androidColorSilhouetteSuccess") ?: 0
+        return theme["colorSilhouetteSuccess"] ?: 0
     }
 
     override fun getColorSilhouetteError(): Any {
-        return call.argument("androidColorSilhouetteError") ?: 0
+        return theme["colorSilhouetteError"] ?: 0
     }
 
+    override fun getColorSilhouetteNeutral(): Any {
+        return theme["colorSilhouetteNeutral"] ?: 0
+    }
 }
