@@ -4,22 +4,34 @@ import com.acesso.acessobio_android.services.dto.ErrorBio
 import java.util.HashMap
 
 
- fun errorBioToHashMap(error: ErrorBio): HashMap<String, Any> {
+fun errorBioToHashMap(error: ErrorBio): HashMap<String, Any> {
 
-     val hashMap: HashMap<String, Any> = HashMap()
+    val hashMap: HashMap<String, Any> = HashMap()
 
-     hashMap["code"] = error.code
-     hashMap["method"] = error.method
-     hashMap["description"] = error.description
+    hashMap["status"] = false
+    hashMap["code"] = error.code
+    hashMap["description"] = error.description
 
-     return hashMap
- }
+    return hashMap
+}
 
- fun convertObjToMapReflection(result: String): HashMap<String, Any> {
+fun successBioToHashMap(base64: String, encrypted: String): HashMap<String, Any> {
 
-     val hashMap: HashMap<String, Any> = HashMap()
+    val hashMap: HashMap<String, Any> = HashMap()
 
-     hashMap["result"] = result
+    hashMap["status"] = true
+    hashMap["base64"] = base64
+    hashMap["encrypted"] = encrypted
 
-     return hashMap
- }
+    return hashMap
+}
+
+fun errorNotifier(errorMethodName: String): HashMap<String, Any> {
+
+    val hashMap: HashMap<String, Any> = HashMap()
+
+    hashMap["status"] = false
+    hashMap["errorMethodName"] = errorMethodName
+
+    return hashMap
+}
