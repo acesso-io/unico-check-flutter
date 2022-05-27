@@ -47,36 +47,47 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
         unicoCheck.setSmartFrame(cameraType.getSmartFrame())
         unicoCheck.setAutoCapture(cameraType.getAutoCapture())
         unicoCheck.setTimeoutSession(unicoTimer.getTimeoutSession())
-        unicoCheck.setTimeoutToFaceInference(unicoTimer.getTimeoutToFaceInference())
         unicoCheck.setTheme(UnicoTheme(argument: SwiftUnicoCheckPlugin.argument))
     }
     
-    func onErrorAcessoBioManager(_ error: ErrorBio!) {
+    func onErrorAcessoBioManager(_ errorBio: ErrorBio!) {
         acessoBioStatus = false
         SwiftUnicoCheckPlugin.result(
-            FlutterError(code: ReturnCostants.onErrorAcessoBio, message: "", details: ConvertToHashMap.convertObjToDicionary(result: error))
+            FlutterError(
+                code: ReturnConstants.ON_ERROR_UNICO.rawValue,
+                message: ReturnConstants.ON_ERROR_UNICO.rawValue,
+                details: ConvertToHashMap.errorBioToHashMap(error: errorBio))
         )
         self.dismiss(animated: true, completion: nil)
     }
     
     func onUserClosedCameraManually() {
         SwiftUnicoCheckPlugin.result(
-            FlutterError(code: ReturnCostants.onUserClosedCameraManually, message: "", details: "")
+            FlutterError(
+                code: ReturnConstants.ON_USER_CLOSED_CAMERA_MANUALLY.rawValue,
+                message: ReturnConstants.ON_ERROR_UNICO.rawValue,
+                details: nil)
         )
         self.dismiss(animated: true, completion: nil)
     }
     
     func onSystemClosedCameraTimeoutSession() {
         SwiftUnicoCheckPlugin.result(
-            FlutterError(code: ReturnCostants.onSystemClosedCameraTimeoutSession, message: "", details: "")
+            FlutterError(
+                code: ReturnConstants.ON_SYSTEM_CLOSED_CAMERA_TIMEOUT_SESSION.rawValue,
+                message: ReturnConstants.ON_SYSTEM_CLOSED_CAMERA_TIMEOUT_SESSION.rawValue,
+                details: nil)
         )
         self.dismiss(animated: true, completion: nil)
     }
     
     func onSystemChangedTypeCameraTimeoutFaceInference() {
-        SwiftUnicoCheckPlugin.result(
-            FlutterError(code: ReturnCostants.onSystemChangedTypeCameraTimeoutFaceInference, message: "", details: "")
+        
+        SwiftUnicoCheckPlugin.channel.invokeMethod(
+            MethodConstants.ON_RESULT.rawValue,
+            arguments: ConvertToHashMap.errorNotifier(
+                errorMethodName: ReturnConstants.ON_SYSTEM_CHANGED_TYPE_CAMERA_TIMEOUT_FACE_INFERENCE.rawValue
+            )
         )
-        self.dismiss(animated: true, completion: nil)
     }
 }

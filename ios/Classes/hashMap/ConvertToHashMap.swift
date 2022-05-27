@@ -9,45 +9,34 @@ import Foundation
 
 class ConvertToHashMap {
     
-    static func convertObjToDicionary(result : NSObject) -> [String:Any] {
+    static func errorBioToHashMap(error : ErrorBio) -> [String:Any] {
         
-        let obj: AnyClass = result.classForCoder
-        var outCount : UInt32 = 0
-        let properties = class_copyPropertyList(obj, &outCount)
         var dict = [String:Any]()
         
-        for i in 0 ..< Int(outCount) {
-            
-            let property = properties?[i],
-
-            strKey = NSString(utf8String: property_getName(property!)) as String?
-
-            let attrs = result.value(forKey: strKey!)
-            
-            if(attrs != nil){
-                dict[strKey!] = attrs
-            }else{
-                dict[strKey!] = ""
-            }
-              
-        }
+        dict["status"] = false
+        dict["code"] = error.code
+        dict["description"] = error.desc
         
         return dict
     }
     
-    static func convertObjToDicionary(result : String) -> [String:Any] {
+    static func successBioToHashMap(base64 : String, encrypted : String) -> [String:Any] {
         
         var dict = [String:Any]()
-        dict["result"] = result
+        
+        dict["status"] = true
+        dict["base64"] = base64
+        dict["encrypted"] = encrypted
         
         return dict
     }
     
-    static func convertObjToDicionary(result : Int) -> [String:Any] {
+    static func errorNotifier(errorMethodName : String) -> [String:Any] {
         
         var dict = [String:Any]()
         
-        dict["result"] = result
+        dict["status"] = false
+        dict["errorMethodName"] = errorMethodName
         
         return dict
     }

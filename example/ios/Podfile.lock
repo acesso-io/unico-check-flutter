@@ -1,21 +1,13 @@
 PODS:
-  - CryptoSwift (1.4.2)
   - Flutter (1.0.0)
   - fluttertoast (0.0.2):
     - Flutter
     - Toast
-  - JOSESwift (2.4.0)
-  - Sentry (7.5.4):
-    - Sentry/Core (= 7.5.4)
-  - Sentry/Core (7.5.4)
   - Toast (4.0.0)
-  - unico_check (2.0.1):
+  - unico_check (2.0.2):
     - Flutter
-    - unicocheck-ios (~> 1.0.2)
-  - unicocheck-ios (1.0.2):
-    - CryptoSwift
-    - JOSESwift
-    - Sentry
+    - unicocheck-ios (~> 2.3.1)
+  - unicocheck-ios (2.3.2)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -24,9 +16,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - CryptoSwift
-    - JOSESwift
-    - Sentry
     - Toast
     - unicocheck-ios
 
@@ -39,15 +28,12 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/unico_check/ios"
 
 SPEC CHECKSUMS:
-  CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
-  JOSESwift: 7ff178bb9173ff42c6e990929a9f2fa702a34f69
-  Sentry: 5c5dd4005f3b7b9765d5a8871232cddbd0d888b7
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
-  unico_check: cd46ff48223736e64dbdcf132770fe09fc6936c0
-  unicocheck-ios: 9b95132b049cb1baeb77e2500a61980830ff945b
+  unico_check: 7ccffadc57e440afae7d745ad0745a124a7b3b9c
+  unicocheck-ios: bb94787b87837ee8540fcc3eb25db6598c3fea99
 
 PODFILE CHECKSUM: 59f8de8f40bb382091a43991ef43c063d955e661
 
-COCOAPODS: 1.10.2
+COCOAPODS: 1.11.3

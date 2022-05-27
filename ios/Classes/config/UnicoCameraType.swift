@@ -13,8 +13,8 @@ class UnicoCameraType {
     private var smartFrame: Bool = true
     
     init(argument: Dictionary<String, Any>) {
-        self.autoCapture = argument[MethodConstansts.disableAutoCapture] as? Bool ?? true
-        self.smartFrame = argument[MethodConstansts.disableSmartFrame] as? Bool ?? true
+        self.autoCapture = argument[MethodConstants.AUTO_CAPTURE.rawValue] as? Bool ?? true
+        self.smartFrame = argument[MethodConstants.SMART_FRAME.rawValue] as? Bool ?? true
     }
 
     func getAutoCapture() -> Bool {

@@ -5,14 +5,16 @@
 //  Created by Lucas Diniz Silva on 26/02/21.
 //
 
-class AcessoBioCamera: AcessoBioView, AcessoBioSelfieDelegate, SelfieCameraDelegate {
+import Foundation
 
+class AcessoBioCamera: AcessoBioView, AcessoBioSelfieDelegate, SelfieCameraDelegate {
+    
     override func callMethodBio(){
         switch SwiftUnicoCheckPlugin.methodCall {
             
-            case MethodConstansts.openCamera: unicoCheck.build().prepareSelfieCamera(self)
+        case MethodConstants.OPEN_CAMERA_SELFIE.rawValue: unicoCheck.build().prepareSelfieCamera(self, config: UnicoConfig(argument: SwiftUnicoCheckPlugin.argument))
             
-            default: SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
+        default: SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
         }
     }
     
@@ -20,15 +22,32 @@ class AcessoBioCamera: AcessoBioView, AcessoBioSelfieDelegate, SelfieCameraDeleg
         cameraOpener.open(self)
     }
     
-    func onCameraFailed(_ message: String!) {}
-
+    func onCameraFailed(_ message: ErrorPrepare!) {
+        SwiftUnicoCheckPlugin.result(
+            FlutterError(
+                code: ReturnConstants.ON_CAMERA_FAILED_PREPARE.rawValue,
+                message: ReturnConstants.ON_CAMERA_FAILED_PREPARE.rawValue,
+                details: ConvertToHashMap.errorBioToHashMap(error: ErrorBio(
+                    code: Int(ReturnConstants.ON_CAMERA_FAILED_PREPARE.rawValue) ?? 101,
+                    method: "",
+                    desc: message.desc
+                ))
+            )
+        )
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func onSuccessSelfie(_ result: SelfieResult!) {
-        SwiftUnicoCheckPlugin.result(ConvertToHashMap.convertObjToDicionary(result: result))
+        SwiftUnicoCheckPlugin.result(ConvertToHashMap.successBioToHashMap(base64: result.base64, encrypted: result.encrypted))
     }
     
     func onErrorSelfie(_ errorBio: ErrorBio!) {
         SwiftUnicoCheckPlugin.result(
-            FlutterError(code: ReturnCostants.onError, message: "", details: ConvertToHashMap.convertObjToDicionary(result: errorBio))
+            FlutterError(
+                code: ReturnConstants.ON_ERROR_SELFIE.rawValue,
+                message: ReturnConstants.ON_ERROR_SELFIE.rawValue,
+                details: ConvertToHashMap.errorBioToHashMap(error: errorBio))
         )
+        self.dismiss(animated: true, completion: nil)
     }
 }
