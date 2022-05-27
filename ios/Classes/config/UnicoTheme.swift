@@ -8,7 +8,6 @@
 import Foundation
 
 class UnicoTheme: NSObject, AcessoBioThemeDelegate {
-    
     private var argument: Dictionary<String, Any>
     
     init(argument: Dictionary<String, Any>){
@@ -16,55 +15,59 @@ class UnicoTheme: NSObject, AcessoBioThemeDelegate {
     }
     
     func getColorBackground() -> Any? {
-        return self.argument["iosColorBackground"] as? String ?? nil
+        return self.argument["colorBackground"] as? String ?? nil
     }
     
     func getColorBoxMessage() -> Any? {
-        return self.argument["iosColorBoxMessage"] as? String ?? nil
+        return self.argument["colorBoxMessage"] as? String ?? nil
     }
     
     func getColorTextMessage() -> Any? {
-        return self.argument["iosColorTextMessage"] as? String ?? nil
+        return self.argument["colorTextMessage"] as? String ?? nil
     }
     
     func getColorBackgroundPopupError() -> Any? {
-        return self.argument["iosColorBackgroundPopupError"] as? String ?? nil
+        return self.argument["colorBackgroundPopupError"] as? String ?? nil
     }
     
     func getColorTextPopupError() -> Any? {
-        return self.argument["iosColorTextPopupError"] as? String ?? nil
+        return self.argument["colorTextPopupError"] as? String ?? nil
     }
     
     func getColorBackgroundButtonPopupError() -> Any? {
-        return self.argument["iosColorBackgroundButtonPopupError"] as? String ?? nil
+        return self.argument["colorBackgroundButtonPopupError"] as? String ?? nil
     }
     
     func getColorTextButtonPopupError() -> Any? {
-        return self.argument["iosColorTextButtonPopupError"] as? String ?? nil
+        return self.argument["colorTextButtonPopupError"] as? String ?? nil
     }
     
     func getColorBackgroundTakePictureButton() -> Any? {
-        return self.argument["iosColorBackgroundTakePictureButton"] as? String ?? nil
+        return self.argument["colorBackgroundTakePictureButton"] as? String ?? nil
     }
     
     func getColorIconTakePictureButton() -> Any? {
-        return self.argument["iosColorIconTakePictureButton"] as? String ?? nil
+        return self.argument["colorIconTakePictureButton"] as? String ?? nil
     }
     
     func getColorBackgroundBottomDocument() -> Any? {
-        return self.argument["iosColorBackgroundBottomDocument"] as? String ?? nil
+        return self.argument["colorBackgroundBottomDocument"] as? String ?? nil
     }
     
     func getColorTextBottomDocument() -> Any? {
-        return self.argument["iosColorTextBottomDocument"] as? String ?? nil
+        return self.argument["colorTextBottomDocument"] as? String ?? nil
     }
     
     func getColorSilhouetteSuccess() -> Any? {
-        return self.argument["iosColorSilhouetteSuccess"] as? String ?? nil
+        return self.argument["colorSilhouetteSuccess"] as? String ?? nil
     }
     
     func getColorSilhouetteError() -> Any? {
-        return self.argument["iosColorSilhouetteError"] as? String ?? nil
+        return self.argument["colorSilhouetteError"] as? String ?? nil
+    }
+    
+    func getColorSilhouetteNeutral() -> Any? {
+        return self.argument["colorSilhouetteNeutral"] as? String ?? nil
     }
 }
 

@@ -7,15 +7,13 @@
 
 import Foundation
 
-class ReturnCostants {
-    static let onError: String  = "onError"
-    static let onErrorAcessoBio: String  = "onErrorAcessoBio"
-    static let onUserClosedCameraManually: String  = "onUserClosedCameraManually"
-    static let onSystemClosedCameraTimeoutSession: String  = "onSystemClosedCameraTimeoutSession"
-    static let onSystemChangedTypeCameraTimeoutFaceInference: String  = "onSystemChangedTypeCameraTimeoutFaceInference"
-
-    static let onSuccessSelfie: String  = "onSuccessSelfie"
-    static let onErrorSelfie: String  = "onErrorSelfie"
-    static let onSuccessDocument: String  = "onSuccessDocument"
-    static let onErrorDocument: String  = "onErrorDocument"
+enum ReturnConstants: String {
+    case ON_CAMERA_FAILED_PREPARE = "101"
+    case ON_ERROR_UNICO = "102"
+    case ON_USER_CLOSED_CAMERA_MANUALLY = "103"
+    case ON_SYSTEM_CLOSED_CAMERA_TIMEOUT_SESSION = "104"
+    case ON_SYSTEM_CHANGED_TYPE_CAMERA_TIMEOUT_FACE_INFERENCE = "105"
+    case ON_ERROR_SELFIE = "106"
+    case ON_ERROR_DOCUMENT = "107"
+    case ON_ERROR_JSON_FILE_NAME = "108"
 }

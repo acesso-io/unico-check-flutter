@@ -7,18 +7,23 @@
 
 class AcessoBioDocument: AcessoBioView, AcessoBioDocumentDelegate, DocumentCameraDelegate{
     
-    static let rgFrente = 501
-    static let rgVerso = 502
-    static let CNH = 4
+    static let RG_FRENTE = "RG_FRENTE"
+    static let RG_VERSO = "RG_VERSO"
+    static let CNH = "CNH"
+    static let CNH_FRENTE = "CNH_FRENTE"
+    static let CNH_VERSO = "CNH_VERSO"
+    static let CPF = "CPF"
+    static let NONE = "NONE"
+    
     var document: DocumentEnums = DocumentEnums.none
     
     override func callMethodBio(){
         selectDocument()
         switch SwiftUnicoCheckPlugin.methodCall {
             
-            case MethodConstansts.openCameraDocument: unicoCheck.build().prepareDocumentCamera(self)
-                
-            default: SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
+        case MethodConstants.OPEN_CAMERA_DOCUMENT.rawValue: unicoCheck.build().prepareDocumentCamera(self, config: UnicoConfig(argument: SwiftUnicoCheckPlugin.argument))
+            
+        default: SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
         }
     }
     
@@ -29,28 +34,51 @@ class AcessoBioDocument: AcessoBioView, AcessoBioDocumentDelegate, DocumentCamer
         )
     }
     
-    func onCameraFailedDocument(_ message: String!) { }
+    func onCameraFailedDocument(_ message: ErrorPrepare!) {
+        SwiftUnicoCheckPlugin.result(
+            FlutterError(
+                code: ReturnConstants.ON_CAMERA_FAILED_PREPARE.rawValue,
+                message: ReturnConstants.ON_CAMERA_FAILED_PREPARE.rawValue,
+                details: ConvertToHashMap.errorBioToHashMap(error: ErrorBio(
+                    code: Int(ReturnConstants.ON_CAMERA_FAILED_PREPARE.rawValue) ?? 101,
+                    method: "",
+                    desc: message.desc
+                ))
+            )
+        )
+        self.dismiss(animated: true, completion: nil)
+    }
     
     func selectDocument(){
-        let document_type = SwiftUnicoCheckPlugin.argument[MethodConstansts.document_type] as? Int
+        let document_type = SwiftUnicoCheckPlugin.argument[MethodConstants.DOCUMENT_TYPE.rawValue] as? String
         
         switch document_type {
-            case AcessoBioDocument.rgFrente: do { document = DocumentEnums.rgFrente }
-            case AcessoBioDocument.rgVerso: do { document = DocumentEnums.rgVerso }
-            case AcessoBioDocument.CNH: do { document = DocumentEnums.CNH }
-                
-            default: document = DocumentEnums.none
+        case AcessoBioDocument.RG_FRENTE : do { document = DocumentEnums.rgFrente }
+        case AcessoBioDocument.RG_VERSO: do { document = DocumentEnums.rgVerso }
+        case AcessoBioDocument.CNH: do { document = DocumentEnums.CNH }
+        case AcessoBioDocument.CNH_FRENTE: do { document = DocumentEnums.cnhFrente }
+        case AcessoBioDocument.CNH_VERSO: do { document = DocumentEnums.cnhVerso}
+        case AcessoBioDocument.CPF: do { document = DocumentEnums.CPF }
+        case AcessoBioDocument.NONE: do { document = DocumentEnums.none }
+        default: document = DocumentEnums.none
+            
         }
     }
     
-
+    
     func onSuccessDocument(_ result: DocumentResult!) {
-        SwiftUnicoCheckPlugin.result(ConvertToHashMap.convertObjToDicionary(result: result))
+        SwiftUnicoCheckPlugin.result(ConvertToHashMap.successBioToHashMap(base64: result.base64, encrypted: result.encrypted))
     }
     
     func onErrorDocument(_ errorBio: ErrorBio!) {
         SwiftUnicoCheckPlugin.result(
-            FlutterError(code: ReturnCostants.onError, message: "", details: ConvertToHashMap.convertObjToDicionary(result: errorBio))
+            FlutterError(
+                code: ReturnConstants.ON_ERROR_DOCUMENT.rawValue,
+                message: ReturnConstants.ON_ERROR_DOCUMENT.rawValue,
+                details: ConvertToHashMap.errorBioToHashMap(error: errorBio))
         )
+        self.dismiss(animated: true, completion: nil)
     }
+    
+    
 }

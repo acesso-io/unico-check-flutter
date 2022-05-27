@@ -7,19 +7,15 @@
 
 import Foundation
 
-class MethodConstansts {
-   
-    static let methodCall: String  = "methodCall"
-
-    static let openCamera: String  = "OpenCamera"
-    static let openCameraDocument: String = "OpenCameraDocument"
-
-    static let disableAutoCapture: String = "disableAutoCapture"
-    static let disableSmartFrame: String = "disableSmartFrame"
-
-    static let document_type: String = "DOCUMENT_TYPE"
-
-    static let setTimeoutSession: String = "setTimeoutSession"
-    static let setTimeoutToFaceInference: String = "setTimeoutToFaceInference"
-    
+enum MethodConstants: String {
+    case BRIDGE_NAME = "unico_channel"
+    case JSON_NAME = "json_file_name"
+    case OPEN_CAMERA_SELFIE = "open_camera_selfie"
+    case OPEN_CAMERA_DOCUMENT = "open_camera_document"
+    case AUTO_CAPTURE = "set_auto_capture"
+    case SMART_FRAME = "set_smart_frame"
+    case DOCUMENT_TYPE = "document_type"
+    case SET_TIMEOUT_SESSION = "set_timeout_session"
+    case ON_RESULT = "call_result"
+    case UNICO_THEME = "unico_theme"
 }
