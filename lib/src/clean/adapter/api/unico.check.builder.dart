@@ -1,3 +1,4 @@
+import 'package:unico_check/src/clean/domain/entities/unico.config.dart';
 import 'package:unico_check/src/clean/domain/entities/unico.theme.dart';
 import 'unico.check.camera.opener.dart';
 
@@ -9,6 +10,8 @@ abstract class UnicoCheckBuilder {
   UnicoCheckBuilder setSmartFrame({required bool smartFrame});
 
   UnicoCheckBuilder setTimeoutSession({required double timeoutSession});
+
+  UnicoCheckBuilder setUnicoConfig({required UnicoConfig unicoConfig});
 
   UnicoCheckCameraOpener build();
 }

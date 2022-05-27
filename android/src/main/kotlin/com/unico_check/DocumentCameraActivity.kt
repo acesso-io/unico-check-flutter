@@ -71,6 +71,7 @@ class DocumentCameraActivity : CameraActivity(), iAcessoBioDocument {
                         )
                     )
                 )
+                finish()
             }
         })
     }

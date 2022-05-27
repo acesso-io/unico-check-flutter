@@ -47,6 +47,7 @@ class SelfieCameraActivity : CameraActivity(), iAcessoBioSelfie {
                         )
                     )
                 )
+                finish()
             }
         })
     }
