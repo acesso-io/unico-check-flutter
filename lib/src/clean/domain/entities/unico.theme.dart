@@ -1,5 +1,5 @@
 class UnicoTheme {
-  ///Android custom layout
+
   String? colorBackground;
   String? colorBoxMessage;
   String? colorTextMessage;
@@ -15,7 +15,7 @@ class UnicoTheme {
   String? colorSilhouetteError;
   String? colorSilhouetteNeutral;
 
-  ///Objeto de configuracao unico
+  ///Objeto de tema da unico
   UnicoTheme({
     this.colorBackground,
     this.colorBoxMessage,
@@ -62,7 +62,7 @@ class UnicoTheme {
       /// Cor de ícone do botão de tirar foto manualmente.
       'colorIconTakePictureButton': colorIconTakePictureButton,
 
-      ///a diciona cor no icone do botão de captura
+      /// Adiciona cor no icone do botão de captura
       'colorBackgroundBottomDocument': colorBackgroundBottomDocument,
 
       /// Cor de fundo do box na captura de documentos.
