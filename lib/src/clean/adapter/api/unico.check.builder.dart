@@ -11,7 +11,7 @@ abstract class UnicoCheckBuilder {
 
   UnicoCheckBuilder setTimeoutSession({required double timeoutSession});
 
-  UnicoCheckBuilder setUnicoConfig({required UnicoConfig unicoConfig});
+  UnicoCheckBuilder setUnicoConfigIos({required UnicoConfig unicoConfig});
 
   UnicoCheckCameraOpener build();
 }

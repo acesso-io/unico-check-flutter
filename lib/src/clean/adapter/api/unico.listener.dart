@@ -1,7 +1,7 @@
 import 'package:unico_check/src/clean/domain/entities/unico.error.dart';
 
 abstract class UnicoListener {
-  void onErrorAcessoBio(UnicoError error);
+  void onErrorUnico(UnicoError error);
 
   void onUserClosedCameraManually();
 
