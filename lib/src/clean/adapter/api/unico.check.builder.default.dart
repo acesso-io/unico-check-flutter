@@ -16,7 +16,7 @@ class UnicoCheck extends UnicoCheckBuilder {
   late bool _smartFrame = true;
   late double _timeoutSession = 45;
   late UnicoListener _listener;
-  late UnicoConfig _unicoConfig;
+  late UnicoConfig _unicoConfigIos;
 
   UnicoCheck(UnicoListener listener) {
     _listener = listener;
@@ -33,7 +33,7 @@ class UnicoCheck extends UnicoCheckBuilder {
         smartFrame: _smartFrame,
         unicoListener: _listener,
         timeoutSession: _timeoutSession,
-        unicoConfig: _unicoConfig,
+        unicoConfigIos: _unicoConfigIos,
         unicoCallBackUseCase: UnicoCallBackUseCase());
   }
 
@@ -62,8 +62,8 @@ class UnicoCheck extends UnicoCheckBuilder {
   }
 
   @override
-  UnicoCheckBuilder setUnicoConfig({required UnicoConfig unicoConfig}) {
-    _unicoConfig = unicoConfig;
+  UnicoCheckBuilder setUnicoConfigIos({required UnicoConfig unicoConfig}) {
+    _unicoConfigIos = unicoConfig;
     return this;
   }
 }

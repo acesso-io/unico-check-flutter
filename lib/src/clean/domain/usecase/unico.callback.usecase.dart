@@ -31,7 +31,7 @@ class UnicoCallBackUseCase {
         _unicoError?.methodName != "") {
       errorCallBackWithName(_unicoError!.methodName!);
     } else {
-      _unicoListener.onErrorAcessoBio(getUnknownError());
+      _unicoListener.onErrorUnico(getUnknownError());
     }
   }
 
@@ -59,10 +59,10 @@ class UnicoCallBackUseCase {
 
   void onErrorUnico() {
     try {
-      _unicoListener.onErrorAcessoBio(
+      _unicoListener.onErrorUnico(
           UnicoError(_unicoError!.code!, _unicoError!.description!));
     } catch (exception) {
-      _unicoListener.onErrorAcessoBio(getUnknownError());
+      _unicoListener.onErrorUnico(getUnknownError());
     }
   }
 
@@ -71,7 +71,7 @@ class UnicoCallBackUseCase {
       _listenerSelfie!.onErrorSelfie(
           UnicoError(_unicoError!.code!, _unicoError!.description!));
     } catch (exception) {
-      _unicoListener.onErrorAcessoBio(getUnknownError());
+      _unicoListener.onErrorUnico(getUnknownError());
     }
   }
 
@@ -80,7 +80,7 @@ class UnicoCallBackUseCase {
       _listenerDocument!.onErrorDocument(
           UnicoError(_unicoError!.code!, _unicoError!.description!));
     } catch (exception) {
-      _unicoListener.onErrorAcessoBio(getUnknownError());
+      _unicoListener.onErrorUnico(getUnknownError());
     }
   }
 
