@@ -25,7 +25,7 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
   UnicoSelfie? _selfieListener;
   UnicoDocument? _documentListener;
   late UnicoCallBackUseCase _unicoCallBackUseCase;
-  late UnicoConfig _unicoConfig;
+  late UnicoConfig _unicoConfigIos;
 
   UnicoCheckCameraOpenerDefault(
       {required OpenCameraUseCase openCameraUseCase,
@@ -36,7 +36,7 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
       required UnicoListener unicoListener,
       required UnicoCallBackUseCase unicoCallBackUseCase,
       required double timeoutSession,
-      required UnicoConfig unicoConfig}) {
+      required UnicoConfig unicoConfigIos}) {
     _openCamera = openCameraUseCase;
     _openCameraRequest = openCameraRequest;
     _unicoTheme = unicoTheme;
@@ -45,7 +45,7 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
     _unicoListener = unicoListener;
     _unicoCallBackUseCase = unicoCallBackUseCase;
     _timeoutSession = timeoutSession;
-    _unicoConfig = unicoConfig;
+    _unicoConfigIos = unicoConfigIos;
   }
 
   @override
@@ -88,7 +88,7 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
     _openCameraRequest.setJsonFilneName(jsonFileName);
     _openCameraRequest.setUnicoTheme(_unicoTheme);
     _openCameraRequest.setTimeoutSession(_timeoutSession);
-    _openCameraRequest.setUnicoConfig(_unicoConfig);
+    _openCameraRequest.setUnicoConfigIos(_unicoConfigIos);
   }
 
   @override

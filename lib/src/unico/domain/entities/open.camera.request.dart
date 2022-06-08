@@ -9,7 +9,7 @@ class OpenCameraRequest {
   late bool _smartFrame = true;
   late double _timeoutSession;
   late DocumentType _documentType = DocumentType.NONE;
-  late UnicoConfig _unicoConfig;
+  late UnicoConfig _unicoConfigIos;
 
   void setUnicoTheme(UnicoTheme unicoTheme) {
     _unicoTheme = unicoTheme;
@@ -35,8 +35,8 @@ class OpenCameraRequest {
     _documentType = documentType;
   }
 
-  void setUnicoConfig(UnicoConfig unicoConfig) {
-    _unicoConfig = unicoConfig;
+  void setUnicoConfigIos(UnicoConfig unicoConfigIos) {
+    _unicoConfigIos = unicoConfigIos;
   }
 
   Map<dynamic, dynamic> get getOpenCameraRequest {
@@ -47,7 +47,7 @@ class OpenCameraRequest {
       'set_smart_frame': _smartFrame,
       'set_timeout_session': _timeoutSession,
       'document_type': _documentType.name,
-      'unico_config': _unicoConfig.getCommonMap
+      'unico_config_ios': _unicoConfigIos.getCommonMap
     };
   }
 }

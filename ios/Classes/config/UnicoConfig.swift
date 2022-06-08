@@ -12,7 +12,7 @@ class UnicoConfig : NSObject,  AcessoBioConfigDataSource {
     private var argument: Dictionary<String, Any>?
     
     init(argument: Dictionary<String, Any>){
-        self.argument = argument["unico_config"] as? Dictionary<String, Any> ?? nil
+        self.argument = argument["unico_config_ios"] as? Dictionary<String, Any> ?? nil
     }
     
     func getProjectNumber() -> String {

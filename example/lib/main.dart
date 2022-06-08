@@ -29,16 +29,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage>
-    implements UnicoListener, UnicoDocument, UnicoSelfie {
-  late UnicoCheckBuilder unicoCheck;
-  String jsonName = "unico-check-mobile-services.json";
+    implements UnicoListener, UnicoSelfie, UnicoDocument {
+  late UnicoCheckBuilder _unicoCheck;
+  late UnicoCheckCameraOpener _opener;
+  String androidJsonFileName = "unico-check-mobile-services.json";
 
-  final theme = UnicoTheme(
+  final _theme = UnicoTheme(
       colorSilhouetteSuccess: "#4ca832",
       colorSilhouetteError: "#fcdb03",
       colorBackground: "#3295a8");
 
-  final config = UnicoConfig(
+  final _configIos = UnicoConfig(
       getProjectNumber: "getProjectNumber",
       getProjectId: "getProjectId",
       getMobileSdkAppId: "getMobileSdkAppId",
@@ -49,67 +50,127 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     super.initState();
-    initAcessoBio();
+    initUnicoCamera();
+    configUnicoCamera();
   }
 
-  void initAcessoBio() {
-    unicoCheck = new UnicoCheck(this)
-        .setTheme(unicoTheme: theme)
-        .setUnicoConfig(unicoConfig: config);
+  void initUnicoCamera() {
+    _unicoCheck = new UnicoCheck(this);
+  }
+
+  void configUnicoCamera() {
+    _unicoCheck
+        .setTheme(unicoTheme: _theme)
+        .setUnicoConfigIos(unicoConfig: _configIos)
+        .setTimeoutSession(timeoutSession: 55);
+  }
+
+  /// Unico callbacks
+
+  @override
+  void onErrorUnico(UnicoError error) {}
+
+  @override
+  void onUserClosedCameraManually() {}
+
+  @override
+  void onSystemChangedTypeCameraTimeoutFaceInference() {}
+
+  @override
+  void onSystemClosedCameraTimeoutSession() {}
+
+  /// Selfie callbacks
+
+  @override
+  void onSuccessSelfie(ResultCamera result) {}
+
+  @override
+  void onErrorSelfie(UnicoError error) {}
+
+  /// Document callbacks
+
+  @override
+  void onSuccessDocument(ResultCamera resultCamera) { }
+
+  @override
+  void onErrorDocument(UnicoError error) { }
+
+  void setCameraSmart() {
+    _opener = new UnicoCheck(this)
+        .setAutoCapture(autoCapture: true)
+        .setSmartFrame(smartFrame: true)
+        .build();
+  }
+
+  void setCameraNormal() {
+    _opener = new UnicoCheck(this)
+        .setAutoCapture(autoCapture: false)
+        .setSmartFrame(smartFrame: false)
+        .build();
+  }
+
+  void setCameraSmartWithButton() {
+    _opener = new UnicoCheck(this)
+        .setAutoCapture(autoCapture: false)
+        .setSmartFrame(smartFrame: true)
+        .build();
   }
 
   void openCamera() {
-    unicoCheck
-        .setAutoCapture(autoCapture: true)
-        .setSmartFrame(smartFrame: true)
-        .build()
-        .openCameraSelfie(jsonFileName: jsonName, listener: this);
+    setCameraSmart();
+
+    _opener.openCameraSelfie(jsonFileName: androidJsonFileName, listener: this);
+
   }
 
   void openCameraNormal() {
-    unicoCheck
+    _unicoCheck
         .setAutoCapture(autoCapture: false)
         .setSmartFrame(smartFrame: false)
         .build()
-        .openCameraSelfie(jsonFileName: jsonName, listener: this);
+        .openCameraSelfie(jsonFileName: androidJsonFileName, listener: this);
   }
 
   void openCameraDocumentCNH() {
-    unicoCheck.build().openCameraDocument(
-        jsonFileName: jsonName, documentType: DocumentType.CNH, listener: this);
+    _unicoCheck.build().openCameraDocument(
+        jsonFileName: androidJsonFileName,
+        documentType: DocumentType.CNH,
+        listener: this);
   }
 
-  void openCameraDocumentCNHFrente() {
-    unicoCheck.build().openCameraDocument(
-        jsonFileName: jsonName,
+  void openCameraDocumentCNHFront() {
+    _unicoCheck.build().openCameraDocument(
+        jsonFileName: androidJsonFileName,
         documentType: DocumentType.CNH_FRENTE,
         listener: this);
   }
 
   void openCameraDocumentCNHVerso() {
-    unicoCheck.build().openCameraDocument(
-        jsonFileName: jsonName,
+    _unicoCheck.build().openCameraDocument(
+        jsonFileName: androidJsonFileName,
         documentType: DocumentType.CNH_VERSO,
         listener: this);
   }
 
-  void openCameraDocumentRGFrente() {
-    unicoCheck.build().openCameraDocument(
-        jsonFileName: jsonName,
+  void openCameraDocumentRGFront() {
+    _unicoCheck.build().openCameraDocument(
+        jsonFileName: androidJsonFileName,
         documentType: DocumentType.RG_FRENTE,
         listener: this);
   }
 
   void openCameraDocumentRGVerso() {
-    unicoCheck.build().openCameraDocument(
-        jsonFileName: jsonName,
+    _unicoCheck.build().openCameraDocument(
+        jsonFileName: androidJsonFileName,
         documentType: DocumentType.RG_VERSO,
         listener: this);
   }
 
   void openCameraDocumentCPF() {
-    unicoCheck.build().openCameraDocument(
-        jsonFileName: jsonName, documentType: DocumentType.CPF, listener: this);
+    _unicoCheck.build().openCameraDocument(
+        jsonFileName: androidJsonFileName,
+        documentType: DocumentType.CPF,
+        listener: this);
   }
 
   @override
@@ -173,7 +234,7 @@ class _MyHomePageState extends State<MyHomePage>
             Container(
               margin: EdgeInsets.all(10),
               child: TextButton(
-                onPressed: openCameraDocumentCNHFrente,
+                onPressed: openCameraDocumentCNHFront,
                 child: Text('Documentos CNH Frente'),
               ),
             ),
@@ -187,7 +248,7 @@ class _MyHomePageState extends State<MyHomePage>
             Container(
               margin: EdgeInsets.all(10),
               child: TextButton(
-                onPressed: openCameraDocumentRGFrente,
+                onPressed: openCameraDocumentRGVerso,
                 child: Text('Documentos RG Frente'),
               ),
             ),
@@ -209,48 +270,6 @@ class _MyHomePageState extends State<MyHomePage>
         ),
       ),
     );
-  }
-
-  ///Unico callbacks
-  void onErrorAcessoBio(UnicoError error) {
-    showToast("Erro ao abrir a camera: " + error.description);
-  }
-
-  @override
-  void onSystemChangedTypeCameraTimeoutFaceInference() {
-    showToast("Sistema trocou o tipo da camera !");
-  }
-
-  @override
-  void onSystemClosedCameraTimeoutSession() {
-    showToast("Sistema fechou a camera !");
-  }
-
-  @override
-  void onUserClosedCameraManually() {
-    showToast("Usuario fechou camera manualmente !");
-  }
-
-  ///Selfie callbacks
-  @override
-  void onSuccessSelfie(ResultCamera result) {
-    showToast("Sucesso na captura, aqui temos o base64 e encrypted ");
-  }
-
-  @override
-  void onErrorSelfie(UnicoError result) {
-    showToast("Erro ao abrir a camera: " + result.description);
-  }
-
-  ///Document callbacks
-  @override
-  void onSuccessDocument(ResultCamera base64) {
-    showToast("Sucesso na captura, aqui temos o base64 e encrypted ");
-  }
-
-  @override
-  void onErrorDocument(UnicoError error) {
-    showToast("Erro ao abrir a camera: " + error.description);
   }
 
   void showToast(String msg) {
