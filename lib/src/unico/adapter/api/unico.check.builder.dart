@@ -13,5 +13,7 @@ abstract class UnicoCheckBuilder {
 
   UnicoCheckBuilder setUnicoConfigIos({required UnicoConfig unicoConfig});
 
+  UnicoCheckBuilder setUnicoConfigAndroid({required UnicoConfig unicoConfig});
+
   UnicoCheckCameraOpener build();
 }

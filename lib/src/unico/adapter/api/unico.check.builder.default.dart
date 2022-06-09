@@ -11,12 +11,13 @@ import 'package:unico_check/src/unico/plugins/channel/channel.unico.default.dart
 import 'unico.check.camera.opener.dart';
 
 class UnicoCheck extends UnicoCheckBuilder {
-  late UnicoTheme _unicoTheme;
-  late bool _autoCapture = true;
-  late bool _smartFrame = true;
-  late double _timeoutSession = 45;
+  UnicoTheme _unicoTheme = new UnicoTheme();
+  bool _autoCapture = true;
+  bool _smartFrame = true;
+  double _timeoutSession = 45;
   late UnicoListener _listener;
   late UnicoConfig _unicoConfigIos;
+  late UnicoConfig _unicoConfigAndroid;
 
   UnicoCheck(UnicoListener listener) {
     _listener = listener;
@@ -34,6 +35,7 @@ class UnicoCheck extends UnicoCheckBuilder {
         unicoListener: _listener,
         timeoutSession: _timeoutSession,
         unicoConfigIos: _unicoConfigIos,
+        unicoConfigAndroid: _unicoConfigAndroid,
         unicoCallBackUseCase: UnicoCallBackUseCase());
   }
 
@@ -64,6 +66,12 @@ class UnicoCheck extends UnicoCheckBuilder {
   @override
   UnicoCheckBuilder setUnicoConfigIos({required UnicoConfig unicoConfig}) {
     _unicoConfigIos = unicoConfig;
+    return this;
+  }
+
+  @override
+  UnicoCheckBuilder setUnicoConfigAndroid({required UnicoConfig unicoConfig}) {
+    _unicoConfigAndroid = unicoConfig;
     return this;
   }
 }

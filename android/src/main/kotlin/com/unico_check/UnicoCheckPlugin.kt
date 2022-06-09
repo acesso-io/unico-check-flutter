@@ -7,9 +7,7 @@ import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.MethodConstants.AUTO_CAPTURE
 import com.unico_check.constants.MethodConstants.BRIDGE_NAME
 import com.unico_check.constants.MethodConstants.DOCUMENT_TYPE
-import com.unico_check.constants.MethodConstants.JSON_NAME
 import com.unico_check.constants.MethodConstants.SMART_FRAME
-import com.unico_check.constants.ReturnConstants
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -46,36 +44,21 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
 
             MethodConstants.OPEN_CAMERA_SELFIE -> getCameraSelfie(
                 call.argument(AUTO_CAPTURE),
-                call.argument(SMART_FRAME),
-                call.argument(JSON_NAME)
+                call.argument(SMART_FRAME)
             )
 
             MethodConstants.OPEN_CAMERA_DOCUMENT -> openCameraDocument(
                 call.argument(DOCUMENT_TYPE),
-                call.argument(JSON_NAME)
             )
 
             else -> result.notImplemented()
         }
     }
 
-    private fun setJsonFileName(jsonName: String?, intent: Intent) {
-        if (jsonName == "" || jsonName == null) {
-            result.error(
-                ReturnConstants.ON_ERROR_JSON_FILE_NAME.code,
-                ReturnConstants.ON_ERROR_JSON_FILE_NAME.message,
-                null
-            )
-        } else {
-            intent.putExtra(JSON_NAME, jsonName)
-        }
-    }
-
-    private fun openCameraDocument(document_type: String?, jsonName: String?) {
+    private fun openCameraDocument(document_type: String?) {
         val intent = Intent(activity, DocumentCameraActivity::class.java)
 
         intent.putExtra(DOCUMENT_TYPE, document_type)
-        setJsonFileName(jsonName, intent)
 
         activity.startActivity(intent)
     }
@@ -83,13 +66,11 @@ class UnicoCheckPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
     private fun getCameraSelfie(
         disableAutoCapture: Boolean?,
         disableSmartFrame: Boolean?,
-        jsonName: String?
     ) {
         val intent = Intent(activity, SelfieCameraActivity::class.java)
 
         intent.putExtra(AUTO_CAPTURE, disableAutoCapture)
         intent.putExtra(SMART_FRAME, disableSmartFrame)
-        setJsonFileName(jsonName, intent)
 
         activity.startActivity(intent)
     }

@@ -3,8 +3,6 @@ package com.unico_check.constants
 object MethodConstants {
     const val BRIDGE_NAME = "unico_channel"
 
-    const val JSON_NAME: String = "json_file_name"
-
     const val OPEN_CAMERA_SELFIE: String = "open_camera_selfie"
     const val OPEN_CAMERA_DOCUMENT: String = "open_camera_document"
 

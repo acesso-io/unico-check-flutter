@@ -26,6 +26,7 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
   UnicoDocument? _documentListener;
   late UnicoCallBackUseCase _unicoCallBackUseCase;
   late UnicoConfig _unicoConfigIos;
+  late UnicoConfig _unicoConfigAndroid;
 
   UnicoCheckCameraOpenerDefault(
       {required OpenCameraUseCase openCameraUseCase,
@@ -36,7 +37,8 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
       required UnicoListener unicoListener,
       required UnicoCallBackUseCase unicoCallBackUseCase,
       required double timeoutSession,
-      required UnicoConfig unicoConfigIos}) {
+      required UnicoConfig unicoConfigIos,
+      required UnicoConfig unicoConfigAndroid}) {
     _openCamera = openCameraUseCase;
     _openCameraRequest = openCameraRequest;
     _unicoTheme = unicoTheme;
@@ -46,13 +48,13 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
     _unicoCallBackUseCase = unicoCallBackUseCase;
     _timeoutSession = timeoutSession;
     _unicoConfigIos = unicoConfigIos;
+    _unicoConfigAndroid = unicoConfigAndroid;
   }
 
   @override
-  void openCameraSelfie(
-      {required String jsonFileName, required UnicoSelfie listener}) {
+  void openCameraSelfie({required UnicoSelfie listener}) {
     buildSelfieRequest();
-    buildDefaultRequest(jsonFileName);
+    buildDefaultRequest();
 
     _selfieListener = listener;
     _openCamera.openCamera(
@@ -84,20 +86,18 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
     _openCameraRequest.setSmartFrame(_smartFrame);
   }
 
-  void buildDefaultRequest(String jsonFileName) {
-    _openCameraRequest.setJsonFilneName(jsonFileName);
+  void buildDefaultRequest() {
     _openCameraRequest.setUnicoTheme(_unicoTheme);
     _openCameraRequest.setTimeoutSession(_timeoutSession);
     _openCameraRequest.setUnicoConfigIos(_unicoConfigIos);
+    _openCameraRequest.setUnicoConfigAndroid(_unicoConfigAndroid);
   }
 
   @override
   void openCameraDocument(
-      {required String jsonFileName,
-      required DocumentType documentType,
-      required UnicoDocument listener}) {
+      {required DocumentType documentType, required UnicoDocument listener}) {
     buildDocumentRequest(documentType);
-    buildDefaultRequest(jsonFileName);
+    buildDefaultRequest();
 
     _documentListener = listener;
     _openCamera.openCamera(
