@@ -1,3 +1,5 @@
+## 3.0.0-beta.1
+* update smartlive 
 ## 2.0.2
 * Updated iOS Version
 ## 2.0.1

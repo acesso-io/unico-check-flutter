@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:unico_check/unico_check.dart';
 
-import 'keys.dart';
-
 void main() {
   runApp(MyApp());
 }
@@ -42,12 +40,12 @@ class _MyHomePageState extends State<MyHomePage>
       colorBackground: "#3295a8");
 
   final _configIos = UnicoConfig(
-      getProjectNumber: getProjectNumber,
-      getProjectId: getProjectId,
-      getMobileSdkAppId: getMobileSdkAppId,
-      getBundleIdentifier: getBundleIdentifier,
-      getHostInfo: getHostInfo,
-      getHostKey: getHostKey);
+      getProjectNumber: "getProjectNumber",
+      getProjectId: "getProjectId",
+      getMobileSdkAppId: "getMobileSdkAppId",
+      getBundleIdentifier: "getBundleIdentifier",
+      getHostInfo: "getHostInfo",
+      getHostKey: "getHostKey");
 
   @override
   void initState() {
@@ -208,20 +206,17 @@ class _MyHomePageState extends State<MyHomePage>
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: FlatButton(
+              child: TextButton(
                 onPressed: openCameraNormal,
                 child: Text('Camera normal'),
-                color: Color(0xFF1172EB),
-                textColor: Colors.white,
               ),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: FlatButton(
-                  onPressed: openCamera,
-                  child: Text('Camera inteligente'),
-                  color: Color(0xFF1172EB),
-                  textColor: Colors.white),
+              child: TextButton(
+                onPressed: openCamera,
+                child: Text('Camera inteligente'),
+              ),
             ),
             Container(
               margin: EdgeInsets.only(top: 10, bottom: 10),
@@ -232,51 +227,44 @@ class _MyHomePageState extends State<MyHomePage>
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: FlatButton(
+              child: TextButton(
                   onPressed: openCameraDocumentCNH,
-                  child: Text('Documentos CNH'),
-                  color: Color(0xFF1172EB),
-                  textColor: Colors.white),
+                  child: Text('Documentos CNH')),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: FlatButton(
-                  onPressed: openCameraDocumentCNHFront,
-                  child: Text('Documentos CNH Frente'),
-                  color: Color(0xFF1172EB),
-                  textColor: Colors.white),
+              child: TextButton(
+                onPressed: openCameraDocumentCNHFront,
+                child: Text('Documentos CNH Frente'),
+              ),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: FlatButton(
-                  onPressed: openCameraDocumentCNHVerso,
-                  child: Text('Documentos CNH Verso'),
-                  color: Color(0xFF1172EB),
-                  textColor: Colors.white),
+              child: TextButton(
+                onPressed: openCameraDocumentCNHVerso,
+                child: Text('Documentos CNH Verso'),
+              ),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: FlatButton(
-                  onPressed: openCameraDocumentRGFront,
-                  child: Text('Documentos RG Frente'),
-                  color: Color(0xFF1172EB),
-                  textColor: Colors.white),
+              child: TextButton(
+                onPressed: openCameraDocumentRGVerso,
+                child: Text('Documentos RG Frente'),
+              ),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: FlatButton(
-                  onPressed: openCameraDocumentRGVerso,
-                  child: Text('Documentos RG verso'),
-                  color: Color(0xFF1172EB),
-                  textColor: Colors.white),
+              child: TextButton(
+                onPressed: openCameraDocumentRGVerso,
+                child: Text('Documentos RG verso'),
+              ),
             ),
             Container(
               margin: EdgeInsets.all(10),
-              child: FlatButton(
-                  onPressed: openCameraDocumentCPF,
-                  child: Text('Documentos CPF'),
-                  color: Color(0xFF1172EB),
-                  textColor: Colors.white),
+              child: TextButton(
+                onPressed: openCameraDocumentCPF,
+                child: Text('Documentos CPF'),
+              ),
             ),
           ],
         ),
