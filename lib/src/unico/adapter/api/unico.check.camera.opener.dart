@@ -6,5 +6,6 @@ abstract class UnicoCheckCameraOpener {
   void openCameraSelfie({required UnicoSelfie listener});
 
   void openCameraDocument(
-      {required DocumentType documentType, required UnicoDocument listener});
+      {required DocumentType documentType,
+      required UnicoDocument listener});
 }

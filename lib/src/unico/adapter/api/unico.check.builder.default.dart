@@ -6,7 +6,6 @@ import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.config.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
 import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.default.dart';
-import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.dart';
 import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.default.dart';
 import 'package:unico_check/src/unico/plugins/channel/channel.unico.default.dart';
 import 'unico.check.camera.opener.dart';
