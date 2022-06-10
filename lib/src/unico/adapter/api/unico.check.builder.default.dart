@@ -1,13 +1,15 @@
 import 'package:unico_check/src/unico/adapter/api/unico.check.builder.dart';
 import 'package:unico_check/src/unico/adapter/api/unico.check.camera.opener.default.dart';
 import 'package:unico_check/src/unico/adapter/api/unico.listener.dart';
-import 'package:unico_check/src/unico/adapter/repository/channel.repository.default.dart';
+import 'package:unico_check/src/unico/adapter/repository/channel.repository.impl.dart';
+import 'package:unico_check/src/unico/adapter/repository/processors/camera.result.processor.mapper.dart';
 import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.config.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
-import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.default.dart';
+import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.dart';
 import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.dart';
 import 'package:unico_check/src/unico/plugins/channel/channel.unico.default.dart';
+
 import 'unico.check.camera.opener.dart';
 
 class UnicoCheck extends UnicoCheckBuilder {
@@ -24,10 +26,14 @@ class UnicoCheck extends UnicoCheckBuilder {
 
   @override
   UnicoCheckCameraOpener build() {
-    return new UnicoCheckCameraOpenerDefault(
-        openCameraUseCase: new OpenCameraUseCaseDefault(
-            new ChannelRepositoryDefault(new ChannelUnicoDefault())),
-        openCameraRequest: new OpenCameraRequest(),
+    final processorMapper = CameraResultProcessorMapper();
+    final channelUnicoDefault = ChannelUnicoDefault();
+    final repository =  ChannelRepositoryImpl(channelUnicoDefault, processorMapper);
+    final openCameraUseCase = OpenCameraUseCase(repository);
+
+    return UnicoCheckCameraOpenerDefault(
+        openCameraUseCase: openCameraUseCase,
+        openCameraRequest: OpenCameraRequest(),
         unicoTheme: _unicoTheme,
         autoCapture: _autoCapture,
         smartFrame: _smartFrame,

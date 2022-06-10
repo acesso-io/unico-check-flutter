@@ -1,21 +1,23 @@
+import 'package:unico_check/src/unico/abstractions/interfaces/open.camera.listener.dart';
 import 'package:unico_check/src/unico/adapter/api/response/document/unico.document.dart';
 import 'package:unico_check/src/unico/adapter/api/response/selfie/unico.selfie.dart';
 import 'package:unico_check/src/unico/adapter/api/unico.listener.dart';
 import 'package:unico_check/src/unico/domain/entities/document.type.dart';
 import 'package:unico_check/src/unico/domain/entities/methods.channel.dart';
 import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
+import 'package:unico_check/src/unico/domain/entities/open_camera/open.camera.config.entity.dart';
 import 'package:unico_check/src/unico/domain/entities/result.camera.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.config.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.error.channel.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
 import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.dart';
-import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.listener.dart';
 import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.dart';
+
 import 'unico.check.camera.opener.dart';
 
 class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
-    implements OpenCameraUseCaseListener {
-  late OpenCameraUseCase _openCamera;
+    implements IOpenCameraeListener {
+  late OpenCameraUseCase _openCameraUseCase;
   late OpenCameraRequest _openCameraRequest;
   late UnicoTheme _unicoTheme;
   late bool _autoCapture;
@@ -37,7 +39,7 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
       required UnicoCallBackUseCase unicoCallBackUseCase,
       required double timeoutSession,
       required UnicoConfig unicoConfigIos}) {
-    _openCamera = openCameraUseCase;
+    _openCameraUseCase = openCameraUseCase;
     _openCameraRequest = openCameraRequest;
     _unicoTheme = unicoTheme;
     _autoCapture = autoCapture;
@@ -49,16 +51,16 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
   }
 
   @override
-  void openCameraSelfie(
-      {required String jsonFileName, required UnicoSelfie listener}) {
+  void openCameraSelfie({required String jsonFileName, required UnicoSelfie listener}) {
     buildSelfieRequest();
     buildDefaultRequest(jsonFileName);
 
     _selfieListener = listener;
-    _openCamera.openCamera(
-        request: _openCameraRequest,
-        methodsChannel: MethodsChannel.open_camera_selfie,
-        openCameraUseCaseListener: this);
+    _openCameraUseCase(OpenCameraConfigEntity(
+      _openCameraRequest,
+      MethodsChannel.open_camera_selfie,
+      this,
+    ));
   }
 
   @override
@@ -100,10 +102,11 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
     buildDefaultRequest(jsonFileName);
 
     _documentListener = listener;
-    _openCamera.openCamera(
-        request: _openCameraRequest,
-        methodsChannel: MethodsChannel.open_camera_document,
-        openCameraUseCaseListener: this);
+    _openCameraUseCase(OpenCameraConfigEntity(
+      _openCameraRequest,
+      MethodsChannel.open_camera_document,
+      this,
+    ));
   }
 
   void buildDocumentRequest(DocumentType documentType) {
