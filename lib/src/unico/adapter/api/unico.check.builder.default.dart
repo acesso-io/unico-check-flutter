@@ -30,17 +30,19 @@ class UnicoCheck extends UnicoCheckBuilder {
     final channelUnicoDefault = ChannelUnicoDefault();
     final repository =  ChannelRepositoryImpl(channelUnicoDefault, processorMapper);
     final openCameraUseCase = OpenCameraUseCase(repository);
+    final unicoCallBackUseCase = UnicoCallBackUseCase();
+    final openCameraRequest = OpenCameraRequest();
 
     return UnicoCheckCameraOpenerDefault(
         openCameraUseCase: openCameraUseCase,
-        openCameraRequest: OpenCameraRequest(),
+        openCameraRequest: openCameraRequest,
         unicoTheme: _unicoTheme,
         autoCapture: _autoCapture,
         smartFrame: _smartFrame,
         unicoListener: _listener,
         timeoutSession: _timeoutSession,
         unicoConfigIos: _unicoConfigIos,
-        unicoCallBackUseCase: UnicoCallBackUseCase());
+        unicoCallBackUseCase: unicoCallBackUseCase);
   }
 
   @override
