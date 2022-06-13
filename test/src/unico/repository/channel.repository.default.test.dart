@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:unico_check/src/unico/abstractions/interfaces/open.camera.listener.dart';
-import 'package:unico_check/src/unico/adapter/repository/channel.repository.impl.dart';
+import 'package:unico_check/src/unico/adapter/repository/channel.repository.default.dart';
 import 'package:unico_check/src/unico/adapter/repository/plugin/channel.unico.dart';
 import 'package:unico_check/src/unico/adapter/repository/processors/camera.result.processor.mapper.dart';
 import 'package:unico_check/src/unico/domain/entities/methods.channel.dart';
@@ -14,12 +14,12 @@ class MockIOpenCameraeListener extends Mock implements IOpenCameraeListener {}
 void main() {
   late ChannelUnico channelUnico;
   late CameraResultProcessorMapper processorMapper;
-  late ChannelRepositoryImpl repository;
+  late ChannelRepositoryDefault repository;
 
   setUp(() {
     channelUnico = MockChannelUnico();
     processorMapper = MockCameraResultProcessorMapper();
-    repository = ChannelRepositoryImpl(channelUnico, processorMapper);
+    repository = ChannelRepositoryDefault(channelUnico, processorMapper);
   });
 
   group('Channel Repository Open Camera Tests', () {
@@ -135,7 +135,7 @@ void main() {
       when(() => processorMapper.onSuccess(result)).thenAnswer((_) => dummyResultCamera);
       when(() => openCameraeListener.onSuccessOpenCamera(dummyResultCamera))
           .thenThrow(exception);
-      when(() => processorMapper.getDefaultErrorChanel(ChannelRepositoryImpl.error))
+      when(() => processorMapper.getDefaultErrorChanel(ChannelRepositoryDefault.error))
           .thenAnswer((invocation) => dummyUnicoErrorChannel);
       when(() => openCameraeListener.onErrorOpenCamera(dummyUnicoErrorChannel))
           .thenAnswer((invocation) {});
@@ -154,7 +154,7 @@ void main() {
           )).called(1);
       verify(() => processorMapper.onSuccess(result)).called(1);
       verify(() => openCameraeListener.onSuccessOpenCamera(dummyResultCamera)).called(1);
-      verify(() => processorMapper.getDefaultErrorChanel(ChannelRepositoryImpl.error))
+      verify(() => processorMapper.getDefaultErrorChanel(ChannelRepositoryDefault.error))
           .called(1);
       verify(() => openCameraeListener.onErrorOpenCamera(dummyUnicoErrorChannel))
           .called(1);

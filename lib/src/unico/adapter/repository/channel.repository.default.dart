@@ -6,7 +6,7 @@ import 'package:unico_check/src/unico/domain/interface/channel.repository.dart';
 
 import 'processors/camera.result.processor.mapper.dart';
 
-class ChannelRepositoryImpl extends ChannelRepository
+class ChannelRepositoryDefault extends ChannelRepository
     implements ChannelResultListener {
   final ChannelUnico channelUnico;
   final CameraResultProcessorMapper processorMapper;
@@ -16,7 +16,7 @@ class ChannelRepositoryImpl extends ChannelRepository
   //... Camera listener, is subscribe on callMethodOpenCamera method
   IOpenCameraeListener? _openCameraeListener;
 
-  ChannelRepositoryImpl(this.channelUnico, this.processorMapper);
+  ChannelRepositoryDefault(this.channelUnico, this.processorMapper);
 
   @override
   void callMethodOpenCamera({

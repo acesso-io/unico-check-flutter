@@ -1,7 +1,7 @@
 import 'package:unico_check/src/unico/adapter/api/unico.check.builder.dart';
 import 'package:unico_check/src/unico/adapter/api/unico.check.camera.opener.default.dart';
 import 'package:unico_check/src/unico/adapter/api/unico.listener.dart';
-import 'package:unico_check/src/unico/adapter/repository/channel.repository.impl.dart';
+import 'package:unico_check/src/unico/adapter/repository/channel.repository.default.dart';
 import 'package:unico_check/src/unico/adapter/repository/processors/camera.result.processor.mapper.dart';
 import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.config.dart';
@@ -30,7 +30,7 @@ class UnicoCheck extends UnicoCheckBuilder {
   UnicoCheckCameraOpener build() {
     final processorMapper = CameraResultProcessorMapper();
     final channelUnicoDefault = ChannelUnicoDefault();
-    final repository =  ChannelRepositoryImpl(channelUnicoDefault, processorMapper);
+    final repository =  ChannelRepositoryDefault(channelUnicoDefault, processorMapper);
     final openCameraUseCase = OpenCameraUseCase(repository);
     final unicoErrorMapper = UnicoErrorMapper();
     final unicoCallBackUseCase = UnicoCallBackUseCase(unicoErrorMapper);
