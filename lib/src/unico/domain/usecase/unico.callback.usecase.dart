@@ -1,90 +1,89 @@
+import 'package:unico_check/src/unico/abstractions/use_case.dart';
 import 'package:unico_check/src/unico/adapter/api/response/document/unico.document.dart';
 import 'package:unico_check/src/unico/adapter/api/response/selfie/unico.selfie.dart';
 import 'package:unico_check/src/unico/adapter/api/unico.listener.dart';
+import 'package:unico_check/src/unico/domain/entities/camera_callback/camera.callback.config.entity.dart';
 import 'package:unico_check/src/unico/domain/entities/error.method.name.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.error.channel.dart';
-import 'package:unico_check/src/unico/domain/entities/unico.error.dart';
+import 'package:unico_check/src/unico/domain/mapper/unico_error_mapper.dart';
 
-class UnicoCallBackUseCase {
+class UnicoCallBackUseCase implements UseCase<void, CameraCallbackConfingEntity> {
+  final UnicoErrorMapper unicoErrorMapper;
   static const String unknownError = "unknown error";
+  static const int unknownCode = 999;
+
   late UnicoErrorChannel? _unicoError;
   late UnicoListener _unicoListener;
   late UnicoSelfie? _listenerSelfie;
   late UnicoDocument? _listenerDocument;
 
-  void execute(
-      {required UnicoErrorChannel? unicoError,
-      required UnicoListener unicoListener,
-      required UnicoSelfie? listenerSelfie,
-      required UnicoDocument? listenerDocument}) {
-    _unicoError = unicoError;
-    _unicoListener = unicoListener;
-    _listenerSelfie = listenerSelfie;
-    _listenerDocument = listenerDocument;
+  UnicoCallBackUseCase(this.unicoErrorMapper);
 
-    verifyError();
+  @override
+  void call(CameraCallbackConfingEntity param) {
+    _unicoError = param.unicoError;
+    _unicoListener = param.unicoListener;
+    _listenerSelfie = param.listenerSelfie;
+    _listenerDocument = param.listenerDocument;
+
+    _verifyError();
   }
 
-  void verifyError() {
-    if (_unicoError != null &&
-        _unicoError?.methodName != null &&
-        _unicoError?.methodName != "") {
-      errorCallBackWithName(_unicoError!.methodName!);
+  _verifyError() {
+    if (_unicoError != null && _unicoError?.methodName != null && _unicoError?.methodName != "") {
+      _errorCallBackWithName(_unicoError!.methodName!);
     } else {
-      _unicoListener.onErrorUnico(getUnknownError());
+      _unicoListener.onErrorUnico(unicoErrorMapper.getUnknownError(unknownCode, unknownError));
     }
   }
 
-  void errorCallBackWithName(String methodName) {
-    if (methodName == ErrorMethodName.onCameraFailedPrepare) {
-      onErrorUnico();
-    } else if (methodName == ErrorMethodName.onErrorUnico) {
-      onErrorUnico();
-    } else if (methodName == ErrorMethodName.onUserClosedCameraManually) {
-      _unicoListener.onUserClosedCameraManually();
-    } else if (methodName ==
-        ErrorMethodName.onSystemClosedCameraTimeoutSession) {
-      _unicoListener.onSystemClosedCameraTimeoutSession();
-    } else if (methodName ==
-        ErrorMethodName.onSystemChangedTypeCameraTimeoutFaceInference) {
-      _unicoListener.onSystemChangedTypeCameraTimeoutFaceInference();
-    } else if (methodName == ErrorMethodName.onErrorSelfie) {
-      onErrorSelfie();
-    } else if (methodName == ErrorMethodName.onErrorDocument) {
-      onErrorDocument();
-    } else if (methodName == ErrorMethodName.onErrorJsonFileName) {
-      onErrorUnico();
-    }
-  }
-
-  void onErrorUnico() {
+  _errorCallBackWithName(String methodName) {
     try {
-      _unicoListener.onErrorUnico(
-          UnicoError(_unicoError!.code!, _unicoError!.description!));
+      switch (methodName) {
+        case ErrorMethodName.onCameraFailedPrepare:
+        case ErrorMethodName.onErrorUnico:
+        case ErrorMethodName.onErrorJsonFileName:
+          _onErrorUnico();
+          break;
+        case ErrorMethodName.onUserClosedCameraManually:
+          _unicoListener.onUserClosedCameraManually();
+          break;
+        case ErrorMethodName.onSystemClosedCameraTimeoutSession:
+          _unicoListener.onSystemClosedCameraTimeoutSession();
+          break;
+        case ErrorMethodName.onSystemChangedTypeCameraTimeoutFaceInference:
+          _unicoListener.onSystemChangedTypeCameraTimeoutFaceInference();
+          break;
+        case ErrorMethodName.onErrorSelfie:
+          _onErrorSelfie();
+          break;
+        case ErrorMethodName.onErrorDocument:
+          _onErrorDocument();
+          break;
+      }
     } catch (exception) {
-      _unicoListener.onErrorUnico(getUnknownError());
+      _unicoListener.onErrorUnico(unicoErrorMapper.getUnknownError(unknownCode, unknownError));
     }
   }
 
-  void onErrorSelfie() {
-    try {
-      _listenerSelfie!.onErrorSelfie(
-          UnicoError(_unicoError!.code!, _unicoError!.description!));
-    } catch (exception) {
-      _unicoListener.onErrorUnico(getUnknownError());
-    }
+  _onErrorUnico() {
+    _unicoListener.onErrorUnico(unicoErrorMapper.getUnknownError(
+      _unicoError?.code ?? unknownCode,
+      _unicoError?.description ?? unknownError,
+    ));
   }
 
-  void onErrorDocument() {
-    try {
-      _listenerDocument!.onErrorDocument(
-          UnicoError(_unicoError!.code!, _unicoError!.description!));
-    } catch (exception) {
-      _unicoListener.onErrorUnico(getUnknownError());
-    }
+  _onErrorSelfie() {
+    _listenerSelfie?.onErrorSelfie(unicoErrorMapper.getUnknownError(
+      _unicoError?.code ?? unknownCode,
+      _unicoError?.description ?? 'Selfie error',
+    ));
   }
 
-  UnicoError getUnknownError() {
-    return new UnicoError(0, unknownError);
+  _onErrorDocument() {
+    _listenerDocument?.onErrorDocument(unicoErrorMapper.getUnknownError(
+      _unicoError?.code ?? unknownCode,
+      _unicoError?.description ?? 'Document error',
+    ));
   }
 }

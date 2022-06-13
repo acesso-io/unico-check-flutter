@@ -2,6 +2,7 @@ import 'package:unico_check/src/unico/abstractions/interfaces/open.camera.listen
 import 'package:unico_check/src/unico/adapter/api/response/document/unico.document.dart';
 import 'package:unico_check/src/unico/adapter/api/response/selfie/unico.selfie.dart';
 import 'package:unico_check/src/unico/adapter/api/unico.listener.dart';
+import 'package:unico_check/src/unico/domain/entities/camera_callback/camera.callback.config.entity.dart';
 import 'package:unico_check/src/unico/domain/entities/document.type.dart';
 import 'package:unico_check/src/unico/domain/entities/methods.channel.dart';
 import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
@@ -74,11 +75,13 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
 
   @override
   void onErrorOpenCamera(UnicoErrorChannel? result) {
-    _unicoCallBackUseCase.execute(
+    final confing = CameraCallbackConfingEntity(
         unicoError: result,
         unicoListener: _unicoListener,
         listenerSelfie: _selfieListener,
-        listenerDocument: _documentListener);
+        listenerDocument: _documentListener,
+    );
+    _unicoCallBackUseCase(confing);
   }
 
   void buildSelfieRequest() {
