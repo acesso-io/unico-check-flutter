@@ -1,8 +1,8 @@
 import 'package:flutter/services.dart';
+import 'package:unico_check/src/unico/abstractions/interfaces/open.camera.listener.dart';
 import 'package:unico_check/src/unico/adapter/repository/plugin/channel.unico.dart';
 import 'package:unico_check/src/unico/adapter/repository/channel.result.listener.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.error.channel.dart';
-import 'package:unico_check/src/unico/domain/interface/channel.repository.result.listener.dart';
 
 class ChannelUnicoDefault extends ChannelUnico {
   static const String _resultName = 'call_result';
@@ -25,14 +25,14 @@ class ChannelUnicoDefault extends ChannelUnico {
           .then((value) => {_listener.onChannelResult(value)})
           .catchError((error) => {
                 listener.onChannelResult(<dynamic, dynamic>{
-                  ChannelRepositoryResultListener.response: false,
+                  IOpenCameraeListener.response: false,
                   UnicoErrorChannel.errorMethod: error.code,
                   UnicoErrorChannel.unicoError: error.details,
                 })
               });
     } on PlatformException catch (e) {
       _listener.onChannelResult(<dynamic, dynamic>{
-        ChannelRepositoryResultListener.response: false,
+        IOpenCameraeListener.response: false,
         UnicoErrorChannel.errorMethod: e.code,
         UnicoErrorChannel.unicoError: e.details,
       });
@@ -42,7 +42,7 @@ class ChannelUnicoDefault extends ChannelUnico {
   Future<void> _fromNative(MethodCall call) async {
     if (call.method == _resultName) {
       _listener.onChannelResult(<dynamic, dynamic>{
-        ChannelRepositoryResultListener.response: false,
+        IOpenCameraeListener.response: false,
         UnicoErrorChannel.errorMethod:
             call.arguments[UnicoErrorChannel.errorMethod],
       });

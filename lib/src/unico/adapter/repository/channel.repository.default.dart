@@ -1,72 +1,50 @@
+import 'package:unico_check/src/unico/abstractions/interfaces/open.camera.listener.dart';
 import 'package:unico_check/src/unico/adapter/repository/channel.result.listener.dart';
-import 'package:unico_check/src/unico/domain/entities/unico.error.channel.dart';
-import 'package:unico_check/src/unico/domain/interface/channel.repository.result.listener.dart';
-import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
-import 'package:unico_check/src/unico/domain/entities/result.camera.dart';
-import 'package:unico_check/src/unico/domain/interface/channel.repository.dart';
 import 'package:unico_check/src/unico/adapter/repository/plugin/channel.unico.dart';
+import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
+import 'package:unico_check/src/unico/domain/interface/channel.repository.dart';
+
+import 'processors/camera.result.processor.mapper.dart';
 
 class ChannelRepositoryDefault extends ChannelRepository
     implements ChannelResultListener {
-  late ChannelUnico _channelUnico;
+  final ChannelUnico channelUnico;
+  final CameraResultProcessorMapper processorMapper;
+
   static const String error = "repository error";
 
-  late ChannelRepositoryResultListener _channelRepositoryResultListener;
+  //... Camera listener, is subscribe on callMethodOpenCamera method
+  IOpenCameraeListener? _openCameraeListener;
 
-  ChannelRepositoryDefault(ChannelUnico channelUnico) {
-    _channelUnico = channelUnico;
-  }
+  ChannelRepositoryDefault(this.channelUnico, this.processorMapper);
 
   @override
-  void callMethodOpenCamera(
-      {required String method,
-      required OpenCameraRequest cameraRequest,
-      required ChannelRepositoryResultListener
-          channelRepositoryResultListener}) {
-    _channelUnico.callMethod(
-        method: method,
-        request: cameraRequest.getOpenCameraRequest,
-        listener: this);
-    _channelRepositoryResultListener = channelRepositoryResultListener;
+  void callMethodOpenCamera({
+    required String method,
+    required OpenCameraRequest cameraRequest,
+    required IOpenCameraeListener openCameraeListener,
+  }) {
+    _openCameraeListener = openCameraeListener;
+
+    channelUnico.callMethod(
+      method: method,
+      request: cameraRequest.getOpenCameraRequest,
+      listener: this,
+    );
   }
 
   @override
   void onChannelResult(Map<dynamic, dynamic> result) {
     try {
-      if (result[ChannelRepositoryResultListener.response]) {
-        _channelRepositoryResultListener
-            .onSuccessChannelResult(onSuccess(result));
+      if (result[IOpenCameraeListener.response]) {
+        _openCameraeListener?.onSuccessOpenCamera(processorMapper.onSuccess(result));
       } else {
-        _channelRepositoryResultListener.onErrorChannelResult(onError(result));
+        _openCameraeListener?.onErrorOpenCamera(processorMapper.onError(result));
       }
     } catch (exception) {
-      _channelRepositoryResultListener
-          .onErrorChannelResult(UnicoErrorChannel(0, error, ""));
-    }
-  }
-
-  ResultCamera onSuccess(Map result) {
-    return ResultCamera(
-        result[ResultCamera.map_base64], result[ResultCamera.map_encrypted]);
-  }
-
-  UnicoErrorChannel? onError(Map result) {
-    try {
-      var unicoErrorMap = result[UnicoErrorChannel.unicoError];
-      if (unicoErrorMap != "" && unicoErrorMap != null) {
-        return UnicoErrorChannel(
-            unicoErrorMap[UnicoErrorChannel.map_code],
-            unicoErrorMap[UnicoErrorChannel.map_description],
-            result[UnicoErrorChannel.errorMethod]);
-      } else if (result[UnicoErrorChannel.errorMethod] != null &&
-          result[UnicoErrorChannel.errorMethod] != "") {
-        return UnicoErrorChannel(
-            null, null, result[UnicoErrorChannel.errorMethod]);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      return null;
+      _openCameraeListener?.onErrorOpenCamera(
+        processorMapper.getDefaultErrorChanel(error),
+      );
     }
   }
 }

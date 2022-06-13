@@ -2,12 +2,15 @@ import 'package:unico_check/src/unico/adapter/api/unico.check.builder.dart';
 import 'package:unico_check/src/unico/adapter/api/unico.check.camera.opener.default.dart';
 import 'package:unico_check/src/unico/adapter/api/unico.listener.dart';
 import 'package:unico_check/src/unico/adapter/repository/channel.repository.default.dart';
+import 'package:unico_check/src/unico/adapter/repository/processors/camera.result.processor.mapper.dart';
 import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.config.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
-import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.default.dart';
-import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.default.dart';
+import 'package:unico_check/src/unico/domain/mapper/unico_error_mapper.dart';
+import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.dart';
+import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.dart';
 import 'package:unico_check/src/unico/plugins/channel/channel.unico.default.dart';
+
 import 'unico.check.camera.opener.dart';
 
 class UnicoCheck extends UnicoCheckBuilder {
@@ -25,10 +28,17 @@ class UnicoCheck extends UnicoCheckBuilder {
 
   @override
   UnicoCheckCameraOpener build() {
+    final processorMapper = CameraResultProcessorMapper();
+    final channelUnicoDefault = ChannelUnicoDefault();
+    final repository =  ChannelRepositoryDefault(channelUnicoDefault, processorMapper);
+    final openCameraUseCase = OpenCameraUseCase(repository);
+    final unicoErrorMapper = UnicoErrorMapper();
+    final unicoCallBackUseCase = UnicoCallBackUseCase(unicoErrorMapper);
+    final openCameraRequest = OpenCameraRequest();
+
     return UnicoCheckCameraOpenerDefault(
-        openCameraUseCase: OpenCameraUseCaseDefault(
-            ChannelRepositoryDefault(ChannelUnicoDefault())),
-        openCameraRequest: OpenCameraRequest(),
+        openCameraUseCase: openCameraUseCase,
+        openCameraRequest: openCameraRequest,
         unicoTheme: _unicoTheme,
         autoCapture: _autoCapture,
         smartFrame: _smartFrame,
@@ -36,7 +46,7 @@ class UnicoCheck extends UnicoCheckBuilder {
         timeoutSession: _timeoutSession,
         unicoConfigIos: _unicoConfigIos,
         unicoConfigAndroid: _unicoConfigAndroid,
-        unicoCallBackUseCase: UnicoCallBackUseCaseDefault());
+        unicoCallBackUseCase: unicoCallBackUseCase);
   }
 
   @override
