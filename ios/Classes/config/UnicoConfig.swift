@@ -12,30 +12,30 @@ class UnicoConfig : NSObject,  AcessoBioConfigDataSource {
     private var argument: Dictionary<String, Any>?
     
     init(argument: Dictionary<String, Any>){
-        self.argument = argument["unico_config_ios"] as? Dictionary<String, Any> ?? nil
+        self.argument = argument[MethodConstants.UNICO_CONFIG_ANDROID.rawValue] as? Dictionary<String, Any> ?? nil
     }
     
     func getProjectNumber() -> String {
-        return self.argument?["project_number"] as? String ?? ""
+        return self.argument?[MethodConstants.PROJECT_NUMBER.rawValue] as? String ?? ""
     }
     
     func getProjectId() -> String {
-        return self.argument?["project_id"] as? String ?? ""
+        return self.argument?[MethodConstants.PROJECT_ID.rawValue] as? String ?? ""
     }
     
     func getMobileSdkAppId() -> String {
-        return self.argument?["mobile_sdk_app_id"] as? String ?? ""
+        return self.argument?[MethodConstants.MOBILE_SDK_APP_ID.rawValue] as? String ?? ""
     }
     
     func getBundleIdentifier() -> String {
-        return self.argument?["bundle_identifier"] as? String ?? ""
+        return self.argument?[MethodConstants.BUNDLE_IDENTIFIER.rawValue] as? String ?? ""
     }
     
     func getHostInfo() -> String {
-        return self.argument?["host_info"] as? String ?? ""
+        return self.argument?[MethodConstants.HOST_INFO.rawValue] as? String ?? ""
     }
     
     func getHostKey() -> String {
-        return self.argument?["host_Key"] as? String ?? ""
+        return self.argument?[MethodConstants.HOST_KEY.rawValue] as? String ?? ""
     }
 }

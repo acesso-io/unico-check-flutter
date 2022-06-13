@@ -5,6 +5,7 @@ import android.util.Log
 import com.acesso.acessobio_android.AcessoBioListener
 import com.acesso.acessobio_android.onboarding.AcessoBio
 import com.acesso.acessobio_android.onboarding.IAcessoBioBuilder
+import com.acesso.acessobio_android.onboarding.types.OriginType
 import com.acesso.acessobio_android.services.dto.ErrorBio
 import com.unico_check.config.UnicoTheme
 import com.unico_check.config.UnicoTimer
@@ -50,6 +51,7 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
 
     private fun initAcessoBio() {
         acessoBio = AcessoBio(this, this)
+            .setOrigin(OriginType.FLUTTER, "3.0.0-beta.2")
             .apply {
                 val unicoTimer = UnicoTimer(UnicoCheckPlugin.methodCall)
                 setTimeoutSession(unicoTimer.getTimeoutSession())
