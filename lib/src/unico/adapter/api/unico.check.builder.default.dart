@@ -6,6 +6,8 @@ import 'package:unico_check/src/unico/adapter/repository/processors/camera.resul
 import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.config.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
+import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.default.dart';
+import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.default.dart';
 import 'package:unico_check/src/unico/domain/mapper/unico_error_mapper.dart';
 import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.dart';
 import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.dart';
@@ -14,12 +16,13 @@ import 'package:unico_check/src/unico/plugins/channel/channel.unico.default.dart
 import 'unico.check.camera.opener.dart';
 
 class UnicoCheck extends UnicoCheckBuilder {
-  late UnicoTheme _unicoTheme;
-  late bool _autoCapture = true;
-  late bool _smartFrame = true;
-  late double _timeoutSession = 45;
+  UnicoTheme _unicoTheme = UnicoTheme();
+  bool _autoCapture = true;
+  bool _smartFrame = true;
+  double _timeoutSession = 45;
   late UnicoListener _listener;
   late UnicoConfig _unicoConfigIos;
+  late UnicoConfig _unicoConfigAndroid;
 
   UnicoCheck(UnicoListener listener) {
     _listener = listener;
@@ -44,6 +47,8 @@ class UnicoCheck extends UnicoCheckBuilder {
         unicoListener: _listener,
         timeoutSession: _timeoutSession,
         unicoConfigIos: _unicoConfigIos,
+        unicoConfigAndroid: _unicoConfigAndroid,
+        unicoCallBackUseCase: UnicoCallBackUseCaseDefault());
         unicoCallBackUseCase: unicoCallBackUseCase);
   }
 
@@ -74,6 +79,12 @@ class UnicoCheck extends UnicoCheckBuilder {
   @override
   UnicoCheckBuilder setUnicoConfigIos({required UnicoConfig unicoConfig}) {
     _unicoConfigIos = unicoConfig;
+    return this;
+  }
+
+  @override
+  UnicoCheckBuilder setUnicoConfigAndroid({required UnicoConfig unicoConfig}) {
+    _unicoConfigAndroid = unicoConfig;
     return this;
   }
 }

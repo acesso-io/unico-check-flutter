@@ -3,11 +3,8 @@ import 'package:unico_check/src/unico/adapter/api/response/selfie/unico.selfie.d
 import 'package:unico_check/src/unico/domain/entities/document.type.dart';
 
 abstract class UnicoCheckCameraOpener {
-  void openCameraSelfie(
-      {required String jsonFileName, required UnicoSelfie listener});
+  void openCameraSelfie({required UnicoSelfie listener});
 
   void openCameraDocument(
-      {required String jsonFileName,
-      required DocumentType documentType,
-      required UnicoDocument listener});
+      {required DocumentType documentType, required UnicoDocument listener});
 }

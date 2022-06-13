@@ -32,7 +32,6 @@ class _MyHomePageState extends State<MyHomePage>
     implements UnicoListener, UnicoSelfie, UnicoDocument {
   late UnicoCheckBuilder _unicoCheck;
   late UnicoCheckCameraOpener _opener;
-  String androidJsonFileName = "unico-check-mobile-services.json";
 
   final _theme = UnicoTheme(
       colorSilhouetteSuccess: "#4ca832",
@@ -40,12 +39,20 @@ class _MyHomePageState extends State<MyHomePage>
       colorBackground: "#3295a8");
 
   final _configIos = UnicoConfig(
-      getProjectNumber: "getProjectNumber",
-      getProjectId: "getProjectId",
-      getMobileSdkAppId: "getMobileSdkAppId",
-      getBundleIdentifier: "getBundleIdentifier",
-      getHostInfo: "getHostInfo",
-      getHostKey: "getHostKey");
+      getProjectNumber: "Your ProjectNumber Ios",
+      getProjectId: "Your ProjectId Ios",
+      getMobileSdkAppId: "Your MobileSdkAppId Ios",
+      getBundleIdentifier: "Your BundleIdentifier Ios",
+      getHostInfo: "Your HostInfo Ios",
+      getHostKey: "Your HostKey Ios");
+
+  final _configAndroid = UnicoConfig(
+      getProjectNumber: "Your ProjectNumber Android",
+      getProjectId: "Your ProjectId Android",
+      getMobileSdkAppId: "Your MobileSdkAppId Android",
+      getBundleIdentifier: "Your BundleIdentifier Android",
+      getHostInfo: "Your HostInfo Android",
+      getHostKey: "Your HostKey Android");
 
   @override
   void initState() {
@@ -62,11 +69,11 @@ class _MyHomePageState extends State<MyHomePage>
     _unicoCheck
         .setTheme(unicoTheme: _theme)
         .setUnicoConfigIos(unicoConfig: _configIos)
+        .setUnicoConfigAndroid(unicoConfig: _configAndroid)
         .setTimeoutSession(timeoutSession: 55);
   }
 
   /// Unico callbacks
-
   @override
   void onErrorUnico(UnicoError error) {}
 
@@ -80,7 +87,6 @@ class _MyHomePageState extends State<MyHomePage>
   void onSystemClosedCameraTimeoutSession() {}
 
   /// Selfie callbacks
-
   @override
   void onSuccessSelfie(ResultCamera result) {}
 
@@ -88,29 +94,28 @@ class _MyHomePageState extends State<MyHomePage>
   void onErrorSelfie(UnicoError error) {}
 
   /// Document callbacks
+  @override
+  void onSuccessDocument(ResultCamera resultCamera) {}
 
   @override
-  void onSuccessDocument(ResultCamera resultCamera) { }
-
-  @override
-  void onErrorDocument(UnicoError error) { }
+  void onErrorDocument(UnicoError error) {}
 
   void setCameraSmart() {
-    _opener = new UnicoCheck(this)
+    _opener = _unicoCheck
         .setAutoCapture(autoCapture: true)
         .setSmartFrame(smartFrame: true)
         .build();
   }
 
   void setCameraNormal() {
-    _opener = new UnicoCheck(this)
+    _opener = _unicoCheck
         .setAutoCapture(autoCapture: false)
         .setSmartFrame(smartFrame: false)
         .build();
   }
 
   void setCameraSmartWithButton() {
-    _opener = new UnicoCheck(this)
+    _opener = _unicoCheck
         .setAutoCapture(autoCapture: false)
         .setSmartFrame(smartFrame: true)
         .build();
@@ -118,59 +123,49 @@ class _MyHomePageState extends State<MyHomePage>
 
   void openCamera() {
     setCameraSmart();
-
-    _opener.openCameraSelfie(jsonFileName: androidJsonFileName, listener: this);
-
+    _opener.openCameraSelfie(listener: this);
   }
 
   void openCameraNormal() {
-    _unicoCheck
-        .setAutoCapture(autoCapture: false)
-        .setSmartFrame(smartFrame: false)
-        .build()
-        .openCameraSelfie(jsonFileName: androidJsonFileName, listener: this);
+    setCameraNormal();
+    _opener.openCameraSelfie(listener: this);
+  }
+
+  void openCameraSmartWithButton() {
+    setCameraSmartWithButton();
+    _opener.openCameraSelfie(listener: this);
   }
 
   void openCameraDocumentCNH() {
-    _unicoCheck.build().openCameraDocument(
-        jsonFileName: androidJsonFileName,
-        documentType: DocumentType.CNH,
-        listener: this);
+    _unicoCheck
+        .build()
+        .openCameraDocument(documentType: DocumentType.CNH, listener: this);
   }
 
   void openCameraDocumentCNHFront() {
     _unicoCheck.build().openCameraDocument(
-        jsonFileName: androidJsonFileName,
-        documentType: DocumentType.CNH_FRENTE,
-        listener: this);
+        documentType: DocumentType.CNH_FRENTE, listener: this);
   }
 
   void openCameraDocumentCNHVerso() {
     _unicoCheck.build().openCameraDocument(
-        jsonFileName: androidJsonFileName,
-        documentType: DocumentType.CNH_VERSO,
-        listener: this);
+        documentType: DocumentType.CNH_VERSO, listener: this);
   }
 
   void openCameraDocumentRGFront() {
     _unicoCheck.build().openCameraDocument(
-        jsonFileName: androidJsonFileName,
-        documentType: DocumentType.RG_FRENTE,
-        listener: this);
+        documentType: DocumentType.RG_FRENTE, listener: this);
   }
 
   void openCameraDocumentRGVerso() {
     _unicoCheck.build().openCameraDocument(
-        jsonFileName: androidJsonFileName,
-        documentType: DocumentType.RG_VERSO,
-        listener: this);
+        documentType: DocumentType.RG_VERSO, listener: this);
   }
 
   void openCameraDocumentCPF() {
-    _unicoCheck.build().openCameraDocument(
-        jsonFileName: androidJsonFileName,
-        documentType: DocumentType.CPF,
-        listener: this);
+    _unicoCheck
+        .build()
+        .openCameraDocument(documentType: DocumentType.CPF, listener: this);
   }
 
   @override
@@ -216,6 +211,13 @@ class _MyHomePageState extends State<MyHomePage>
               child: TextButton(
                 onPressed: openCamera,
                 child: Text('Camera inteligente'),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: TextButton(
+                onPressed: openCameraSmartWithButton,
+                child: Text('Camera smart button'),
               ),
             ),
             Container(

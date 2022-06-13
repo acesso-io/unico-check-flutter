@@ -6,6 +6,7 @@ import com.acesso.acessobio_android.onboarding.camera.UnicoCheckCameraOpener
 import com.acesso.acessobio_android.onboarding.camera.selfie.SelfieCameraListener
 import com.acesso.acessobio_android.services.dto.ErrorBio
 import com.acesso.acessobio_android.services.dto.ResultCamera
+import com.unico_check.config.UnicoConfig
 import com.unico_check.constants.MethodConstants
 import com.unico_check.constants.ReturnConstants
 import com.unico_check.hashMap.errorBioToHashMap
@@ -13,10 +14,7 @@ import com.unico_check.hashMap.successBioToHashMap
 
 class SelfieCameraActivity : CameraActivity(), iAcessoBioSelfie {
 
-    private var jsonFileName = ""
-
     override fun callMethodBio() {
-        jsonFileName()
         cameraSettings()
         selectCameraMethod()
     }
@@ -31,7 +29,7 @@ class SelfieCameraActivity : CameraActivity(), iAcessoBioSelfie {
     }
 
     private fun openCamera() {
-        acessoBio.build().prepareSelfieCamera(jsonFileName, object : SelfieCameraListener {
+        acessoBio.build().prepareSelfieCamera(UnicoConfig(UnicoCheckPlugin.methodCall), object : SelfieCameraListener {
             override fun onCameraReady(cameraOpener: UnicoCheckCameraOpener.Selfie) {
                 cameraOpener.open(this@SelfieCameraActivity)
             }
@@ -50,18 +48,6 @@ class SelfieCameraActivity : CameraActivity(), iAcessoBioSelfie {
                 finish()
             }
         })
-    }
-
-    private fun jsonFileName() {
-        try {
-            jsonFileName = intent.getStringExtra(MethodConstants.JSON_NAME).toString()
-        } catch (e: Exception) {
-            UnicoCheckPlugin.result.error(
-                ReturnConstants.ON_ERROR_JSON_FILE_NAME.code,
-                ReturnConstants.ON_ERROR_JSON_FILE_NAME.message,
-                null
-            )
-        }
     }
 
     private fun cameraSettings() {
