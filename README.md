@@ -11,7 +11,7 @@ Pré-requisito minSdkVersion : 21
 
 ## IOS
 
-Pré-requisito versão 9 ou superior.
+Pré-requisito versão 11 ou superior.
 
 Caso ainda não possua as permissões para o uso de câmera em seu projeto
 
