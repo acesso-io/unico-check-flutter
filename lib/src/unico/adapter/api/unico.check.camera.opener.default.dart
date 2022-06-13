@@ -42,7 +42,7 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
       required double timeoutSession,
       required UnicoConfig unicoConfigIos,
       required UnicoConfig unicoConfigAndroid}) {
-    _openCamera = openCameraUseCase;
+    _openCameraUseCase = openCameraUseCase;
     _openCameraRequest = openCameraRequest;
     _unicoTheme = unicoTheme;
     _autoCapture = autoCapture;

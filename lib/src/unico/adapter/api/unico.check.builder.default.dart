@@ -6,8 +6,6 @@ import 'package:unico_check/src/unico/adapter/repository/processors/camera.resul
 import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.config.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
-import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.default.dart';
-import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.default.dart';
 import 'package:unico_check/src/unico/domain/mapper/unico_error_mapper.dart';
 import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.dart';
 import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.dart';
@@ -48,7 +46,6 @@ class UnicoCheck extends UnicoCheckBuilder {
         timeoutSession: _timeoutSession,
         unicoConfigIos: _unicoConfigIos,
         unicoConfigAndroid: _unicoConfigAndroid,
-        unicoCallBackUseCase: UnicoCallBackUseCaseDefault());
         unicoCallBackUseCase: unicoCallBackUseCase);
   }
 
