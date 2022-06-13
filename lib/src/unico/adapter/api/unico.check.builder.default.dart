@@ -11,7 +11,7 @@ import 'package:unico_check/src/unico/plugins/channel/channel.unico.default.dart
 import 'unico.check.camera.opener.dart';
 
 class UnicoCheck extends UnicoCheckBuilder {
-  UnicoTheme _unicoTheme = new UnicoTheme();
+  UnicoTheme _unicoTheme = UnicoTheme();
   bool _autoCapture = true;
   bool _smartFrame = true;
   double _timeoutSession = 45;
@@ -25,10 +25,10 @@ class UnicoCheck extends UnicoCheckBuilder {
 
   @override
   UnicoCheckCameraOpener build() {
-    return new UnicoCheckCameraOpenerDefault(
-        openCameraUseCase: new OpenCameraUseCaseDefault(
-            new ChannelRepositoryDefault(new ChannelUnicoDefault())),
-        openCameraRequest: new OpenCameraRequest(),
+    return UnicoCheckCameraOpenerDefault(
+        openCameraUseCase: OpenCameraUseCaseDefault(
+            ChannelRepositoryDefault(ChannelUnicoDefault())),
+        openCameraRequest: OpenCameraRequest(),
         unicoTheme: _unicoTheme,
         autoCapture: _autoCapture,
         smartFrame: _smartFrame,
