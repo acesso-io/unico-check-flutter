@@ -1,3 +1,5 @@
+## 3.0.0-beta.2
+* updated camera configuration Android and Ios and remove jsonFileName parameter, now you can configure Android and Ios by config object.
 ## 3.0.0-beta.1
 * update smartlive 
 ## 2.0.2

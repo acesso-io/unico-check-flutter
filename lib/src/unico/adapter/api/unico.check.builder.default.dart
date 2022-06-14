@@ -5,7 +5,6 @@ import 'package:unico_check/src/unico/di/di.dart';
 import 'package:unico_check/src/unico/di/module.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.config.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
-
 import 'unico.check.camera.opener.dart';
 
 class UnicoCheck extends UnicoCheckBuilder {
@@ -13,13 +12,15 @@ class UnicoCheck extends UnicoCheckBuilder {
   bool _autoCapture = true;
   bool _smartFrame = true;
   double _timeoutSession = 45;
-  late UnicoListener _listener;
-  late UnicoConfig _unicoConfigIos;
-  late UnicoConfig _unicoConfigAndroid;
+  final UnicoListener listener;
+  final UnicoConfig unicoConfigIos;
+  final UnicoConfig unicoConfigAndroid;
 
-  UnicoCheck(UnicoListener listener) {
+  UnicoCheck(
+      {required this.listener,
+      required this.unicoConfigAndroid,
+      required this.unicoConfigIos}) {
     Module.initDependencies();
-    _listener = listener;
   }
 
   @override
@@ -30,10 +31,10 @@ class UnicoCheck extends UnicoCheckBuilder {
         unicoTheme: _unicoTheme,
         autoCapture: _autoCapture,
         smartFrame: _smartFrame,
-        unicoListener: _listener,
+        unicoListener: listener,
         timeoutSession: _timeoutSession,
-        unicoConfigIos: _unicoConfigIos,
-        unicoConfigAndroid: _unicoConfigAndroid,
+        unicoConfigIos: unicoConfigIos,
+        unicoConfigAndroid: unicoConfigAndroid,
         unicoCallBackUseCase: Di.I.get());
   }
 
@@ -58,18 +59,6 @@ class UnicoCheck extends UnicoCheckBuilder {
   @override
   UnicoCheckBuilder setTimeoutSession({required double timeoutSession}) {
     _timeoutSession = timeoutSession;
-    return this;
-  }
-
-  @override
-  UnicoCheckBuilder setUnicoConfigIos({required UnicoConfig unicoConfig}) {
-    _unicoConfigIos = unicoConfig;
-    return this;
-  }
-
-  @override
-  UnicoCheckBuilder setUnicoConfigAndroid({required UnicoConfig unicoConfig}) {
-    _unicoConfigAndroid = unicoConfig;
     return this;
   }
 }

@@ -62,14 +62,15 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   void initUnicoCamera() {
-    _unicoCheck = new UnicoCheck(this);
+    _unicoCheck = new UnicoCheck(
+        listener: this,
+        unicoConfigIos: _configIos,
+        unicoConfigAndroid: _configAndroid);
   }
 
   void configUnicoCamera() {
     _unicoCheck
         .setTheme(unicoTheme: _theme)
-        .setUnicoConfigIos(unicoConfig: _configIos)
-        .setUnicoConfigAndroid(unicoConfig: _configAndroid)
         .setTimeoutSession(timeoutSession: 55);
   }
 
