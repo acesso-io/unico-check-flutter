@@ -10,7 +10,6 @@ import 'package:unico_check/src/unico/domain/mapper/unico_error_mapper.dart';
 import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.dart';
 import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.dart';
 import 'package:unico_check/src/unico/plugins/channel/channel.unico.default.dart';
-
 import 'unico.check.camera.opener.dart';
 
 class UnicoCheck extends UnicoCheckBuilder {
@@ -18,19 +17,21 @@ class UnicoCheck extends UnicoCheckBuilder {
   bool _autoCapture = true;
   bool _smartFrame = true;
   double _timeoutSession = 45;
-  late UnicoListener _listener;
-  late UnicoConfig _unicoConfigIos;
-  late UnicoConfig _unicoConfigAndroid;
+  final UnicoListener listener;
+  final UnicoConfig unicoConfigIos;
+  final UnicoConfig unicoConfigAndroid;
 
-  UnicoCheck(UnicoListener listener) {
-    _listener = listener;
-  }
+  UnicoCheck(
+      {required this.listener,
+      required this.unicoConfigAndroid,
+      required this.unicoConfigIos});
 
   @override
   UnicoCheckCameraOpener build() {
     final processorMapper = CameraResultProcessorMapper();
     final channelUnicoDefault = ChannelUnicoDefault();
-    final repository =  ChannelRepositoryDefault(channelUnicoDefault, processorMapper);
+    final repository =
+        ChannelRepositoryDefault(channelUnicoDefault, processorMapper);
     final openCameraUseCase = OpenCameraUseCase(repository);
     final unicoErrorMapper = UnicoErrorMapper();
     final unicoCallBackUseCase = UnicoCallBackUseCase(unicoErrorMapper);
@@ -42,10 +43,10 @@ class UnicoCheck extends UnicoCheckBuilder {
         unicoTheme: _unicoTheme,
         autoCapture: _autoCapture,
         smartFrame: _smartFrame,
-        unicoListener: _listener,
+        unicoListener: listener,
         timeoutSession: _timeoutSession,
-        unicoConfigIos: _unicoConfigIos,
-        unicoConfigAndroid: _unicoConfigAndroid,
+        unicoConfigIos: unicoConfigIos,
+        unicoConfigAndroid: unicoConfigAndroid,
         unicoCallBackUseCase: unicoCallBackUseCase);
   }
 
@@ -70,18 +71,6 @@ class UnicoCheck extends UnicoCheckBuilder {
   @override
   UnicoCheckBuilder setTimeoutSession({required double timeoutSession}) {
     _timeoutSession = timeoutSession;
-    return this;
-  }
-
-  @override
-  UnicoCheckBuilder setUnicoConfigIos({required UnicoConfig unicoConfig}) {
-    _unicoConfigIos = unicoConfig;
-    return this;
-  }
-
-  @override
-  UnicoCheckBuilder setUnicoConfigAndroid({required UnicoConfig unicoConfig}) {
-    _unicoConfigAndroid = unicoConfig;
     return this;
   }
 }
