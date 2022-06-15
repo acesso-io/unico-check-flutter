@@ -1,17 +1,31 @@
 import 'package:unico_check/src/unico/adapter/api/unico.check.builder.dart';
 import 'package:unico_check/src/unico/adapter/api/unico.check.camera.opener.default.dart';
 import 'package:unico_check/src/unico/adapter/api/unico.listener.dart';
-import 'package:unico_check/src/unico/di/di.dart';
+import 'package:unico_check/src/unico/di/injection.dart';
 import 'package:unico_check/src/unico/di/module.dart';
+import 'package:unico_check/src/unico/domain/entities/camera_opener/camera.opener.config.entity.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.config.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
+
 import 'unico.check.camera.opener.dart';
 
 class UnicoCheck extends UnicoCheckBuilder {
   UnicoTheme _unicoTheme = UnicoTheme();
+
+  UnicoTheme get unicoTheme => _unicoTheme;
+
   bool _autoCapture = true;
+
+  bool get autoCapture => _autoCapture;
+
   bool _smartFrame = true;
+
+  bool get smartFrame => _smartFrame;
+
   double _timeoutSession = 45;
+
+  double get timeoutSession => _timeoutSession;
+
   final UnicoListener listener;
   final UnicoConfig unicoConfigIos;
   final UnicoConfig unicoConfigAndroid;
@@ -25,17 +39,22 @@ class UnicoCheck extends UnicoCheckBuilder {
 
   @override
   UnicoCheckCameraOpener build() {
+    final cameraOpenerConfig = CameraOpenerConfigEntity(
+      unicoTheme: _unicoTheme,
+      autoCapture: _autoCapture,
+      smartFrame: _smartFrame,
+      timeoutSession: _timeoutSession,
+      unicoConfigAndroid: unicoConfigAndroid,
+      unicoConfigIos: unicoConfigIos,
+      unicoListener: listener,
+    );
     return UnicoCheckCameraOpenerDefault(
-        openCameraUseCase: Di.I.get(),
-        openCameraRequest: Di.I.get(),
-        unicoTheme: _unicoTheme,
-        autoCapture: _autoCapture,
-        smartFrame: _smartFrame,
-        unicoListener: listener,
-        timeoutSession: _timeoutSession,
-        unicoConfigIos: unicoConfigIos,
-        unicoConfigAndroid: unicoConfigAndroid,
-        unicoCallBackUseCase: Di.I.get());
+      openCameraUseCase: Injection.I.get(),
+      openCameraRequest: Injection.I.get(),
+      cameraOpenerConfig: cameraOpenerConfig,
+      unicoCallBackUseCase: Injection.I.get(),
+      openCheckCameraFactory: Injection.I.get(),
+    );
   }
 
   @override

@@ -11,3 +11,5 @@ build/
 .fvm/flutter_sdk
 
 .idea
+
+coverage/

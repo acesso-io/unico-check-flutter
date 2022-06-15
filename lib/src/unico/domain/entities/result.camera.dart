@@ -1,11 +1,8 @@
 class ResultCamera {
   late String? base64;
   late String? encrypted;
-  static const String map_base64 = "base64";
-  static const String map_encrypted = "encrypted";
+  static const String mapBase64 = "base64";
+  static const String mapEncrypted = "encrypted";
 
-  ResultCamera(String? base64, String? encrypted) {
-    this.base64 = base64;
-    this.encrypted = encrypted;
-  }
+  ResultCamera(this.base64, this.encrypted);
 }
