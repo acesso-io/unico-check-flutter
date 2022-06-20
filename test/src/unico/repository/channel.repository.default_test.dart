@@ -134,8 +134,8 @@ void main() {
           )).thenAnswer((invocation) {});
       when(() => processorMapper.onSuccess(result)).thenAnswer((_) => dummyResultCamera);
       when(() => openCameraeListener.onSuccessOpenCamera(dummyResultCamera))
-          .thenThrow(exception);
-      when(() => processorMapper.getDefaultErrorChanel(ChannelRepositoryDefault.error))
+          .thenThrow(dummyException);
+      when(() => processorMapper.getDefaultErrorChanel(description: ChannelRepositoryDefault.error))
           .thenAnswer((invocation) => dummyUnicoErrorChannel);
       when(() => openCameraeListener.onErrorOpenCamera(dummyUnicoErrorChannel))
           .thenAnswer((invocation) {});
@@ -154,7 +154,7 @@ void main() {
           )).called(1);
       verify(() => processorMapper.onSuccess(result)).called(1);
       verify(() => openCameraeListener.onSuccessOpenCamera(dummyResultCamera)).called(1);
-      verify(() => processorMapper.getDefaultErrorChanel(ChannelRepositoryDefault.error))
+      verify(() => processorMapper.getDefaultErrorChanel(description: ChannelRepositoryDefault.error))
           .called(1);
       verify(() => openCameraeListener.onErrorOpenCamera(dummyUnicoErrorChannel))
           .called(1);

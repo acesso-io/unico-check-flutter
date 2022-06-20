@@ -43,7 +43,7 @@ class ChannelRepositoryDefault extends ChannelRepository
       }
     } catch (exception) {
       _openCameraeListener?.onErrorOpenCamera(
-        processorMapper.getDefaultErrorChanel(error),
+        processorMapper.getDefaultErrorChanel(description: error),
       );
     }
   }

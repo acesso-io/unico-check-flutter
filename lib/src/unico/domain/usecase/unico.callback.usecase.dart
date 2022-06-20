@@ -5,10 +5,10 @@ import 'package:unico_check/src/unico/adapter/api/unico.listener.dart';
 import 'package:unico_check/src/unico/domain/entities/camera_callback/camera.callback.config.entity.dart';
 import 'package:unico_check/src/unico/domain/entities/error.method.name.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.error.channel.dart';
-import 'package:unico_check/src/unico/domain/mapper/unico_error_mapper.dart';
+import 'package:unico_check/src/unico/domain/mapper/unico.error.factory.dart';
 
 class UnicoCallBackUseCase implements UseCase<void, CameraCallbackConfingEntity> {
-  final UnicoErrorMapper unicoErrorMapper;
+  final UnicoErrorFactory unicoErrorMapper;
   static const String unknownError = "unknown error";
   static const int unknownCode = 999;
 
@@ -33,7 +33,7 @@ class UnicoCallBackUseCase implements UseCase<void, CameraCallbackConfingEntity>
     if (_unicoError != null && _unicoError?.methodName != null && _unicoError?.methodName != "") {
       _errorCallBackWithName(_unicoError!.methodName!);
     } else {
-      _unicoListener.onErrorUnico(unicoErrorMapper.getUnknownError(unknownCode, unknownError));
+      _unicoListener.onErrorUnico(unicoErrorMapper.buildUnicoError(unknownCode, unknownError));
     }
   }
 
@@ -62,26 +62,26 @@ class UnicoCallBackUseCase implements UseCase<void, CameraCallbackConfingEntity>
           break;
       }
     } catch (exception) {
-      _unicoListener.onErrorUnico(unicoErrorMapper.getUnknownError(unknownCode, unknownError));
+      _unicoListener.onErrorUnico(unicoErrorMapper.buildUnicoError(unknownCode, unknownError));
     }
   }
 
   _onErrorUnico() {
-    _unicoListener.onErrorUnico(unicoErrorMapper.getUnknownError(
+    _unicoListener.onErrorUnico(unicoErrorMapper.buildUnicoError(
       _unicoError?.code ?? unknownCode,
       _unicoError?.description ?? unknownError,
     ));
   }
 
   _onErrorSelfie() {
-    _listenerSelfie?.onErrorSelfie(unicoErrorMapper.getUnknownError(
+    _listenerSelfie?.onErrorSelfie(unicoErrorMapper.buildUnicoError(
       _unicoError?.code ?? unknownCode,
       _unicoError?.description ?? 'Selfie error',
     ));
   }
 
   _onErrorDocument() {
-    _listenerDocument?.onErrorDocument(unicoErrorMapper.getUnknownError(
+    _listenerDocument?.onErrorDocument(unicoErrorMapper.buildUnicoError(
       _unicoError?.code ?? unknownCode,
       _unicoError?.description ?? 'Document error',
     ));

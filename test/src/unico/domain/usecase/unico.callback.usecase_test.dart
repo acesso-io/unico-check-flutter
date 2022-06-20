@@ -6,12 +6,10 @@ import 'package:unico_check/src/unico/adapter/api/unico.listener.dart';
 import 'package:unico_check/src/unico/domain/entities/camera_callback/camera.callback.config.entity.dart';
 import 'package:unico_check/src/unico/domain/entities/error.method.name.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.error.channel.dart';
-import 'package:unico_check/src/unico/domain/mapper/unico_error_mapper.dart';
+import 'package:unico_check/src/unico/domain/mapper/unico.error.factory.dart';
 import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.dart';
 
 import '../../../test_dummy.dart';
-
-class MockUnicoErrorMapper extends Mock implements UnicoErrorMapper {}
 
 class MockUnicoListener extends Mock implements UnicoListener {}
 
@@ -20,7 +18,7 @@ class MockUnicoSelfie extends Mock implements UnicoSelfie {}
 class MockUnicoDocument extends Mock implements UnicoDocument {}
 
 void main() {
-  late UnicoErrorMapper unicoErrorMapper;
+  late UnicoErrorFactory unicoErrorMapper;
   late UnicoCallBackUseCase useCase;
 
   setUp(() {
@@ -38,7 +36,7 @@ void main() {
         unicoListener: unicoListener,
       );
       //  Given
-      when(() => unicoErrorMapper.getUnknownError(
+      when(() => unicoErrorMapper.buildUnicoError(
             UnicoCallBackUseCase.unknownCode,
             UnicoCallBackUseCase.unknownError,
           )).thenAnswer((invocation) => dummyUnicoError);
@@ -46,7 +44,7 @@ void main() {
       //  When
       useCase(callbackConfingEntity);
       //  Then
-      verify(() => unicoErrorMapper.getUnknownError(
+      verify(() => unicoErrorMapper.buildUnicoError(
             UnicoCallBackUseCase.unknownCode,
             UnicoCallBackUseCase.unknownError,
           )).called(1);
@@ -57,8 +55,8 @@ void main() {
   test(
     'should invoke error callback listener when ErrorMethodName is onCameraFailedPrepare',
     () {
-      final errorName = 'my_error';
-      final errorCode = 0;
+      const errorName = 'my_error';
+      const errorCode = 0;
       final unicoListener = MockUnicoListener();
       final unicoError = UnicoErrorChannel(
         errorCode,
@@ -71,7 +69,7 @@ void main() {
         unicoListener: unicoListener,
       );
       //  Given
-      when(() => unicoErrorMapper.getUnknownError(
+      when(() => unicoErrorMapper.buildUnicoError(
             errorCode,
             errorName,
           )).thenAnswer((invocation) => dummyUnicoError);
@@ -79,7 +77,7 @@ void main() {
       //  When
       useCase(callbackConfingEntity);
       //  Then
-      verify(() => unicoErrorMapper.getUnknownError(
+      verify(() => unicoErrorMapper.buildUnicoError(
             errorCode,
             errorName,
           )).called(1);
@@ -90,8 +88,8 @@ void main() {
   test(
     'should invoke error callback listener when ErrorMethodName is onErrorUnico',
     () {
-      final errorName = 'my_error';
-      final errorCode = 0;
+      const errorName = 'my_error';
+      const errorCode = 0;
       final unicoListener = MockUnicoListener();
       final unicoError = UnicoErrorChannel(
         errorCode,
@@ -104,7 +102,7 @@ void main() {
         unicoListener: unicoListener,
       );
       //  Given
-      when(() => unicoErrorMapper.getUnknownError(
+      when(() => unicoErrorMapper.buildUnicoError(
             errorCode,
             errorName,
           )).thenAnswer((invocation) => dummyUnicoError);
@@ -112,7 +110,7 @@ void main() {
       //  When
       useCase(callbackConfingEntity);
       //  Then
-      verify(() => unicoErrorMapper.getUnknownError(
+      verify(() => unicoErrorMapper.buildUnicoError(
             errorCode,
             errorName,
           )).called(1);
@@ -123,8 +121,8 @@ void main() {
   test(
     'should invoke error callback listener when ErrorMethodName is onErrorJsonFileName',
     () {
-      final errorName = 'my_error';
-      final errorCode = 0;
+      const errorName = 'my_error';
+      const errorCode = 0;
       final unicoListener = MockUnicoListener();
       final unicoError = UnicoErrorChannel(
         errorCode,
@@ -137,7 +135,7 @@ void main() {
         unicoListener: unicoListener,
       );
       //  Given
-      when(() => unicoErrorMapper.getUnknownError(
+      when(() => unicoErrorMapper.buildUnicoError(
             errorCode,
             errorName,
           )).thenAnswer((invocation) => dummyUnicoError);
@@ -145,7 +143,7 @@ void main() {
       //  When
       useCase(callbackConfingEntity);
       //  Then
-      verify(() => unicoErrorMapper.getUnknownError(
+      verify(() => unicoErrorMapper.buildUnicoError(
             errorCode,
             errorName,
           )).called(1);
@@ -156,8 +154,8 @@ void main() {
   test(
     'should invoke error callback listener when ErrorMethodName is onUserClosedCameraManually',
     () {
-      final errorName = 'my_error';
-      final errorCode = 0;
+      const errorName = 'my_error';
+      const errorCode = 0;
       final unicoListener = MockUnicoListener();
       final unicoError = UnicoErrorChannel(
         errorCode,
@@ -181,8 +179,8 @@ void main() {
   test(
     'should invoke error callback listener when ErrorMethodName is onSystemClosedCameraTimeoutSession',
     () {
-      final errorName = 'my_error';
-      final errorCode = 0;
+      const errorName = 'my_error';
+      const errorCode = 0;
       final unicoListener = MockUnicoListener();
       final unicoError = UnicoErrorChannel(
         errorCode,
@@ -207,8 +205,8 @@ void main() {
   test(
     'should invoke error callback listener when ErrorMethodName is onSystemChangedTypeCameraTimeoutFaceInference',
     () {
-      final errorName = 'my_error';
-      final errorCode = 0;
+      const errorName = 'my_error';
+      const errorCode = 0;
       final unicoListener = MockUnicoListener();
       final unicoError = UnicoErrorChannel(
         errorCode,
@@ -234,8 +232,8 @@ void main() {
   test(
     'should invoke error callback listener when ErrorMethodName is onErrorSelfie',
     () {
-      final errorName = 'my_error';
-      final errorCode = 0;
+      const errorName = 'my_error';
+      const errorCode = 0;
       final unicoListener = MockUnicoListener();
       final unicoSelfie = MockUnicoSelfie();
       final unicoError = UnicoErrorChannel(
@@ -249,7 +247,7 @@ void main() {
           unicoListener: unicoListener,
           listenerSelfie: unicoSelfie);
       //  Given
-      when(() => unicoErrorMapper.getUnknownError(
+      when(() => unicoErrorMapper.buildUnicoError(
             errorCode,
             errorName,
           )).thenAnswer((invocation) => dummyUnicoError);
@@ -257,7 +255,7 @@ void main() {
       //  When
       useCase(callbackConfingEntity);
       //  Then
-      verify(() => unicoErrorMapper.getUnknownError(
+      verify(() => unicoErrorMapper.buildUnicoError(
             errorCode,
             errorName,
           )).called(1);
@@ -269,8 +267,8 @@ void main() {
   test(
     'should invoke error callback listener when ErrorMethodName is onErrorDocument',
     () {
-      final errorName = 'my_error';
-      final errorCode = 0;
+      const errorName = 'my_error';
+      const errorCode = 0;
       final unicoListener = MockUnicoListener();
       final unicoDocument = MockUnicoDocument();
       final unicoError = UnicoErrorChannel(
@@ -284,7 +282,7 @@ void main() {
           unicoListener: unicoListener,
           listenerDocument: unicoDocument);
       //  Given
-      when(() => unicoErrorMapper.getUnknownError(
+      when(() => unicoErrorMapper.buildUnicoError(
             errorCode,
             errorName,
           )).thenAnswer((invocation) => dummyUnicoError);
@@ -293,7 +291,7 @@ void main() {
       //  When
       useCase(callbackConfingEntity);
       //  Then
-      verify(() => unicoErrorMapper.getUnknownError(
+      verify(() => unicoErrorMapper.buildUnicoError(
             errorCode,
             errorName,
           )).called(1);
@@ -305,8 +303,8 @@ void main() {
   test(
     'should invoke error callback listener when get excepiton',
     () {
-      final errorName = 'my_error';
-      final errorCode = 0;
+      const errorName = 'my_error';
+      const errorCode = 0;
       final unicoListener = MockUnicoListener();
       final unicoError = UnicoErrorChannel(
         errorCode,
@@ -318,11 +316,11 @@ void main() {
         unicoListener: unicoListener,
       );
       //  Given
-      when(() => unicoErrorMapper.getUnknownError(
+      when(() => unicoErrorMapper.buildUnicoError(
             errorCode,
             errorName,
-          )).thenThrow(exception);
-      when(() => unicoErrorMapper.getUnknownError(
+          )).thenThrow(dummyException);
+      when(() => unicoErrorMapper.buildUnicoError(
             UnicoCallBackUseCase.unknownCode,
             UnicoCallBackUseCase.unknownError,
           )).thenAnswer((invocation) => dummyUnicoError);
@@ -330,11 +328,11 @@ void main() {
       //  When
       useCase(callbackConfingEntity);
       //  Then
-      verify(() => unicoErrorMapper.getUnknownError(
+      verify(() => unicoErrorMapper.buildUnicoError(
             errorCode,
             errorName,
           )).called(1);
-      verify(() => unicoErrorMapper.getUnknownError(
+      verify(() => unicoErrorMapper.buildUnicoError(
             UnicoCallBackUseCase.unknownCode,
             UnicoCallBackUseCase.unknownError,
           )).called(1);

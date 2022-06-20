@@ -8,12 +8,12 @@ import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.dart';
 import '../../../test_dummy.dart';
 
 void main() {
-  late ChannelRepository _channel;
+  late ChannelRepository channel;
   late OpenCameraUseCase useCase;
 
   setUp(() {
-    _channel = MockChannelRepository();
-    useCase = OpenCameraUseCase(_channel);
+    channel = MockChannelRepository();
+    useCase = OpenCameraUseCase(channel);
   });
 
   group('Open Camera Use Case Unit Test', () {
@@ -26,14 +26,14 @@ void main() {
         FakeIOpenCameraeListener(),
       );
       //  Given
-      when(() => _channel.callMethodOpenCamera(
+      when(() => channel.callMethodOpenCamera(
           method: entity.methodsChannel.name,
           cameraRequest: entity.request,
           openCameraeListener: entity.openCameraeListener));
       //  When
       useCase(entity);
       //  Then
-      verify(() => _channel.callMethodOpenCamera(
+      verify(() => channel.callMethodOpenCamera(
           method: entity.methodsChannel.name,
           cameraRequest: entity.request,
           openCameraeListener: entity.openCameraeListener)).called(1);

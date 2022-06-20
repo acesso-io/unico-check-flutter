@@ -23,4 +23,6 @@ jobs:
       - run: |
           flutter pub get
       - run: |
-          make unit-tests
+          flutter analyze
+      - run: |
+          flutter test
