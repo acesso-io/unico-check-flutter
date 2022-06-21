@@ -19,6 +19,7 @@ import 'package:unico_check/src/unico/domain/mapper/unico.error.factory.dart';
 
 // dummies
 const dummyString = 'dummyString';
+
 const Map<dynamic, dynamic> dummyMapped = {};
 
 final dummyUnicoErrorChannel = FakeUnicoErrorChannel();
@@ -59,10 +60,7 @@ class MockUnicoErrorChannel extends Mock implements UnicoErrorChannel {}
 class MockIOpenCameraeListener extends Mock implements IOpenCameraeListener {}
 
 // Fakes
-class FakeOpenCameraRequest extends Fake implements OpenCameraRequest {
-  @override
-  Map<dynamic, dynamic> get getOpenCameraRequest => {};
-}
+class FakeOpenCameraRequest extends Fake implements OpenCameraRequest {}
 
 class FakeIOpenCameraeListener extends Fake implements IOpenCameraeListener {}
 
