@@ -19,6 +19,7 @@ import 'package:unico_check/src/unico/domain/mapper/unico.error.factory.dart';
 
 // dummies
 const dummyString = 'dummyString';
+const Map<dynamic, dynamic> dummyMapped = {};
 
 final dummyUnicoErrorChannel = FakeUnicoErrorChannel();
 

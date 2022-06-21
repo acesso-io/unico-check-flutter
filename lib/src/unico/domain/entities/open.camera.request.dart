@@ -3,13 +3,33 @@ import 'package:unico_check/src/unico/domain/entities/unico.config.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
 
 class OpenCameraRequest {
-  late UnicoTheme _unicoTheme;
-  late bool _autoCapture = true;
-  late bool _smartFrame = true;
-  late double _timeoutSession;
-  late DocumentType _documentType = DocumentType.NONE;
-  late UnicoConfig _unicoConfigIos;
-  late UnicoConfig _unicoConfigAndroid;
+  UnicoTheme? _unicoTheme;
+
+  UnicoTheme? get unicoTheme => _unicoTheme;
+
+  bool _autoCapture = true;
+
+  bool get autoCapture => _autoCapture;
+
+  bool _smartFrame = true;
+
+  bool get smartFrame => _smartFrame;
+
+  double? _timeoutSession;
+
+  double? get timeoutSession => _timeoutSession;
+
+  DocumentType _documentType = DocumentType.NONE;
+
+  DocumentType get documentType => _documentType;
+
+  UnicoConfig? _unicoConfigIos;
+
+  UnicoConfig? get unicoConfigIos => _unicoConfigIos;
+
+  UnicoConfig? _unicoConfigAndroid;
+
+  UnicoConfig? get unicoConfigAndroid => _unicoConfigAndroid;
 
   void setUnicoTheme(UnicoTheme unicoTheme) {
     _unicoTheme = unicoTheme;
@@ -37,17 +57,5 @@ class OpenCameraRequest {
 
   void setUnicoConfigAndroid(UnicoConfig unicoConfigAndroid) {
     _unicoConfigAndroid = unicoConfigAndroid;
-  }
-
-  Map<dynamic, dynamic> get getOpenCameraRequest {
-    return <dynamic, dynamic>{
-      'unico_theme': _unicoTheme.getCommonMap,
-      'set_auto_capture': _autoCapture,
-      'set_smart_frame': _smartFrame,
-      'set_timeout_session': _timeoutSession,
-      'document_type': _documentType.name,
-      'unico_config_ios': _unicoConfigIos.getCommonMap,
-      'unico_config_android': _unicoConfigAndroid.getCommonMap
-    };
   }
 }

@@ -14,6 +14,7 @@ void main() {
   late UnicoListener listener;
 
   setUp(() {
+    Module.initDependencies();
     listener = MockUnicoListener();
     unicoCheck = UnicoCheck(
       listener: listener,

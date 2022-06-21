@@ -56,7 +56,7 @@ void main() {
             method,
             request,
           )).thenThrow(response);
-      when(() => listener.onChannelResult(any())).thenAnswer((invocation) { });
+      when(() => listener.onChannelResult(any())).thenAnswer((invocation) {});
       //  When
       channelUnicoDefault.callMethod(
         method: method,
