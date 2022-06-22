@@ -6,7 +6,10 @@ import 'package:unico_check/src/unico/adapter/repository/processors/camera.resul
 import 'package:unico_check/src/unico/di/injection.dart';
 import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
 import 'package:unico_check/src/unico/domain/interface/channel.repository.dart';
+import 'package:unico_check/src/unico/adapter/repository/mappers/open.camera.request.mapper.dart';
+import 'package:unico_check/src/unico/adapter/repository/mappers/unico.config.mapper.dart';
 import 'package:unico_check/src/unico/domain/mapper/unico.error.factory.dart';
+import 'package:unico_check/src/unico/adapter/repository/mappers/unico.theme.mapper.dart';
 import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.dart';
 import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.dart';
 import 'package:unico_check/src/unico/plugins/channel/channel.unico.default.dart';
@@ -39,6 +42,15 @@ class Module {
   }
 
   static _repositoryDependecies(Injection helper) {
+    helper.factory<UnicoThemeMapper>(
+          () => UnicoThemeMapper(),
+    );
+    helper.factory<UnicoConfigMapper>(
+          () => UnicoConfigMapper(),
+    );
+    helper.factory<OpenCameraRequestMapper>(
+          () => OpenCameraRequestMapper(Injection.I.get(), Injection.I.get()),
+    );
     helper.factory<CameraResultProcessorMapper>(
       () => CameraResultProcessorMapper(),
     );
@@ -49,7 +61,11 @@ class Module {
       () => ChannelUnicoDefault(_channel),
     );
     helper.factory<ChannelRepository>(
-      () => ChannelRepositoryDefault(Injection.I.get(), Injection.I.get()),
+      () => ChannelRepositoryDefault(
+        Injection.I.get(),
+        Injection.I.get(),
+        Injection.I.get(),
+      ),
     );
   }
 

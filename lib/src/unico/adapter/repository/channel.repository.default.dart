@@ -3,6 +3,7 @@ import 'package:unico_check/src/unico/adapter/repository/channel.result.listener
 import 'package:unico_check/src/unico/adapter/repository/plugin/channel.unico.dart';
 import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
 import 'package:unico_check/src/unico/domain/interface/channel.repository.dart';
+import 'package:unico_check/src/unico/adapter/repository/mappers/open.camera.request.mapper.dart';
 
 import 'processors/camera.result.processor.mapper.dart';
 
@@ -10,13 +11,18 @@ class ChannelRepositoryDefault extends ChannelRepository
     implements ChannelResultListener {
   final ChannelUnico channelUnico;
   final CameraResultProcessorMapper processorMapper;
+  final OpenCameraRequestMapper openCameraRequestMapper;
 
   static const String error = "repository error";
 
   //... Camera listener, is subscribe on callMethodOpenCamera method
   IOpenCameraeListener? _openCameraeListener;
 
-  ChannelRepositoryDefault(this.channelUnico, this.processorMapper);
+  ChannelRepositoryDefault(
+    this.channelUnico,
+    this.processorMapper,
+    this.openCameraRequestMapper,
+  );
 
   @override
   void callMethodOpenCamera({
@@ -25,10 +31,11 @@ class ChannelRepositoryDefault extends ChannelRepository
     required IOpenCameraeListener openCameraeListener,
   }) {
     _openCameraeListener = openCameraeListener;
+    final request = openCameraRequestMapper.map(cameraRequest);
 
     channelUnico.callMethod(
       method: method,
-      request: cameraRequest.getOpenCameraRequest,
+      request: request,
       listener: this,
     );
   }
