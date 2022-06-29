@@ -24,7 +24,9 @@ void main() {
     expect(restul.encrypted, ResultCamera.mapEncrypted);
   });
 
-  test('should map to ResultCamera when onSuccess is called and exist unicoError', () {
+  test(
+      'should map to ResultCamera when onSuccess is called and exist unicoError',
+      () {
     final Map<String, dynamic> map = {
       UnicoErrorChannel.unicoError: {
         UnicoErrorChannel.mapCode: 0,

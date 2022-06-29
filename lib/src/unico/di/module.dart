@@ -43,13 +43,13 @@ class Module {
 
   static _repositoryDependecies(Injection helper) {
     helper.factory<UnicoThemeMapper>(
-          () => UnicoThemeMapper(),
+      () => UnicoThemeMapper(),
     );
     helper.factory<UnicoConfigMapper>(
-          () => UnicoConfigMapper(),
+      () => UnicoConfigMapper(),
     );
     helper.factory<OpenCameraRequestMapper>(
-          () => OpenCameraRequestMapper(Injection.I.get(), Injection.I.get()),
+      () => OpenCameraRequestMapper(Injection.I.get(), Injection.I.get()),
     );
     helper.factory<CameraResultProcessorMapper>(
       () => CameraResultProcessorMapper(),

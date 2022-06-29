@@ -19,13 +19,15 @@ class UnicoThemeMapper {
       'colorTextPopupError': unicoTheme.colorTextPopupError,
 
       /// Cor de fundo do botão do popup.
-      'colorBackgroundButtonPopupError': unicoTheme.colorBackgroundButtonPopupError,
+      'colorBackgroundButtonPopupError':
+          unicoTheme.colorBackgroundButtonPopupError,
 
       /// Cor de texto do botão do popup.
       'colorTextButtonPopupError': unicoTheme.colorTextButtonPopupError,
 
       /// Cor de fundo do botão de tirar foto manualmente.
-      'colorBackgroundTakePictureButton': unicoTheme.colorBackgroundTakePictureButton,
+      'colorBackgroundTakePictureButton':
+          unicoTheme.colorBackgroundTakePictureButton,
 
       /// Cor de ícone do botão de tirar foto manualmente.
       'colorIconTakePictureButton': unicoTheme.colorIconTakePictureButton,

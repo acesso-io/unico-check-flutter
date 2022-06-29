@@ -44,9 +44,11 @@ class ChannelRepositoryDefault extends ChannelRepository
   void onChannelResult(Map<dynamic, dynamic> result) {
     try {
       if (result[IOpenCameraeListener.response]) {
-        _openCameraeListener?.onSuccessOpenCamera(processorMapper.onSuccess(result));
+        _openCameraeListener
+            ?.onSuccessOpenCamera(processorMapper.onSuccess(result));
       } else {
-        _openCameraeListener?.onErrorOpenCamera(processorMapper.onError(result));
+        _openCameraeListener
+            ?.onErrorOpenCamera(processorMapper.onError(result));
       }
     } catch (exception) {
       _openCameraeListener?.onErrorOpenCamera(

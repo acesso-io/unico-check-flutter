@@ -70,7 +70,8 @@ class FakeUnicoErrorChannel extends Fake implements UnicoErrorChannel {}
 
 class FakeUnicoError extends Fake implements UnicoError {}
 
-class FakeOpenCameraConfigEntity extends Fake implements OpenCameraConfigEntity {}
+class FakeOpenCameraConfigEntity extends Fake
+    implements OpenCameraConfigEntity {}
 
 class FakePlatformException extends Fake implements PlatformException {
   @override

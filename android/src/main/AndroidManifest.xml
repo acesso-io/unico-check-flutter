@@ -6,12 +6,12 @@
         <activity
             android:name=".SelfieCameraActivity"
             android:noHistory = "true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/UnicoAppTheme.NoActionBar" />
 
         <activity
             android:name=".DocumentCameraActivity"
             android:noHistory = "true"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/UnicoAppTheme.NoActionBar" />
 
     </application>
 

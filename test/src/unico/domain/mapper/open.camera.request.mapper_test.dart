@@ -38,8 +38,10 @@ void main() {
       ..setTimeoutSession(1)
       ..setUnicoTheme(unicoTheme);
 
-    when(() => unicoThemeMapper.map(unicoTheme)).thenAnswer((invocation) => mapped);
-    when(() => unicoConfigMapper.map(unicoConfig)).thenAnswer((invocation) => mapped);
+    when(() => unicoThemeMapper.map(unicoTheme))
+        .thenAnswer((invocation) => mapped);
+    when(() => unicoConfigMapper.map(unicoConfig))
+        .thenAnswer((invocation) => mapped);
 
     final result = mapper.map(request);
 

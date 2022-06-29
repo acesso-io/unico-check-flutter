@@ -15,7 +15,8 @@ class MockOpenCameraUseCase extends Mock implements OpenCameraUseCase {}
 
 class MockUnicoCallBackUseCase extends Mock implements UnicoCallBackUseCase {}
 
-class MockOpenCheckCameraFactory extends Mock implements OpenCheckCameraFactory {}
+class MockOpenCheckCameraFactory extends Mock
+    implements OpenCheckCameraFactory {}
 
 void main() {
   final unicoTheme = UnicoTheme();
@@ -66,10 +67,10 @@ void main() {
         .thenAnswer((invocation) {});
     when(() => openCameraRequest.setUnicoTheme(cameraOpenerConfig.unicoTheme))
         .thenAnswer((invocation) {});
-    when(() => openCameraRequest.setTimeoutSession(cameraOpenerConfig.timeoutSession))
-        .thenAnswer((invocation) {});
-    when(() => openCameraRequest.setUnicoConfigIos(cameraOpenerConfig.unicoConfigIos))
-        .thenAnswer((invocation) {});
+    when(() => openCameraRequest.setTimeoutSession(
+        cameraOpenerConfig.timeoutSession)).thenAnswer((invocation) {});
+    when(() => openCameraRequest.setUnicoConfigIos(
+        cameraOpenerConfig.unicoConfigIos)).thenAnswer((invocation) {});
     when(() => openCameraRequest.setUnicoConfigAndroid(
         cameraOpenerConfig.unicoConfigAndroid)).thenAnswer((invocation) {});
     when(() => openCheckCameraFactory.buildOpenCameraConfigEntity(
@@ -82,18 +83,19 @@ void main() {
     //  Wehn
     cameraOpenerDefault.openCameraSelfie(listener: unicoSelfieListener);
     //  Then
-    verify(() => openCameraRequest.setAutoCaptrue(cameraOpenerConfig.autoCapture))
+    verify(() =>
+            openCameraRequest.setAutoCaptrue(cameraOpenerConfig.autoCapture))
         .called(1);
     verify(() => openCameraRequest.setSmartFrame(cameraOpenerConfig.smartFrame))
         .called(1);
     verify(() => openCameraRequest.setUnicoTheme(cameraOpenerConfig.unicoTheme))
         .called(1);
-    verify(() => openCameraRequest.setTimeoutSession(cameraOpenerConfig.timeoutSession))
-        .called(1);
-    verify(() => openCameraRequest.setUnicoConfigIos(cameraOpenerConfig.unicoConfigIos))
-        .called(1);
     verify(() => openCameraRequest
-        .setUnicoConfigAndroid(cameraOpenerConfig.unicoConfigAndroid)).called(1);
+        .setTimeoutSession(cameraOpenerConfig.timeoutSession)).called(1);
+    verify(() => openCameraRequest
+        .setUnicoConfigIos(cameraOpenerConfig.unicoConfigIos)).called(1);
+    verify(() => openCameraRequest.setUnicoConfigAndroid(
+        cameraOpenerConfig.unicoConfigAndroid)).called(1);
     verify(() => openCheckCameraFactory.buildOpenCameraConfigEntity(
           openCameraRequest,
           MethodsChannel.open_camera_selfie,
@@ -105,22 +107,24 @@ void main() {
   test('should execute onErrorOpenCamera when retrive error', () {
     final dummyCameraCallbackConfingEntity = MockCameraCallbackConfingEntity();
     when(() => openCheckCameraFactory.buildCameraCallbackConfingEntity(
-      unicoError: null,
-      unicoListener: cameraOpenerConfig.unicoListener,
-      listenerSelfie: null,
-      listenerDocument: null,
-    )).thenAnswer((invocation) => dummyCameraCallbackConfingEntity);
-    when(() => unicoCallBackUseCase(dummyCameraCallbackConfingEntity)).thenAnswer((invocation) { });
+          unicoError: null,
+          unicoListener: cameraOpenerConfig.unicoListener,
+          listenerSelfie: null,
+          listenerDocument: null,
+        )).thenAnswer((invocation) => dummyCameraCallbackConfingEntity);
+    when(() => unicoCallBackUseCase(dummyCameraCallbackConfingEntity))
+        .thenAnswer((invocation) {});
 
     cameraOpenerDefault.onErrorOpenCamera(null);
 
     verify(() => openCheckCameraFactory.buildCameraCallbackConfingEntity(
-      unicoError: null,
-      unicoListener: cameraOpenerConfig.unicoListener,
-      listenerSelfie: null,
-      listenerDocument: null,
-    )).called(1);
-    verify(() => unicoCallBackUseCase(dummyCameraCallbackConfingEntity)).called(1);
+          unicoError: null,
+          unicoListener: cameraOpenerConfig.unicoListener,
+          listenerSelfie: null,
+          listenerDocument: null,
+        )).called(1);
+    verify(() => unicoCallBackUseCase(dummyCameraCallbackConfingEntity))
+        .called(1);
   });
 
   test('should open document camera when call openCameraDocument', () {
@@ -130,37 +134,37 @@ void main() {
         .thenAnswer((invocation) {});
     when(() => openCameraRequest.setUnicoTheme(cameraOpenerConfig.unicoTheme))
         .thenAnswer((invocation) {});
-    when(() => openCameraRequest.setTimeoutSession(cameraOpenerConfig.timeoutSession))
-        .thenAnswer((invocation) {});
-    when(() => openCameraRequest.setUnicoConfigIos(cameraOpenerConfig.unicoConfigIos))
-        .thenAnswer((invocation) {});
+    when(() => openCameraRequest.setTimeoutSession(
+        cameraOpenerConfig.timeoutSession)).thenAnswer((invocation) {});
+    when(() => openCameraRequest.setUnicoConfigIos(
+        cameraOpenerConfig.unicoConfigIos)).thenAnswer((invocation) {});
     when(() => openCameraRequest.setUnicoConfigAndroid(
         cameraOpenerConfig.unicoConfigAndroid)).thenAnswer((invocation) {});
     when(() => openCheckCameraFactory.buildOpenCameraConfigEntity(
-      openCameraRequest,
-      MethodsChannel.open_camera_selfie,
-      cameraOpenerDefault,
-    )).thenAnswer((invocation) => dummyOpenCameraConfigEntity);
+          openCameraRequest,
+          MethodsChannel.open_camera_document,
+          cameraOpenerDefault,
+        )).thenAnswer((invocation) => dummyOpenCameraConfigEntity);
     when(() => openCameraUseCase(dummyOpenCameraConfigEntity))
         .thenAnswer((invocation) {});
     //  Wehn
-    cameraOpenerDefault.openCameraDocument(documentType: DocumentType.CNH, listener: unicoDocumenListener);
+    cameraOpenerDefault.openCameraDocument(
+        documentType: DocumentType.CNH, listener: unicoDocumenListener);
     //  Then
-    verify(() => openCameraRequest.setDocumentType(DocumentType.CNH))
-        .called(1);
+    verify(() => openCameraRequest.setDocumentType(DocumentType.CNH)).called(1);
     verify(() => openCameraRequest.setUnicoTheme(cameraOpenerConfig.unicoTheme))
         .called(1);
-    verify(() => openCameraRequest.setTimeoutSession(cameraOpenerConfig.timeoutSession))
-        .called(1);
-    verify(() => openCameraRequest.setUnicoConfigIos(cameraOpenerConfig.unicoConfigIos))
-        .called(1);
     verify(() => openCameraRequest
-        .setUnicoConfigAndroid(cameraOpenerConfig.unicoConfigAndroid)).called(1);
+        .setTimeoutSession(cameraOpenerConfig.timeoutSession)).called(1);
+    verify(() => openCameraRequest
+        .setUnicoConfigIos(cameraOpenerConfig.unicoConfigIos)).called(1);
+    verify(() => openCameraRequest.setUnicoConfigAndroid(
+        cameraOpenerConfig.unicoConfigAndroid)).called(1);
     verify(() => openCheckCameraFactory.buildOpenCameraConfigEntity(
-      openCameraRequest,
-      MethodsChannel.open_camera_selfie,
-      cameraOpenerDefault,
-    )).called(1);
+          openCameraRequest,
+          MethodsChannel.open_camera_document,
+          cameraOpenerDefault,
+        )).called(1);
     verify(() => openCameraUseCase(dummyOpenCameraConfigEntity)).called(1);
   });
 }

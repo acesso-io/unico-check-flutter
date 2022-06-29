@@ -9,16 +9,18 @@ class OpenCameraRequestMapper {
   OpenCameraRequestMapper(this.unicoThemeMapper, this.unicoConfigMapper);
 
   Map<dynamic, dynamic> map(OpenCameraRequest request) {
-    Map<dynamic, dynamic> unicoTheme =
-        request.unicoTheme != null ? unicoThemeMapper.map(request.unicoTheme!) : {};
+    Map<dynamic, dynamic> unicoTheme = request.unicoTheme != null
+        ? unicoThemeMapper.map(request.unicoTheme!)
+        : {};
 
     Map<dynamic, dynamic> unicoConfigIos = request.unicoConfigIos != null
         ? unicoConfigMapper.map(request.unicoConfigIos!)
         : {};
 
-    Map<dynamic, dynamic> unicoConfigAndroid = request.unicoConfigAndroid != null
-        ? unicoConfigMapper.map(request.unicoConfigAndroid!)
-        : {};
+    Map<dynamic, dynamic> unicoConfigAndroid =
+        request.unicoConfigAndroid != null
+            ? unicoConfigMapper.map(request.unicoConfigAndroid!)
+            : {};
 
     return <dynamic, dynamic>{
       'unico_theme': unicoTheme,
