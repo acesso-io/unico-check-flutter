@@ -1,3 +1,4 @@
+/// Set your camera theme
 class UnicoTheme {
   String? colorBackground = "";
   String? colorBoxMessage = "";
@@ -14,7 +15,6 @@ class UnicoTheme {
   String? colorSilhouetteError = "";
   String? colorSilhouetteNeutral = "";
 
-  ///Objeto de tema da unico
   UnicoTheme({
     this.colorBackground,
     this.colorBoxMessage,

@@ -1,3 +1,4 @@
+/// Camera callback success
 class ResultCamera {
   late String? base64;
   late String? encrypted;

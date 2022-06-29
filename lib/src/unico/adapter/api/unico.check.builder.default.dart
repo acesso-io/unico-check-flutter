@@ -9,6 +9,7 @@ import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
 
 import 'unico.check.camera.opener.dart';
 
+///Unico camera builder
 class UnicoCheck extends UnicoCheckBuilder {
   UnicoTheme _unicoTheme = UnicoTheme();
 
@@ -26,8 +27,13 @@ class UnicoCheck extends UnicoCheckBuilder {
 
   double get timeoutSession => _timeoutSession;
 
+  /// Return the camera callback
   final UnicoListener listener;
+
+  /// Set credentials of IOS platform
   final UnicoConfig unicoConfigIos;
+
+  /// Set credentials of Android platform
   final UnicoConfig unicoConfigAndroid;
 
   UnicoCheck(
