@@ -1,14 +1,6 @@
-## 3.0.0-beta.2
-* updated camera configuration Android and Ios and remove jsonFileName parameter, now you can configure Android and Ios by config object.
-## 3.0.0-beta.1
-* update smartlive 
+## 3.0.0
+Plugin flutter atualizando e contando agora com o Smartlive com interação, simplificando ainda mais a implementação da SDK!
 ## 2.0.2
 * Updated iOS Version
-## 2.0.1
-* Fix bug in iOS when open camera
-## 2.0.0
-* Restructure public api
-## 1.0.1
-* Frictionless for iOS implementation
 ## 1.0.0
 * Initial release

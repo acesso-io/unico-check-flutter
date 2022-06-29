@@ -17,3 +17,6 @@ Caso ainda não possua as permissões para o uso de câmera em seu projeto
 
 `<key>NSCameraUsageDescription</key>`
 `<string>Camera usage description</string>`
+
+Para mais detalhes confira nossa documentação.
+https://developers.unico.io/guias/flutter/overview/

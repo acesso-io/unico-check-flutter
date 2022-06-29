@@ -1,3 +1,4 @@
+/// Configure your credentials
 class UnicoConfig {
   final String getProjectNumber;
   final String getProjectId;
