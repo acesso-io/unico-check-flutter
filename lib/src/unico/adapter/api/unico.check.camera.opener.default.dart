@@ -56,13 +56,13 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
 
   @override
   void onErrorOpenCamera(UnicoErrorChannel? result) {
-    final confing = openCheckCameraFactory.buildCameraCallbackConfingEntity(
+    final config = openCheckCameraFactory.buildCameraCallbackConfingEntity(
       unicoError: result,
       unicoListener: cameraOpenerConfig.unicoListener,
       listenerSelfie: _selfieListener,
       listenerDocument: _documentListener,
     );
-    unicoCallBackUseCase(confing);
+    unicoCallBackUseCase(config);
   }
 
   @override
@@ -77,7 +77,7 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
 
     final configEntity = openCheckCameraFactory.buildOpenCameraConfigEntity(
       openCameraRequest,
-      MethodsChannel.open_camera_selfie,
+      MethodsChannel.open_camera_document,
       this,
     );
 

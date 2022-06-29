@@ -12,6 +12,7 @@ import com.unico_check.config.UnicoTimer
 import com.unico_check.constants.MethodConstants.ON_RESULT
 import com.unico_check.constants.MethodConstants.UNICO_THEME
 import com.unico_check.constants.ReturnConstants
+import com.unico_check.constants.VersionTag
 import com.unico_check.hashMap.errorBioToHashMap
 import com.unico_check.hashMap.errorNotifier
 import com.unico_check.permission.CameraPermissionActivity
@@ -51,7 +52,7 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
 
     private fun initAcessoBio() {
         acessoBio = AcessoBio(this, this)
-            .setOrigin(OriginType.FLUTTER, "3.0.0-beta.2")
+            .setOrigin(OriginType.FLUTTER, VersionTag)
             .apply {
                 val unicoTimer = UnicoTimer(UnicoCheckPlugin.methodCall)
                 setTimeoutSession(unicoTimer.getTimeoutSession())

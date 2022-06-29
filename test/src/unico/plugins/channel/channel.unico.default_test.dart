@@ -22,7 +22,8 @@ void main() {
       final Map<dynamic, dynamic> response = {dummyString: dummyString};
       final listener = MockChannelResultListener();
       //  Given
-      when(() => channel.setMethodCallHandler(any())).thenAnswer((invocation) {});
+      when(() => channel.setMethodCallHandler(any()))
+          .thenAnswer((invocation) {});
       when(() => channel.invokeMethod(
             method,
             request,
@@ -47,7 +48,8 @@ void main() {
       final response = FakePlatformException();
       final listener = MockChannelResultListener();
       //  Given
-      when(() => channel.setMethodCallHandler(any())).thenAnswer((invocation) {});
+      when(() => channel.setMethodCallHandler(any()))
+          .thenAnswer((invocation) {});
       when(() => channel.invokeMethod(
             method,
             request,

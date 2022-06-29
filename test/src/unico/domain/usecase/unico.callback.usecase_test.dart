@@ -40,7 +40,8 @@ void main() {
             UnicoCallBackUseCase.unknownCode,
             UnicoCallBackUseCase.unknownError,
           )).thenAnswer((invocation) => dummyUnicoError);
-      when(() => unicoListener.onErrorUnico(dummyUnicoError)).thenAnswer((invocation) {});
+      when(() => unicoListener.onErrorUnico(dummyUnicoError))
+          .thenAnswer((invocation) {});
       //  When
       useCase(callbackConfingEntity);
       //  Then
@@ -73,7 +74,8 @@ void main() {
             errorCode,
             errorName,
           )).thenAnswer((invocation) => dummyUnicoError);
-      when(() => unicoListener.onErrorUnico(dummyUnicoError)).thenAnswer((invocation) {});
+      when(() => unicoListener.onErrorUnico(dummyUnicoError))
+          .thenAnswer((invocation) {});
       //  When
       useCase(callbackConfingEntity);
       //  Then
@@ -106,7 +108,8 @@ void main() {
             errorCode,
             errorName,
           )).thenAnswer((invocation) => dummyUnicoError);
-      when(() => unicoListener.onErrorUnico(dummyUnicoError)).thenAnswer((invocation) {});
+      when(() => unicoListener.onErrorUnico(dummyUnicoError))
+          .thenAnswer((invocation) {});
       //  When
       useCase(callbackConfingEntity);
       //  Then
@@ -139,7 +142,8 @@ void main() {
             errorCode,
             errorName,
           )).thenAnswer((invocation) => dummyUnicoError);
-      when(() => unicoListener.onErrorUnico(dummyUnicoError)).thenAnswer((invocation) {});
+      when(() => unicoListener.onErrorUnico(dummyUnicoError))
+          .thenAnswer((invocation) {});
       //  When
       useCase(callbackConfingEntity);
       //  Then
@@ -168,7 +172,8 @@ void main() {
         unicoListener: unicoListener,
       );
       //  Given
-      when(() => unicoListener.onUserClosedCameraManually()).thenAnswer((invocation) {});
+      when(() => unicoListener.onUserClosedCameraManually())
+          .thenAnswer((invocation) {});
       //  When
       useCase(callbackConfingEntity);
       //  Then
@@ -198,7 +203,8 @@ void main() {
       //  When
       useCase(callbackConfingEntity);
       //  Then
-      verify(() => unicoListener.onSystemClosedCameraTimeoutSession()).called(1);
+      verify(() => unicoListener.onSystemClosedCameraTimeoutSession())
+          .called(1);
     },
   );
 
@@ -224,7 +230,8 @@ void main() {
       //  When
       useCase(callbackConfingEntity);
       //  Then
-      verify(() => unicoListener.onSystemChangedTypeCameraTimeoutFaceInference())
+      verify(() =>
+              unicoListener.onSystemChangedTypeCameraTimeoutFaceInference())
           .called(1);
     },
   );
@@ -251,7 +258,8 @@ void main() {
             errorCode,
             errorName,
           )).thenAnswer((invocation) => dummyUnicoError);
-      when(() => unicoSelfie.onErrorSelfie(dummyUnicoError)).thenAnswer((invocation) {});
+      when(() => unicoSelfie.onErrorSelfie(dummyUnicoError))
+          .thenAnswer((invocation) {});
       //  When
       useCase(callbackConfingEntity);
       //  Then
@@ -324,7 +332,8 @@ void main() {
             UnicoCallBackUseCase.unknownCode,
             UnicoCallBackUseCase.unknownError,
           )).thenAnswer((invocation) => dummyUnicoError);
-      when(() => unicoListener.onErrorUnico(dummyUnicoError)).thenAnswer((invocation) {});
+      when(() => unicoListener.onErrorUnico(dummyUnicoError))
+          .thenAnswer((invocation) {});
       //  When
       useCase(callbackConfingEntity);
       //  Then

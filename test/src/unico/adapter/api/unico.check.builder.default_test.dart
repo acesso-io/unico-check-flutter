@@ -42,7 +42,8 @@ void main() {
     expect(unicoCheck.unicoTheme, unicoTheme);
   });
 
-  test('should set timeout session when setTimeoutSession method is called', () {
+  test('should set timeout session when setTimeoutSession method is called',
+      () {
     unicoCheck.setTimeoutSession(timeoutSession: 1.0);
 
     expect(unicoCheck.timeoutSession, 1.0);

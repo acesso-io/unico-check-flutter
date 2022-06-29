@@ -7,7 +7,8 @@ import 'package:unico_check/src/unico/domain/entities/error.method.name.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.error.channel.dart';
 import 'package:unico_check/src/unico/domain/mapper/unico.error.factory.dart';
 
-class UnicoCallBackUseCase implements UseCase<void, CameraCallbackConfingEntity> {
+class UnicoCallBackUseCase
+    implements UseCase<void, CameraCallbackConfingEntity> {
   final UnicoErrorFactory unicoErrorMapper;
   static const String unknownError = "unknown error";
   static const int unknownCode = 999;
@@ -30,10 +31,13 @@ class UnicoCallBackUseCase implements UseCase<void, CameraCallbackConfingEntity>
   }
 
   _verifyError() {
-    if (_unicoError != null && _unicoError?.methodName != null && _unicoError?.methodName != "") {
+    if (_unicoError != null &&
+        _unicoError?.methodName != null &&
+        _unicoError?.methodName != "") {
       _errorCallBackWithName(_unicoError!.methodName!);
     } else {
-      _unicoListener.onErrorUnico(unicoErrorMapper.buildUnicoError(unknownCode, unknownError));
+      _unicoListener.onErrorUnico(
+          unicoErrorMapper.buildUnicoError(unknownCode, unknownError));
     }
   }
 
@@ -62,7 +66,8 @@ class UnicoCallBackUseCase implements UseCase<void, CameraCallbackConfingEntity>
           break;
       }
     } catch (exception) {
-      _unicoListener.onErrorUnico(unicoErrorMapper.buildUnicoError(unknownCode, unknownError));
+      _unicoListener.onErrorUnico(
+          unicoErrorMapper.buildUnicoError(unknownCode, unknownError));
     }
   }
 

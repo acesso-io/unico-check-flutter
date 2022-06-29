@@ -12,7 +12,8 @@ import '../../test_dummy.dart';
 
 class MockIOpenCameraeListener extends Mock implements IOpenCameraeListener {}
 
-class MockOpenCameraRequestMapper extends Mock implements OpenCameraRequestMapper {}
+class MockOpenCameraRequestMapper extends Mock
+    implements OpenCameraRequestMapper {}
 
 void main() {
   late ChannelUnico channelUnico;
@@ -37,9 +38,11 @@ void main() {
         () {
       final String method = MethodsChannel.open_camera_selfie.name;
       final OpenCameraRequest cameraRequest = FakeOpenCameraRequest();
-      final IOpenCameraeListener openCameraeListener = FakeIOpenCameraeListener();
+      final IOpenCameraeListener openCameraeListener =
+          FakeIOpenCameraeListener();
       //  Given
-      when(() => requestMapper.map(cameraRequest)).thenAnswer((invocation) => dummyMapped);
+      when(() => requestMapper.map(cameraRequest))
+          .thenAnswer((invocation) => dummyMapped);
       when(() => channelUnico.callMethod(
             method: method,
             request: dummyMapped,
@@ -68,16 +71,20 @@ void main() {
       final method = MethodsChannel.open_camera_selfie.name;
       final cameraRequest = FakeOpenCameraRequest();
       final openCameraeListener = MockIOpenCameraeListener();
-      final Map<dynamic, dynamic> result = {IOpenCameraeListener.response: true};
+      final Map<dynamic, dynamic> result = {
+        IOpenCameraeListener.response: true
+      };
       final dummyResultCamera = FakeResultCamera();
       //  Given
-      when(() => requestMapper.map(cameraRequest)).thenAnswer((invocation) => dummyMapped);
+      when(() => requestMapper.map(cameraRequest))
+          .thenAnswer((invocation) => dummyMapped);
       when(() => channelUnico.callMethod(
             method: method,
             request: dummyMapped,
             listener: repository,
           )).thenAnswer((invocation) {});
-      when(() => processorMapper.onSuccess(result)).thenAnswer((_) => dummyResultCamera);
+      when(() => processorMapper.onSuccess(result))
+          .thenAnswer((_) => dummyResultCamera);
       when(() => openCameraeListener.onSuccessOpenCamera(dummyResultCamera))
           .thenAnswer((invocation) {});
       //  When
@@ -95,7 +102,8 @@ void main() {
             listener: repository,
           )).called(1);
       verify(() => processorMapper.onSuccess(result)).called(1);
-      verify(() => openCameraeListener.onSuccessOpenCamera(dummyResultCamera)).called(1);
+      verify(() => openCameraeListener.onSuccessOpenCamera(dummyResultCamera))
+          .called(1);
     });
 
     test(
@@ -104,9 +112,12 @@ void main() {
       final method = MethodsChannel.open_camera_selfie.name;
       final cameraRequest = FakeOpenCameraRequest();
       final openCameraeListener = MockIOpenCameraeListener();
-      final Map<dynamic, dynamic> result = {IOpenCameraeListener.response: false};
+      final Map<dynamic, dynamic> result = {
+        IOpenCameraeListener.response: false
+      };
       //  Given
-      when(() => requestMapper.map(cameraRequest)).thenAnswer((invocation) => dummyMapped);
+      when(() => requestMapper.map(cameraRequest))
+          .thenAnswer((invocation) => dummyMapped);
       when(() => channelUnico.callMethod(
             method: method,
             request: dummyMapped,
@@ -131,7 +142,8 @@ void main() {
             listener: repository,
           )).called(1);
       verify(() => processorMapper.onError(result)).called(1);
-      verify(() => openCameraeListener.onErrorOpenCamera(dummyUnicoErrorChannel))
+      verify(() =>
+              openCameraeListener.onErrorOpenCamera(dummyUnicoErrorChannel))
           .called(1);
     });
 
@@ -139,16 +151,20 @@ void main() {
       final method = MethodsChannel.open_camera_selfie.name;
       final cameraRequest = FakeOpenCameraRequest();
       final openCameraeListener = MockIOpenCameraeListener();
-      final Map<dynamic, dynamic> result = {IOpenCameraeListener.response: true};
+      final Map<dynamic, dynamic> result = {
+        IOpenCameraeListener.response: true
+      };
       final dummyResultCamera = FakeResultCamera();
       //  Given
-      when(() => requestMapper.map(cameraRequest)).thenAnswer((invocation) => dummyMapped);
+      when(() => requestMapper.map(cameraRequest))
+          .thenAnswer((invocation) => dummyMapped);
       when(() => channelUnico.callMethod(
             method: method,
             request: dummyMapped,
             listener: repository,
           )).thenAnswer((invocation) {});
-      when(() => processorMapper.onSuccess(result)).thenAnswer((_) => dummyResultCamera);
+      when(() => processorMapper.onSuccess(result))
+          .thenAnswer((_) => dummyResultCamera);
       when(() => openCameraeListener.onSuccessOpenCamera(dummyResultCamera))
           .thenThrow(dummyException);
       when(() => processorMapper.getDefaultErrorChanel(
@@ -171,10 +187,12 @@ void main() {
             listener: repository,
           )).called(1);
       verify(() => processorMapper.onSuccess(result)).called(1);
-      verify(() => openCameraeListener.onSuccessOpenCamera(dummyResultCamera)).called(1);
+      verify(() => openCameraeListener.onSuccessOpenCamera(dummyResultCamera))
+          .called(1);
       verify(() => processorMapper.getDefaultErrorChanel(
           description: ChannelRepositoryDefault.error)).called(1);
-      verify(() => openCameraeListener.onErrorOpenCamera(dummyUnicoErrorChannel))
+      verify(() =>
+              openCameraeListener.onErrorOpenCamera(dummyUnicoErrorChannel))
           .called(1);
     });
   });
