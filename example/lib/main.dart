@@ -251,7 +251,7 @@ class _MyHomePageState extends State<MyHomePage>
             Container(
               margin: EdgeInsets.all(10),
               child: TextButton(
-                onPressed: openCameraDocumentRGVerso,
+                onPressed: openCameraDocumentRGFront,
                 child: Text('Documentos RG Frente'),
               ),
             ),
