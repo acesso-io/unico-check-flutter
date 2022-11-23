@@ -1,4 +1,7 @@
-## 3.0.0
+## 3.0.2
+feat: Update native Android and IOS
+fix: Document example RG
+## 3.0.1
 feat: Atualização no Smartlive com interação.
 fix: Remoção da dependencia do arquivo google-service.json
 ## 3.0.0
