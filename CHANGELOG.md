@@ -1,5 +1,5 @@
 ## 3.0.2
-feat: Update Android and IOS
+feat: Update native Android and IOS
 fix: Document example RG
 ## 3.0.1
 feat: Atualização no Smartlive com interação.
