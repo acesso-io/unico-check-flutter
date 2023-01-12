@@ -28,7 +28,9 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         if(isOpenCamera) {
-            self.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
         isOpenCamera = true
     }
@@ -58,7 +60,9 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
                 message: ReturnConstants.ON_ERROR_UNICO.rawValue,
                 details: ConvertToHashMap.errorBioToHashMap(error: errorBio))
         )
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func onUserClosedCameraManually() {
@@ -68,7 +72,9 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
                 message: ReturnConstants.ON_ERROR_UNICO.rawValue,
                 details: nil)
         )
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func onSystemClosedCameraTimeoutSession() {
@@ -78,7 +84,9 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
                 message: ReturnConstants.ON_SYSTEM_CLOSED_CAMERA_TIMEOUT_SESSION.rawValue,
                 details: nil)
         )
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func onSystemChangedTypeCameraTimeoutFaceInference() {
