@@ -46,7 +46,9 @@ class AcessoBioDocument: AcessoBioView, AcessoBioDocumentDelegate, DocumentCamer
                 ))
             )
         )
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func selectDocument(){
@@ -77,7 +79,9 @@ class AcessoBioDocument: AcessoBioView, AcessoBioDocumentDelegate, DocumentCamer
                 message: ReturnConstants.ON_ERROR_DOCUMENT.rawValue,
                 details: ConvertToHashMap.errorBioToHashMap(error: errorBio))
         )
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     

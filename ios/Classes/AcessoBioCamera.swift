@@ -34,7 +34,10 @@ class AcessoBioCamera: AcessoBioView, AcessoBioSelfieDelegate, SelfieCameraDeleg
                 ))
             )
         )
-        self.dismiss(animated: true, completion: nil)
+        
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func onSuccessSelfie(_ result: SelfieResult!) {
@@ -48,6 +51,8 @@ class AcessoBioCamera: AcessoBioView, AcessoBioSelfieDelegate, SelfieCameraDeleg
                 message: ReturnConstants.ON_ERROR_SELFIE.rawValue,
                 details: ConvertToHashMap.errorBioToHashMap(error: errorBio))
         )
-        self.dismiss(animated: true, completion: nil)
+        DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
