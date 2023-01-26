@@ -1,4 +1,6 @@
-## 3.0.4-beta.1
+## 3.0.5
+fix: Adjust rear camera aperture
+## 3.0.4
 fix: Build missing files
 ## 3.0.3
 fix: Geolocation permission
