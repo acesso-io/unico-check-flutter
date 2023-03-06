@@ -1,3 +1,7 @@
+## 3.0.7
+fix: update android and ios
+## 3.0.6
+fix: update android and ios
 ## 3.0.5
 fix: Adjust rear camera aperture
 ## 3.0.4

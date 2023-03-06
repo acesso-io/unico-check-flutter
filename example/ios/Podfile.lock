@@ -6,8 +6,8 @@ PODS:
   - Toast (4.0.0)
   - unico_check (2.0.2):
     - Flutter
-    - unicocheck-ios (~> 2.3.11)
-  - unicocheck-ios (2.3.11)
+    - unicocheck-ios (~> 2.3.12)
+  - unicocheck-ios (2.3.12)
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -31,8 +31,8 @@ SPEC CHECKSUMS:
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   fluttertoast: 16fbe6039d06a763f3533670197d01fc73459037
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
-  unico_check: bf9d178d7d380a0ca26a484bc49ff30d7081b799
-  unicocheck-ios: 51231314eef57e272d26f0e747247602f78ffdb3
+  unico_check: a8523b3dc2d3c4c19d3b5c31e60fdbd1a26309a5
+  unicocheck-ios: dc12c93731a6f8d190fe120c13e2579a241c9bf2
 
 PODFILE CHECKSUM: 59f8de8f40bb382091a43991ef43c063d955e661
 
