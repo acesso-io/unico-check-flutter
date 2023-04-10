@@ -1,3 +1,11 @@
+## 3.0.9
+feat: Update android Smart live
+## 3.0.8
+fix: black screen
+## 3.0.7
+fix: update android and ios
+## 3.0.6
+fix: update android and ios
 ## 3.0.5
 fix: Adjust rear camera aperture
 ## 3.0.4
@@ -8,11 +16,11 @@ fix: Geolocation permission
 feat: Update native Android and IOS
 fix: Document example RG
 ## 3.0.1
-feat: Atualização no Smartlive com interação.
-fix: Remoção da dependencia do arquivo google-service.json
+feat: Update Smart live.
+fix: Remove dependence of google-service.json
 ## 3.0.0
-Plugin flutter atualizando e contando agora com o Smartlive com interação, simplificando ainda mais a implementação da SDK!
+feat: Now counting on Smart live with interaction, simplifying even more the implementation of the SDK!
 ## 2.0.2
-* Updated iOS Version
+feat: Updated iOS Version
 ## 1.0.0
-* Initial release
+feat: Initial release
