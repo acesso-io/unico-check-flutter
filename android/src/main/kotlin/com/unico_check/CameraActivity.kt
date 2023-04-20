@@ -65,6 +65,7 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
             val theme: Map<Any, Any>? = UnicoCheckPlugin.methodCall.argument(UNICO_THEME)
             if (theme != null) {
                 acessoBio.setTheme(UnicoTheme(theme))
+                customiseThisActivity(UnicoTheme(theme))
             }
 
         }.onFailure {
@@ -72,6 +73,11 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
             finish()
         }
     }
+
+    private fun customiseThisActivity(unicoTheme: UnicoTheme) {
+        setContentView(CameraView(this, unicoTheme).getLayout())
+    }
+
 
     override fun onErrorAcessoBio(errorBio: ErrorBio) {
         acessoBioStatus = false

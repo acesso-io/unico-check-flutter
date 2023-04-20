@@ -9,9 +9,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
-abstract class CameraPermissionActivity : AppCompatActivity(){
+abstract class CameraPermissionActivity : AppCompatActivity() {
 
-    companion object{
+    companion object {
         var REQUESTCODE = 10
     }
 
@@ -20,7 +20,9 @@ abstract class CameraPermissionActivity : AppCompatActivity(){
     }
 
     @SuppressLint("MissingSuperCall")
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String>, grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode != REQUESTCODE) {
             Toast.makeText(this, "Permissão acesso camera negada", Toast.LENGTH_SHORT).show()
@@ -33,8 +35,7 @@ abstract class CameraPermissionActivity : AppCompatActivity(){
         super.onResume()
         if (!getPermission()) {
             requestPermissions(
-                arrayOf(Manifest.permission.CAMERA),
-                REQUESTCODE
+                arrayOf(Manifest.permission.CAMERA), REQUESTCODE
             )
             finish()
         }
