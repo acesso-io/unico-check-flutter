@@ -1,4 +1,4 @@
-## 3.0.10 
+## 3.0.10-beta
 feat: improvement in user experience
 ## 3.0.9
 feat: Update android Smart live
