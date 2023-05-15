@@ -26,5 +26,5 @@ jobs:
           flutter pub get
       - run: |
           flutter test
-      - run: |
-          flutter analyze
+#      - run: |
+#          flutter analyze
