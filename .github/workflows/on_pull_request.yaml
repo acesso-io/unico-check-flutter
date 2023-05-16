@@ -20,10 +20,10 @@ jobs:
           java-version: '12.x'
 
       - uses: subosito/flutter-action@v1
-        with:
-          flutter-version: '3.7.12'
       - run: |
           flutter clean
+      - run: |
+          flutter upgrade
       - run: |
           flutter pub get
       - run: |
