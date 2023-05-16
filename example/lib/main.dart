@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:unico_check/unico_check.dart';
 
 void main() {
@@ -272,16 +271,6 @@ class _MyHomePageState extends State<MyHomePage>
           ],
         ),
       ),
-    );
-  }
-
-  void showToast(String msg) {
-    Fluttertoast.showToast(
-      msg: msg,
-      toastLength: Toast.LENGTH_LONG,
-      gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.amber,
-      fontSize: 14,
     );
   }
 }

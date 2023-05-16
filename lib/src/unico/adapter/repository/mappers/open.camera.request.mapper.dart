@@ -1,6 +1,6 @@
-import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
 import 'package:unico_check/src/unico/adapter/repository/mappers/unico.config.mapper.dart';
 import 'package:unico_check/src/unico/adapter/repository/mappers/unico.theme.mapper.dart';
+import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
 
 class OpenCameraRequestMapper {
   final UnicoThemeMapper unicoThemeMapper;
