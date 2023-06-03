@@ -1,4 +1,6 @@
-## 3.0.10-beta
+## 3.0.11-beta
+hotfix: compatibility with Android 8.0
+## 3.0.10
 feat: improvement in user experience
 ## 3.0.9
 feat: Update android Smart live
