@@ -1,5 +1,11 @@
+## 4.0.0
+``Publicado: 23/07/2023``
+- Atualização das sdks nativas
+    - Android versão `5.0.0` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
+    - iOS versão `2.3.20` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+- Atualização da versão mínima do SDK Dart para >=2.15.0 <4.0.0
 ## 3.0.11-beta
-hotfix: compatibility with Android 8.0
+fix: compatibility with Android 8.0
 ## 3.0.10
 feat: improvement in user experience
 ## 3.0.9
