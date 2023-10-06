@@ -4,6 +4,7 @@
 
 - Update Android 5.1.5
 - Update iOS 2.3.24
+- Fix iOS sdk-key
 
 ## 4.0.1
 
