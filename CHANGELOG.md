@@ -1,3 +1,10 @@
+## 4.1.0
+
+``Publicado: 24/10/2023``
+
+- Update Android 5.2.0
+- Update iOS 2.4.0
+
 ## 4.0.2
 
 ``Publicado: 05/10/2023``
