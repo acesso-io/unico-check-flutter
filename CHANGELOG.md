@@ -2,7 +2,7 @@
 
 ``Publicado: 24/10/2023``
 
-- Update Android 5.2.0
+- Update Android 5.3.0
 - Update iOS 2.4.0
 
 ## 4.0.2
