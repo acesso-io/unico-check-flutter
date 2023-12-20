@@ -1,3 +1,7 @@
+## 4.2.0
+
+- Atualização da sdk nativa iOS para `2.6.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+
 ## 4.1.0
 
 ``Publicado: 24/10/2023``
