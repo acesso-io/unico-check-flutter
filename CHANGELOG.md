@@ -1,7 +1,11 @@
 ## 4.2.0
 
-- Atualização da sdk nativa iOS para `2.6.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
-- Atualização da sdk nativa Android para `5.6.1` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
+``Publicado: 21/12/2023``
+
+- Atualização da sdk nativa iOS
+  para `2.6.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+- Atualização da sdk nativa Android
+  para `5.6.1` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
 
 ## 4.1.0
 
