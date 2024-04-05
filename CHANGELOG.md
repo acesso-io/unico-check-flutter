@@ -1,3 +1,12 @@
+## 4.5.2
+
+``Publicado: 05/04/2024``
+
+- Atualização da sdk nativa iOS
+  para `2.9.3-beta`
+- Atualização da sdk nativa Android
+  para `5.11.0-rc2`
+
 ## 4.5.1
 
 ``Publicado: 02/04/2024``
