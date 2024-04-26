@@ -10,22 +10,42 @@ on:
       - main
 
 jobs:
-  publish:
-    name: 'Publish to pub.dev'
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Flutter SDK
-        uses: flutter-actions/setup-flutter@v3
-        with:
-          channel: stable
-          version: 3.0.2
-
+      - uses: actions/checkout@v2
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+#      - name: Install dependencies
+#        run: flutter pub get
+#      - name: Analyze
+#        run: flutter analyze
+#      - name: Run tests
+#        run: flutter test
+#      - name: Format code
+#        run: dart format --fix .
+#      - name: Check Publish Warnings
+#        run: dart pub publish --dry-run
       - name: Publish
-        run: flutter pub publish -f
+        uses: k-paxian/dart-package-publisher@v1.5.1
+        with:
+          credentialJson: ${{ secrets.PUBCREDENTIALS }}
+          flutter: true
+          skipTests: true
 
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v4
+#
+#      - name: Setup Flutter SDK
+#        uses: flutter-actions/setup-flutter@v3
+#        with:
+#          channel: stable
+#          version: 3.0.2
+#
 #      - name: Install dependencies
 #        run: flutter pub get
 #
@@ -65,6 +85,9 @@ jobs:
 #    permissions:
 #      id-token: write
 #    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+
+
+
 
 #jobs:
 #  publish:
