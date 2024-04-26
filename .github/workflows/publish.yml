@@ -7,6 +7,14 @@ on:
 
 jobs:
   publish:
+    name: 'Publish to pub.dev'
     permissions:
       id-token: write
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+      - name: Install Dart
+        uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
