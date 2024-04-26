@@ -9,13 +9,13 @@ Pod::Spec.new do |s|
   s.description      = <<-DESC
 Esta biblioteca visa implementar a tecnologia Unico.
                        DESC
-  s.homepage         = 'https://www3.acesso.io/sdkbio'
+  s.homepage         = 'https://developers.unico.io/docs/'
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'unico id tech' => 'suporte.unicocheck@unico.io' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency  'unicocheck-ios', '~> 2.11.0'
+  s.dependency  'unicocheck-ios', '2.12.0'
   s.static_framework = false
   s.platform = :ios, '11.0'
 
