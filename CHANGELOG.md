@@ -1,6 +1,13 @@
+## 4.7.0
+
+``Publicado: 26/04/2024``
+
+- Atualização da sdk nativa iOS
+  para `2.12.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+
 ## 4.6.0
 
-``Publicado: 25/04/2024``
+``Publicado: 26/04/2024``
 
 - Atualização da sdk nativa iOS
   para `2.11.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
