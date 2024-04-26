@@ -11,7 +11,7 @@ Pré-requisito minSdkVersion : 21
 
 ## IOS
 
-Pré-requisito versão 11 ou superior.
+Pré-requisito versão iOS 11 ou superior e Xcode 15 ou superior.
 
 Caso ainda não possua as permissões para o uso de câmera em seu projeto
 
@@ -19,4 +19,4 @@ Caso ainda não possua as permissões para o uso de câmera em seu projeto
 `<string>Camera usage description</string>`
 
 Para mais detalhes confira nossa documentação.
-https://developers.unico.io/guias/flutter/overview/
+https://developers.unico.io/docs/
