@@ -24,8 +24,8 @@ jobs:
 
       - uses: subosito/flutter-action@v1
       - run: |
-          flutter pub publish
-      
+          flutter pub publish --no-warning
+
 
 #jobs:
 #  publish:
