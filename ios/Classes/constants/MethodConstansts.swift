@@ -18,7 +18,7 @@ enum MethodConstants: String {
     case SET_TIMEOUT_SESSION = "set_timeout_session"
     case ON_RESULT = "call_result"
     case UNICO_THEME = "unico_theme"
-    case UNICO_CONFIG_ANDROID = "unico_config_android"
+    case UNICO_CONFIG_IOS = "unico_config_ios"
     case PROJECT_NUMBER = "project_number"
     case PROJECT_ID = "project_id"
     case MOBILE_SDK_APP_ID = "mobile_sdk_app_id"

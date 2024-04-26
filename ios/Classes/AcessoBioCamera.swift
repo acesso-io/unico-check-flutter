@@ -42,6 +42,10 @@ class AcessoBioCamera: AcessoBioView, AcessoBioSelfieDelegate, SelfieCameraDeleg
     
     func onSuccessSelfie(_ result: SelfieResult!) {
         SwiftUnicoCheckPlugin.result(ConvertToHashMap.successBioToHashMap(base64: result.base64, encrypted: result.encrypted))
+        DispatchQueue.main.async {
+            self.dismiss(animated: true)
+            self.dismiss(animated: false)
+        }
     }
     
     func onErrorSelfie(_ errorBio: ErrorBio!) {

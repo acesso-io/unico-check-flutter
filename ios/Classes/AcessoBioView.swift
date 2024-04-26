@@ -12,7 +12,7 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
     
     private var method: String!
     var unicoCheck: AcessoBioManager!
-    private var isOpenCamera: Bool =  false
+    
     private var acessoBioStatus = true
     
     override func viewDidLoad() {
@@ -25,15 +25,6 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
     }
     
     func callMethodBio(){}
-    
-    override func viewWillAppear(_ animated: Bool) {
-        if(isOpenCamera) {
-            DispatchQueue.main.async {
-                self.dismiss(animated: true, completion: nil)
-            }
-        }
-        isOpenCamera = true
-    }
     
     private func setUi() {
         self.view.backgroundColor = UIColor(white: 1, alpha: 0.0)

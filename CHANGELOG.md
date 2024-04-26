@@ -1,3 +1,79 @@
+## 4.6.0
+
+``Publicado: 25/04/2024``
+
+- Atualização da sdk nativa iOS
+  para `2.11.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+- Atualização da sdk nativa Android
+  para `5.12.0` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
+
+## 4.5.2
+
+``Publicado: 05/04/2024``
+
+- Atualização da sdk nativa iOS
+  para `2.9.3-beta`
+- Atualização da sdk nativa Android
+  para `5.11.0-rc2`
+
+## 4.5.1
+
+``Publicado: 02/04/2024``
+
+- Atualização da sdk nativa iOS
+  para `2.9.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+
+## 4.5.0
+
+``Publicado: 26/03/2024``
+
+- Atualização da sdk nativa iOS
+  para `2.9.1` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+- Atualização da sdk nativa Android
+  para `5.11.0-rc` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
+
+## 4.4.0
+
+``Publicado: 14/02/2024``
+
+- Atualização da sdk nativa iOS
+  para `2.8.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+- Atualização da sdk nativa Android
+  para `5.9.0` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
+
+## 4.3.0
+
+``Publicado: 16/01/2024``
+
+- Atualização da sdk nativa iOS
+  para `2.6.1` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+- Atualização da sdk nativa Android
+  para `5.7.0` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
+
+## 4.2.0
+
+``Publicado: 21/12/2023``
+
+- Atualização da sdk nativa iOS
+  para `2.6.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+- Atualização da sdk nativa Android
+  para `5.6.1` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
+
+## 4.1.0
+
+``Publicado: 24/10/2023``
+
+- Update Android 5.3.0
+- Update iOS 2.4.0
+
+## 4.0.2
+
+``Publicado: 05/10/2023``
+
+- Update Android 5.1.5
+- Update iOS 2.3.24
+- Fix iOS sdk-key
+
 ## 4.0.1
 
 ``Publicado: 23/07/2023``
