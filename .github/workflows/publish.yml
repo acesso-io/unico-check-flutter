@@ -12,19 +12,35 @@ on:
 jobs:
   publish:
     name: 'Publish to pub.dev'
-    permissions:
-      id-token: write
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: dart-lang/setup-dart@v1
-      - name: Install dependencies
-        run: dart pub get
-      # Here you can insert custom steps you need
-      # - run: dart tool/generate-code.dart
-      - name: Publish
-        run: dart pub publish --force
 
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Flutter SDK
+        uses: flutter-actions/setup-flutter@v3
+        with:
+          channel: stable
+          version: 3.0.2
+
+      - name: Publish
+        run: flutter pub publish -f
+
+#      - name: Install dependencies
+#        run: flutter pub get
+#
+#      - name: Analyze project source
+#        run: dart analyze
+#
+#      - name: Run tests
+#        run: flutter test
+
+#jobs:
+#  publish:
+#    name: 'Publish to pub.dev'
+#    permissions:
+#      id-token: write
+#    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
 
 #jobs:
 #  publish:
@@ -50,9 +66,6 @@ jobs:
 #      id-token: write
 #    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
 
-
-
-#
 #jobs:
 #  publish:
 #    name: 'Publish to pub.dev'
