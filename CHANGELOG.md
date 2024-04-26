@@ -1,3 +1,12 @@
+## 4.7.0
+
+``Publicado: 26/04/2024``
+
+- Atualização da sdk nativa iOS
+  para `2.12.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+- Atualização da sdk nativa Android
+  para `5.12.0` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
+
 ## 4.6.0
 
 ``Publicado: 25/04/2024``
