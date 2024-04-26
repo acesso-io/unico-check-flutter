@@ -5,7 +5,7 @@ Esta biblioteca visa implementar a tecnologia Unico para prova de vida sob a pla
 
 ## Getting Started
 
-## Android 
+## Android
 
 Pré-requisito minSdkVersion : 21
 
@@ -19,4 +19,4 @@ Caso ainda não possua as permissões para o uso de câmera em seu projeto
 `<string>Camera usage description</string>`
 
 Para mais detalhes confira nossa documentação.
-https://developers.unico.io/guias/flutter/overview/
+https://developers.unico.io/docs/check/SDK/flutter/overview
