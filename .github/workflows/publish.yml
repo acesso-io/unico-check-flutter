@@ -64,5 +64,5 @@ jobs:
         working-directory: ${{ inputs.working-directory }}
       # Publishing...
       - name: Publish to pub.dev
-        run: dart pub publish -f
+        run: flutter pub publish -f
         working-directory: ${{ inputs.working-directory }}
