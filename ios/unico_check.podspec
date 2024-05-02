@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'unico_check'
-  s.version          = '2.1.2'
+  s.version          = '2.1.3'
   s.summary          = 'Esta biblioteca visa implementar a tecnologia Unico.'
   s.description      = <<-DESC
 Esta biblioteca visa implementar a tecnologia Unico.
@@ -15,7 +15,7 @@ Esta biblioteca visa implementar a tecnologia Unico.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency  'unicocheck-ios', '2.12.0'
+  s.dependency  'unicocheck-ios', '2.12.1'
   s.static_framework = false
   s.platform = :ios, '11.0'
 
