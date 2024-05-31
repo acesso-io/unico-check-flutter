@@ -1,6 +1,6 @@
 ## 4.8.1
 
-``Publicado: 31/05/2024``
+``Publicado: 30/05/2024``
 
 - Atualização da sdk nativa iOS
   para `2.14.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
