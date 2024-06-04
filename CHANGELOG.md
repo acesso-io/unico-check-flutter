@@ -1,11 +1,11 @@
 ## 4.8.2
 
-``Publicado: 30/05/2024``
+``Publicado: 05/06/2024``
 
 - Atualização da sdk nativa iOS
-  para `2.14.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+  para `2.14.1` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
 - Atualização da sdk nativa Android
-  para `5.14.1` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
+  para `5.14.3` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
 
 ## 4.8.1
 
@@ -16,15 +16,6 @@
 - Atualização da sdk nativa Android
   para `5.14.1` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
 
-## 4.8.0
-
-``Publicado: 04/06/2024``
-
-- Atualização da sdk nativa iOS
-  para `2.14.1` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
-- Atualização da sdk nativa Android
-  para `5.13.0` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
-- 
 ## 4.8.0
 
 ``Publicado: 02/05/2024``
@@ -129,10 +120,10 @@
 ``Publicado: 23/07/2023``
 
 - Atualização das sdks nativas
-    - Android
-      versão `5.0.0` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
-    - iOS
-      versão `2.3.20` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+  - Android
+    versão `5.0.0` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
+  - iOS
+    versão `2.3.20` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
 - Atualização da versão mínima do SDK Dart para >=2.15.0 <4.0.0
 
 ## 3.0.11-beta
