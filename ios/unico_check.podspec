@@ -15,7 +15,7 @@ Esta biblioteca visa implementar a tecnologia Unico.
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency  'unicocheck-ios', '2.14.0'
+  s.dependency  'unicocheck-ios', '2.14.1'
   s.static_framework = false
   s.platform = :ios, '11.0'
 
