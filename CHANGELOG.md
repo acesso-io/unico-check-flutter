@@ -1,9 +1,9 @@
 ## 4.8.2
 
-``Publicado: 05/06/2024``
+``Publicado: 07/06/2024``
 
 - Atualização da sdk nativa iOS
-  para `2.14.1` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+  para `2.14.2` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
 - Atualização da sdk nativa Android
   para `5.14.3` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
 
