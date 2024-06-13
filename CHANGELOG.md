@@ -1,6 +1,6 @@
 ## 4.8.3
 
-``Publicado: 12/06/2024``
+``Publicado: 13/06/2024``
 
 - Atualização da sdk nativa Android
   para `5.15.1` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
