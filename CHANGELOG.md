@@ -3,7 +3,7 @@
 ``Publicado: 24/06/2024``
 
 - Atualização da sdk nativa iOS
-  para `2.15.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
+  para `2.15.1` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK)
 - Atualização da sdk nativa Android
   para `5.16.0` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK/)
 
