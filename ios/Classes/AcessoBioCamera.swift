@@ -56,7 +56,11 @@ class AcessoBioCamera: AcessoBioView, AcessoBioSelfieDelegate, SelfieCameraDeleg
                 details: ConvertToHashMap.errorBioToHashMap(error: errorBio))
         )
         DispatchQueue.main.async {
-            self.presentingViewController!.dismiss(animated: false)
+            if let presentingViewController = self.presentingViewController {
+                presentingViewController.dismiss(animated: false)
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
 }
