@@ -1,6 +1,6 @@
 ## 4.10.0
 
-``Publicado: 01/06/2024``
+``Publicado: 01/07/2024``
 
 - Atualização da sdk nativa iOS
   para `2.15.2` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK#versão-2152)
