@@ -1,3 +1,12 @@
+## 4.12.0
+
+``Publicado: 20/08/2024``
+
+- Atualização da sdk nativa iOS
+  para `2.16.0` [release notes]()
+- Atualização da sdk nativa Android
+  para `5.20.0` [release notes]()
+
 ## 4.11.0
 
 ``Publicado: 07/08/2024``
