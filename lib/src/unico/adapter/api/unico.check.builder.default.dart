@@ -5,27 +5,32 @@ import 'package:unico_check/src/unico/di/injection.dart';
 import 'package:unico_check/src/unico/di/module.dart';
 import 'package:unico_check/src/unico/domain/entities/camera_opener/camera.opener.config.entity.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.config.dart';
+import 'package:unico_check/src/unico/domain/entities/unico.locale.types.dart';
+import 'package:unico_check/src/unico/domain/entities/unico.environment.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
 
 import 'unico.check.camera.opener.dart';
 
 ///Unico camera builder
 class UnicoCheck extends UnicoCheckBuilder {
-  UnicoTheme _unicoTheme = UnicoTheme();
 
+  UnicoTheme _unicoTheme = UnicoTheme();
   UnicoTheme get unicoTheme => _unicoTheme;
 
   bool _autoCapture = true;
-
   bool get autoCapture => _autoCapture;
 
   bool _smartFrame = true;
-
   bool get smartFrame => _smartFrame;
 
   double _timeoutSession = 45;
-
   double get timeoutSession => _timeoutSession;
+
+  UnicoLocaleTypes _unicoLocaleTypes = UnicoLocaleTypes.PT_BR;
+  UnicoLocaleTypes get unicoLocaleTypes => _unicoLocaleTypes;
+
+  UnicoEnvironment _unicoEnvironment = UnicoEnvironment.PROD;
+  UnicoEnvironment get unicoEnvironment => _unicoEnvironment;
 
   /// Return the camera callback
   final UnicoListener listener;
@@ -50,6 +55,8 @@ class UnicoCheck extends UnicoCheckBuilder {
       autoCapture: _autoCapture,
       smartFrame: _smartFrame,
       timeoutSession: _timeoutSession,
+      localeTypes: _unicoLocaleTypes,
+      environment: _unicoEnvironment,
       unicoConfigAndroid: unicoConfigAndroid,
       unicoConfigIos: unicoConfigIos,
       unicoListener: listener,
@@ -84,6 +91,18 @@ class UnicoCheck extends UnicoCheckBuilder {
   @override
   UnicoCheckBuilder setTimeoutSession({required double timeoutSession}) {
     _timeoutSession = timeoutSession;
+    return this;
+  }
+
+  @override
+  UnicoCheckBuilder setLocale({required UnicoLocaleTypes unicoLocaleTypes}) {
+    _unicoLocaleTypes = unicoLocaleTypes;
+    return this;
+  }
+
+  @override
+  UnicoCheckBuilder setEnvironment({required UnicoEnvironment unicoEnvironment}) {
+    _unicoEnvironment = unicoEnvironment;
     return this;
   }
 }

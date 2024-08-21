@@ -6,11 +6,15 @@ import com.acesso.acessobio_android.AcessoBioListener
 import com.acesso.acessobio_android.onboarding.AcessoBio
 import com.acesso.acessobio_android.onboarding.IAcessoBioBuilder
 import com.acesso.acessobio_android.onboarding.types.OriginType
+import com.acesso.acessobio_android.onboarding.LocaleTypes
+import com.acesso.acessobio_android.onboarding.models.Environment
 import com.acesso.acessobio_android.services.dto.ErrorBio
 import com.unico_check.config.UnicoTheme
 import com.unico_check.config.UnicoTimer
 import com.unico_check.constants.MethodConstants.ON_RESULT
 import com.unico_check.constants.MethodConstants.UNICO_THEME
+import com.unico_check.constants.MethodConstants.SET_LOCALE_TYPES
+import com.unico_check.constants.MethodConstants.SET_ENVIRONMENT
 import com.unico_check.constants.ReturnConstants
 import com.unico_check.constants.VersionTag
 import com.unico_check.hashMap.errorBioToHashMap
@@ -35,6 +39,8 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
 
         initAcessoBio()
         setUnicoTheme()
+        setLocale()
+        setEnvironment()
         verifyCanCallMethod()
     }
 
@@ -61,13 +67,51 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
 
     private fun setUnicoTheme() {
         runCatching {
-
             val theme: Map<Any, Any>? = UnicoCheckPlugin.methodCall.argument(UNICO_THEME)
             if (theme != null) {
                 acessoBio.setTheme(UnicoTheme(theme))
                 customiseThisActivity(UnicoTheme(theme))
             }
+        }.onFailure {
+            Log.d(TAG, errorLog)
+            finish()
+        }
+    }
 
+    private fun setLocale() {
+        runCatching {
+            val locale: String? = UnicoCheckPlugin.methodCall.argument(SET_LOCALE_TYPES)
+            if (locale != null) {
+                acessoBio.setLocale(
+                    when (locale) {
+                        "PT-BR" -> LocaleTypes.PT_BR
+                        "EN-US" -> LocaleTypes.EN_US
+                        "ES-ES" -> LocaleTypes.ES_ES
+                        "ES-MX" -> LocaleTypes.ES_MX
+                        else -> LocaleTypes.PT_BR
+                    }
+                )
+            }
+        }.onFailure {
+            Log.d(TAG, errorLog)
+            finish()
+        }
+    }
+
+    private fun setEnvironment() {
+        runCatching {
+            val environment: String? = UnicoCheckPlugin.methodCall.argument(SET_ENVIRONMENT)
+            Log.d("vitor", environment.toString())
+            if (environment != null) {
+                acessoBio.setEnvironment(
+                    when (environment) {
+                        "PROD" -> Environment.PROD
+                        "UAT" -> Environment.UAT
+                        "DEV" -> Environment.DEV
+                        else -> Environment.PROD
+                    }
+                )
+            }
         }.onFailure {
             Log.d(TAG, errorLog)
             finish()
@@ -78,12 +122,10 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
         setContentView(CameraView(this, unicoTheme).getLayout())
     }
 
-
     override fun onErrorAcessoBio(errorBio: ErrorBio) {
         acessoBioStatus = false
 
         runCatching {
-
             UnicoCheckPlugin.result.error(
                 ReturnConstants.ON_ERROR_UNICO.code,
                 ReturnConstants.ON_ERROR_UNICO.message,
@@ -99,14 +141,11 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
 
     override fun onUserClosedCameraManually() {
         runCatching {
-
             UnicoCheckPlugin.result.error(
                 ReturnConstants.ON_USER_CLOSED_CAMERA_MANUALLY.code,
                 ReturnConstants.ON_USER_CLOSED_CAMERA_MANUALLY.message, ""
             )
-
             finish()
-
         }.onFailure {
             Log.d(TAG, errorLog)
             finish()
@@ -115,14 +154,12 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
 
     override fun onSystemClosedCameraTimeoutSession() {
         runCatching {
-
             UnicoCheckPlugin.result.error(
                 ReturnConstants.ON_SYSTEM_CLOSED_CAMERA_TIMEOUT_SESSION.code,
                 ReturnConstants.ON_SYSTEM_CLOSED_CAMERA_TIMEOUT_SESSION.message,
                 ""
             )
             finish()
-
         }.onFailure {
             Log.d(TAG, errorLog)
             finish()
@@ -131,7 +168,6 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
 
     override fun onSystemChangedTypeCameraTimeoutFaceInference() {
         runCatching {
-
             UnicoCheckPlugin.channel.invokeMethod(
                 ON_RESULT,
                 errorNotifier(
@@ -139,7 +175,6 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
                 )
             )
             finish()
-
         }.onFailure {
             Log.d(TAG, errorLog)
             finish()
