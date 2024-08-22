@@ -94,6 +94,8 @@ class UnicoCheckCameraOpenerDefault extends UnicoCheckCameraOpener
     openCameraRequest
       ..setUnicoTheme(cameraOpenerConfig.unicoTheme)
       ..setTimeoutSession(cameraOpenerConfig.timeoutSession)
+      ..setLocaleTypes(cameraOpenerConfig.localeTypes)
+      ..setEnvironment(cameraOpenerConfig.environment)
       ..setUnicoConfigIos(cameraOpenerConfig.unicoConfigIos)
       ..setUnicoConfigAndroid(cameraOpenerConfig.unicoConfigAndroid);
   }

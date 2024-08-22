@@ -17,6 +17,6 @@ object MethodConstants {
     const val BUNDLE_IDENTIFIER: String = "bundle_identifier"
     const val HOST_INFO: String = "host_info"
     const val HOST_KEY: String = "host_Key"
+    const val SET_LOCALE_TYPES: String = "set_locale_types"
+    const val SET_ENVIRONMENT: String = "set_environment"
 }
-
-

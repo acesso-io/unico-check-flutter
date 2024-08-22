@@ -11,13 +11,19 @@ class AcessoBioCamera: AcessoBioView, AcessoBioSelfieDelegate, SelfieCameraDeleg
     
     override func callMethodBio(){
         switch SwiftUnicoCheckPlugin.methodCall {
-            
-        case MethodConstants.OPEN_CAMERA_SELFIE.rawValue: unicoCheck.build().prepareSelfieCamera(self, config: UnicoConfig(argument: SwiftUnicoCheckPlugin.argument))
-            
-        default: SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
+        case MethodConstants.OPEN_CAMERA_SELFIE.rawValue:
+            unicoCheck.build()
+                .prepareSelfieCamera(
+                    self,
+                    config: UnicoConfigFactory.make(argument: SwiftUnicoCheckPlugin.argument)
+                )
+
+        default:
+            SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
+
         }
     }
-    
+
     func onCameraReady(_ cameraOpener: AcessoBioCameraOpenerDelegate!) {
         cameraOpener.open(self)
     }

@@ -1,4 +1,6 @@
 import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
+import 'package:unico_check/src/unico/domain/entities/unico.locale.types.dart';
+import 'package:unico_check/src/unico/domain/entities/unico.environment.dart';
 import 'unico.check.camera.opener.dart';
 
 abstract class UnicoCheckBuilder {
@@ -13,6 +15,12 @@ abstract class UnicoCheckBuilder {
 
   /// Set the timing of your session capture
   UnicoCheckBuilder setTimeoutSession({required double timeoutSession});
+
+  /// Set the locale of your session capture
+  UnicoCheckBuilder setLocale({required UnicoLocaleTypes unicoLocaleTypes});
+
+  /// Set the environment of your session capture
+  UnicoCheckBuilder setEnvironment({required UnicoEnvironment unicoEnvironment});
 
   /// Build all configuration
   UnicoCheckCameraOpener build();

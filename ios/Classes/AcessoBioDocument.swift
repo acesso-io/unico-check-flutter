@@ -20,10 +20,16 @@ class AcessoBioDocument: AcessoBioView, AcessoBioDocumentDelegate, DocumentCamer
     override func callMethodBio(){
         selectDocument()
         switch SwiftUnicoCheckPlugin.methodCall {
-            
-        case MethodConstants.OPEN_CAMERA_DOCUMENT.rawValue: unicoCheck.build().prepareDocumentCamera(self, config: UnicoConfig(argument: SwiftUnicoCheckPlugin.argument))
-            
-        default: SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
+        case MethodConstants.OPEN_CAMERA_DOCUMENT.rawValue: 
+            unicoCheck.build()
+                .prepareDocumentCamera(
+                    self,
+                    config: UnicoConfigFactory.make(argument: SwiftUnicoCheckPlugin.argument)
+                )
+
+        default: 
+            SwiftUnicoCheckPlugin.result(FlutterMethodNotImplemented)
+
         }
     }
     

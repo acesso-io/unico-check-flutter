@@ -25,4 +25,6 @@ enum MethodConstants: String {
     case BUNDLE_IDENTIFIER = "bundle_identifier"
     case HOST_INFO = "host_info"
     case HOST_KEY = "host_Key"
+    case SET_LOCALE_TYPES = "set_locale_types"
+    case SET_ENVIRONMENT = "set_environment"
 }
