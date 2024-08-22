@@ -36,11 +36,15 @@ class AcessoBioView: UIViewController, AcessoBioManagerDelegate {
         
         let cameraType = UnicoCameraType(argument: SwiftUnicoCheckPlugin.argument)
         let unicoTimer = UnicoTimer(argument: SwiftUnicoCheckPlugin.argument)
-        
+        let unicoLocale = UnicoLocale(argument: SwiftUnicoCheckPlugin.argument)
+        let unicoEnvironment = UnicoEnvironment(argument: SwiftUnicoCheckPlugin.argument)
+
         unicoCheck.setSmartFrame(cameraType.getSmartFrame())
         unicoCheck.setAutoCapture(cameraType.getAutoCapture())
         unicoCheck.setTimeoutSession(unicoTimer.getTimeoutSession())
         unicoCheck.setTheme(UnicoTheme(argument: SwiftUnicoCheckPlugin.argument))
+        unicoCheck.setLocale(unicoLocale.getLocale())
+        unicoCheck.setEnvironment(unicoEnvironment.getEnvironment())
     }
     
     func onErrorAcessoBioManager(_ errorBio: ErrorBio!) {
