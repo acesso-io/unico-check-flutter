@@ -1,3 +1,9 @@
+## 4.13.0
+
+``Publicado: 22/08/2024``
+
+- Adicionado os métodos `setLocale()` e `setEnvironment()` na api pública
+
 ## 4.12.0
 
 ``Publicado: 20/08/2024``
