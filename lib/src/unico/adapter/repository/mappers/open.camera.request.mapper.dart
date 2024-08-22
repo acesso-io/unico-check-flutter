@@ -29,7 +29,7 @@ class OpenCameraRequestMapper {
 
     String unicoLocaleTypes = request.unicoLocaleTypes != null
         ? unicoLocaleTypesMapper.map(request.unicoLocaleTypes!)
-        : "PT-BR";
+        : "PT_BR";
 
     String unicoEnvironment = request.unicoEnvironment != null
         ? unicoEnvironmentMapper.map(request.unicoEnvironment!)

@@ -5,11 +5,11 @@ class UnicoLocaleTypesMapper {
     if (unicoLocaleTypes == UnicoLocaleTypes.PT_BR) {
       return "PT_BR";
     } else if (unicoLocaleTypes == UnicoLocaleTypes.EN_US) {
-      return "EN-US";
+      return "EN_US";
     } else if (unicoLocaleTypes == UnicoLocaleTypes.ES_ES) {
-      return "ES-ES";
+      return "ES_ES";
     } else if (unicoLocaleTypes == UnicoLocaleTypes.ES_MX) {
-      return "ES-MX";
+      return "ES_MX";
     } else {
       return "PT_BR";
     }

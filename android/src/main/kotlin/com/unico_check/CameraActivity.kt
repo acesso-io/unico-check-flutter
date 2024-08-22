@@ -84,10 +84,10 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
             if (locale != null) {
                 acessoBio.setLocale(
                     when (locale) {
-                        "PT-BR" -> LocaleTypes.PT_BR
-                        "EN-US" -> LocaleTypes.EN_US
-                        "ES-ES" -> LocaleTypes.ES_ES
-                        "ES-MX" -> LocaleTypes.ES_MX
+                        "PT_BR" -> LocaleTypes.PT_BR
+                        "EN_US" -> LocaleTypes.EN_US
+                        "ES_ES" -> LocaleTypes.ES_ES
+                        "ES_MX" -> LocaleTypes.ES_MX
                         else -> LocaleTypes.PT_BR
                     }
                 )
@@ -101,7 +101,6 @@ abstract class CameraActivity : CameraPermissionActivity(), AcessoBioListener {
     private fun setEnvironment() {
         runCatching {
             val environment: String? = UnicoCheckPlugin.methodCall.argument(SET_ENVIRONMENT)
-            Log.d("vitor", environment.toString())
             if (environment != null) {
                 acessoBio.setEnvironment(
                     when (environment) {
