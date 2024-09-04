@@ -1,3 +1,9 @@
+## 4.14.0-beta1
+
+``Publicado: 04/09/2024``
+
+- Versão nativa android 5.21.0-beta1
+
 ## 4.13.0
 
 ``Publicado: 22/08/2024``
