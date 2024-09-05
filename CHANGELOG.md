@@ -4,6 +4,13 @@
 
 - Versão nativa android 5.21.0-beta
 
+## 4.14.0
+
+``Publicado: 04/09/2024``
+
+- Atualização da sdk nativa Android
+  para `5.21.1` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK#versão-5211)
+
 ## 4.13.0
 
 ``Publicado: 22/08/2024``
