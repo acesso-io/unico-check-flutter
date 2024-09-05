@@ -2,13 +2,7 @@
 
 ``Publicado: 05/09/2024``
 
-- Versão nativa android 5.21.0-beta2
-
-## 4.14.0-beta1
-
-``Publicado: 04/09/2024``
-
-- Versão nativa android 5.21.0-beta1
+- Versão nativa android 5.21.0-beta
 
 ## 4.13.0
 
