@@ -1,3 +1,9 @@
+## 4.15.1
+
+``Publicado: 10/09/2024``
+
+- Atualização da sdk nativa android beta
+
 ## 4.15.0
 
 ``Publicado: 10/09/2024``
