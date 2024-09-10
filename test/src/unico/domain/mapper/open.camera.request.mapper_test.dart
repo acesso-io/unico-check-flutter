@@ -1,8 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:unico_check/src/unico/adapter/repository/mappers/unico.environment.mapper.dart';
+import 'package:unico_check/src/unico/adapter/repository/mappers/unico.locale.types.mapper.dart';
 import 'package:unico_check/src/unico/domain/entities/document.type.dart';
 import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.config.dart';
+import 'package:unico_check/src/unico/domain/entities/unico.environment.dart';
+import 'package:unico_check/src/unico/domain/entities/unico.locale.types.dart';
 import 'package:unico_check/src/unico/domain/entities/unico.theme.dart';
 import 'package:unico_check/src/unico/adapter/repository/mappers/open.camera.request.mapper.dart';
 import 'package:unico_check/src/unico/adapter/repository/mappers/unico.config.mapper.dart';
@@ -17,17 +21,24 @@ class FakeUnicoConfig extends Mock implements UnicoConfig {}
 void main() {
   late UnicoThemeMapper unicoThemeMapper;
   late UnicoConfigMapper unicoConfigMapper;
+  late UnicoLocaleTypesMapper unicoLocaleTypesMapper;
+  late UnicoEnvironmentMapper unicoEnvironmentMapper;
   late OpenCameraRequestMapper mapper;
 
   setUp(() {
     unicoThemeMapper = MockUnicoThemeMapper();
     unicoConfigMapper = MockUnicoConfigMapper();
-    mapper = OpenCameraRequestMapper(unicoThemeMapper, unicoConfigMapper);
+    unicoLocaleTypesMapper = UnicoLocaleTypesMapper();
+    unicoEnvironmentMapper = UnicoEnvironmentMapper();
+    
+    mapper = OpenCameraRequestMapper(unicoThemeMapper, unicoConfigMapper, unicoLocaleTypesMapper, unicoEnvironmentMapper);
   });
 
   test('should map to OpenCameraRequest when call map method', () {
     final UnicoTheme unicoTheme = UnicoTheme();
     final UnicoConfig unicoConfig = FakeUnicoConfig();
+    const UnicoLocaleTypes unicoLocaleType = UnicoLocaleTypes.PT_BR;
+    const UnicoEnvironment unicoEnvironment = UnicoEnvironment.DEV;
     final Map<dynamic, dynamic> mapped = {};
     final OpenCameraRequest request = OpenCameraRequest()
       ..setUnicoConfigAndroid(unicoConfig)
@@ -36,7 +47,9 @@ void main() {
       ..setDocumentType(DocumentType.CNH)
       ..setSmartFrame(true)
       ..setTimeoutSession(1)
-      ..setUnicoTheme(unicoTheme);
+      ..setUnicoTheme(unicoTheme)
+      ..setLocaleTypes(unicoLocaleType)
+      ..setEnvironment(unicoEnvironment);
 
     when(() => unicoThemeMapper.map(unicoTheme))
         .thenAnswer((invocation) => mapped);
