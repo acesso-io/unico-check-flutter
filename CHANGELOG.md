@@ -1,6 +1,6 @@
 ## 4.15.1-beta2
 
-``Publicado: 10/09/2024``
+``Publicado: 13/09/2024``
 
 - Atualização da sdk nativa android beta
 
