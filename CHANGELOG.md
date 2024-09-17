@@ -1,3 +1,10 @@
+## 4.15.2-beta2
+
+``Publicado: 10/09/2024``
+
+- Atualização da sdk nativa Android
+  para `5.21.0-beta6` [release notes](https://developers.unico.io/docs/check/SDK/android/release-notesAndroidSDK#versão-5211)
+
 ## 4.15.0
 
 ``Publicado: 10/09/2024``
