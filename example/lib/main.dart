@@ -35,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage>
   final _theme = UnicoTheme(
       colorSilhouetteSuccess: "#4ca832",
       colorSilhouetteError: "#fcdb03",
+      colorTextMessage: '#000000',
       colorBackground: "#3295a8");
 
   final _configIos = UnicoConfig(
