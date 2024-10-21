@@ -1,3 +1,9 @@
+## 4.20.0-beta1
+
+``Publicado: 21/10/2024``
+
+- Beta android
+
 ## 4.19.0
 
 ``Publicado: 18/10/2024``
