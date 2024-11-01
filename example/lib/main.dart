@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unico_check/unico_check.dart';
+import 'package:unico_check/src/unico/domain/entities/unico.locale.types.dart';
+import 'package:unico_check/src/unico/domain/entities/unico.environment.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,7 +15,85 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xFF0B38E7),
       ),
-      home: MyHomePage(title: 'unico | check'),
+      home: One(title: 'One'),
+    );
+  }
+}
+
+class One extends StatelessWidget {
+  One({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('One'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Two(title: 'Two')),
+            );
+          },
+          child: const Text('Go!'),
+        ),
+      ),
+    );
+  }
+}
+
+class Two extends StatelessWidget {
+  Two({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Two'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Three(title: 'Three'), fullscreenDialog: true),
+            );
+          },
+          child: const Text('Go!'),
+        ),
+      ),
+    );
+  }
+}
+
+class Three extends StatelessWidget {
+  Three({Key? key, required this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Three'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MyHomePage(title: 'unico | check')),
+            );
+          },
+          child: const Text('Go!'),
+        ),
+      ),
     );
   }
 }
@@ -39,20 +119,16 @@ class _MyHomePageState extends State<MyHomePage>
       colorBackground: "#3295a8");
 
   final _configIos = UnicoConfig(
-      getProjectNumber: "Your ProjectNumber Ios",
-      getProjectId: "Your ProjectId Ios",
-      getMobileSdkAppId: "Your MobileSdkAppId Ios",
-      getBundleIdentifier: "Your BundleIdentifier Ios",
-      getHostInfo: "Your HostInfo Ios",
-      getHostKey: "Your HostKey Ios");
+    getBundleIdentifier: "io.unico.unico-check-flutter",
+    getHostKey: "sdkKey_fef55157-2750-4642-892f-88024b86f029");
 
   final _configAndroid = UnicoConfig(
-      getProjectNumber: "Your ProjectNumber Android",
-      getProjectId: "Your ProjectId Android",
-      getMobileSdkAppId: "Your MobileSdkAppId Android",
-      getBundleIdentifier: "Your BundleIdentifier Android",
-      getHostInfo: "Your HostInfo Android",
-      getHostKey: "Your HostKey Android");
+    getProjectNumber: "20134421840665432",
+    getProjectId: "Flutter Android",
+    getMobileSdkAppId: "j_2cdba0f1-e3de-4421-8f40-e665fefcf432",
+    getBundleIdentifier: "com.unico_check_example",
+    getHostInfo: "nRMqSJJeWMZ0K4n9Dxs/Zhb5RslAxes+pmH0gJgmVtbdRrszm5hV9d4KpdQ4JJz/",
+    getHostKey: "L3FXDmZ4bewdis7YS4RrAZxHGlYeDbDBw8Ha3rPCioyB/K9x0GEwPo3/GKlZQhzU");
 
   @override
   void initState() {
@@ -112,8 +188,14 @@ class _MyHomePageState extends State<MyHomePage>
     _opener = _unicoCheck
         .setAutoCapture(autoCapture: false)
         .setSmartFrame(smartFrame: false)
+        // .setLocale(unicoLocaleTypes: UnicoLocaleTypes.PT_BR)
+        .setEnvironment(unicoEnvironment: UnicoEnvironment.UAT)
         .build();
   }
+
+// UAT, PROD, DEV
+// 
+// EN_US, ES_ES, ES_MX, PT_BR,
 
   void setCameraSmartWithButton() {
     _opener = _unicoCheck
