@@ -1,3 +1,10 @@
+## 4.20.0
+
+``Publicado: 05/11/2024``
+
+- Atualização da sdk nativa android
+  para `5.25.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK#versão-5240)
+
 ## 4.19.0
 
 ``Publicado: 18/10/2024``
