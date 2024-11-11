@@ -9,3 +9,5 @@ export 'src/unico/domain/entities/result.camera.dart';
 export 'src/unico/domain/entities/unico.theme.dart';
 export 'src/unico/domain/entities/document.type.dart';
 export 'src/unico/domain/entities/unico.config.dart';
+export 'src/unico/domain/entities/unico.environment.dart';
+export 'src/unico/domain/entities/unico.locale.types.dart';
