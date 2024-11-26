@@ -4,9 +4,7 @@
 
 - Atualização da sdk nativa android
   para `5.26.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK#versão-5260)
-- Atualização da sdk nativa iOS
-  para `2.16.5` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK#versão-2165)
-
+  
 ## 4.20.0
 
 ``Publicado: 05/11/2024``
