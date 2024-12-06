@@ -40,7 +40,6 @@ class _MyHomePageState extends State<MyHomePage>
       colorProgressBar: "#4ca832",
       colorCancelButtonIcon: "#4ca832");
 
-
   final _configIos = UnicoConfig(
       getProjectNumber: "Your ProjectNumber Ios",
       getProjectId: "Your ProjectId Ios",
