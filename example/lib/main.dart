@@ -36,7 +36,10 @@ class _MyHomePageState extends State<MyHomePage>
       colorSilhouetteSuccess: "#4ca832",
       colorSilhouetteError: "#fcdb03",
       colorTextMessage: '#000000',
-      colorBackground: "#3295a8");
+      colorBackground: "#3295a8",
+      colorProgressBar: "#4ca832",
+      colorCancelButtonIcon: "#4ca832");
+
 
   final _configIos = UnicoConfig(
       getProjectNumber: "Your ProjectNumber Ios",
