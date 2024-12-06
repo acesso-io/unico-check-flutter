@@ -69,5 +69,13 @@ class UnicoTheme: NSObject, AcessoBioThemeDelegate {
     func getColorSilhouetteNeutral() -> Any? {
         return self.argument?["colorSilhouetteNeutral"] as? String ?? nil
     }
+
+    func getProgressBarColor() -> Any? {
+        return self.argument?["colorProgressBar"] as? String ?? nil
+    }
+
+    func getCancelButtonIconColor() -> Any? {
+        return self.argument?["colorCancelButtonIcon"] as? String ?? nil
+    }
 }
 

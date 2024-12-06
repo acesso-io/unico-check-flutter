@@ -14,6 +14,8 @@ class UnicoTheme {
   String? colorSilhouetteSuccess = "";
   String? colorSilhouetteError = "";
   String? colorSilhouetteNeutral = "";
+  String? colorProgressBar = "";
+  String? colorCancelButtonIcon = "";
 
   UnicoTheme({
     this.colorBackground,
@@ -30,5 +32,7 @@ class UnicoTheme {
     this.colorSilhouetteSuccess,
     this.colorSilhouetteError,
     this.colorSilhouetteNeutral,
+    this.colorProgressBar,
+    this.colorCancelButtonIcon,
   });
 }
