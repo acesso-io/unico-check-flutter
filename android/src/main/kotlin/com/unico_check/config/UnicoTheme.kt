@@ -6,7 +6,6 @@ import io.flutter.plugin.common.MethodCall
 
 data class UnicoTheme(private val theme: Map<Any, Any>) : IAcessoBioTheme {
 
-
     override fun getColorBackground(): Any {
         return theme["colorBackground"] ?: 0
     }
@@ -61,5 +60,9 @@ data class UnicoTheme(private val theme: Map<Any, Any>) : IAcessoBioTheme {
 
     override fun getColorSilhouetteNeutral(): Any {
         return theme["colorSilhouetteNeutral"] ?: 0
+    }
+
+    override fun getColorProgressBar(): Any {
+        return theme["colorProgressBar"] ?: 0
     }
 }
