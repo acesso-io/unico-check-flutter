@@ -45,7 +45,13 @@ class UnicoThemeMapper {
       'colorSilhouetteError': unicoTheme.colorSilhouetteError,
 
       /// Cor de erro da silhueta.
-      'colorSilhouetteNeutral': unicoTheme.colorSilhouetteNeutral
+      'colorSilhouetteNeutral': unicoTheme.colorSilhouetteNeutral,
+
+      /// Cor do ícone da animação durante progresso de carregamento.
+      'colorProgressBar': unicoTheme.colorProgressBar,
+
+      /// Cor do botão de cancelar.
+      'colorCancelButtonIcon': unicoTheme.colorCancelButtonIcon
     };
   }
 }
