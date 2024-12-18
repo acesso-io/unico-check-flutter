@@ -1,6 +1,6 @@
 ## 4.21.0
 
-``Publicado: 28/12/2024``
+``Publicado: 18/12/2024``
 
 - Atualização da sdk nativa android
   para `5.26.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK#versão-5260)
