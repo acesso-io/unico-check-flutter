@@ -3,25 +3,25 @@
 ``Publicado: 18/12/2024``
 
 - Atualização da sdk nativa android
-  para `5.26.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK#versão-5260)
+  para `5.26.0` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-android/release-notes#versao-5260)
 - Atualização da sdk nativa iOS
-  para `2.16.5` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK#versão-2165)
+  para `2.16.5` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-ios/release-notes#versao-2165)
 
 ## 4.20.0
 
 ``Publicado: 05/11/2024``
 
 - Atualização da sdk nativa android
-  para `5.25.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK#versão-5250)
+  para `5.25.0` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-android/release-notes#versao-5250)
 
 ## 4.19.0
 
 ``Publicado: 18/10/2024``
 
 - Atualização da sdk nativa android
-  para `5.24.0` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK#versão-5240)
+  para `5.24.0` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-android/release-notes#versao-5240)
 - Atualização da sdk nativa iOS
-  para `2.16.4` [release notes](https://developers.unico.io/docs/check/SDK/iOS/release-notesiOSSDK#versão-2164)
+  para `2.16.4` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-ios/release-notes#versao-2164)
 
 ## 4.18.0
 
