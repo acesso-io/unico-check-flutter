@@ -3,7 +3,7 @@
 ``Publicado: 18/12/2024``
 
 - Atualização da sdk nativa android
-  para `5.26.0` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-android/release-notes#versao-5260)
+  para `5.27.0` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-android/release-notes#versao-5270)
 - Atualização da sdk nativa iOS
   para `2.16.5` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-ios/release-notes#versao-2165)
 
