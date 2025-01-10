@@ -1,3 +1,12 @@
+## 4.22.0
+
+``Publicado: dd/MM/yyyy``
+
+- Atualização da sdk nativa android
+  para `5.28.0` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-android/release-notes#versao-5280)
+- Atualização da sdk nativa iOS
+  para `x.xx.x` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-ios/release-notes#versao-xxxx)
+
 ## 4.21.0
 
 ``Publicado: 18/12/2024``
