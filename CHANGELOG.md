@@ -1,3 +1,12 @@
+## 4.23.0
+
+``Publicado: 22/01/2025``
+
+- Atualização da sdk nativa android
+  para `5.29.0` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-android/release-notes#versao-5290)
+- Atualização da sdk nativa iOS
+  para `2.16.8` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-ios/release-notes#versao-2168)
+
 ## 4.22.0
 
 ``Publicado: 14/01/2025``
