@@ -5,8 +5,6 @@ import 'package:unico_check/src/unico/adapter/api/unico.check.camera.opener.defa
 import 'package:unico_check/src/unico/domain/entities/camera_opener/camera.opener.config.entity.dart';
 import 'package:unico_check/src/unico/domain/entities/methods.channel.dart';
 import 'package:unico_check/src/unico/domain/entities/open.camera.request.dart';
-import 'package:unico_check/src/unico/domain/entities/unico.environment.dart';
-import 'package:unico_check/src/unico/domain/entities/unico.locale.types.dart';
 import 'package:unico_check/src/unico/domain/usecase/open.camera.usecase.dart';
 import 'package:unico_check/src/unico/domain/usecase/unico.callback.usecase.dart';
 import 'package:unico_check/unico_check.dart';
