@@ -1,6 +1,6 @@
 ## 4.25.0
 
-``Publicado: 07/03/2025``
+``Publicado: 13/03/2025``
 
 - Atualização da sdk nativa android
   para `5.31.0` [release notes](https://devcenter.unico.io/idcloud/integracao/sdk/integracao-sdks/sdk-android/release-notes#versao-5250)
